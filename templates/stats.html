@@ -1,0 +1,31 @@
+<!-- stats.html -->
+{% extends "base.html" %}
+
+{% block title %}Statistics - TIL{% endblock %}
+
+{% block content %}
+    <h2>Blog Statistics</h2>
+    
+    <div class="stats-overview">
+        <h3>Overview</h3>
+        <p><strong>Total entries:</strong> {{ total_entries }}</p>
+        {% if date_range.first_entry %}
+        <p><strong>First entry:</strong> {{ date_range.first_entry[:10] }}</p>
+        <p><strong>Latest entry:</strong> {{ date_range.last_entry[:10] }}</p>
+        {% endif %}
+    </div>
+    
+    {% if topic_stats %}
+    <div class="topic-stats">
+        <h3>Entries by Topic</h3>
+        <ul class="stats-list">
+            {% for stat in topic_stats %}
+            <li>
+                <a href="{{ url_for('topic', topic=stat.topic) }}">{{ stat.topic }}</a>
+                <span class="count">{{ stat.count }} entries</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}
