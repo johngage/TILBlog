@@ -1,0 +1,368 @@
+/* Main styles for the TIL blog */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --light-text: #777;
+    --border-color: #ddd;
+    --highlight-color: #e67e22;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding-bottom: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+header h1 a {
+    color: white;
+}
+
+header h1 a:hover {
+    text-decoration: none;
+}
+
+/* Search form */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="search"] {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 3px 0 0 3px;
+    width: 200px;
+}
+
+.search-form button {
+    background-color: var(--secondary-color);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Topic navigation */
+.topics {
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+}
+
+.topics ul {
+    list-style: none;
+    display: flex;
+    padding: 0.5rem 0;
+}
+
+.topics li {
+    margin-right: 1rem;
+    white-space: nowrap;
+}
+
+.topics a {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+}
+
+.topics a:hover, .topics a.active {
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+}
+
+/* Main content */
+main {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+h3 {
+    margin: 1.5rem 0 1rem;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Entry list */
+.entry-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.entry-list li {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.entry-list a {
+    display: flex;
+    padding: 0.75rem 0;
+    color: var(--text-color);
+    align-items: baseline;
+}
+
+.entry-list a:hover {
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.02);
+}
+
+.entry-list .title {
+    flex: 1;
+    font-weight: 500;
+}
+
+.entry-list .topic {
+    color: var(--light-text);
+    padding: 0 1rem;
+    text-transform: capitalize;
+}
+
+.entry-list time {
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+/* Search results */
+.search-results .snippet {
+    padding: 0 0 0.75rem;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.search-results mark {
+    background-color: #fffacd;
+    color: var(--text-color);
+    padding: 0 0.1rem;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pagination a {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+}
+
+.pagination .info {
+    margin-left: auto;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+/* Entry page */
+.entry {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.entry header {
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.entry h2 {
+    margin-bottom: 0.5rem;
+}
+
+.entry .meta {
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.entry .topic a {
+    background-color: #f0f0f0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-transform: capitalize;
+    color: var(--primary-color);
+}
+
+.entry .content {
+    line-height: 1.8;
+}
+
+.entry .content h1, 
+.entry .content h2, 
+.entry .content h3, 
+.entry .content h4 {
+    margin: 1.5rem 0 1rem;
+}
+
+.entry .content p {
+    margin-bottom: 1.25rem;
+}
+
+.entry .content ul, 
+.entry .content ol {
+    margin: 0 0 1.25rem 1.5rem;
+}
+
+.entry .content pre {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    border-radius: 3px;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+}
+
+.entry .content code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+    background-color: #f8f8f8;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.entry .content pre code {
+    padding: 0;
+    background-color: transparent;
+}
+
+.entry .content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
+
+.entry .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+}
+
+.entry .content th, 
+.entry .content td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.entry .content th {
+    background-color: #f8f8f8;
+}
+
+/* Related entries */
+.related {
+    background-color: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+.related h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.related ul {
+    list-style: none;
+}
+
+.related li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    header h1 {
+        margin-bottom: 1rem;
+    }
+    
+    .search-form {
+        width: 100%;
+    }
+    
+    .search-form input[type="search"] {
+        width: 100%;
+    }
+    
+    .entry-list a {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .entry-list .topic,
+    .entry-list time {
+        margin-top: 0.25rem;
+        padding: 0;
+    }
+}

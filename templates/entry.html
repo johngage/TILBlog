@@ -1,0 +1,34 @@
+<!-- entry.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ entry.title }} - TIL{% endblock %}
+
+{% block content %}
+    <article class="entry">
+        <header>
+            <h2>{{ entry.title }}</h2>
+            <div class="meta">
+                <span class="topic"><a href="{{ url_for('topic', topic=entry.topic) }}">{{ entry.topic }}</a></span>
+                <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
+                {% if entry.updated != entry.created %}
+                <span class="updated">(Updated: {{ entry.updated[:10] }})</span>
+                {% endif %}
+            </div>
+        </header>
+        
+        <div class="content">
+            {{ entry.html|safe }}
+        </div>
+    </article>
+    
+    {% if related %}
+    <aside class="related">
+        <h3>More in {{ entry.topic }}</h3>
+        <ul>
+            {% for item in related %}
+            <li><a href="{{ url_for('entry', topic=item.topic, slug=item.slug) }}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </aside>
+    {% endif %}
+{% endblock %}

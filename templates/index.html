@@ -1,0 +1,36 @@
+<!-- index.html -->
+{% extends "base.html" %}
+
+{% block title %}TIL - Today I Learned{% endblock %}
+
+{% block content %}
+    <h2>Recent entries{% if request.args.get('page', '1') != '1' %} (page {{ page }}){% endif %}</h2>
+    
+    {% if entries %}
+        <ul class="entry-list">
+            {% for entry in entries %}
+            <li>
+                <a href="{{ url_for('entry', topic=entry.topic, slug=entry.slug) }}">
+                    <span class="title">{{ entry.title }}</span>
+                    <span class="topic">{{ entry.topic }}</span>
+                    <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination">
+            {% if has_prev %}
+            <a href="{{ url_for('index', page=page-1) }}" class="prev">Previous</a>
+            {% endif %}
+            
+            <span class="info">Page {{ page }} ({{ count }} entries)</span>
+            
+            {% if has_next %}
+            <a href="{{ url_for('index', page=page+1) }}" class="next">Next</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No entries found. Add some markdown files to get started.</p>
+    {% endif %}
+{% endblock %}
