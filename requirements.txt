@@ -1,5 +1,4 @@
 Flask==2.3.3
-flask-serverless==0.0.6
 markdown==3.4.4
 Pygments==2.16.1
 gunicorn==21.2.0
