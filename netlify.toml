@@ -1,10 +1,12 @@
 [build]
-  command = "pip install -r requirements.txt && python app.py freeze"
-  publish = "build"  # This is where Frozen-Flask outputs static files
+  command = "pip install -r requirements.txt"
+  functions = "netlify/functions"
+  publish = "public"  # Create an empty public directory
+
 [build.environment]
   PYTHON_VERSION = "3.11"
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/api"
   status = 200

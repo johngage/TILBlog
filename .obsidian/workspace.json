@@ -172,6 +172,8 @@
   },
   "active": "15e76adedc2ea2ed",
   "lastOpenFiles": [
+    "public/index.html",
+    "public",
     "netlify/functions/api.py",
     "netlify/functions",
     "netlify/function",
@@ -192,8 +194,6 @@
     "templater",
     "rebuild_database.py",
     "rebuild_app.py",
-    "til.db",
-    "README.md",
-    "content/California-Africa/Water"
+    "README.md"
   ]
 }
