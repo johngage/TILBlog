@@ -1,5 +1,5 @@
 ---
-title: "TheInternet is a global library"
+title: "The Internet is a global library"
 topics: ["education", "metaphor", "internet", "symbol", "library"]
 created: 2025-05-19 13:52:25
 modified: 2025-05-19 13:52:25
