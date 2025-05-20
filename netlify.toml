@@ -1,6 +1,6 @@
 [build]
-  command = "pip install -r requirements.txt"
-  
+  command = "pip install -r requirements.txt && python app.py freeze"
+  publish = "build"  # This is where Frozen-Flask outputs static files
 [build.environment]
   PYTHON_VERSION = "3.11"
 

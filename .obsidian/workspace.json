@@ -172,6 +172,10 @@
   },
   "active": "15e76adedc2ea2ed",
   "lastOpenFiles": [
+    "netlify/functions/api.py",
+    "netlify/functions",
+    "netlify/function",
+    "netlify",
     "netlify.toml",
     "til.db-journal",
     "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
@@ -190,7 +194,6 @@
     "rebuild_app.py",
     "til.db",
     "README.md",
-    "content/California-Africa/Water",
-    "content/California-Africa/Carbon"
+    "content/California-Africa/Water"
   ]
 }

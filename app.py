@@ -632,7 +632,11 @@ def internal_error(e):
 
 if __name__ == "__main__":
     # This code ONLY runs when executed directly (not on Netlify)
-    
+    if len(sys.argv) > 1 and sys.argv[1] == 'freeze':
+        from flask_frozen import Freezer
+        freezer = Freezer(app)
+        freezer.freeze()
+        sys.exit(0)
     # Start file watcher in a separate thread (for local dev only)
     observer = start_file_watcher()
     
