@@ -3,9 +3,20 @@ title: "The Internet is a global library"
 topics: ["education", "metaphor", "internet", "symbol", "library"]
 created: 2025-05-19 13:52:25
 modified: 2025-05-19 13:52:25
-slug: untitled
+slug: NetDay-World-Wide
 source: "https://ubiquity.acm.org/article.cfm?id=375349"
 ---
+
+After talking yesterday with [[Fenny Desriani]] at the [[GSPP]] graduation,  I wanted to extend her prize-winning work examining how California schools provide Internet access to their students.  I looked for a summary of the  **NetDay** mobilization of tens of thousands of volunteers in 1996 to wire all California schools for access to the internet. Schools used the internet for the first time as a tool to self-organize one day of free work by parents, teachers, and staff. 
+
+I found this interview I did in 2001 for the Association for Computing Machinery: - [NetDay interview](https://ubiquity.acm.org/article.cfm?id=375349) and thought it should be updated.
+
+- Today, I would add major links to the mathematics community of [LEAN proofs](https://leanprover-community.github.io/), and the way this methodical development of [conversations about establishing formal truths](https://lean-lang.org/) can be extended to examinations of how human communities can develop ways of thinking, together.
+
+- First, in 1996, we did California schools, then schools in a dozen other US states, then all schools in Korea, then Great Britain, then Malaysia, then Thailand,  with the hope of doing all countries before 2000. 
+- It's time to renew the project, with fiber, new sources of power and computing, and generative AI. 
+
+Some quotes, that I had completely forgotten about.
 
 # How metaphor and language shape learning
 
@@ -38,6 +49,8 @@ Shift to the image of the complete water cycle: evaporation, transpiration, cond
 The foundation tools or the foundation curriculum is one that enhances thought. I'm convinced these days that losing music and art in the schools is a serious detriment to people's capability to think. I don't know many engineers that, when describing what they're doing, don't draw it. 
 
 That linkage to the physical world is one of the reasons it's so important for Internet connectivity and high bandwidth connectivity for schools.  The capabilities for children to interact with the complexities of the world are rather limited inside a classroom. You can drop chalk on the floor trying to show what Galileo did. But the ability to immerse yourself in molecules, to watch atoms form into molecules, and molecules interact to form life.... all made visible, or audible by the tool of the computer, this symbol manipulator, is now extended through generative language models that extend your thought while building from patterns found by summarizing all forms of human experience.
+
+And this technology shift incorporates all the earlier ones.
 
 ## Details
 
