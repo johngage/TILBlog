@@ -336,6 +336,46 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Page header and sort controls */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.sort-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.sort-controls span {
+    color: var(--light-text);
+}
+
+.sort-link {
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    color: var(--text-color);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+}
+
+.sort-link:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.sort-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
 /* Stats page */
 .stats-overview {
     background-color: #f8f8f8;
@@ -380,6 +420,15 @@ footer {
         width: 100%;
     }
     
+    .topic-cloud {
+        justify-content: flex-start;
+    }
+    
+    .topic-link {
+        font-size: 0.8rem !important;
+        padding: 0.3rem 0.6rem;
+    }
+    
     .entry-list a {
         flex-direction: column;
         align-items: flex-start;
@@ -389,5 +438,16 @@ footer {
     .entry-list time {
         margin-top: 0.25rem;
         padding: 0;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .sort-controls {
+        width: 100%;
+        justify-content: flex-start;
     }
 }

@@ -8,11 +8,14 @@
         <header>
             <h2>{{ entry.title }}</h2>
             <div class="meta">
-                <span class="topic"><a href="{{ url_for('topic', topic=entry.topic) }}">{{ entry.topic }}</a></span>
-                <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
-                {% if entry.updated != entry.created %}
-                <span class="updated">(Updated: {{ entry.updated[:10] }})</span>
+                {% if entry_topics %}
+                <div class="topics">
+                    {% for topic in entry_topics %}
+                    <a href="{{ url_for('topic', topic=topic.name) }}" class="topic-tag">{{ topic.name }}</a>
+                    {% endfor %}
+                </div>
                 {% endif %}
+                <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
             </div>
         </header>
         
@@ -23,10 +26,10 @@
     
     {% if related %}
     <aside class="related">
-        <h3>More in {{ entry.topic }}</h3>
+        <h3>Related entries</h3>
         <ul>
             {% for item in related %}
-            <li><a href="{{ url_for('entry', topic=item.topic, slug=item.slug) }}">{{ item.title }}</a></li>
+            <li><a href="{{ url_for('entry', slug=item.slug) }}">{{ item.title }}</a></li>
             {% endfor %}
         </ul>
     </aside>

@@ -4,13 +4,23 @@
 {% block title %}{{ current_topic }} - TIL{% endblock %}
 
 {% block content %}
-    <h2>{{ current_topic }}{% if request.args.get('page', '1') != '1' %} (page {{ page }}){% endif %}</h2>
+    <div class="page-header">
+        <h2>{{ current_topic }}{% if request.args.get('page', '1') != '1' %} (page {{ page }}){% endif %}</h2>
+        
+        <div class="sort-controls">
+            <span>Sort by date:</span>
+            <a href="{{ url_for('topic', topic=current_topic, order='desc', page=1) }}" 
+               class="sort-link {% if current_order == 'desc' %}active{% endif %}">Newest first</a>
+            <a href="{{ url_for('topic', topic=current_topic, order='asc', page=1) }}" 
+               class="sort-link {% if current_order == 'asc' %}active{% endif %}">Oldest first</a>
+        </div>
+    </div>
     
     {% if entries %}
         <ul class="entry-list">
             {% for entry in entries %}
             <li>
-                <a href="{{ url_for('entry', topic=entry.topic, slug=entry.slug) }}">
+                <a href="{{ url_for('entry', slug=entry.slug) }}">
                     <span class="title">{{ entry.title }}</span>
                     <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
                 </a>
@@ -20,13 +30,13 @@
 
         <div class="pagination">
             {% if has_prev %}
-            <a href="{{ url_for('topic', topic=current_topic, page=page-1) }}" class="prev">Previous</a>
+            <a href="{{ url_for('topic', topic=current_topic, page=page-1, order=current_order) }}" class="prev">Previous</a>
             {% endif %}
             
             <span class="info">Page {{ page }} ({{ count }} entries)</span>
             
             {% if has_next %}
-            <a href="{{ url_for('topic', topic=current_topic, page=page+1) }}" class="next">Next</a>
+            <a href="{{ url_for('topic', topic=current_topic, page=page+1, order=current_order) }}" class="next">Next</a>
             {% endif %}
         </div>
     {% else %}

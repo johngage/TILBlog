@@ -12,9 +12,8 @@
         <ul class="entry-list search-results">
             {% for entry in entries %}
             <li>
-                <a href="{{ url_for('entry', topic=entry.topic, slug=entry.slug) }}">
+                <a href="{{ url_for('entry', slug=entry.slug) }}">
                     <span class="title">{{ entry.title }}</span>
-                    <span class="topic">{{ entry.topic }}</span>
                     <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
                 </a>
                 {% if entry.snippet %}

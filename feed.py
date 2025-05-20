@@ -2,13 +2,13 @@ import os
 import pathlib
 from datetime import datetime
 from flask import url_for, request
-from werkzeug.contrib.atom import AtomFeed
+# from werkzeug.contrib.atom import AtomFeed
 from urllib.parse import urljoin
 
 def get_atom_feed(app, entries):
     """Generate Atom feed from entries"""
     feed = AtomFeed(
-        "Today I Learned",
+        "John Gage: Today I Learned",
         feed_url=request.url,
         url=request.url_root,
         author="Your Name"

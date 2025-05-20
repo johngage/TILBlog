@@ -3,11 +3,16 @@ import pathlib
 import re
 import sqlite3
 import time
+import yaml
 from datetime import datetime
 from markdown import markdown
 from flask import Flask, g, render_template, request, redirect, url_for, abort, Response
 from feedgen.feed import FeedGenerator
 from urllib.parse import urljoin
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+import threading
+import frontmatter
 
 # Configuration
 DATABASE = "til.db"
@@ -19,6 +24,44 @@ root = pathlib.Path(__file__).parent.resolve()
 # Flask application
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+# File watcher for auto-rebuild
+class MarkdownHandler(FileSystemEventHandler):
+    def __init__(self, rebuild_callback):
+        self.rebuild_callback = rebuild_callback
+        self.last_rebuild = 0
+        
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+            
+        # Only rebuild for markdown files
+        if not event.src_path.endswith('.md'):
+            return
+            
+        # Prevent rapid successive rebuilds
+        now = time.time()
+        if now - self.last_rebuild < 2:  # Wait 2 seconds between rebuilds
+            return
+            
+        print(f"Detected change in {event.src_path}, rebuilding database...")
+        self.rebuild_callback()
+        self.last_rebuild = now
+
+def start_file_watcher():
+    """Start watching for markdown file changes"""
+    def rebuild_db():
+        try:
+            build_database(root)
+        except Exception as e:
+            print(f"Error rebuilding database: {e}")
+    
+    event_handler = MarkdownHandler(rebuild_db)
+    observer = Observer()
+    observer.schedule(event_handler, str(root), recursive=True)
+    observer.start()
+    print("File watcher started - will auto-rebuild on markdown changes")
+    return observer
 
 def get_db():
     """Connect to the database and return a connection object"""
@@ -42,148 +85,230 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
+def get_topic_cloud():
+    """Get topics with their counts for the topic cloud"""
+    return query_db(
+        """
+        SELECT t.name as topic, COUNT(*) as count
+        FROM entry_topics et
+        JOIN topics t ON et.topic_id = t.id
+        GROUP BY t.name
+        ORDER BY t.name ASC
+        """
+    )
+
+def convert_wikilinks(content):
+    """Convert [[Wiki Links]] to HTML links"""
+    def replace_link(match):
+        link_text = match.group(1)
+        # Convert to slug (lowercase, hyphens for spaces)
+        slug = link_text.lower().replace(' ', '-').replace('_', '-')
+        # Remove special characters
+        slug = re.sub(r'[^\w\-]', '', slug)
+        return f'<a href="/note/{slug}" class="wiki-link">{link_text}</a>'
+    
+    # Pattern for [[Link Text]]
+    pattern = r'\[\[([^\]]+)\]\]'
+    return re.sub(pattern, replace_link, content)
+
 def build_database(root_dir):
-    """Build the SQLite database from Markdown files"""
+    """Build the SQLite database from Markdown files with front matter"""
     print(f"Building database from {root_dir}")
     db_path = root_dir / DATABASE
     conn = sqlite3.connect(str(db_path))
     conn.row_factory = sqlite3.Row
     
     # Create tables
-    conn.execute("DROP TABLE IF EXISTS til")
+    conn.execute("DROP TABLE IF EXISTS entries")
+    conn.execute("DROP TABLE IF EXISTS topics")
+    conn.execute("DROP TABLE IF EXISTS entry_topics")
+    conn.execute("DROP TABLE IF EXISTS entry_fts")
+    
+    # Main entries table
     conn.execute("""
-        CREATE TABLE til (
+        CREATE TABLE entries (
             id INTEGER PRIMARY KEY,
-            topic TEXT,
-            slug TEXT,
+            slug TEXT UNIQUE,
             title TEXT,
+            content TEXT,
             html TEXT,
-            created TEXT,
-            updated TEXT
+            created_fs TEXT,
+            modified_fs TEXT,
+            created_fm TEXT,
+            topics_raw TEXT
         )
     """)
-    print("Created til table")
     
-    # Create search table
-    conn.execute("DROP TABLE IF EXISTS til_fts")
+    # Topics table
     conn.execute("""
-        CREATE VIRTUAL TABLE til_fts USING fts5(
+        CREATE TABLE topics (
+            id INTEGER PRIMARY KEY,
+            name TEXT UNIQUE
+        )
+    """)
+    
+    # Many-to-many relationship
+    conn.execute("""
+        CREATE TABLE entry_topics (
+            entry_id INTEGER,
+            topic_id INTEGER,
+            FOREIGN KEY (entry_id) REFERENCES entries (id),
+            FOREIGN KEY (topic_id) REFERENCES topics (id)
+        )
+    """)
+    
+    # Full-text search
+    conn.execute("""
+        CREATE VIRTUAL TABLE entry_fts USING fts5(
             title,
-            html,
-            content=til,
+            content,
+            topics,
+            content=entries,
             content_rowid=id
         )
     """)
-    print("Created til_fts table")
     
-    # List all markdown files in content directory first, then fallback to root
-    content_dir = root_dir / "content"
-    if content_dir.exists():
-        all_files = list(content_dir.glob("*/*.md"))
-        print(f"Found {len(all_files)} markdown files in content directory")
-    else:
-        # Fallback to looking in root directory
-        all_files = list(root_dir.glob("*/*.md"))
-        print(f"Found {len(all_files)} markdown files in root directory")
+    print("Created database tables")
+    
+    # Find all markdown files
+    all_files = list(root_dir.glob("**/*.md"))
+    # Exclude files in templates, static, and .obsidian directories
+    all_files = [f for f in all_files if not any(part.startswith('.') or part in ['templates', 'static', '__pycache__'] for part in f.parts)]
+    
+    print(f"Found {len(all_files)} markdown files")
     
     if not all_files:
-        print("No markdown files found! Checking directories:")
-        if content_dir.exists():
-            print(f"Checking content directory: {content_dir}")
-            for d in content_dir.iterdir():
-                if d.is_dir():
-                    print(f"Directory: {d}")
-                    files = list(d.glob("*.md"))
-                    for f in files:
-                        print(f"  - {f}")
-        else:
-            print(f"Checking root directory: {root_dir}")
-            for d in root_dir.iterdir():
-                if d.is_dir():
-                    print(f"Directory: {d}")
-                    files = list(d.glob("*.md"))
-                    for f in files:
-                        print(f"  - {f}")
+        print("No markdown files found!")
+        conn.close()
+        return
     
     # Process markdown files
     for filepath in all_files:
-        # Calculate relative path from content directory or root directory
-        if content_dir.exists() and filepath.is_relative_to(content_dir):
-            rel_path = filepath.relative_to(content_dir)
-        else:
-            rel_path = filepath.relative_to(root_dir)
-        
-        topic = rel_path.parts[0]
-        slug = filepath.stem
-        
-        print(f"Processing: {rel_path} (topic={topic}, slug={slug})")
-        
-        with open(filepath, encoding='utf-8') as f:
-            content = f.read()
-        
-        # Extract title from first line (remove leading # if present)
-        lines = content.strip().splitlines()
-        if lines and lines[0].startswith("# "):
-            title = lines[0].lstrip("# ").strip()
-        else:
-            title = slug.replace("-", " ").replace("_", " ").title()
-        
-        print(f"Title: {title}")
-        
-        # Render HTML with proper extensions
-        html = markdown(
-            content,
-            extensions=[
-                'markdown.extensions.fenced_code',  # For code blocks
-                'markdown.extensions.tables',       # For tables
-                'markdown.extensions.codehilite',   # For syntax highlighting
-                'markdown.extensions.smarty',       # For smart quotes
-                'markdown.extensions.nl2br',        # For line breaks
-                'markdown.extensions.toc',          # For table of contents
-                'markdown.extensions.attr_list',    # For attribute lists
-                'markdown.extensions.def_list'      # For definition lists
-            ],
-            extension_configs={
-                'markdown.extensions.codehilite': {
-                    'use_pygments': True,
-                    'css_class': 'highlight'
+        try:
+            # Parse front matter
+            with open(filepath, 'r', encoding='utf-8') as f:
+                post = frontmatter.load(f)
+            
+            # Extract metadata
+            front_matter = post.metadata
+            content = post.content
+            
+            # Get title (from front matter or first heading or filename)
+            title = front_matter.get('title')
+            if not title:
+                # Try to extract from first # heading
+                lines = content.strip().splitlines()
+                for line in lines:
+                    if line.startswith('# '):
+                        title = line[2:].strip()
+                        break
+                if not title:
+                    # Use filename as fallback
+                    title = filepath.stem.replace('-', ' ').replace('_', ' ').title()
+            
+            # Generate slug
+            slug = front_matter.get('slug')
+            if not slug:
+                slug = title.lower()
+                slug = re.sub(r'[^\w\s-]', '', slug)  # Remove special chars
+                slug = re.sub(r'[\s_]+', '-', slug)   # Replace spaces/underscores with hyphens
+                slug = slug.strip('-')                # Remove leading/trailing hyphens
+            
+            print(f"Processing: {filepath.name} -> {slug}")
+            
+            # Get topics
+            topics = front_matter.get('topics', [])
+            if isinstance(topics, str):
+                topics = [topics]  # Handle single topic as string
+            
+            # Get dates
+            created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(filepath.stat().st_mtime))
+            modified_fs = created_fs  # For now, use mtime for both
+            
+            # Front matter date (if provided)
+            created_fm = front_matter.get('created') or front_matter.get('date')
+            if created_fm:
+                if isinstance(created_fm, datetime):
+                    created_fm = created_fm.strftime("%Y-%m-%d %H:%M:%S")
+                else:
+                    created_fm = str(created_fm)
+            
+            # Convert wiki links before rendering markdown
+            content_with_links = convert_wikilinks(content)
+            
+            # Render HTML
+            html = markdown(
+                content_with_links,
+                extensions=[
+                    'markdown.extensions.fenced_code',
+                    'markdown.extensions.tables',
+                    'markdown.extensions.codehilite',
+                    'markdown.extensions.smarty',
+                    'markdown.extensions.toc',
+                    'markdown.extensions.attr_list',
+                    'markdown.extensions.def_list'
+                ],
+                extension_configs={
+                    'markdown.extensions.codehilite': {
+                        'use_pygments': True,
+                        'css_class': 'highlight'
+                    }
                 }
-            }
-        )
-        
-        print(f"Rendered HTML for {rel_path} - length: {len(html)} chars")
-        
-        # Get modification time
-        created = updated = time.strftime(
-            "%Y-%m-%d %H:%M:%S", 
-            time.localtime(filepath.stat().st_mtime)
-        )
-        
-        # Insert into database
-        conn.execute(
-            """
-            INSERT INTO til (topic, slug, title, html, created, updated)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            [topic, slug, title, html, created, updated],
-        )
-        print(f"Inserted into database: topic={topic}, slug={slug}")
+            )
+            
+            # Insert entry
+            entry_result = conn.execute(
+                """
+                INSERT INTO entries (slug, title, content, html, created_fs, modified_fs, created_fm, topics_raw)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                [slug, title, content, html, created_fs, modified_fs, created_fm, ','.join(topics)]
+            )
+            entry_id = entry_result.lastrowid
+            
+            # Insert topics and relationships
+            for topic in topics:
+                topic = topic.strip()
+                if topic:
+                    # Insert or get topic
+                    topic_result = conn.execute(
+                        "INSERT OR IGNORE INTO topics (name) VALUES (?)",
+                        [topic]
+                    )
+                    
+                    # Get topic ID
+                    topic_row = conn.execute(
+                        "SELECT id FROM topics WHERE name = ?",
+                        [topic]
+                    ).fetchone()
+                    
+                    if topic_row:
+                        # Link entry to topic
+                        conn.execute(
+                            "INSERT INTO entry_topics (entry_id, topic_id) VALUES (?, ?)",
+                            [entry_id, topic_row[0]]
+                        )
+            
+            print(f"Inserted: {title} with topics: {topics}")
+            
+        except Exception as e:
+            print(f"Error processing {filepath}: {e}")
+            continue
+    
+    # Populate full-text search
+    conn.execute("""
+        INSERT INTO entry_fts (rowid, title, content, topics)
+        SELECT id, title, content, topics_raw FROM entries
+    """)
     
     # Verify contents
-    count = conn.execute("SELECT COUNT(*) FROM til").fetchone()[0]
-    print(f"Total entries in database: {count}")
+    count = conn.execute("SELECT COUNT(*) FROM entries").fetchone()[0]
+    topic_count = conn.execute("SELECT COUNT(*) FROM topics").fetchone()[0]
     
-    # Populate search index
-    if count > 0:
-        conn.execute("""
-            INSERT INTO til_fts (rowid, title, html)
-            SELECT id, title, html FROM til
-        """)
-        print("Populated search index")
+    print(f"Database build completed: {count} entries, {topic_count} topics")
     
     conn.commit()
     conn.close()
-    print("Database build completed")
 
 # Flask routes
 
@@ -191,25 +316,29 @@ def build_database(root_dir):
 def index():
     """Home page - show recent entries"""
     page = request.args.get("page", 1, type=int)
+    order = request.args.get("order", "desc")
     offset = (page - 1) * PER_PAGE
     
     # Get total count
-    count = query_db("SELECT COUNT(*) as count FROM til", one=True)["count"]
+    count = query_db("SELECT COUNT(*) as count FROM entries", one=True)["count"]
+    
+    # Determine sort order - use front matter date if available, otherwise file date
+    order_clause = "DESC" if order == "desc" else "ASC"
+    sort_field = "COALESCE(created_fm, created_fs)"
     
     # Get entries for this page
     entries = query_db(
-        """
-        SELECT id, topic, slug, title, created
-        FROM til
-        ORDER BY created DESC
+        f"""
+        SELECT id, slug, title, {sort_field} as created
+        FROM entries
+        ORDER BY {sort_field} {order_clause}
         LIMIT ? OFFSET ?
         """,
         [PER_PAGE, offset]
     )
     
-    # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
+    # Get all topics with counts
+    topic_cloud = get_topic_cloud()
     
     has_next = offset + PER_PAGE < count
     has_prev = page > 1
@@ -217,46 +346,59 @@ def index():
     return render_template(
         "index.html",
         entries=entries,
-        topics=topics,
+        topic_cloud=topic_cloud,
         page=page,
         has_next=has_next,
         has_prev=has_prev,
-        count=count
+        count=count,
+        current_order=order
     )
 
 @app.route("/topic/<topic>")
 def topic(topic):
     """Show entries for a specific topic"""
     # Check if topic exists
-    topic_exists = query_db("SELECT 1 FROM til WHERE topic = ? LIMIT 1", [topic], one=True)
+    topic_exists = query_db("SELECT 1 FROM topics WHERE name = ? LIMIT 1", [topic], one=True)
     if not topic_exists:
         abort(404)
     
     page = request.args.get("page", 1, type=int)
+    order = request.args.get("order", "desc")
     offset = (page - 1) * PER_PAGE
     
     # Get total count for this topic
     count = query_db(
-        "SELECT COUNT(*) as count FROM til WHERE topic = ?", 
+        """
+        SELECT COUNT(*) as count 
+        FROM entries e
+        JOIN entry_topics et ON e.id = et.entry_id
+        JOIN topics t ON et.topic_id = t.id
+        WHERE t.name = ?
+        """, 
         [topic], 
         one=True
     )["count"]
     
+    # Determine sort order
+    order_clause = "DESC" if order == "desc" else "ASC"
+    sort_field = "COALESCE(e.created_fm, e.created_fs)"
+    
     # Get entries for this page
     entries = query_db(
-        """
-        SELECT id, topic, slug, title, created
-        FROM til
-        WHERE topic = ?
-        ORDER BY created DESC
+        f"""
+        SELECT e.id, e.slug, e.title, {sort_field} as created
+        FROM entries e
+        JOIN entry_topics et ON e.id = et.entry_id
+        JOIN topics t ON et.topic_id = t.id
+        WHERE t.name = ?
+        ORDER BY {sort_field} {order_clause}
         LIMIT ? OFFSET ?
         """,
         [topic, PER_PAGE, offset]
     )
     
     # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
+    topic_cloud = get_topic_cloud()
     
     has_next = offset + PER_PAGE < count
     has_prev = page > 1
@@ -264,50 +406,67 @@ def topic(topic):
     return render_template(
         "topic.html",
         entries=entries,
-        topics=topics,
+        topic_cloud=topic_cloud,
         current_topic=topic,
         page=page,
         has_next=has_next,
         has_prev=has_prev,
-        count=count
+        count=count,
+        current_order=order
     )
 
-@app.route("/<topic>/<slug>")
-def entry(topic, slug):
-    """Show a single entry"""
+@app.route("/note/<slug>")
+def entry(slug):
+    """Show a single entry by slug"""
     entry = query_db(
         """
-        SELECT id, topic, slug, title, html, created, updated
-        FROM til
-        WHERE topic = ? AND slug = ?
+        SELECT e.id, e.slug, e.title, e.html, 
+               COALESCE(e.created_fm, e.created_fs) as created,
+               e.topics_raw
+        FROM entries e
+        WHERE e.slug = ?
         """,
-        [topic, slug],
+        [slug],
         one=True
     )
     
     if entry is None:
         abort(404)
     
-    # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
+    # Get topics for this entry
+    entry_topics = query_db(
+        """
+        SELECT t.name
+        FROM topics t
+        JOIN entry_topics et ON t.id = et.topic_id
+        WHERE et.entry_id = ?
+        ORDER BY t.name
+        """,
+        [entry['id']]
+    )
     
-    # Get related entries (same topic, exclude current)
+    # Get all topics for navigation
+    topic_cloud = get_topic_cloud()
+    
+    # Get related entries (entries that share topics)
     related = query_db(
         """
-        SELECT id, topic, slug, title
-        FROM til
-        WHERE topic = ? AND slug != ?
-        ORDER BY created DESC
+        SELECT DISTINCT e.id, e.slug, e.title
+        FROM entries e
+        JOIN entry_topics et ON e.id = et.entry_id
+        JOIN entry_topics et2 ON et.topic_id = et2.topic_id
+        WHERE et2.entry_id = ? AND e.id != ?
+        ORDER BY e.title
         LIMIT 5
         """,
-        [topic, slug]
+        [entry['id'], entry['id']]
     )
     
     return render_template(
         "entry.html",
         entry=entry,
-        topics=topics,
+        entry_topics=entry_topics,
+        topic_cloud=topic_cloud,
         related=related
     )
 
@@ -325,9 +484,8 @@ def search():
     count = query_db(
         """
         SELECT COUNT(*) as count
-        FROM til_fts
-        JOIN til ON til_fts.rowid = til.id
-        WHERE til_fts MATCH ?
+        FROM entry_fts
+        WHERE entry_fts MATCH ?
         """,
         [q],
         one=True
@@ -336,11 +494,12 @@ def search():
     # Get entries for this page
     entries = query_db(
         """
-        SELECT til.id, til.topic, til.slug, til.title, til.created,
-               snippet(til_fts, -1, '<mark>', '</mark>', '...', 30) as snippet
-        FROM til_fts
-        JOIN til ON til_fts.rowid = til.id
-        WHERE til_fts MATCH ?
+        SELECT e.id, e.slug, e.title, 
+               COALESCE(e.created_fm, e.created_fs) as created,
+               snippet(entry_fts, -1, '<mark>', '</mark>', '...', 30) as snippet
+        FROM entry_fts
+        JOIN entries e ON entry_fts.rowid = e.id
+        WHERE entry_fts MATCH ?
         ORDER BY rank
         LIMIT ? OFFSET ?
         """,
@@ -348,8 +507,7 @@ def search():
     )
     
     # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
+    topic_cloud = get_topic_cloud()
     
     has_next = offset + PER_PAGE < count
     has_prev = page > 1
@@ -357,7 +515,7 @@ def search():
     return render_template(
         "search.html",
         entries=entries,
-        topics=topics,
+        topic_cloud=topic_cloud,
         query=q,
         page=page,
         has_next=has_next,
@@ -371,9 +529,10 @@ def feed():
     # Get the 20 most recent entries
     entries = query_db(
         """
-        SELECT id, topic, slug, title, html, created
-        FROM til
-        ORDER BY created DESC
+        SELECT id, slug, title, html, 
+               COALESCE(created_fm, created_fs) as created
+        FROM entries
+        ORDER BY COALESCE(created_fm, created_fs) DESC
         LIMIT 20
         """
     )
@@ -391,7 +550,7 @@ def feed():
         # Create full URL for entry
         entry_url = urljoin(
             request.url_root,
-            url_for('entry', topic=entry['topic'], slug=entry['slug'])
+            url_for('entry', slug=entry['slug'])
         )
         
         # Convert created date to datetime object
@@ -419,32 +578,33 @@ def stats():
     # Get topic counts
     topic_stats = query_db(
         """
-        SELECT topic, COUNT(*) as count 
-        FROM til 
-        GROUP BY topic 
+        SELECT t.name as topic, COUNT(*) as count 
+        FROM topics t
+        JOIN entry_topics et ON t.id = et.topic_id
+        GROUP BY t.name 
         ORDER BY count DESC
         """
     )
     
     # Get total counts
-    total_entries = query_db("SELECT COUNT(*) as count FROM til", one=True)["count"]
+    total_entries = query_db("SELECT COUNT(*) as count FROM entries", one=True)["count"]
     
     # Get date range
     date_range = query_db(
         """
-        SELECT MIN(created) as first_entry, MAX(created) as last_entry
-        FROM til
+        SELECT MIN(COALESCE(created_fm, created_fs)) as first_entry, 
+               MAX(COALESCE(created_fm, created_fs)) as last_entry
+        FROM entries
         """,
         one=True
     )
     
     # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
+    topic_cloud = get_topic_cloud()
     
     return render_template(
         "stats.html",
-        topics=topics,
+        topic_cloud=topic_cloud,
         topic_stats=topic_stats,
         total_entries=total_entries,
         date_range=date_range
@@ -461,22 +621,27 @@ def build_command():
 @app.errorhandler(404)
 def page_not_found(e):
     """Handle 404 errors"""
-    # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
-    return render_template('404.html', topics=topics), 404
+    topic_cloud = get_topic_cloud()
+    return render_template('404.html', topic_cloud=topic_cloud), 404
 
 @app.errorhandler(500)
 def internal_error(e):
     """Handle 500 errors"""
-    # Get all topics for navigation
-    topics = query_db("SELECT DISTINCT topic FROM til ORDER BY topic")
-    topics = [t["topic"] for t in topics]
-    return render_template('500.html', topics=topics), 500
+    topic_cloud = get_topic_cloud()
+    return render_template('500.html', topic_cloud=topic_cloud), 500
 
 if __name__ == "__main__":
-    # If run directly, build database first then run app
-    if not os.path.exists(root / DATABASE):
-        print("Database not found. Building database...")
-        build_database(root)
-    app.run(debug=True)
+    # Start file watcher in a separate thread
+    observer = start_file_watcher()
+    
+    try:
+        # If run directly, build database first then run app
+        if not os.path.exists(root / DATABASE):
+            print("Database not found. Building database...")
+            build_database(root)
+        
+        app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
+    except KeyboardInterrupt:
+        print("Stopping file watcher...")
+        observer.stop()
+        observer.join()

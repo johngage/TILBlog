@@ -1,5 +1,6 @@
 ---
 type: timeline
+topics:  [africa,tocs-omishakin, gavin-newsom,kenya]
 
 ---
 # Framework for California-Africa Agreements
