@@ -1,13 +1,13 @@
 ---
 topics:  [til-build]
 ---
-# Today I Learned (TIL) Blog
+# Today I Learned (TIL) Blog that may develop into a full weblog
 
 A simple, fast TIL (Today I Learned) blog inspired by Simon Willison's design. This application allows you to publish quick notes and snippets you learn daily, organized by topics.
 
 ## Features
 
-- Organized by topics
+- Organized by topics- the topics accumulate as notes with named topics in the front matter add new topics; stored somehow in sqlite
 - Full-text search
 - Responsive design
 - Markdown support with syntax highlighting
