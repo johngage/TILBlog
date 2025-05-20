@@ -631,17 +631,26 @@ def internal_error(e):
     return render_template('500.html', topic_cloud=topic_cloud), 500
 
 if __name__ == "__main__":
-    # Start file watcher in a separate thread
+    # This code ONLY runs when executed directly (not on Netlify)
+    
+    # Start file watcher in a separate thread (for local dev only)
     observer = start_file_watcher()
     
     try:
-        # If run directly, build database first then run app
+        # If database doesn't exist, build it
         if not os.path.exists(root / DATABASE):
             print("Database not found. Building database...")
             build_database(root)
         
+        # Run the app with file watcher (local dev only)
         app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
     except KeyboardInterrupt:
         print("Stopping file watcher...")
         observer.stop()
         observer.join()
+else:
+    # When imported by Netlify, just ensure database exists
+    if not os.path.exists(root / DATABASE):
+        print("Database not found. Building database...")
+        build_database(root)
+    
