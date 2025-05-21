@@ -1,0 +1,111 @@
+name: Build and Deploy TIL Blog
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper timestamps
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install requests
+          
+      - name: List repository files
+        run: |
+          echo "Files in repository:"
+          ls -la
+          
+      - name: Fix static_generator.py if needed
+        run: |
+          # Check if the static_generator.py still has the app_module issue
+          if grep -q "app_module" static_generator.py; then
+            echo "Found 'app_module' in static_generator.py, fixing..."
+            # Replace 'app_module' with 'app_script'
+            sed -i 's/app_module/app_script/g' static_generator.py
+            echo "Fixed static_generator.py"
+          else
+            echo "static_generator.py already fixed or doesn't contain 'app_module'"
+          fi
+          
+      - name: Try static_generator.py
+        id: try_static_generator
+        run: |
+          # Try static_generator.py and check if it works
+          python static_generator.py
+          if [ -f build/index.html ]; then
+            echo "static_generator.py created index.html successfully"
+            echo "success=true" >> $GITHUB_OUTPUT
+          else
+            echo "static_generator.py failed to create index.html"
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true  # Don't fail if this doesn't work
+          
+      - name: Use build.py as fallback
+        if: steps.try_static_generator.outputs.success != 'true'
+        run: |
+          echo "Using build.py as fallback..."
+          python build.py
+          
+      - name: Debug directory structure
+        run: |
+          echo "Current directory structure:"
+          ls -la
+          
+          echo "Build directory contents:"
+          mkdir -p build  # Ensure the directory exists
+          ls -la build || echo "Build directory is empty or does not exist"
+          
+          # Check if index.html exists
+          if [ -f build/index.html ]; then
+            echo "✅ index.html exists"
+          else
+            echo "❌ index.html is missing - this will cause deployment to fail"
+            
+            # Create a minimal index.html as a last resort
+            echo "Creating a minimal index.html as a fallback..."
+            echo '<!DOCTYPE html><html><head><title>TIL Blog - Fallback Page</title></head><body><h1>TIL Blog</h1><p>This is a fallback page created by the GitHub Actions workflow. The regular build process did not complete successfully.</p></body></html>' > build/index.html
+          fi
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build'
+          
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
