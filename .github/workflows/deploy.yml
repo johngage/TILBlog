@@ -1,4 +1,4 @@
-name: Build and Deploy TIL Blog-10
+name: Build and Deploy TIL Blog
 
 on:
   push:
@@ -39,80 +39,37 @@ jobs:
           echo "Files in repository:"
           ls -la
           
-      - name: Debug Python environment
+      - name: Debug database and content
         run: |
-          echo "Python version: $(python --version)"
-          echo "Python path: $(which python)"
-          echo "Sys.path content:"
-          python -c "import sys; print('\n'.join(sys.path))"
-          echo "Installed packages:"
-          pip list
+          echo "Examining database and content:"
+          python debug_database.py || echo "Debug script failed but continuing build"
           
-      - name: Show app.py structure
+      - name: Build static site using improved generator
         run: |
-          echo "First few lines of app.py:"
-          head -n 20 app.py
-          echo "Looking for Flask app definition in app.py:"
-          grep -n "app = Flask" app.py || echo "Flask app not found in expected pattern"
-      
-      - name: Try static_generator.py with verbose output
-        id: try_static_generator
+          echo "Starting static site generation process..."
+          python static_generator.py
+          
+      - name: Check build output
         run: |
-          # Run static_generator.py with full output captured
-          python -u static_generator.py
-          
-          if [ -f build/index.html ]; then
-            echo "static_generator.py created index.html successfully"
-            echo "success=true" >> $GITHUB_OUTPUT
-            
-            # Show the size and first few lines of index.html
-            echo "Index.html size: $(stat -c%s build/index.html) bytes"
-            echo "First 10 lines of index.html:"
-            head -n 10 build/index.html
-          else
-            echo "static_generator.py failed to create index.html"
-            echo "success=false" >> $GITHUB_OUTPUT
-          fi
-        continue-on-error: true
-          
-      - name: Debug directory structure
-        run: |
-          echo "Current directory structure after running static_generator.py:"
-          ls -la
-          
-          echo "Build directory contents:"
-          mkdir -p build  # Ensure the directory exists
+          echo "Checking build directory contents:"
           ls -la build || echo "Build directory is empty or does not exist"
           
-          echo "Templates directory contents:"
-          ls -la templates || echo "Templates directory not found"
+          # List entry pages
+          echo "Entry pages:"
+          find build/til -type d -maxdepth 1 | wc -l
           
-          echo "Static directory contents:"
-          ls -la static || echo "Static directory not found"
+          # List topic pages
+          echo "Topic pages:"
+          find build/topic -type d -maxdepth 1 | wc -l
           
-      - name: Use build.py as fallback if needed
-        if: steps.try_static_generator.outputs.success != 'true' || steps.try_static_generator.outcome == 'failure'
-        run: |
-          echo "Using build.py as fallback..."
-          python -u build.py
-          
-          echo "Build directory contents after running build.py:"
-          ls -la build
-          
+          # Check if index.html exists and show its size
           if [ -f build/index.html ]; then
-            echo "build.py created index.html successfully"
-            echo "First 10 lines of index.html:"
-            head -n 10 build/index.html
+            echo "✅ index.html exists with size: $(stat -c%s build/index.html) bytes"
+            echo "First 20 lines of index.html:"
+            head -n 20 build/index.html
           else
-            echo "build.py failed to create index.html"
-          fi
-          
-      - name: Ensure index.html exists
-        run: |
-          if [ -f build/index.html ]; then
-            echo "✅ index.html exists"
-          else
-            echo "❌ index.html is missing - creating a minimal fallback page"
+            echo "❌ index.html is missing"
+            # Create a minimal index.html as a fallback
             mkdir -p build
             echo '<!DOCTYPE html><html><head><title>TIL Blog - Fallback Page</title></head><body><h1>TIL Blog</h1><p>This is a fallback page created by the GitHub Actions workflow. The regular build process did not complete successfully.</p></body></html>' > build/index.html
           fi
