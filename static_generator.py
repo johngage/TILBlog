@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 """
 Static content generator for TIL Blog
@@ -48,30 +47,40 @@ def load_app_module():
             log("Error: app.py does not have a 'app' attribute (Flask app instance)")
             return None
             
-        # Configure Flask for URL generation outside of a request
-        app.app.config['SERVER_NAME'] = 'localhost:5000'
+        # Configure Flask app for static site generation
+        log("Configuring Flask app for static site generation")
+        app.app.config['SERVER_NAME'] = 'localhost:5000'  # Dummy server name
         app.app.config['APPLICATION_ROOT'] = '/'
         app.app.config['PREFERRED_URL_SCHEME'] = 'http'
         
-        # Enable relative URLs in templates (needed for static site generation)
-        from flask import Flask
-        old_handle_url_build_error = Flask.handle_url_build_error
+        # Important: we need to fix url_for to generate relative URLs
+        from flask import url_for as flask_url_for
         
-        def handle_url_build_error(self, error, endpoint, values):
-            # If static file URL, convert to relative path
-            if endpoint == 'static':
-                return f"static/{values['filename']}"
-            # Fall back to original handler
-            return old_handle_url_build_error(self, error, endpoint, values)
-            
-        app.app.handle_url_build_error = handle_url_build_error.__get__(app.app)
+        def static_url_for(*args, **kwargs):
+            """Generate static-friendly URLs (relative paths) for static site"""
+            # For static files, use a relative path
+            if args and args[0] == 'static':
+                return f"/static/{kwargs.get('filename', '')}"
+            # For other URLs, try to make them relative
+            try:
+                url = flask_url_for(*args, **kwargs)
+                # Remove http://localhost:5000 prefix from URLs
+                url = url.replace('http://localhost:5000', '')
+                return url
+            except Exception as e:
+                log(f"Error generating URL for {args}, {kwargs}: {e}")
+                # Return a safe fallback
+                return "/"
+                
+        # Replace url_for with our static version
+        app.app.jinja_env.globals['url_for'] = static_url_for
             
         # Check if database exists
         if not os.path.exists(app.root / app.DATABASE):
             log(f"Database not found at {app.root / app.DATABASE}, building it...")
             app.build_database(app.root)
             
-        log("Successfully imported app.py")
+        log("Successfully imported and configured app.py")
         return app
     except Exception as e:
         log(f"Error importing app.py: {e}")
@@ -91,17 +100,18 @@ def get_db_connection(app_module):
         log(f"Error connecting to database: {e}")
         return None
 
-def fix_relative_urls(html_content):
-    """Convert absolute URLs to relative URLs"""
-    # Replace absolute URLs like "/til/..." with relative "til/..."
-    html_content = re.sub(r'href="/([^"]*)"', r'href="\1"', html_content)
-    html_content = re.sub(r'src="/([^"]*)"', r'src="\1"', html_content)
+def fix_links_in_html(html):
+    """Fix links in HTML for static site deployment"""
+    # Convert absolute links to URL-relative links
+    html = re.sub(r'href="http://localhost:5000([^"]*)"', r'href="\1"', html)
     
-    # Fix URL for static files
-    html_content = re.sub(r'href="static/', r'href="./static/', html_content)
-    html_content = re.sub(r'src="static/', r'src="./static/', html_content)
+    # Fix links to entry pages
+    html = re.sub(r'href="/til/([^"]*)"', r'href="/til/\1/index.html"', html)
     
-    return html_content
+    # Fix links to topic pages
+    html = re.sub(r'href="/topic/([^"]*)"', r'href="/topic/\1/index.html"', html)
+    
+    return html
 
 def generate_entry_pages(app_module, build_dir, conn):
     """Generate individual entry pages"""
@@ -165,7 +175,7 @@ def generate_entry_pages(app_module, build_dir, conn):
             ).fetchall()
             
             # Render template
-            with app_module.app.app_context():
+            with app_module.app.test_request_context():
                 from flask import render_template
                 try:
                     html = render_template(
@@ -176,10 +186,10 @@ def generate_entry_pages(app_module, build_dir, conn):
                         related=related
                     )
                     
-                    # Fix relative URLs in HTML
-                    html = fix_relative_urls(html)
-                    
                     if html:
+                        # Fix links in HTML
+                        html = fix_links_in_html(html)
+                        
                         # Create slug-based URL directory
                         entry_path = entries_dir / entry['slug']
                         ensure_dir(entry_path)
@@ -257,7 +267,7 @@ def generate_topic_pages(app_module, build_dir, conn):
             count = len(entries)
             
             # Render template
-            with app_module.app.app_context():
+            with app_module.app.test_request_context():
                 from flask import render_template
                 try:
                     html = render_template(
@@ -272,10 +282,10 @@ def generate_topic_pages(app_module, build_dir, conn):
                         current_order="desc"
                     )
                     
-                    # Fix relative URLs in HTML
-                    html = fix_relative_urls(html)
-                    
                     if html:
+                        # Fix links in HTML
+                        html = fix_links_in_html(html)
+                        
                         # Create topic directory
                         topic_path = topics_dir / topic
                         ensure_dir(topic_path)
@@ -298,48 +308,6 @@ def generate_topic_pages(app_module, build_dir, conn):
         import traceback
         traceback.print_exc()
         return False
-
-def create_fallback_index(build_dir, entries=None):
-    """Create a fallback index.html with basic styling"""
-    log("Creating fallback index.html")
-    
-    with open(build_dir / "index.html", "w") as f:
-        f.write("""<!DOCTYPE html>
-<html>
-<head>
-    <title>TIL Blog - Generated</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-        h1 { color: #333; }
-        .entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
-        .entry h2 { margin-bottom: 5px; }
-        .entry-date { color: #666; font-size: 0.9em; }
-        .notice { background: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin-bottom: 20px; }
-    </style>
-</head>
-<body>
-    <h1>Today I Learned</h1>
-    
-    <div class="notice">
-        <p>This is a fallback page generated by the static site generator.</p>
-        <p>The regular template rendering encountered an error, but your content was found in the database.</p>
-    </div>
-""")
-        
-        # Add entries if we have them
-        if entries:
-            f.write("    <h2>Recent Entries</h2>\n")
-            for entry in entries:
-                f.write(f"""    <div class="entry">
-        <h2><a href="til/{entry['slug']}">{entry['title']}</a></h2>
-        <div class="entry-date">Posted: {entry['created']}</div>
-    </div>
-""")
-        
-        f.write("""</body>
-</html>""")
-    
-    log("Created fallback index.html")
 
 def main():
     """Main build process that works without starting Flask"""
@@ -432,55 +400,73 @@ def main():
             # Get total count of entries
             count = conn.execute("SELECT COUNT(*) as count FROM entries").fetchone()["count"]
             
-            # Try to render home page using Flask's app_context
-            try:
-                with app_module.app.app_context():
-                    from flask import render_template
-                    try:
-                        home_html = render_template(
-                            'index.html',
-                            entries=entries,
-                            topic_cloud=topic_cloud,
-                            page=1,
-                            has_next=(count > app_module.PER_PAGE),
-                            has_prev=False,
-                            count=count,
-                            current_order="desc"
-                        )
+            # Render home page using Flask's test_request_context()
+            with app_module.app.test_request_context():
+                from flask import render_template
+                try:
+                    home_html = render_template(
+                        'index.html',
+                        entries=entries,
+                        topic_cloud=topic_cloud,
+                        page=1,
+                        has_next=(count > app_module.PER_PAGE),
+                        has_prev=False,
+                        count=count,
+                        current_order="desc"
+                    )
+                    
+                    if home_html:
+                        # Fix links in HTML for static site
+                        home_html = fix_links_in_html(home_html)
                         
-                        # Fix relative URLs in HTML
-                        home_html = fix_relative_urls(home_html)
+                        # Save home page
+                        with open(BUILD_DIR / "index.html", "w", encoding="utf-8") as f:
+                            f.write(home_html)
+                        log("Generated index.html")
                         
-                        if home_html:
-                            # Save home page
-                            with open(BUILD_DIR / "index.html", "w", encoding="utf-8") as f:
-                                f.write(home_html)
-                            log("Generated index.html")
-                            
-                            # Generate entry pages
-                            generate_entry_pages(app_module, BUILD_DIR, conn)
-                            
-                            # Generate topic pages
-                            generate_topic_pages(app_module, BUILD_DIR, conn)
-                            
-                            # Generate feed file
-                            # TODO: Add feed generation
-                            
-                            # Generate sitemap
-                            # TODO: Add sitemap generation
-                        else:
-                            log("Failed to render index.html, creating fallback page")
-                            create_fallback_index(BUILD_DIR, entries)
-                    except Exception as e:
-                        log(f"Error rendering index template: {e}")
-                        import traceback
-                        traceback.print_exc()
+                        # Generate entry pages
+                        generate_entry_pages(app_module, BUILD_DIR, conn)
                         
-                        # Create fallback page with basic styling that uses our entries
-                        create_fallback_index(BUILD_DIR, entries)
-            except Exception as e:
-                log(f"Error with Flask app context: {e}")
-                create_fallback_index(BUILD_DIR, entries)
+                        # Generate topic pages
+                        generate_topic_pages(app_module, BUILD_DIR, conn)
+                        
+                        # Generate feed file
+                        # TODO: Add feed generation
+                        
+                        # Generate sitemap
+                        # TODO: Add sitemap generation
+                    else:
+                        log("Failed to render index.html, creating fallback page")
+                        # Create simple index.html
+                        with open(BUILD_DIR / "index.html", "w") as f:
+                            f.write("""<!DOCTYPE html>
+<html>
+<head>
+    <title>TIL Blog</title>
+</head>
+<body>
+    <h1>TIL Blog</h1>
+    <p>Could not render the template. This is a fallback page.</p>
+</body>
+</html>""")
+                except Exception as e:
+                    log(f"Error rendering index template: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    
+                    # Create fallback page
+                    with open(BUILD_DIR / "index.html", "w") as f:
+                        f.write(f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>TIL Blog - Rendering Error</title>
+</head>
+<body>
+    <h1>TIL Blog - Rendering Error</h1>
+    <p>Error rendering templates: {e}</p>
+    <p>Found {len(entries)} entries in the database.</p>
+</body>
+</html>""")
     
     # Copy static files if they exist
     if STATIC_DIR and STATIC_DIR.exists():
