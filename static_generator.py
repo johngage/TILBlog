@@ -29,25 +29,35 @@ def load_app_module():
     log("Loading app.py as a module...")
     
     # Import app.py as a module
-    # FIX: Change the module name to something other than "app_module"
-    # because we're importing the actual file, not a module named app_module
-    spec = importlib.util.spec_from_file_location("app_script", "app.py")
-    app_script = importlib.util.module_from_spec(spec)
-    
-    # Prepare a dummy sys.argv to prevent the app from running in main mode
-    original_argv = sys.argv
-    sys.argv = [sys.argv[0], 'build']
-    
+    # FIXED: The issue is that we need to load app.py directly, not look for a module
     try:
-        # Execute the module
-        spec.loader.exec_module(app_script)
-        return app_script
+        # First, add the current directory to sys.path to ensure app can be imported
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        if current_dir not in sys.path:
+            sys.path.insert(0, current_dir)
+        
+        # Now try to import app directly
+        import app
+        return app
     except Exception as e:
-        log(f"Error loading app.py: {e}")
-        return None
-    finally:
-        # Restore original argv
-        sys.argv = original_argv
+        log(f"Error directly importing app.py: {e}")
+        
+        # Fallback to the spec loader method if direct import fails
+        try:
+            spec = importlib.util.spec_from_file_location("app", "app.py")
+            app = importlib.util.module_from_spec(spec)
+            
+            # Prepare a dummy sys.argv to prevent the app from running in main mode
+            original_argv = sys.argv
+            sys.argv = [sys.argv[0], 'build']
+            
+            # Execute the module
+            spec.loader.exec_module(app)
+            sys.argv = original_argv  # Restore original argv
+            return app
+        except Exception as e2:
+            log(f"Error loading app.py using spec loader: {e2}")
+            return None
 
 def render_template_directly(app_module, template_name, **context):
     """Render a template directly using Jinja2 without Flask running"""
