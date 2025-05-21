@@ -2,6 +2,7 @@
 """
 Static content generator for TIL Blog
 Works without starting a Flask server
+We really hope this works
 """
 import os
 import sys

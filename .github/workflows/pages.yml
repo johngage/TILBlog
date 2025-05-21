@@ -37,12 +37,25 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install requests
-
-      - name: Run static generator
-        run: python static_generator.py
       
-      - name: Run build script
-        run: python build.py
+      - name: List files in repository
+        run: |
+          ls -la
+          
+      - name: Run Flask adapter static generator
+        run: python static_generator.py
+          
+      - name: List generated files
+        run: |
+          echo "Generated files in build directory:"
+          ls -la build || echo "Build directory is empty or does not exist"
+          
+          # Check if index.html exists
+          if [ -f build/index.html ]; then
+            echo "✅ index.html exists"
+          else
+            echo "❌ index.html is missing"
+          fi
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
