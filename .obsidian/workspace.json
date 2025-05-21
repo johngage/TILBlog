@@ -172,14 +172,17 @@
   },
   "active": "15e76adedc2ea2ed",
   "lastOpenFiles": [
+    "__pycache__/test_app.cpython-312-pytest-8.3.5.pyc",
+    "static/js/dark-mode.js",
+    "static/js",
+    "__pycache__/test_dark_mode.cpython-312-pytest-8.3.5.pyc",
+    "test_dark_mode.py",
+    "build.py",
+    "test_app.py",
     "public/index.html",
     "public",
     "netlify/functions/api.py",
     "netlify/functions",
-    "netlify/function",
-    "netlify",
-    "netlify.toml",
-    "til.db-journal",
     "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
     "content/Schools/Internet joins schools and teachers to a global library.md",
     "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
@@ -191,9 +194,6 @@
     "content/California-Africa/timeline.md",
     "content/building/creating-a-TIl-blog.md",
     "content/building/new-creating.md",
-    "templater",
-    "rebuild_database.py",
-    "rebuild_app.py",
     "README.md"
   ]
 }

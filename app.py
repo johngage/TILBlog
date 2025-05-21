@@ -15,6 +15,83 @@ from watchdog.events import FileSystemEventHandler
 import threading
 import frontmatter
 
+
+# Add this near the top of your app.py file, after imports
+
+# Check if we're running in build mode
+import sys
+is_build_mode = len(sys.argv) > 1 and sys.argv[1] == 'build'
+
+# Add these functions after your other helper functions
+
+def get_all_til_urls():
+    """Return all URLs for TIL entries - used for static site generation"""
+    # Connect to database
+    conn = get_db()
+    
+    # Get all entries
+    entries = conn.execute(
+        """
+        SELECT 
+            id, 
+            title,
+            path,
+            created,
+            updated,
+            topic
+        FROM entries
+        ORDER BY created DESC
+        """
+    ).fetchall()
+    
+    # Generate URLs for all entries
+    urls = []
+    
+    # Home page
+    urls.append("/")
+    
+    # Individual entry pages
+    for entry in entries:
+        urls.append(f"/til/{entry['id']}")
+    
+    # Topic pages
+    topics = conn.execute("SELECT DISTINCT topic FROM entries").fetchall()
+    for topic in topics:
+        urls.append(f"/topic/{topic['topic']}")
+    
+    # Add any other routes you want to include
+    urls.append("/about")
+    urls.append("/feed.xml")
+    urls.append("/sitemap.xml")
+    
+    return urls
+
+# Modify the main section at the bottom of app.py
+
+if __name__ == "__main__":
+    # Start file watcher in a separate thread
+    if not is_build_mode:
+        observer = start_file_watcher()
+    
+    try:
+        # If database doesn't exist, build it
+        if not os.path.exists(root / DATABASE):
+            print("Database not found. Building database...")
+            build_database(root)
+        
+        # If running in build mode, don't actually start the server
+        if is_build_mode:
+            print("Running in build mode - static site generator will handle URLs")
+            # You could add code here to pre-generate any dynamic content
+        else:
+            # For local development
+            app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
+    except KeyboardInterrupt:
+        if not is_build_mode:
+            print("Stopping file watcher...")
+            observer.stop()
+            observer.join()
+
 # Configuration
 DATABASE = "til.db"
 PER_PAGE = 20

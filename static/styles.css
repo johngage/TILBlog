@@ -19,6 +19,39 @@
     padding: 0;
 }
 
+/* static/css/styles.css */
+/* Default light theme */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --link-color: #3498db;
+}
+
+/* Dark theme */
+.dark-mode {
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --link-color: #5dade2;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a {
+  color: var(--link-color);
+}
+
+#dark-mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;

@@ -10,6 +10,13 @@
 </head>
 <body>
     <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
         <div class="container">
             <div class="header-content">
                 <h1><a href="{{ url_for('index') }}">John Gage: Today I Learned</a></h1>
@@ -56,5 +63,8 @@
             </p>
         </div>
     </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="{{ url_for('static', filename='js/dark-mode.js') }}"></script>
 </body>
 </html>
