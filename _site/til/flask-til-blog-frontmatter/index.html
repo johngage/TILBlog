@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a TIL Blog with Flask and Front Matter - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">TIL: Today I Learned</a></h1>
+        <nav class="topics-nav">
+            <a href="/topic/GSPP/">GSPP</a><a href="/topic/africa/">africa</a><a href="/topic/berkeley-open-courseware/">berkeley-open-courseware</a><a href="/topic/carbon/">carbon</a><a href="/topic/cof/">cof</a><a href="/topic/curriculum/">curriculum</a><a href="/topic/education/">education</a><a href="/topic/flask/">flask</a><a href="/topic/gavin-newsom/">gavin-newsom</a><a href="/topic/internet/">internet</a><a href="/topic/kenya/">kenya</a><a href="/topic/library/">library</a><a href="/topic/markdown/">markdown</a><a href="/topic/metaphor/">metaphor</a><a href="/topic/mof/">mof</a><a href="/topic/netday/">netday</a><a href="/topic/obsidian/">obsidian</a><a href="/topic/python/">python</a><a href="/topic/schools/">schools</a><a href="/topic/symbol/">symbol</a><a href="/topic/til-build/">til-build</a><a href="/topic/tocs-omishakin/">tocs-omishakin</a><a href="/topic/water/">water</a><a href="/topic/web-development/">web-development</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article class="entry full">
+            <h1>Creating a TIL Blog with Flask and Front Matter</h1>
+            <div class="metadata">
+                <span class="date">2024-01-15</span>
+                <div class="topics">
+                    <a href="/topic/flask/">flask</a><a href="/topic/python/">python</a><a href="/topic/web-development/">web-development</a><a href="/topic/obsidian/">obsidian</a><a href="/topic/markdown/">markdown</a>
+                </div>
+            </div>
+            <div class="content">
+                <h1 id="creating-a-til-blog-with-flask-and-front-matter">Creating a TIL Blog with Flask and Front Matter</h1>
+<p>Today I learned how to upgrade my TIL blog to use YAML front matter instead of folder structure for organizing topics.</p>
+<h2 id="key-changes">Key Changes</h2>
+<p>The new approach uses <strong>front matter</strong> in each markdown file:</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My</span><span class="nv"> </span><span class="s">Note</span><span class="nv"> </span><span class="s">Title&quot;</span>
+<span class="nt">topics</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;python&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;flask&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;web-development&quot;</span><span class="p p-Indicator">]</span>
+<span class="nt">created</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2024-01-15</span>
+<span class="nn">---</span>
+</code></pre></div>
+
+<h2 id="benefits">Benefits</h2>
+<h3 id="multiple-topics-per-note">Multiple Topics per Note</h3>
+<p>Now each note can belong to multiple topics! This Python Flask tutorial can be tagged with:
+- <code>python</code>
+- <code>flask</code> 
+- <code>web-development</code>
+- <code>authentication</code> (if it covers login)</p>
+<h3 id="obsidian-integration">Obsidian Integration</h3>
+<p>This structure works perfectly with <a href="/note/obsidian" class="wiki-link">Obsidian</a> because:
+- Front matter is displayed nicely
+- Topics can be used with the Dataview plugin
+- <a href="/note/wiki-links" class="wiki-link">Wiki links</a> work automatically
+- File organization is flexible</p>
+<h3 id="auto-rebuild">Auto-Rebuild</h3>
+<p>The blog now watches for file changes and rebuilds automatically when I save in Obsidian. No more manual rebuilds!</p>
+<h2 id="wiki-links">Wiki Links</h2>
+<p>I can now link between notes using <a href="/note/wiki-links" class="wiki-link">Wiki Links</a> syntax, and they&rsquo;ll automatically be converted to proper HTML links in the blog.</p>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<p>The database schema changed to support many-to-many relationships:
+- <code>entries</code> table for posts
+- <code>topics</code> table for topic names<br />
+- <code>entry_topics</code> junction table</p>
+<p>This is much more flexible than the old folder-based system and scales to hundreds of topics easily.</p>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p><a href="/">← Back to all entries</a></p>
+        <p><a href="/data/">Browse the database</a></p>
+    </footer>
+</body>
+</html>

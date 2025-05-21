@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today I Learned (TIL) JG Blog - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">TIL: Today I Learned</a></h1>
+        <nav class="topics-nav">
+            <a href="/topic/GSPP/">GSPP</a><a href="/topic/africa/">africa</a><a href="/topic/berkeley-open-courseware/">berkeley-open-courseware</a><a href="/topic/carbon/">carbon</a><a href="/topic/cof/">cof</a><a href="/topic/curriculum/">curriculum</a><a href="/topic/education/">education</a><a href="/topic/flask/">flask</a><a href="/topic/gavin-newsom/">gavin-newsom</a><a href="/topic/internet/">internet</a><a href="/topic/kenya/">kenya</a><a href="/topic/library/">library</a><a href="/topic/markdown/">markdown</a><a href="/topic/metaphor/">metaphor</a><a href="/topic/mof/">mof</a><a href="/topic/netday/">netday</a><a href="/topic/obsidian/">obsidian</a><a href="/topic/python/">python</a><a href="/topic/schools/">schools</a><a href="/topic/symbol/">symbol</a><a href="/topic/til-build/">til-build</a><a href="/topic/tocs-omishakin/">tocs-omishakin</a><a href="/topic/water/">water</a><a href="/topic/web-development/">web-development</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article class="entry full">
+            <h1>Today I Learned (TIL) JG Blog</h1>
+            <div class="metadata">
+                <span class="date">2025-05-18</span>
+                <div class="topics">
+                    <a href="/topic/til-build/">til-build</a>
+                </div>
+            </div>
+            <div class="content">
+                <h1 id="today-i-learned-til-jg-blog">Today I Learned (TIL) JG Blog</h1>
+<p>A simple, fast TIL (Today I Learned) blog inspired by Simon Willison&rsquo;s design. This application allows you to publish quick notes and snippets you learn daily, organized by topics.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Organized by topics</li>
+<li>Full-text search</li>
+<li>Responsive design</li>
+<li>Markdown support with syntax highlighting</li>
+<li>Atom feed</li>
+<li>SQLite backend for simplicity</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.6+</li>
+<li>Flask</li>
+<li>Markdown</li>
+<li>A few other dependencies listed in <code>requirements.txt</code></li>
+</ul>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>
+<p>Clone this repository:
+   <code>git clone https://github.com/yourusername/til.git
+   cd til</code></p>
+</li>
+<li>
+<p>Create a virtual environment and install dependencies:
+   <code>python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt</code></p>
+</li>
+<li>
+<p>Initialize the database:
+   <code>flask build</code></p>
+</li>
+</ol>
+<h2 id="adding-content">Adding Content</h2>
+<p>Create directories for your topics and add Markdown files:</p>
+<div class="highlight"><pre><span></span><code>python/
+  useful-list-comprehensions.md
+  debugging-with-pdb.md
+flask/
+  flask-blueprints.md
+git/
+  reset-vs-revert.md
+</code></pre></div>
+
+<p>Each Markdown file should start with a title (a line beginning with <code>#</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Useful List Comprehensions in Python</span>
+
+Here&#39;s how to use list comprehensions effectively...
+</code></pre></div>
+
+<p>If no title is provided, the filename (converted to title case) will be used.</p>
+<h2 id="running-the-app">Running the App</h2>
+<p>For development:</p>
+<div class="highlight"><pre><span></span><code>flask run --debug
+</code></pre></div>
+
+<p>For production, use a WSGI server like Gunicorn:</p>
+<div class="highlight"><pre><span></span><code>gunicorn app:app
+</code></pre></div>
+
+<h2 id="deployment">Deployment</h2>
+<p>This app is designed to be simple to deploy. You can deploy it to any platform that supports Python applications, such as:</p>
+<ul>
+<li>Heroku</li>
+<li>PythonAnywhere</li>
+<li>Vercel</li>
+<li>Fly.io</li>
+<li>VPS with Nginx and Gunicorn</li>
+</ul>
+<h3 id="example-deployment-with-flyio">Example deployment with Fly.io</h3>
+<ol>
+<li>Install the Fly CLI</li>
+<li>Create a <code>fly.toml</code> file</li>
+<li>Deploy with <code>fly deploy</code></li>
+</ol>
+<h2 id="customization">Customization</h2>
+<ul>
+<li>Edit <code>templates/</code> to change the HTML structure</li>
+<li>Modify <code>static/styles.css</code> to change the appearance</li>
+<li>Update author information in <code>feed.py</code></li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Inspired by <a href="https://til.simonwillison.net/">Simon Willison&rsquo;s TIL</a></p>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p><a href="/">← Back to all entries</a></p>
+        <p><a href="/data/">Browse the database</a></p>
+    </footer>
+</body>
+</html>
