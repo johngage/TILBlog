@@ -60,15 +60,23 @@ def load_app_module():
         traceback.print_exc()
         return None
 
-def generate_entry_pages(app_module, build_dir):
+def get_db_connection(app_module):
+    """Get database connection directly without using Flask's g object"""
+    try:
+        db_path = app_module.root / app_module.DATABASE
+        log(f"Opening direct connection to database: {db_path}")
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+        return conn
+    except Exception as e:
+        log(f"Error connecting to database: {e}")
+        return None
+
+def generate_entry_pages(app_module, build_dir, conn):
     """Generate individual entry pages"""
     log("Generating entry pages...")
     
-    # Get database connection
     try:
-        conn = app_module.get_db()
-        log("Successfully connected to database")
-        
         # Get all entries
         entries = conn.execute(
             """
@@ -126,27 +134,31 @@ def generate_entry_pages(app_module, build_dir):
             ).fetchall()
             
             # Render template
-            html = render_template_using_jinja(
-                app_module, 
-                'entry.html', 
-                entry=entry, 
-                entry_topics=entry_topics,
-                topic_cloud=topic_cloud,
-                related=related
-            )
-            
-            if html:
-                # Create slug-based URL directory
-                entry_path = entries_dir / entry['slug']
-                ensure_dir(entry_path)
-                
-                # Write index.html in that directory
-                with open(entry_path / "index.html", "w", encoding="utf-8") as f:
-                    f.write(html)
-                
-                log(f"Generated entry page: {entry['slug']}")
-            else:
-                log(f"Failed to render entry page for {entry['slug']}")
+            with app_module.app.app_context():
+                from flask import render_template
+                try:
+                    html = render_template(
+                        'entry.html', 
+                        entry=entry, 
+                        entry_topics=entry_topics,
+                        topic_cloud=topic_cloud,
+                        related=related
+                    )
+                    
+                    if html:
+                        # Create slug-based URL directory
+                        entry_path = entries_dir / entry['slug']
+                        ensure_dir(entry_path)
+                        
+                        # Write index.html in that directory
+                        with open(entry_path / "index.html", "w", encoding="utf-8") as f:
+                            f.write(html)
+                        
+                        log(f"Generated entry page: {entry['slug']}")
+                    else:
+                        log(f"Failed to render entry page for {entry['slug']}")
+                except Exception as e:
+                    log(f"Error rendering template for {entry['slug']}: {e}")
         
         return True
     except Exception as e:
@@ -155,13 +167,11 @@ def generate_entry_pages(app_module, build_dir):
         traceback.print_exc()
         return False
 
-def generate_topic_pages(app_module, build_dir):
+def generate_topic_pages(app_module, build_dir, conn):
     """Generate topic index pages"""
     log("Generating topic pages...")
     
     try:
-        conn = app_module.get_db()
-        
         # Get all topics
         topics = conn.execute(
             """
@@ -211,31 +221,35 @@ def generate_topic_pages(app_module, build_dir):
             count = len(entries)
             
             # Render template
-            html = render_template_using_jinja(
-                app_module,
-                'topic.html',
-                entries=entries,
-                topic_cloud=topic_cloud,
-                current_topic=topic,
-                page=1,
-                has_next=False,
-                has_prev=False,
-                count=count,
-                current_order="desc"
-            )
-            
-            if html:
-                # Create topic directory
-                topic_path = topics_dir / topic
-                ensure_dir(topic_path)
-                
-                # Write index.html
-                with open(topic_path / "index.html", "w", encoding="utf-8") as f:
-                    f.write(html)
-                
-                log(f"Generated topic page: {topic}")
-            else:
-                log(f"Failed to render topic page for {topic}")
+            with app_module.app.app_context():
+                from flask import render_template
+                try:
+                    html = render_template(
+                        'topic.html',
+                        entries=entries,
+                        topic_cloud=topic_cloud,
+                        current_topic=topic,
+                        page=1,
+                        has_next=False,
+                        has_prev=False,
+                        count=count,
+                        current_order="desc"
+                    )
+                    
+                    if html:
+                        # Create topic directory
+                        topic_path = topics_dir / topic
+                        ensure_dir(topic_path)
+                        
+                        # Write index.html
+                        with open(topic_path / "index.html", "w", encoding="utf-8") as f:
+                            f.write(html)
+                        
+                        log(f"Generated topic page: {topic}")
+                    else:
+                        log(f"Failed to render topic page for {topic}")
+                except Exception as e:
+                    log(f"Error rendering template for topic {topic}: {e}")
         
         return True
     except Exception as e:
@@ -243,31 +257,6 @@ def generate_topic_pages(app_module, build_dir):
         import traceback
         traceback.print_exc()
         return False
-
-def render_template_using_jinja(app_module, template_name, **context):
-    """Render a template directly using the Flask app"""
-    log(f"Rendering template: {template_name}")
-    
-    try:
-        # Get Flask app
-        flask_app = app_module.app
-        
-        # Create a dummy request context
-        with flask_app.test_request_context():
-            # Try to use Flask's render_template function
-            from flask import render_template
-            return render_template(template_name, **context)
-    except Exception as e:
-        log(f"Error rendering template with Flask: {e}")
-        
-        # Fallback: Try to render directly with Jinja
-        try:
-            jinja_env = app_module.app.jinja_env
-            template = jinja_env.get_template(template_name)
-            return template.render(**context)
-        except Exception as e2:
-            log(f"Error rendering with Jinja directly: {e2}")
-            return None
 
 def main():
     """Main build process that works without starting Flask"""
@@ -315,72 +304,88 @@ def main():
             log("Database not found, building it from content directory...")
             app_module.build_database(app_module.root)
         
-        # Get database connection
-        conn = app_module.get_db()
+        # Open direct database connection without Flask's g
+        conn = get_db_connection(app_module)
         
-        # Get all entries for the home page
-        entries = conn.execute(
-            """
-            SELECT id, slug, title, 
-                   COALESCE(created_fm, created_fs) as created
-            FROM entries
-            ORDER BY COALESCE(created_fm, created_fs) DESC
-            LIMIT ?
-            """,
-            [app_module.PER_PAGE]
-        ).fetchall()
-        
-        log(f"Found {len(entries)} entries for home page")
-        
-        # Get topic cloud for sidebar
-        topic_cloud = conn.execute(
-            """
-            SELECT t.name as topic, COUNT(*) as count
-            FROM topics t
-            JOIN entry_topics et ON t.id = et.topic_id
-            GROUP BY t.name
-            ORDER BY t.name ASC
-            """
-        ).fetchall()
-        
-        # Get total count of entries
-        count = conn.execute("SELECT COUNT(*) as count FROM entries").fetchone()["count"]
-        
-        # Render home page
-        home_html = render_template_using_jinja(
-            app_module,
-            'index.html',
-            entries=entries,
-            topic_cloud=topic_cloud,
-            page=1,
-            has_next=(count > app_module.PER_PAGE),
-            has_prev=False,
-            count=count,
-            current_order="desc"
-        )
-        
-        if home_html:
-            # Save home page
-            with open(BUILD_DIR / "index.html", "w", encoding="utf-8") as f:
-                f.write(home_html)
-            log("Generated index.html")
-            
-            # Generate entry pages
-            generate_entry_pages(app_module, BUILD_DIR)
-            
-            # Generate topic pages
-            generate_topic_pages(app_module, BUILD_DIR)
-            
-            # Generate feed file
-            # TODO: Add feed generation
-            
-            # Generate sitemap
-            # TODO: Add sitemap generation
-        else:
-            log("Failed to render index.html, creating fallback page")
-            # Create simple index.html
+        if conn is None:
+            log("Failed to connect to database, creating fallback page")
             with open(BUILD_DIR / "index.html", "w") as f:
                 f.write("""<!DOCTYPE html>
+<html>
+<head>
+    <title>TIL Blog - Database Error</title>
+</head>
+<body>
+    <h1>TIL Blog - Database Error</h1>
+    <p>Could not connect to the database. This is a fallback page.</p>
+</body>
+</html>""")
+        else:
+            # Get all entries for the home page
+            entries = conn.execute(
+                """
+                SELECT id, slug, title, 
+                       COALESCE(created_fm, created_fs) as created
+                FROM entries
+                ORDER BY COALESCE(created_fm, created_fs) DESC
+                LIMIT ?
+                """,
+                [app_module.PER_PAGE]
+            ).fetchall()
+            
+            log(f"Found {len(entries)} entries for home page")
+            
+            # Get topic cloud for sidebar
+            topic_cloud = conn.execute(
+                """
+                SELECT t.name as topic, COUNT(*) as count
+                FROM topics t
+                JOIN entry_topics et ON t.id = et.topic_id
+                GROUP BY t.name
+                ORDER BY t.name ASC
+                """
+            ).fetchall()
+            
+            # Get total count of entries
+            count = conn.execute("SELECT COUNT(*) as count FROM entries").fetchone()["count"]
+            
+            # Render home page using Flask's app_context
+            with app_module.app.app_context():
+                from flask import render_template
+                try:
+                    home_html = render_template(
+                        'index.html',
+                        entries=entries,
+                        topic_cloud=topic_cloud,
+                        page=1,
+                        has_next=(count > app_module.PER_PAGE),
+                        has_prev=False,
+                        count=count,
+                        current_order="desc"
+                    )
+                    
+                    if home_html:
+                        # Save home page
+                        with open(BUILD_DIR / "index.html", "w", encoding="utf-8") as f:
+                            f.write(home_html)
+                        log("Generated index.html")
+                        
+                        # Generate entry pages
+                        generate_entry_pages(app_module, BUILD_DIR, conn)
+                        
+                        # Generate topic pages
+                        generate_topic_pages(app_module, BUILD_DIR, conn)
+                        
+                        # Generate feed file
+                        # TODO: Add feed generation
+                        
+                        # Generate sitemap
+                        # TODO: Add sitemap generation
+                    else:
+                        log("Failed to render index.html, creating fallback page")
+                        # Create simple index.html
+                        with open(BUILD_DIR / "index.html", "w") as f:
+                            f.write("""<!DOCTYPE html>
 <html>
 <head>
     <title>TIL Blog</title>
@@ -388,6 +393,24 @@ def main():
 <body>
     <h1>TIL Blog</h1>
     <p>Could not render the template. This is a fallback page.</p>
+</body>
+</html>""")
+                except Exception as e:
+                    log(f"Error rendering index template: {e}")
+                    import traceback
+                    traceback.print_exc()
+                    
+                    # Create fallback page
+                    with open(BUILD_DIR / "index.html", "w") as f:
+                        f.write(f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>TIL Blog - Rendering Error</title>
+</head>
+<body>
+    <h1>TIL Blog - Rendering Error</h1>
+    <p>Error rendering templates: {e}</p>
+    <p>Found {len(entries)} entries in the database.</p>
 </body>
 </html>""")
     
