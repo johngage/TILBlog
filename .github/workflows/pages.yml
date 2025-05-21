@@ -38,10 +38,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install requests
       
-      # Uncomment this section once the test deployment works
-       - name: Run build script
-         run: python build.py
-      
+      - name: Run build script
+        run: python build.py
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
