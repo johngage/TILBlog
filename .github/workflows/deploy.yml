@@ -3,11 +3,7 @@ name: Build and Deploy TIL Blog
 on:
   push:
     branches: [ main ]
-  schedule:
-    # Run daily at midnight to catch any new TILs
-    - cron: '0 0 * * *'
   workflow_dispatch:
-    # Allows manual triggering
 
 permissions:
   contents: read
@@ -20,8 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Fetch all history for proper timestamps
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -32,15 +26,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install requests pytest
+          pip install requests
+          
+      - name: List files
+        run: ls -la
           
       - name: Build static site
-        run: python build.py
+        run: |
+          python -m pip install requests
+          python build.py
+        
+      - name: List build directory
+        run: |
+          mkdir -p build
+          ls -la build || echo "Build directory is empty or does not exist"
         
       - name: Setup Pages
         uses: actions/configure-pages@v3
         
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'build'
