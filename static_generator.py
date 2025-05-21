@@ -29,8 +29,10 @@ def load_app_module():
     log("Loading app.py as a module...")
     
     # Import app.py as a module
-    spec = importlib.util.spec_from_file_location("app_module", "app.py")
-    app_module = importlib.util.module_from_spec(spec)
+    # FIX: Change the module name to something other than "app_module"
+    # because we're importing the actual file, not a module named app_module
+    spec = importlib.util.spec_from_file_location("app_script", "app.py")
+    app_script = importlib.util.module_from_spec(spec)
     
     # Prepare a dummy sys.argv to prevent the app from running in main mode
     original_argv = sys.argv
@@ -38,8 +40,8 @@ def load_app_module():
     
     try:
         # Execute the module
-        spec.loader.exec_module(app_module)
-        return app_module
+        spec.loader.exec_module(app_script)
+        return app_script
     except Exception as e:
         log(f"Error loading app.py: {e}")
         return None
