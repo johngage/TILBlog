@@ -172,6 +172,7 @@
   },
   "active": "15e76adedc2ea2ed",
   "lastOpenFiles": [
+    "check_html.sh",
     "build/static/js/dark-mode.js",
     "build/topic/python.html",
     "build/topic/flask.html",
@@ -182,7 +183,6 @@
     "build/topic",
     "build/til",
     "build/static",
-    "build/index.html",
     "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
     "content/Schools/Internet joins schools and teachers to a global library.md",
     "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
