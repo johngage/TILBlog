@@ -39,14 +39,9 @@ jobs:
           pip install requests
       
       # Uncomment this section once the test deployment works
-      # - name: Run build script
-      #   run: python build.py
+       - name: Run build script
+         run: python build.py
       
-      # For testing - create simple content
-      - name: Create build directory and test content
-        run: |
-          mkdir -p build
-          echo "<html><body><h1>TIL Blog</h1><p>This is a placeholder page. Replace this step with your build script once deployment works.</p></body></html>" > build/index.html
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
