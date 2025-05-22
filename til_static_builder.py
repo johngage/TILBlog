@@ -17,7 +17,7 @@ import frontmatter
 DATABASE = "til.db"
 BUILD_DIR = Path("_site")
 STATIC_DIR = Path("static")
-BASE_URL = "/TILBlog/"  # Your repository name
+BASE_URL = "/TILBlog"  # Your repository name
 
 def log(message):
     """Print a timestamped log message"""
@@ -109,6 +109,8 @@ def main():
 def generate_home_page(build_dir, entries, topics):
     """Generate the home page"""
     log("Generating home page")
+
+    
     
     with open(build_dir / "index.html", "w", encoding="utf-8") as f:
         f.write(f"""<!DOCTYPE html>
@@ -121,10 +123,13 @@ def generate_home_page(build_dir, entries, topics):
 </head>
 <body>
     <header>
-        <h1>TIL: Today I Learned</h1>
+        <h1>JG-TIL: Today I Learned</h1>
         <nav class="topics-nav">
             {"".join(f'<a href="/topic/{t["topic"]}/">{t["topic"]} <span class="count">({t["count"]})</span></a>' for t in topics)}
         </nav>
+    <link rel="stylesheet" href="{BASE_URL}/static/styles.css">
+    <a href="{BASE_URL}/topic/{t["topic"]}/">
+    
     </header>
     
     <main>
