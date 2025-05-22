@@ -1,23 +1,15 @@
 #!/usr/bin/env python
 """
-Simple static site generator for TIL Blog
-Based on existing database and templates
+Complete static content generator for TIL Blog
+Creates all pages with correct GitHub Pages URLs
 """
 import os
 import sys
 import time
+import re
 import shutil
 import sqlite3
 from pathlib import Path
-import subprocess
-import markdown
-import frontmatter
-
-# Configuration
-DATABASE = "til.db"
-BUILD_DIR = Path("_site")
-STATIC_DIR = Path("static")
-BASE_URL = "/TILBlog"  # Your repository name
 
 def log(message):
     """Print a timestamped log message"""
@@ -31,13 +23,14 @@ def ensure_dir(path):
         log(f"Created directory: {path}")
 
 def main():
-    """Main build process"""
-    log("Starting TIL blog static site generation")
+    """Main build process that creates all pages"""
+    log("Starting complete TIL blog static generation")
     
-    # Configuration
+    # Configuration - IMPORTANT: Change this to your repository name
     DATABASE = "til.db"
-    BUILD_DIR = Path("_site")  # Using _site as it's a common static site convention
+    BUILD_DIR = Path("_site")
     STATIC_DIR = Path("static")
+    BASE_URL = "/TILBlog"  # Change this to your GitHub repository name
     
     # Clean build directory
     if BUILD_DIR.exists():
@@ -46,12 +39,6 @@ def main():
     
     ensure_dir(BUILD_DIR)
     log(f"Created fresh build directory: {BUILD_DIR}")
-    
-    # Copy static files
-    if STATIC_DIR.exists():
-        static_target = BUILD_DIR / "static"
-        shutil.copytree(STATIC_DIR, static_target)
-        log(f"Copied static files to {static_target}")
     
     # Connect to the database
     try:
@@ -73,7 +60,6 @@ def main():
         """
     ).fetchall()
     
-    # Get all topics with counts
     topics = conn.execute(
         """
         SELECT t.name as topic, COUNT(*) as count
@@ -86,31 +72,52 @@ def main():
     
     log(f"Found {len(entries)} entries and {len(topics)} topics")
     
+    if len(entries) == 0:
+        log("No entries found in database!")
+        return 1
+    
     # Generate home page
-    generate_home_page(BUILD_DIR, entries, topics)
+    generate_home_page(BUILD_DIR, entries, topics, BASE_URL)
     
     # Generate individual entry pages
-    generate_entry_pages(BUILD_DIR, conn, entries, topics)
+    generate_entry_pages(BUILD_DIR, conn, entries, topics, BASE_URL)
     
-    # Generate topic pages
-    generate_topic_pages(BUILD_DIR, conn, topics)
+    # Generate topic pages  
+    generate_topic_pages(BUILD_DIR, conn, topics, BASE_URL)
     
-    # Generate Datasette export
-    generate_datasette_export(BUILD_DIR, DATABASE)
+    # Copy static files
+    copy_static_files(BUILD_DIR, STATIC_DIR)
     
     # Create .nojekyll file for GitHub Pages
     with open(BUILD_DIR / ".nojekyll", "w") as f:
         f.write("")
     
-    log("Static site generation complete!")
+    log("Complete static site generation finished!")
     log(f"Deploy the {BUILD_DIR} directory to your hosting provider.")
     return 0
 
-def generate_home_page(build_dir, entries, topics):
-    """Generate the home page"""
+def generate_home_page(build_dir, entries, topics, base_url):
+    """Generate the home page with topic navigation"""
     log("Generating home page")
-
     
+    # Create topics navigation
+    topics_nav = ""
+    for topic in topics:
+        topics_nav += f'<a href="{base_url}/topic/{topic["topic"]}/">{topic["topic"]} ({topic["count"]})</a> '
+    
+    # Create entries list
+    entries_html = ""
+    for entry in entries[:20]:  # Show first 20 entries
+        date_display = entry["created"].split()[0] if entry["created"] else "Unknown"
+        entries_html += f"""
+        <div class="entry-item">
+            <h3><a href="{base_url}/til/{entry["slug"]}/">{entry["title"]}</a></h3>
+            <div class="meta">
+                <span class="date">{date_display}</span>
+                {generate_topics_for_entry(entry, base_url)}
+            </div>
+        </div>
+        """
     
     with open(build_dir / "index.html", "w", encoding="utf-8") as f:
         f.write(f"""<!DOCTYPE html>
@@ -119,74 +126,60 @@ def generate_home_page(build_dir, entries, topics):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIL: Today I Learned</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{base_url}/static/styles.css">
 </head>
 <body>
     <header>
-        <h1>JG-TIL: Today I Learned</h1>
+        <h1><a href="{base_url}/">TIL: Today I Learned</a></h1>
         <nav class="topics-nav">
-            {"".join(f'<a href="/topic/{t["topic"]}/">{t["topic"]} <span class="count">({t["count"]})</span></a>' for t in topics)}
+            {topics_nav}
         </nav>
-    
-    
     </header>
     
     <main>
         <div class="entries">
-            {"".join(generate_entry_item(entry) for entry in entries[:20])}
-        </div>
-        
-        <div class="pagination">
-            <a href="/page/2/">More entries →</a>
+            {entries_html}
         </div>
     </main>
     
     <footer>
-        <p>TIL Blog - <a href="/data/">Browse the database</a></p>
+        <p>Total entries: {len(entries)} | Topics: {len(topics)}</p>
     </footer>
 </body>
 </html>""")
     
-    log("Home page generated")
+    log("Generated home page")
 
-def generate_entry_item(entry):
-    """Generate HTML for a single entry in a list"""
-    date_display = entry["created"].split()[0]  # Just the date part
-    
-    # Extract topics
-    topics_list = []
-    if entry["topics_raw"]:
-        topics_list = entry["topics_raw"].split(",")
-    
-    topics_html = ""
-    if topics_list:
-        topics_html = f'<div class="topics">{" ".join(f"<a href=\"/topic/{topic.strip()}/\">{topic.strip()}</a>" for topic in topics_list)}</div>'
-    
-    return f"""
-    <div class="entry">
-        <h2><a href="/til/{entry["slug"]}/">{entry["title"]}</a></h2>
-        <div class="metadata">
-            <span class="date">{date_display}</span>
-            {topics_html}
-        </div>
-    </div>
-    """
-
-def generate_entry_pages(build_dir, conn, entries, all_topics):
+def generate_entry_pages(build_dir, conn, entries, topics, base_url):
     """Generate individual entry pages"""
-    log("Generating entry pages")
+    log("Generating individual entry pages")
+    
+    # Create main til directory
+    til_dir = build_dir / "til"
+    ensure_dir(til_dir)
+    
+    # Topics navigation for all pages
+    topics_nav = ""
+    for topic in topics:
+        topics_nav += f'<a href="{base_url}/topic/{topic["topic"]}/">{topic["topic"]}</a> '
     
     for entry in entries:
         # Create directory for this entry
-        entry_dir = build_dir / "til" / entry["slug"]
+        entry_dir = til_dir / entry["slug"]
         ensure_dir(entry_dir)
         
         # Get topics for this entry
         entry_topics = []
         if entry["topics_raw"]:
-            entry_topics = entry["topics_raw"].split(",")
+            entry_topics = [t.strip() for t in entry["topics_raw"].split(",")]
         
-        # Generate HTML
+        # Generate topics links for this entry
+        topics_html = ""
+        if entry_topics:
+            topics_links = [f'<a href="{base_url}/topic/{topic}/">{topic}</a>' for topic in entry_topics]
+            topics_html = f'<div class="topics">Topics: {", ".join(topics_links)}</div>'
+        
+        # Create the entry page
         with open(entry_dir / "index.html", "w", encoding="utf-8") as f:
             f.write(f"""<!DOCTYPE html>
 <html lang="en">
@@ -194,24 +187,22 @@ def generate_entry_pages(build_dir, conn, entries, all_topics):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{entry["title"]} - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{base_url}/static/styles.css">
 </head>
 <body>
     <header>
-        <h1><a href="/">TIL: Today I Learned</a></h1>
+        <h1><a href="{base_url}/">TIL: Today I Learned</a></h1>
         <nav class="topics-nav">
-            {"".join(f'<a href="/topic/{t["topic"]}/">{t["topic"]}</a>' for t in all_topics)}
+            {topics_nav}
         </nav>
     </header>
     
     <main>
-        <article class="entry full">
+        <article class="entry">
             <h1>{entry["title"]}</h1>
             <div class="metadata">
-                <span class="date">{entry["created"].split()[0]}</span>
-                <div class="topics">
-                    {"".join(f'<a href="/topic/{topic.strip()}/">{topic.strip()}</a>' for topic in entry_topics)}
-                </div>
+                <span class="date">{entry["created"].split()[0] if entry["created"] else "Unknown"}</span>
+                {topics_html}
             </div>
             <div class="content">
                 {entry["html"]}
@@ -220,166 +211,122 @@ def generate_entry_pages(build_dir, conn, entries, all_topics):
     </main>
     
     <footer>
-        <p><a href="/">← Back to all entries</a></p>
-        <p><a href="/data/">Browse the database</a></p>
+        <p><a href="{base_url}/">← Back to all entries</a></p>
     </footer>
 </body>
 </html>""")
     
     log(f"Generated {len(entries)} entry pages")
 
-def generate_topic_pages(build_dir, conn, topics):
-    """Generate topic pages"""
+def generate_topic_pages(build_dir, conn, topics, base_url):
+    """Generate topic index pages"""
     log("Generating topic pages")
     
+    # Create main topic directory
+    topic_dir = build_dir / "topic"
+    ensure_dir(topic_dir)
+    
+    # Topics navigation for all pages
+    topics_nav = ""
     for topic in topics:
+        topics_nav += f'<a href="{base_url}/topic/{topic["topic"]}/">{topic["topic"]}</a> '
+    
+    for topic in topics:
+        topic_name = topic["topic"]
+        
         # Create directory for this topic
-        topic_dir = build_dir / "topic" / topic["topic"]
-        ensure_dir(topic_dir)
+        topic_page_dir = topic_dir / topic_name
+        ensure_dir(topic_page_dir)
         
         # Get entries for this topic
         topic_entries = conn.execute(
             """
             SELECT e.id, e.slug, e.title, 
-                   COALESCE(e.created_fm, e.created_fs) as created,
-                   e.topics_raw
+                   COALESCE(e.created_fm, e.created_fs) as created
             FROM entries e
             JOIN entry_topics et ON e.id = et.entry_id
             JOIN topics t ON et.topic_id = t.id
             WHERE t.name = ?
             ORDER BY COALESCE(e.created_fm, e.created_fs) DESC
             """,
-            [topic["topic"]]
+            [topic_name]
         ).fetchall()
         
-        # Generate HTML
-        with open(topic_dir / "index.html", "w", encoding="utf-8") as f:
+        # Generate entries list for this topic
+        entries_html = ""
+        for entry in topic_entries:
+            date_display = entry["created"].split()[0] if entry["created"] else "Unknown"
+            entries_html += f"""
+            <div class="entry-item">
+                <h3><a href="{base_url}/til/{entry["slug"]}/">{entry["title"]}</a></h3>
+                <div class="meta">
+                    <span class="date">{date_display}</span>
+                </div>
+            </div>
+            """
+        
+        # Create the topic page
+        with open(topic_page_dir / "index.html", "w", encoding="utf-8") as f:
             f.write(f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topic: {topic["topic"]} - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Topic: {topic_name} - TIL</title>
+    <link rel="stylesheet" href="{base_url}/static/styles.css">
 </head>
 <body>
     <header>
-        <h1><a href="/">TIL: Today I Learned</a></h1>
+        <h1><a href="{base_url}/">TIL: Today I Learned</a></h1>
         <nav class="topics-nav">
-            {"".join(f'<a href="/topic/{t["topic"]}/" class="{"active" if t["topic"] == topic["topic"] else ""}">{t["topic"]}</a>' for t in topics)}
+            {topics_nav}
         </nav>
     </header>
     
     <main>
-        <h1>Topic: {topic["topic"]}</h1>
-        <p class="count">{topic["count"]} entries</p>
+        <h1>Topic: {topic_name}</h1>
+        <p class="topic-count">{topic["count"]} entries in this topic</p>
         
         <div class="entries">
-            {"".join(generate_entry_item(entry) for entry in topic_entries)}
+            {entries_html}
         </div>
     </main>
     
     <footer>
-        <p><a href="/">← Back to all entries</a></p>
-        <p><a href="/data/">Browse the database</a></p>
+        <p><a href="{base_url}/">← Back to all entries</a></p>
     </footer>
 </body>
 </html>""")
     
     log(f"Generated {len(topics)} topic pages")
 
-def generate_datasette_export(build_dir, database):
-    """Generate a Datasette export for the database"""
-    log("Setting up Datasette export")
+def generate_topics_for_entry(entry, base_url):
+    """Generate topic links for an entry"""
+    if not entry["topics_raw"]:
+        return ""
     
-    # Create data directory
-    data_dir = build_dir / "data"
-    ensure_dir(data_dir)
-    
-    # Check if datasette is installed
-    datasette_installed = False
-    try:
-        subprocess.run(["datasette", "--version"], 
-                       stdout=subprocess.PIPE, 
-                       stderr=subprocess.PIPE, 
-                       check=True)
-        datasette_installed = True
-    except (subprocess.SubprocessError, FileNotFoundError):
-        log("Datasette not found. Install with: pip install datasette")
-    
-    if datasette_installed:
-        try:
-            # Create a static export of the database
-            log("Generating Datasette export")
-            subprocess.run([
-                "datasette", "export", database,
-                "--format", "html",
-                "--plugin", "datasette-render-html",
-                "--plugin", "datasette-json-html",
-                "--outfile", str(data_dir / "index.html")
-            ], check=True)
-            log("Datasette export complete")
-        except subprocess.SubprocessError as e:
-            log(f"Error generating Datasette export: {e}")
-            
-            # Create a simple placeholder page
-            with open(data_dir / "index.html", "w", encoding="utf-8") as f:
-                f.write(f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIL Database - Datasette</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <header>
-        <h1><a href="/">TIL: Today I Learned</a></h1>
-    </header>
-    
-    <main>
-        <h1>Database Browser</h1>
-        <p>To browse the database, install Datasette locally:</p>
-        <pre>pip install datasette
-datasette {database}</pre>
-    </main>
-    
-    <footer>
-        <p><a href="/">← Back to all entries</a></p>
-    </footer>
-</body>
-</html>""")
-            log("Created Datasette placeholder page")
+    topics = [t.strip() for t in entry["topics_raw"].split(",")]
+    topic_links = [f'<a href="{base_url}/topic/{topic}/" class="topic-link">{topic}</a>' for topic in topics]
+    return f'<div class="topics">{", ".join(topic_links)}</div>'
+
+def copy_static_files(build_dir, static_dir):
+    """Copy static files to the build directory"""
+    if static_dir.exists():
+        static_target = build_dir / "static"
+        if static_target.exists():
+            shutil.rmtree(static_target)
+        
+        shutil.copytree(static_dir, static_target)
+        log(f"Copied static files to {static_target}")
+        
+        # Check if styles.css exists
+        styles_css = static_target / "styles.css"
+        if styles_css.exists():
+            log(f"Found styles.css ({os.path.getsize(styles_css)} bytes)")
+        else:
+            log("Warning: styles.css not found")
     else:
-        # Create a simple page about Datasette
-        with open(data_dir / "index.html", "w", encoding="utf-8") as f:
-            f.write(f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIL Database - Install Datasette</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <header>
-        <h1><a href="/">TIL: Today I Learned</a></h1>
-    </header>
-    
-    <main>
-        <h1>Database Browser</h1>
-        <p>To browse the database, install Datasette:</p>
-        <pre>pip install datasette
-datasette {database}</pre>
-        <p>Learn more at <a href="https://datasette.io/">datasette.io</a></p>
-    </main>
-    
-    <footer>
-        <p><a href="/">← Back to all entries</a></p>
-    </footer>
-</body>
-</html>""")
-        log("Created Datasette info page")
+        log("No static directory found")
 
 if __name__ == "__main__":
     sys.exit(main())
