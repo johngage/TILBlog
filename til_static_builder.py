@@ -127,8 +127,7 @@ def generate_home_page(build_dir, entries, topics):
         <nav class="topics-nav">
             {"".join(f'<a href="/topic/{t["topic"]}/">{t["topic"]} <span class="count">({t["count"]})</span></a>' for t in topics)}
         </nav>
-    <link rel="stylesheet" href="{BASE_URL}/static/styles.css">
-    <a href="{BASE_URL}/topic/{t["topic"]}/">
+    
     
     </header>
     
