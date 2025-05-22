@@ -17,7 +17,7 @@ import frontmatter
 DATABASE = "til.db"
 BUILD_DIR = Path("_site")
 STATIC_DIR = Path("static")
-BASE_URL = "johngage.github.io/TILBlog/"  # Your repository name
+BASE_URL = "/TILBlog/"  # Your repository name
 
 def log(message):
     """Print a timestamped log message"""
