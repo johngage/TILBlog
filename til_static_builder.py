@@ -13,6 +13,12 @@ import subprocess
 import markdown
 import frontmatter
 
+# Configuration
+DATABASE = "til.db"
+BUILD_DIR = Path("_site")
+STATIC_DIR = Path("static")
+BASE_URL = "johngage.github.io/TILBlog/"  # Your repository name
+
 def log(message):
     """Print a timestamped log message"""
     print(f"[{time.strftime('%H:%M:%S')}] {message}")
