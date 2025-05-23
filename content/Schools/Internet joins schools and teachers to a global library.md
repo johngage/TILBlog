@@ -1,5 +1,5 @@
 ---
-title: "The Internet is a global library"
+title: "The Internet is a global library, with hidden rooms"
 topics: ["education", "metaphor", "internet", "symbol", "library"]
 created: 2025-05-19 13:52:25
 modified: 2025-05-19 13:52:25
@@ -7,7 +7,7 @@ slug: NetDay-World-Wide
 source: "https://ubiquity.acm.org/article.cfm?id=375349"
 ---
 
-After talking yesterday with [[Fenny Desriani]] at the [[GSPP]] graduation,  I wanted to extend her prize-winning work examining how California schools provide Internet access to their students.  I looked for a summary of the  **NetDay** mobilization of tens of thousands of volunteers in 1996 to wire all California schools for access to the internet. Schools used the internet for the first time as a tool to self-organize one day of free work by parents, teachers, and staff. 
+After talking with [[Fenny Desriani]] at the [[GSPP]] graduation on Sunday, May 18,  I wanted to extend her prize-winning work in 2025 that analyzed how California schools provide Internet access to their students.  For contrast, I looked for a summary of the 1996  **NetDay** mobilization of tens of thousands of volunteers to wire all California schools for access to the internet. Then, over two million Californians had access to the Internet, and for the first time, used the Internet as a tool to self-organize school communities for one day of free work by parents, teachers, staff and unions to install Internet access.
 
 I found this interview I did in 2001 for the Association for Computing Machinery: - [NetDay interview](https://ubiquity.acm.org/article.cfm?id=375349) and thought it should be updated.
 
