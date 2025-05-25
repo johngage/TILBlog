@@ -248,15 +248,21 @@ def build_database(root_dir):
     
     print("Created database tables")
     
-    # Find all markdown files
-    all_files = list(root_dir.glob("**/*.md"))
-    # Exclude files in templates, static, and .obsidian directories
-    all_files = [f for f in all_files if not any(part.startswith('.') or part in ['templates', 'static', '__pycache__'] for part in f.parts)]
+    content_dir = root_dir / "content"
+    if not content_dir.exists():
+        print("ERROR: No content directory found!")
+        conn.close()
+        return
     
-    print(f"Found {len(all_files)} markdown files")
+    all_files = list(content_dir.glob("**/*.md"))
+    print(f"Found {len(all_files)} markdown files in content directory")
+    
+    # Log which files are being processed
+    for filepath in all_files:
+        print(f"  Will process: {filepath.relative_to(root_dir)}")
     
     if not all_files:
-        print("No markdown files found!")
+        print("No markdown files found in content directory!")
         conn.close()
         return
     
@@ -331,6 +337,7 @@ def build_database(root_dir):
                         'use_pygments': True,
                         'css_class': 'highlight'
                     }
+                    
                 }
             )
             

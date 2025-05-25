@@ -10,3 +10,5 @@ watchdog==3.0.0
 Frozen-Flask==0.18
 serverless-wsgi==3.0.1
 requests==2.32.3
+pymdown-extensions==10.3
+python-markdown-math==0.8

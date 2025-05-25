@@ -1,4 +1,5 @@
 ---
+title:  "Goldman School of Public Policy"
 topics:
   - schools
   - education

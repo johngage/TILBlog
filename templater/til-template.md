@@ -14,6 +14,8 @@ topics: [<% topics %>]
 created: <% now %>
 modified: <% now %>
 slug: <% slug %>
+date: <% tp.date.now("YYYY-MM-DD") %>
+
 ---
 
 # <% tp.file.title %>

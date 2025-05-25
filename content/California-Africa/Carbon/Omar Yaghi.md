@@ -1,38 +1,33 @@
 ---
+title:  Omar Yaghi
 created: 2024-10-28 11:26
 excalidraw-plugin: parsed
 tags:
   - excalidraw
 excalidraw-open-md: true
-topics:  [carbon, water, mof, cof]
+topics:  
+  - carbon
+  - water
+  - mof
+  - cof
 ---
 
 
-April 2021 talk to Chemistry 
+# Omar Yaghi: Professor, UC Berkeley
+
+April 2021 talk to Chemistry seminar
 https://www.youtube.com/watch?v=SO18satzFC4
 - List of youtube videos about Omar Yaghi
 	- https://www.youtube.com/results?search_query=omar+yaghi+water
 - [[Water Leaders - International Prize List]]
-- 
 
----
-### 📅 Summary
-##### 🌜 Key ideas
-- 
-
-##### 🙌 Key people
 - Omar Yaghi
 	- Amman, Jordan
 	- 
-##### 🚀 To-Do
-- [  ]
-- 
-
-##### 👎 Background Research
-- 
 
 ---
 # 📝 Notes
+- Met at the Bakar Institute seminar on AI and climate in April, 2025
 - 
 ---
 ## 2021

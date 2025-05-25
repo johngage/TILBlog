@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/Schools/Internet joins schools and teachers to a global library.md",
-                "mode": "source",
+                "file": "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Internet joins schools and teachers to a global library"
+              "title": "Needham-Visual Complex Analysis"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 422.5
   },
   "right": {
     "id": "326f170a8c287509",
@@ -172,29 +172,31 @@
   },
   "active": "15e76adedc2ea2ed",
   "lastOpenFiles": [
-    "_site/topic/testing/index.html",
-    "_site/topic/testing",
-    "_site/topic/performance/index.html",
-    "_site/topic/performance",
-    "_site/til/performance-test-entry-1748018437/index.html",
-    "_site/til/performance-test-entry-1748018437",
-    "content/testing/performance-test.md",
-    "content/testing",
     "til.db-journal",
-    "performance_test.py",
-    "_site/til/today-i-learned-til-blog-that-may-develop-into-a-full-weblog/index.html",
-    "_site/til/today-i-learned-til-blog-that-may-develop-into-a-full-weblog",
-    "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
-    "content/Schools/Internet joins schools and teachers to a global library.md",
-    "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
-    "content/California-Africa/Carbon/Omar Yaghi.md",
-    "templater/til-with-source.md",
-    "content/Schools/GSPP.md",
+    "til.db",
+    "_site/static/js/dark-mode.js",
+    "_site/static/styles.css",
+    "_site/static/js",
+    "_site/static",
+    "_site/topic/web-development/index.html",
+    "_site/topic/water/index.html",
+    "_site/topic/tocs-omishakin/index.html",
+    "_site/topic/til-build/index.html",
+    "_site/topic/testing/index.html",
+    "content/test/math-test.md",
     "templater/til-template.md",
-    "content/git/test.md",
+    "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
+    "content/California-Africa/Carbon/Omar Yaghi.md",
+    "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
+    "content/git/New Test For Site Deploy.md",
+    "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
+    "content/Schools/GSPP.md",
+    "content/Schools/Internet joins schools and teachers to a global library.md",
     "content/California-Africa/timeline.md",
     "content/building/creating-a-TIl-blog.md",
-    "content/building/new-creating.md",
-    "README.md"
+    "content/building/Creating a TIL Blog with Flask, or not.md",
+    "README.md",
+    "templater/til-with-source.md",
+    "content/testing/performance-test.md"
   ]
 }
