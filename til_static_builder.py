@@ -22,6 +22,36 @@ def ensure_dir(path):
         path.mkdir(parents=True)
         log(f"Created directory: {path}")
 
+def get_mathjax_script():
+    """Return MathJax configuration and script tags"""
+    return '''
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+    displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+.MathJax_Display {
+  margin: 1rem 0 !important;
+  text-align: center !important;
+}
+</style>'''
+
 def main():
     """Main build process that creates all pages"""
     log("Starting complete TIL blog static generation")
@@ -127,6 +157,8 @@ def generate_home_page(build_dir, entries, topics, base_url):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIL: Today I Learned</title>
     <link rel="stylesheet" href="{base_url}/static/styles.css">
+    {get_mathjax_script()}
+
 </head>
 <body>
     <header>
@@ -188,6 +220,7 @@ def generate_entry_pages(build_dir, conn, entries, topics, base_url):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{entry["title"]} - TIL</title>
     <link rel="stylesheet" href="{base_url}/static/styles.css">
+    {get_mathjax_script()}
 </head>
 <body>
     <header>
@@ -274,6 +307,7 @@ def generate_topic_pages(build_dir, conn, topics, base_url):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topic: {topic_name} - TIL</title>
     <link rel="stylesheet" href="{base_url}/static/styles.css">
+    {get_mathjax_script()}
 </head>
 <body>
     <header>
