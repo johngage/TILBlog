@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Needham-Visual Complex Analysis - TIL</title>
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+.MathJax_Display {
+  margin: 1rem 0 !important;
+  text-align: center !important;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1><a href="/TILBlog/">TIL: Today I Learned</a></h1>
+        <nav class="topics-nav">
+            <a href="/TILBlog/topic/GSPP/">GSPP</a> <a href="/TILBlog/topic/Omar-Yaghi/">Omar-Yaghi</a> <a href="/TILBlog/topic/africa/">africa</a> <a href="/TILBlog/topic/berkeley-open-courseware/">berkeley-open-courseware</a> <a href="/TILBlog/topic/carbon/">carbon</a> <a href="/TILBlog/topic/cof/">cof</a> <a href="/TILBlog/topic/complex/">complex</a> <a href="/TILBlog/topic/curriculum/">curriculum</a> <a href="/TILBlog/topic/education/">education</a> <a href="/TILBlog/topic/flask/">flask</a> <a href="/TILBlog/topic/gavin-newsom/">gavin-newsom</a> <a href="/TILBlog/topic/internet/">internet</a> <a href="/TILBlog/topic/kenya/">kenya</a> <a href="/TILBlog/topic/kernel-trick/">kernel-trick</a> <a href="/TILBlog/topic/library/">library</a> <a href="/TILBlog/topic/machine-learning/">machine-learning</a> <a href="/TILBlog/topic/markdown/">markdown</a> <a href="/TILBlog/topic/math/">math</a> <a href="/TILBlog/topic/mathematics/">mathematics</a> <a href="/TILBlog/topic/metaphor/">metaphor</a> <a href="/TILBlog/topic/mof/">mof</a> <a href="/TILBlog/topic/netday/">netday</a> <a href="/TILBlog/topic/obsidian/">obsidian</a> <a href="/TILBlog/topic/python/">python</a> <a href="/TILBlog/topic/schools/">schools</a> <a href="/TILBlog/topic/sqlite/">sqlite</a> <a href="/TILBlog/topic/symbol/">symbol</a> <a href="/TILBlog/topic/system-design/">system-design</a> <a href="/TILBlog/topic/testing/">testing</a> <a href="/TILBlog/topic/til-build/">til-build</a> <a href="/TILBlog/topic/tocs-omishakin/">tocs-omishakin</a> <a href="/TILBlog/topic/transformer/">transformer</a> <a href="/TILBlog/topic/vector/">vector</a> <a href="/TILBlog/topic/water/">water</a> <a href="/TILBlog/topic/web-development/">web-development</a> 
+        </nav>
+    </header>
+    
+    <main>
+        <article class="entry">
+            <h1>Needham-Visual Complex Analysis</h1>
+            <div class="metadata">
+                <span class="date">2025-05-24</span>
+                <div class="topics">Topics: <a href="/TILBlog/topic/math/">math</a>, <a href="/TILBlog/topic/complex/">complex</a></div>
+            </div>
+            <div class="content">
+                <h1 id="needham-visual-complex-analysis">Needham-Visual Complex Analysis</h1>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Needham, in the 25th anniversary edition of the original Oxford publication of &ldquo;Visual Complex Analysis&rdquo;, clarifies the example he used in the original edition of Newton&rsquo;s third formulation of differentiation, in which Newton abandons his earlier use of symbolic manipulation to emphasize the geometric foundation and analysis.  Newton uses &ldquo;ultimately equal&rdquo;, or, with Needham&rsquo;s modern symbolism, the equivalence relation symbolized by $\asymp$.</li>
+<li>Here is the sequence of steps that show how the desired derivative is equivalent to a sequence of geometrical ratios. The notation for &ldquo;ultimately equal&rdquo; shows the sequence as $\delta\theta$ goes to zero, ending with a multiplication, and the geometric identity with a Pythagorean theorem result.</li>
+</ul>
+<p>$$ \frac {dT}{L d\theta}\asymp \frac {\delta T}{L \delta\theta}\asymp \frac {\delta T}{\delta s}\asymp \frac{L}{1} \implies \frac {dT}{d\theta}= L^2 = 1 + T^2
+$$</p>
+<h2 id="details">Details</h2>
+<ul>
+<li>\ asymp Latex symbol</li>
+</ul>
+<h2 id="linksreferences">Links/References</h2>
+<ul>
+<li><a href="https://www.amazon.com/Visual-Complex-Analysis-25th-Anniversary-ebook/dp/B0BV2TYMHW/ref=tmm_kin_swatch_0">Source</a></li>
+<li>Needham (1993)</li>
+<li>Needham-VCA (1997)</li>
+<li>Needham (2014)</li>
+<li><a href="/note/why-machines-learn" class="wiki-link">Why Machines Learn</a></li>
+<li></li>
+</ul>
+<h2 id="discussion-of-ultimately-equal">Discussion of &ldquo;ultimately equal&rdquo;</h2>
+<h2 id="-discussing-the-new-editions-treatment-of-newtons-use-of-geometric-calculus-rather-than-leibnizian-symbolic-calculus-needham-apologizes-for-failing-to-have-the-courage-to-use-the-ultimately-equal-notation-25-years-ago-in-his-example-in-the-preface-in-the-new-edition-he-significantly-changes-the-drawing-of-the-geometry-for-the-first-time-he-shows-the-arc-of-the-circle-of-radius-l-showing-how-in-the-ultimately-equal-process-the-length-of-the-arc-from-the-original-vertex-of-the-triangle-to-the-new-vertex-after-rotating-the-hypotenuse-by-the-small-amount-deltatheta-becomes-equal-to-the-orthogal-distance-he-shows-this-using-the-derivative-of-the-complex-quantity-reitheta-using-a-triangle-with-base-1-and-vertical-side-t-so-that-t-tan-theta-and-the-rotation-increases-the-length-of-the-vertical-side-t-by-deltat">- Discussing the new edition&rsquo;s treatment of Newton&rsquo;s use of geometric calculus, rather than Leibnizian symbolic calculus, Needham apologizes for failing to have the courage to use the &ldquo;ultimately equal&rdquo; notation 25 years ago in his example in the Preface. In the new edition, he significantly changes the drawing of the geometry. For the first time, he shows the arc of the circle of radius L, showing how, in the &ldquo;ultimately equal&rdquo; process, the length of the arc from the original vertex of the triangle, to the new vertex after rotating the hypotenuse by the small amount $\delta\theta$, becomes equal to the orthogal distance. He shows this using the derivative of the complex quantity  $re^{i\theta}$, using a triangle with base 1 and vertical side T, so that T = $tan (\theta)$, and the rotation increases the length of the vertical side T by $\deltaT$</h2>
+<ul>
+<li>The symbol $\asymp$ is what Needham uses for differential equality. This is a beautiful and intuitive notation that perfectly captures the geometric concept he&rsquo;s describing.</li>
+</ul>
+<p>The symbol $\asymp$ (asymptotically equal) is quite fitting for Needham&rsquo;s geometric approach because:</p>
+<ol>
+<li>
+<p><strong>Visual intuition</strong>: The curved lines suggest that the quantities are &ldquo;approximately equal&rdquo; in a limiting sense, rather than exactly equal at any finite scale.</p>
+</li>
+<li>
+<p><strong>Differential relationship</strong>: When he writes something like $dT \asymp L \cdot d\theta$, he&rsquo;s indicating that these quantities become equal in the differential limit - they differ by terms of higher order that vanish as $d\theta \to 0$.</p>
+</li>
+<li>
+<p><strong>Geometric meaning</strong>: This notation emphasizes that we&rsquo;re dealing with infinitesimal geometric relationships where the &ldquo;error&rdquo; in the equality becomes negligible compared to the quantities themselves.</p>
+</li>
+</ol>
+<p>This is exactly what we were discussing with the geometric proof of $\frac{dT}{d\theta} = 1 + T^2$. When Needham says the perpendicular distance is $L \cdot d\theta$, he might write:</p>
+<p>$$\text{perpendicular distance} \asymp L \cdot d\theta$$</p>
+<p>This captures the idea that for infinitesimal $d\theta$, the straight-line perpendicular distance and the arc length $L \cdot d\theta$ are differentially equal - they differ by terms of order $(d\theta)^2$ or higher, which vanish in the limit.</p>
+<p>This notation beautifully embodies Needham&rsquo;s philosophy of making the geometric intuition behind calculus concepts visually and symbolically clear. It&rsquo;s a much more intuitive way to express infinitesimal relationships than the traditional $\epsilon$-$\delta$ formalism, while still being mathematically precise.</p>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p><a href="/TILBlog/">← Back to all entries</a></p>
+    </footer>
+</body>
+</html>
