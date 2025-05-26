@@ -1,25 +1,4 @@
----
-title: "til-template"
-topics: ["Claude", "documentation"]
-created: 2025-05-26 12:46:26
-modified: 2025-05-26 12:46:26
-slug: til-template
-date: 2025-05-26
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
-excalidraw-open-md: true
----
-
-# til-template
-
-## What I Learned
-
-<% tp.file.cursor() %>
-
-## Details
-
-## References<%*
+<%*
 // Get topics from user
 const topicsInput = await tp.system.prompt("Enter topics (comma-separated)", "");
 const topics = topicsInput.split(',').map(t => `"${t.trim()}"`).join(', ');

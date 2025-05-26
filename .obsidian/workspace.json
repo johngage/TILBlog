@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Redesigning TIL Site to Match Simon Willison's Design.md",
+                "file": "content/building/Building TILBlog.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Redesigning TIL Site to Match Simon Willison's Design"
+              "title": "Building TILBlog"
             }
           }
         ],
@@ -199,25 +199,26 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "84efba1d4ec1ee45",
+  "active": "cab0e1429a7d8dfe",
   "lastOpenFiles": [
+    "_site/topic/documentation/index.html",
+    "_site/topic/documentation",
+    "_site/topic/css/index.html",
+    "_site/topic/css",
+    "_site/topic/claude-conversation/index.html",
+    "_site/topic/claude-conversation",
+    "_site/til/redesigning-til-simon-willison-style/index.html",
+    "_site/til/redesigning-til-simon-willison-style",
+    "_site/til/building-tilblog/index.html",
+    "_site/til/building-tilblog",
     "til.db-journal",
-    "Building TILBlog.md",
-    "Redesigning TIL Site to Match Simon Willison's Design.md",
-    "templater/til-template.md",
     "templater/til-with-source.md",
-    "content/Daily/2025-05-25.md",
-    "til.db",
-    "_site/topic/daily/index.html",
-    "_site/topic/daily",
-    "_site/topic/Claude/index.html",
-    "_site/topic/Claude",
-    "_site/til/2025-05-25/index.html",
-    "_site/til/2025-05-25",
-    "content/Daily",
-    "content/books/Anil Ananthaswamy/Why Machines Learn.md",
-    "content/books/Anil Ananthaswamy",
+    "templater/til-template.md",
+    "content/building/Building TILBlog.md",
     "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
+    "content/building/Redesigning TIL Site to Match Simon Willison's Design.md",
+    "content/Daily/2025-05-25.md",
+    "content/books/Anil Ananthaswamy/Why Machines Learn.md",
     "content/test/test-hybrid-til.md.md",
     "content/test/math-test.md",
     "content/California-Africa/Carbon/Omar Yaghi.md",
@@ -227,7 +228,7 @@
     "content/projects/Goldman School of Public Policy/GSPP.md",
     "content/Schools/Internet joins schools and teachers to a global library.md",
     "content/California-Africa/timeline.md",
-    "content/building/creating-a-TIl-blog.md",
+    "content/California-Africa/Carbon/creating-a-TIl-blog.md",
     "content/building/Creating a TIL Blog with Flask, or not.md",
     "README.md",
     "content/testing/performance-test.md"
