@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
-                "mode": "preview",
+                "file": "content/books/Anil Ananthaswamy/Why Machines Learn.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Why Machines Learn"
+            }
+          },
+          {
+            "id": "620f44dde487c654",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/Daily/2025-05-25.md",
+                "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Needham-Visual Complex Analysis"
+              "title": "2025-05-25"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -170,27 +185,30 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "15e76adedc2ea2ed",
+  "active": "620f44dde487c654",
   "lastOpenFiles": [
     "til.db-journal",
     "til.db",
-    "_site/static/js/dark-mode.js",
-    "_site/static/styles.css",
-    "_site/static/js",
-    "_site/static",
-    "_site/topic/web-development/index.html",
-    "_site/topic/water/index.html",
-    "_site/topic/tocs-omishakin/index.html",
-    "_site/topic/til-build/index.html",
-    "_site/topic/testing/index.html",
+    "_site/topic/daily/index.html",
+    "_site/topic/daily",
+    "_site/topic/Claude/index.html",
+    "_site/topic/Claude",
+    "_site/til/2025-05-25/index.html",
+    "_site/til/2025-05-25",
+    "content/Daily",
+    "content/books/Anil Ananthaswamy/Why Machines Learn.md",
+    "content/Daily/2025-05-25.md",
+    "content/books/Anil Ananthaswamy",
+    "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
+    "_site/topic/complex/index.html",
+    "content/test/test-hybrid-til.md.md",
     "content/test/math-test.md",
     "templater/til-template.md",
-    "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
     "content/California-Africa/Carbon/Omar Yaghi.md",
     "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
     "content/git/New Test For Site Deploy.md",
     "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
-    "content/Schools/GSPP.md",
+    "content/projects/Goldman School of Public Policy/GSPP.md",
     "content/Schools/Internet joins schools and teachers to a global library.md",
     "content/California-Africa/timeline.md",
     "content/building/creating-a-TIl-blog.md",

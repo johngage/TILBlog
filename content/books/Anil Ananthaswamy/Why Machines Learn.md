@@ -1,0 +1,110 @@
+---
+excalidraw-plugin: raw
+tags:
+  - excalidraw
+excalidraw-open-md: true
+title: Why Machines Learn
+topics:
+  - machine-learning
+  - vector
+  - kernel-trick
+  - transformer
+  - math
+created: 2025-05-25 17:00:20
+modified: 2025-05-25 17:00:20
+slug: untitled
+date: 2025-05-25
+author: Anil Ananthaswamy
+isbn: 9780593185742
+---
+
+# Why Machines Learn
+1. Desperately Seeking Patterns
+2. We Are All Just Numbers Here...
+3. The Bottom of the Bowl
+4. In All Probability
+5. Birds of a Feather
+6. There's Magic in Them Matrices
+7. The Great Kernel Rope Trick
+8. With a Little Help From Physics
+9. The Man Who Set Back Deep Learning (Not Really)
+10. The Algorithm that Put Paid to a Persistent Myth
+11. The Eyes of a Machine
+12. Terra Incognita
+13. Epilogue
+## What I Learned
+- There is still a problem with generating interior URL's
+
+## Details
+- Kindle: ISBN-13: 978-0192695451
+  - Publisher: OUP Oxford
+  - Publication date: February 7, 2023
+  - File size: 31.4 MB
+## References
+- Nature 615 (March 9, 2023): 202-5
+- [[Needham-Visual Complex Analysis]]
+- 
+## Drawing Section 
+%%
+# Excalidraw Data
+
+## Text Elements
+2025-05-25-Sunday
+Napa ^0ncok1AZ
+
+Existing text: Hardcover
+Kindle Edition: on Mac
+Diagram of chapter interconnections ^SrSt1Ve9
+
+1. Desperately Seeking Patterns
+2. We Are All Just Numbers Here...
+3. The Bottom of the Bowl
+4. In All Probability
+5. Birds of a Feather
+6. There's Magic in Them Matrices
+7. The Great Kernel Rope Trick
+8. With a Little Help From Physics
+9. The Man Who Set Back Deep Learning (Not Really)
+10. The Algorithm that Put Paid to a Persistent Myth
+11. The Eyes of a Machine
+12. Terra Incognita
+13. Epilogue
+ ^9oSRMxRS
+
+## Drawing
+```compressed-json
+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=
+```
+%%

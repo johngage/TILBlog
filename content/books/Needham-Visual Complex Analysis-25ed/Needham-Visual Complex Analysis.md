@@ -1,16 +1,19 @@
 ---
-title: "Needham-Visual Complex Analysis"
-topics: ["math", "complex"]
+title: Needham-Visual Complex Analysis
+topics:
+  - math
+  - complex
 created: 2025-05-24 20:06:57
 modified: 2025-05-24 20:06:57
-slug: untitled
-source: "https://www.amazon.com/Visual-Complex-Analysis-25th-Anniversary-ebook/dp/B0BV2TYMHW/ref=tmm_kin_swatch_0"
+slug: Needham-Virtual-Complex-Analysis
+source: https://www.amazon.com/Visual-Complex-Analysis-25th-Anniversary-ebook/dp/B0BV2TYMHW/ref=tmm_kin_swatch_0
 ---
 
 # Needham-Visual Complex Analysis
-
+# $\asymp$
 ## Summary
-- from the desired derivative to the geometry to the ultimately equal as $\delta\theta$ goes to zero, to multiplying to Pythagorean theorem.
+- Needham, in the 25th anniversary edition of the original Oxford publication of "Visual Complex Analysis", clarifies the example he used in the original edition of Newton's third formulation of differentiation, in which Newton abandons his earlier use of symbolic manipulation to emphasize the geometric foundation and analysis.  Newton uses "ultimately equal", or, with Needham's modern symbolism, the equivalence relation symbolized by $\asymp$.
+- Here is the sequence of steps that show how the desired derivative is equivalent to a sequence of geometrical ratios. The notation for "ultimately equal" shows the sequence as $\delta\theta$ goes to zero, ending with a multiplication, and the geometric identity with a Pythagorean theorem result.
 
 $$ \frac {dT}{L d\theta}\asymp \frac {\delta T}{L \delta\theta}\asymp \frac {\delta T}{\delta s}\asymp \frac{L}{1} \implies \frac {dT}{d\theta}= L^2 = 1 + T^2
 $$
@@ -23,10 +26,16 @@ $$
 - Needham (1993)
 - Needham-VCA (1997)
 - Needham (2014)
+- [[Why Machines Learn]]
+- 
 
 ## Discussion of "ultimately equal"
-- Discussing tne new edition treatment of Newton's use of geometric calculus, rather than Leibnizian symbolic calculus, with the example in the Preface of the derivative of the complex quantity  $re^{i\theta}$ used in the proof, using a triangle with base 1 and vertical side T, so that T = $tan (\theta)$
-- The symbol $\asymp$ is indeed what Needham uses for differential equality. This is a beautiful and intuitive notation that perfectly captures the geometric concept he's describing.
+
+-  Needham describes Newton's use of geometric calculus, rather than Leibnizian symbolic calculus, and describes his rewriting of the new edition to emphasize this distinction.
+- Needham apologizes for failing to have the courage to use the  geometricl "ultimately equal" notation 25 years ago, using his rewriting of the key example of geometric calculus  in the Preface. 
+- In the new edition, he significantly changes the drawing of the geometry. For the first time, he shows the arc of the circle of radius L, showing how, in the "ultimately equal" process, the length of the arc from the original vertex of the triangle, to the new vertex after rotating the hypotenuse by the small amount $\delta\theta$, becomes equal to the orthogal distance. He shows this using the derivative of the complex quantity  $re^{i\theta}$, using a triangle with base 1 and vertical side T, so that T = $tan (\theta)$, and the rotation increases the length of the vertical side T by  $\delta T$
+- 
+- Needham uses the symbol $\asymp$  for "differential equality." This is a beautiful and intuitive notation that perfectly captures the geometric concept he's describing.
 
 The symbol $\asymp$ (asymptotically equal) is quite fitting for Needham's geometric approach because:
 
