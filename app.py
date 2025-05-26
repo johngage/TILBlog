@@ -414,7 +414,7 @@ def index():
     # Get entries for this page
     entries = query_db(
         f"""
-        SELECT id, slug, title, {sort_field} as created
+        SELECT id, slug, title, content, {sort_field} as created
         FROM entries
         ORDER BY {sort_field} {order_clause}
         LIMIT ? OFFSET ?

@@ -19,6 +19,10 @@ topics: [${topics}]
 created: ${now}
 modified: ${now}
 slug: ${slug}`;
+excalidraw-plugin: parsed 
+tags: 
+  - excalidraw 
+excalidraw-open-md: true
 
 if (source && source.trim() !== "") {
   frontMatter += `\nsource: "${source.trim()}"`;
