@@ -140,7 +140,7 @@ header h1 a:hover {
 
 /* Topic navigation */
 .topics {
-    background-color: var(--card-background);
+    background-color: var(--highlight-color;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 2rem;
     overflow-x: auto;
@@ -168,7 +168,7 @@ header h1 a:hover {
 
 .topics a:hover, .topics a.active {
     background-color: var(--primary-color);
-    color: white;
+    color: greenyellow;
     text-decoration: none;
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
