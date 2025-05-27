@@ -26,6 +26,7 @@ I'm building a radiative linked network model of the mathematics and computer in
 5. Birds of a Feather
 6. There's Magic in Them Matrices
 7. The Great Kernel Rope Trick
+  - UC Berkeley professor from Bell Labs; implement Vlatnick--Danny Hillis mentioned him in 2000.
 8. With a Little Help From Physics
 9. The Man Who Set Back Deep Learning (Not Really)
 10. The Algorithm that Put Paid to a Persistent Myth
@@ -34,6 +35,7 @@ I'm building a radiative linked network model of the mathematics and computer in
 13. Epilogue
 ## What I Learned
 - There is still a problem with generating interior URL's
+- this should be a hyperlink 
 
 ## Details
 - Kindle: ISBN-13: 978-0192695451
