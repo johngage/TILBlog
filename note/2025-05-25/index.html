@@ -1,0 +1,148 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-05-25 - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+    
+</head>
+<body>
+    <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>2025-05-25</h2>
+            <div class="meta">
+                
+                <div class="topics">
+                    
+                    <a href="/topic/Claude" class="topic-tag">Claude</a>
+                    
+                    <a href="/topic/daily" class="topic-tag">daily</a>
+                    
+                </div>
+                
+                <time datetime="2025-05-26 00:00:00">2025-05-26</time>
+            </div>
+        </header>
+        
+        <div class="content">
+            <h1 id="2025-05-25">2025-05-25</h1>
+<ul>
+<li>Simon Williston has a [great exploration of Claude&rsquo;s prompting] (https://simonwillison.net/2025/May/25/claude-4-system-prompt/)tools for Sonnet 4.</li>
+</ul>
+<p>And his <a href="https://simonwillison.net/2025/May/22/code-with-claude-live-blog/">keynote blog</a>
+for Anthropic predicts there will be an enormous increase in the demand for custom software.</p>
+<h2 id="-opportunities-for-kibera">- Opportunities for Kibera</h2>
+<h2 id="details">Details</h2>
+<h2 id="linksreferences">Links/References</h2>
+<ul>
+<li><a href="https://simonwillison.net/2025/May/25/claude-4-system-prompt/">Source</a></li>
+</ul>
+        </div>
+    </article>
+    
+    
+    <aside class="related">
+        <h3>Related entries</h3>
+        <ul>
+            
+            <li><a href="/note/redesigning-til-simon-willison-style">Claude builds new TILBlog</a></li>
+            
+        </ul>
+    </aside>
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
+</body>
+</html>

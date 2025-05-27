@@ -1,0 +1,183 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Internet is a global library, with hidden rooms - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+    
+</head>
+<body>
+    <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>The Internet is a global library, with hidden rooms</h2>
+            <div class="meta">
+                
+                <div class="topics">
+                    
+                    <a href="/topic/education" class="topic-tag">education</a>
+                    
+                    <a href="/topic/internet" class="topic-tag">internet</a>
+                    
+                    <a href="/topic/library" class="topic-tag">library</a>
+                    
+                    <a href="/topic/metaphor" class="topic-tag">metaphor</a>
+                    
+                    <a href="/topic/symbol" class="topic-tag">symbol</a>
+                    
+                </div>
+                
+                <time datetime="2025-05-19 13:52:25">2025-05-19</time>
+            </div>
+        </header>
+        
+        <div class="content">
+            <p>After talking with <a href="/note/fenny-desriani" class="wiki-link">Fenny Desriani</a> at the <a href="/note/gspp" class="wiki-link">GSPP</a> graduation on Sunday, May 18,  I wanted to extend her prize-winning work in 2025 analyzing California schools and Internet access as it afffects students.<br />
+For context, I found some summaries of the 1996 <strong>NetDay</strong> mobilization: tens of thousands of volunteers wired all California schools for access to the internet. Then, over two million Californians had access to the Internet, and for the first time, used the Internet as a tool to self-organize school communities for one day of free work by parents, teachers, staff and unions to install Internet access.</p>
+<p><a href="/note/netday--internet-for-all---1995---2025" class="wiki-link">NetDay- Internet for All - 1995 - 2025</a></p>
+<p>I found this interview I did in 2001 for the Association for Computing Machinery: - <a href="https://ubiquity.acm.org/article.cfm?id=375349">NetDay interview</a> and thought it should be updated.</p>
+<ul>
+<li>
+<p>Today, I would add major links to the mathematics community of <a href="https://leanprover-community.github.io/">LEAN proofs</a>, and the way this methodical development of <a href="https://lean-lang.org/">conversations about establishing formal truths</a> can be extended to examinations of how human communities can develop ways of thinking, together.</p>
+</li>
+<li>
+<p>First, in 1996, we did California schools, then schools in a dozen other US states, then all schools in Korea, then Great Britain, then Malaysia, then Thailand,  with the hope of doing all countries before 2000. </p>
+</li>
+<li>It&rsquo;s time to renew the project, with fiber, new sources of power and computing, and generative AI. </li>
+</ul>
+<p>Some quotes, that I had completely forgotten about.</p>
+<h1 id="how-metaphor-and-language-shape-learning">How metaphor and language shape learning</h1>
+<h2 id="summary">Summary</h2>
+<p><strong>GAGE:</strong> I think several different things are happening at the same time.  They interact with each other. The forms of intellectual technology we use are shifting, but all of them overlap.  </p>
+<p>Over the last 60,000 or 70,000 years of human life, we&rsquo;ve watched oral technology, written technology, symbolic technology, computed symbol technology, then vector-based pattern-recognition and generative technology  arise. </p>
+<p>Oral technology: I speak, you listen. The tribal poems of Somalia are an example. The leader composes, in a poetic form, a powerful statement of what the world is at a moment in time and shares that expression of common vision. It&rsquo;s an oral tradition. People in oral cultures have far better memory for things said than you or I have.  People can repeat hours of speech.</p>
+<p>When writing appeared 6,000 years ago or so, marks became a permanent memory aid.  Writing changed human understanding and human memory&ndash;there were permanent records. This was the foundation for science, for repeated experimentation with a permanent record of observed results. As that technology turned into libraries and books, the sanctity and permanence of a mark made on paper or stone could indicate ownership of objects, so all human economic institutions changed. This brought a new challenge: how could you verify the authenticity of marks? </p>
+<p>When the ability to mass-produce copies of documents by printing, with Gutenberg, life changed again. </p>
+<p>Then, with the ability to make voice travel over distance, it changed once again , changing business, changing warfare.  You had a new problem. If I&rsquo;m speaking to you, where&rsquo;s the signature, or mark,  that you would use to authenticate that it&rsquo;s really me?  if I were to make an analog from the old intellectual technology to the new, how could you modify behavior to allow existing societal forms to continue to work when agreement or command could take place at a distance? </p>
+<p>So, each time we add some new intellectual technology,  it doesn&rsquo;t destroy the old. It just shifts how much each technology is used. It shifts the patterns of thought. It shifts the costs, the ease of use, the habits of thought.</p>
+<p>Now we&rsquo;re in a domain where symbols have actionable power. Human institutions of law and law enforcement take a new form:  written symbols become executable machines. </p>
+<p>Take programming languages as an example. This is something new. The old intellectual patterns don&rsquo;t fit this new world in which symbols are machines. Nor do the institutions of law. </p>
+<p>You could think of the software in my cell phone as a machine. It&rsquo;s making this conversation function. It&rsquo;s doing something to waveforms. All of the old societal patterns then, the legal intellectual property regimes, the authenticity regimes,  based on a certain technology and a certain level of cost to that technology become increasingly meaningless with the new forms of intellectual technology. We&rsquo;re moving into higher-dimensioned spaces, where volumes and distance take on new meanings. One of the telltale signs is the language about these changes is so ugly. The personal digital assistant. AI. Generative. Prompt engineering.</p>
+<p>Education should tease out the ideas inherent in each human language, in the basic space and relationship metaphors  we use without examination: down, up, inside, outside, near, far. </p>
+<p>Education can help kids to recognize them, build on and extend them,  to amplify their capability to take apart and build more abstract ideas from sensory ideas,  and build new metaphors from old.</p>
+<hr />
+<p>Much of the democratic debate about public policy&ndash; where does our money go and what should we do with it&ndash; is based on the metaphor of water supply in a desert&ndash;there&rsquo;s a limited supply, it evaporates, it can only be used once. </p>
+<p>Shift to the image of the complete water cycle: evaporation, transpiration, condensation, rain, all enabling organic growth.</p>
+<p>The foundation tools or the foundation curriculum is one that enhances thought. I&rsquo;m convinced these days that losing music and art in the schools is a serious detriment to people&rsquo;s capability to think. I don&rsquo;t know many engineers that, when describing what they&rsquo;re doing, don&rsquo;t draw it. </p>
+<p>That linkage to the physical world is one of the reasons it&rsquo;s so important for Internet connectivity and high bandwidth connectivity for schools.  The capabilities for children to interact with the complexities of the world are rather limited inside a classroom. You can drop chalk on the floor trying to show what Galileo did. But the ability to immerse yourself in molecules, to watch atoms form into molecules, and molecules interact to form life.... all made visible, or audible by the tool of the computer, this symbol manipulator, is now extended through generative language models that extend your thought while building from patterns found by summarizing all forms of human experience.</p>
+<p>And this technology shift incorporates all the earlier ones.</p>
+<h2 id="details">Details</h2>
+<h2 id="linksreferences">Links/References</h2>
+<ul>
+<li><a href="https://ubiquity.acm.org/article.cfm?id=375349">Source</a></li>
+</ul>
+        </div>
+    </article>
+    
+    
+    <aside class="related">
+        <h3>Related entries</h3>
+        <ul>
+            
+            <li><a href="/note/goldman-school-of-public-policy">Goldman School of Public Policy</a></li>
+            
+            <li><a href="/note/netday-internet-for-all-1995-2025">NetDay- Internet for All - 1995 - 2025</a></li>
+            
+        </ul>
+    </aside>
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
+</body>
+</html>
