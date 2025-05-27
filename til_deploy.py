@@ -52,7 +52,7 @@ def main():
     
     # Step 2: Generate static site
     log("🏗️  Step 2: Generating static site")
-    if not run_command("python til_static_builder.py", "Static site generation"):
+    if not run_command("python til_static_builder.py --base-url '/TILBlog'", "Static site generation"):
         return 1
     
     # Step 3: Check if there are changes to commit
