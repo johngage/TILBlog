@@ -9,6 +9,9 @@ import subprocess
 import time
 from pathlib import Path
 
+# Add near the top of til_deploy.py
+os.environ['TIL_BASE_URL'] = '/TILBlog'
+
 def log(message):
     """Print a timestamped log message"""
     print(f"[{time.strftime('%H:%M:%S')}] {message}")
