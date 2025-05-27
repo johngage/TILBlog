@@ -7,16 +7,25 @@
     <article class="entry">
         <header>
             <h2>{{ entry.title }}</h2>
-            <div class="meta">
-                {% if entry_topics %}
-                <div class="topics">
-                    {% for topic in entry_topics %}
-                    <a href="{{ url_for('topic', topic=topic.name) }}" class="topic-tag">{{ topic.name }}</a>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
+        <div class="meta">
+              {% if entry_topics %}
+               <div class="topics">
+                 {% for topic in entry_topics %}
+                   <a href="{{ url_for('topic', topic=topic.name) }}" class="topic-tag">{{ topic.name }}</a>
+                 {% endfor %}
+               </div>
+              {% endif %}
+            <div class="entry-dates">
+               <time datetime="{{ entry.created }}">
+                   Created: {{ entry.created[:10] if entry.created else "Unknown" }}
+               </time>
+               {% if entry.was_modified %}
+                 <span class="entry-modified">
+                    · Modified: {{ entry.modified_fs[:10] if entry.modified_fs else "Unknown" }}
+                 </span>
+              {% endif %}
             </div>
+        </div>
         </header>
         
         <div class="content">
