@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mathematics - TIL</title>
-    <link rel="stylesheet" href="/TILBlog/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom/">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
-                <form action="/TILBlog/search" method="get" class="search-form">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search/" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/TILBlog/" 
+                <a href="/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/TILBlog/stats" 
+                <a href="/stats/" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -91,9 +91,9 @@ MathJax = {
         
         <div class="sort-controls">
             <span>Sort by date:</span>
-            <a href="/TILBlog/topic/mathematics" 
+            <a href="/topic/mathematics/" 
                class="sort-link active">Newest first</a>
-            <a href="/TILBlog/topic/mathematics?order=asc" 
+            <a href="/topic/mathematics/?order=asc" 
                class="sort-link ">Oldest first</a>
         </div>
     </div>
@@ -104,7 +104,7 @@ MathJax = {
     
     <li class="entry-item">
         <h3 class="entry-title">
-            <a href="/note/latex-math-test">LaTeX Math Test</a>
+           <a href="/note/latex-math-test/">LaTeX Math Test</a>
         </h3>
         <div class="entry-meta">
             <span class="entry-date">2025-05-26</span>
@@ -112,11 +112,11 @@ MathJax = {
             <div class="entry-topics">
                 
                     
-                        <a href="/topic/mathematics" class="entry-topic">mathematics</a>
+                        <a href="/topic/mathematics/" class="entry-topic">mathematics</a>
                     
                 
                     
-                        <a href="/topic/testing" class="entry-topic">testing</a>
+                        <a href="/topic/testing/" class="entry-topic">testing</a>
                     
                 
             </div>
@@ -149,12 +149,12 @@ MathJax = {
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/TILBlog/feed.atom">Atom feed</a>.
+                <a href="/feed.atom/">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/TILBlog/static/js/dark-mode.js"></script>
+  <script src="/static/js/dark-mode.js"></script>
 </body>
 </html>
