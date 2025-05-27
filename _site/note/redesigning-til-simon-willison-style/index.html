@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude builds new TILBlog - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/">John Gage: Today I Learned</a></h1>
-                <form action="/search" method="get" class="search-form">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                <form action="/TILBlog/search" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/" 
+                <a href="/TILBlog/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/stats" 
+                <a href="/TILBlog/stats" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -93,17 +93,17 @@ MathJax = {
                 
                 <div class="topics">
                     
-                    <a href="/topic/Claude" class="topic-tag">Claude</a>
+                    <a href="/TILBlog/topic/Claude" class="topic-tag">Claude</a>
                     
-                    <a href="/topic/claude-conversation" class="topic-tag">claude-conversation</a>
+                    <a href="/TILBlog/topic/claude-conversation" class="topic-tag">claude-conversation</a>
                     
-                    <a href="/topic/css" class="topic-tag">css</a>
+                    <a href="/TILBlog/topic/css" class="topic-tag">css</a>
                     
-                    <a href="/topic/documentation" class="topic-tag">documentation</a>
+                    <a href="/TILBlog/topic/documentation" class="topic-tag">documentation</a>
                     
-                    <a href="/topic/system-design" class="topic-tag">system-design</a>
+                    <a href="/TILBlog/topic/system-design" class="topic-tag">system-design</a>
                     
-                    <a href="/topic/web-development" class="topic-tag">web-development</a>
+                    <a href="/TILBlog/topic/web-development" class="topic-tag">web-development</a>
                     
                 </div>
                 
@@ -206,15 +206,15 @@ MathJax = {
         <h3>Related entries</h3>
         <ul>
             
-            <li><a href="/note/2025-05-25">2025-05-25</a></li>
+            <li><a href="/TILBlog/note/2025-05-25">2025-05-25</a></li>
             
-            <li><a href="/note/building-tilblog">Building TILBlog</a></li>
+            <li><a href="/TILBlog/note/building-tilblog">Building TILBlog</a></li>
             
-            <li><a href="/note/flask-til-blog-frontmatter">Creating a TIL Blog with Flask and Front Matter</a></li>
+            <li><a href="/TILBlog/note/flask-til-blog-frontmatter">Creating a TIL Blog with Flask and Front Matter</a></li>
             
-            <li><a href="/note/new-test-for-site-deploy">New Test For Site Deploy</a></li>
+            <li><a href="/TILBlog/note/new-test-for-site-deploy">New Test For Site Deploy</a></li>
             
-            <li><a href="/note/test-hybrid-til-entry">Test Hybrid TIL Entry</a></li>
+            <li><a href="/TILBlog/note/test-hybrid-til-entry">Test Hybrid TIL Entry</a></li>
             
         </ul>
     </aside>
@@ -227,12 +227,12 @@ MathJax = {
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/feed.atom">Atom feed</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/static/js/dark-mode.js"></script>
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
 </body>
 </html>

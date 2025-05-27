@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>internet - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/">John Gage: Today I Learned</a></h1>
-                <form action="/search" method="get" class="search-form">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                <form action="/TILBlog/search" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/" 
+                <a href="/TILBlog/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/stats" 
+                <a href="/TILBlog/stats" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -91,9 +91,9 @@ MathJax = {
         
         <div class="sort-controls">
             <span>Sort by date:</span>
-            <a href="/topic/internet" 
+            <a href="/TILBlog/topic/internet" 
                class="sort-link active">Newest first</a>
-            <a href="/topic/internet?order=asc" 
+            <a href="/TILBlog/topic/internet?order=asc" 
                class="sort-link ">Oldest first</a>
         </div>
     </div>
@@ -161,12 +161,12 @@ MathJax = {
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/feed.atom">Atom feed</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/static/js/dark-mode.js"></script>
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
 </body>
 </html>
