@@ -17,7 +17,7 @@ date: 2025-05-25
 author: Anil Ananthaswamy
 isbn: 9780593185742
 ---
-
+I'm building a radiative linked network model of the mathematics and computer innovations treated so carefully by Anil Ananthaswamy: cited papers, theorems, simulated chats between major authors.  Pedagogical treasure. Patrick Winston-work of genius.
 # Why Machines Learn
 1. Desperately Seeking Patterns
 2. We Are All Just Numbers Here...

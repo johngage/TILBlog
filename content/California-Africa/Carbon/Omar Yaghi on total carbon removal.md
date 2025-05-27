@@ -7,11 +7,11 @@ slug: omar-yaghi-on-total-carbon-removal
 source: "https://youtube.com/@buildberkeley2050"
 
 ---
+Prof. Omar Yaghi describes the scientific basis for enabling direct atmosperic carbon removal using MOF and COF; removal of 1,100 Gigatonnes of carbon could take as little as 3.1 years, with removal sites in 706 world cities.
 
 
 
-
-Talk at Bakar Institute in April, 2025---
+Talk at Bakar Institute, Berkeley in April, 2025, at the AI-Climate Symposium
 
 ---
 

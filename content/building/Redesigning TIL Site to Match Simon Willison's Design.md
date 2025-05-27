@@ -16,7 +16,7 @@ tags:
   - excalidraw
 excalidraw-open-md: true
 ---
-
+Documenting a complete rebuild of the TIL Blog site,  to create an open-source system merging Obsidian, SQLite, and a static website generator.  Extensions are the use of Excalidraw and SVG, to create an iterative loop of documented innovation.
 
 ## References
 

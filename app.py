@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""
+TIL Blog Application - Fixed Structure
+"""
+
 import os
 import sys
 import pathlib
@@ -15,83 +20,6 @@ from watchdog.events import FileSystemEventHandler
 import threading
 import frontmatter
 
-
-# Add this near the top of your app.py file, after imports
-
-# Check if we're running in build mode
-import sys
-is_build_mode = len(sys.argv) > 1 and sys.argv[1] == 'build'
-
-# Add these functions after your other helper functions
-
-def get_all_til_urls():
-    """Return all URLs for TIL entries - used for static site generation"""
-    # Connect to database
-    conn = get_db()
-    
-    # Get all entries
-    entries = conn.execute(
-        """
-        SELECT 
-            id, 
-            title,
-            path,
-            created,
-            updated,
-            topic
-        FROM entries
-        ORDER BY created DESC
-        """
-    ).fetchall()
-    
-    # Generate URLs for all entries
-    urls = []
-    
-    # Home page
-    urls.append("/")
-    
-    # Individual entry pages
-    for entry in entries:
-        urls.append(f"/til/{entry['id']}")
-    
-    # Topic pages
-    topics = conn.execute("SELECT DISTINCT topic FROM entries").fetchall()
-    for topic in topics:
-        urls.append(f"/topic/{topic['topic']}")
-    
-    # Add any other routes you want to include
-    urls.append("/about")
-    urls.append("/feed.xml")
-    urls.append("/sitemap.xml")
-    
-    return urls
-
-# Modify the main section at the bottom of app.py
-
-if __name__ == "__main__":
-    # Start file watcher in a separate thread
-    if not is_build_mode:
-        observer = start_file_watcher()
-    
-    try:
-        # If database doesn't exist, build it
-        if not os.path.exists(root / DATABASE):
-            print("Database not found. Building database...")
-            build_database(root)
-        
-        # If running in build mode, don't actually start the server
-        if is_build_mode:
-            print("Running in build mode - static site generator will handle URLs")
-            # You could add code here to pre-generate any dynamic content
-        else:
-            # For local development
-            app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
-    except KeyboardInterrupt:
-        if not is_build_mode:
-            print("Stopping file watcher...")
-            observer.stop()
-            observer.join()
-
 # Configuration
 DATABASE = "til.db"
 PER_PAGE = 20
@@ -99,47 +27,14 @@ PER_PAGE = 20
 # Setup paths
 root = pathlib.Path(__file__).parent.resolve()
 
+# Check if we're running in build mode
+is_build_mode = len(sys.argv) > 1 and sys.argv[1] == 'build'
+
 # Flask application
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-# File watcher for auto-rebuild
-class MarkdownHandler(FileSystemEventHandler):
-    def __init__(self, rebuild_callback):
-        self.rebuild_callback = rebuild_callback
-        self.last_rebuild = 0
-        
-    def on_modified(self, event):
-        if event.is_directory:
-            return
-            
-        # Only rebuild for markdown files
-        if not event.src_path.endswith('.md'):
-            return
-            
-        # Prevent rapid successive rebuilds
-        now = time.time()
-        if now - self.last_rebuild < 2:  # Wait 2 seconds between rebuilds
-            return
-            
-        print(f"Detected change in {event.src_path}, rebuilding database...")
-        self.rebuild_callback()
-        self.last_rebuild = now
-
-def start_file_watcher():
-    """Start watching for markdown file changes"""
-    def rebuild_db():
-        try:
-            build_database(root)
-        except Exception as e:
-            print(f"Error rebuilding database: {e}")
-    
-    event_handler = MarkdownHandler(rebuild_db)
-    observer = Observer()
-    observer.schedule(event_handler, str(root), recursive=True)
-    observer.start()
-    print("File watcher started - will auto-rebuild on markdown changes")
-    return observer
+# ===== HELPER FUNCTIONS =====
 
 def get_db():
     """Connect to the database and return a connection object"""
@@ -188,6 +83,44 @@ def convert_wikilinks(content):
     # Pattern for [[Link Text]]
     pattern = r'\[\[([^\]]+)\]\]'
     return re.sub(pattern, replace_link, content)
+
+# File watcher for auto-rebuild
+class MarkdownHandler(FileSystemEventHandler):
+    def __init__(self, rebuild_callback):
+        self.rebuild_callback = rebuild_callback
+        self.last_rebuild = 0
+        
+    def on_modified(self, event):
+        if event.is_directory:
+            return
+            
+        # Only rebuild for markdown files
+        if not event.src_path.endswith('.md'):
+            return
+            
+        # Prevent rapid successive rebuilds
+        now = time.time()
+        if now - self.last_rebuild < 2:  # Wait 2 seconds between rebuilds
+            return
+            
+        print(f"Detected change in {event.src_path}, rebuilding database...")
+        self.rebuild_callback()
+        self.last_rebuild = now
+
+def start_file_watcher():
+    """Start watching for markdown file changes"""
+    def rebuild_db():
+        try:
+            build_database(root)
+        except Exception as e:
+            print(f"Error rebuilding database: {e}")
+    
+    event_handler = MarkdownHandler(rebuild_db)
+    observer = Observer()
+    observer.schedule(event_handler, str(root), recursive=True)
+    observer.start()
+    print("File watcher started - will auto-rebuild on markdown changes")
+    return observer
 
 def build_database(root_dir):
     """Build the SQLite database from Markdown files with front matter"""
@@ -305,9 +238,17 @@ def build_database(root_dir):
             if isinstance(topics, str):
                 topics = [topics]  # Handle single topic as string
             
-            # Get dates
-            created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(filepath.stat().st_mtime))
-            modified_fs = created_fs  # For now, use mtime for both
+            # Get dates - fix the bug where both dates were the same
+            file_stat = filepath.stat()
+            created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
+            modified_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
+            # Check for explicit modified date in front matter
+            modified_fm = front_matter.get('modified') or front_matter.get('updated')
+            if modified_fm:
+               if isinstance(modified_fm, datetime):
+                 modified_fs = modified_fm.strftime("%Y-%m-%d %H:%M:%S")
+               else:
+                 modified_fs = str(modified_fm)
             
             # Front matter date (if provided)
             created_fm = front_matter.get('created') or front_matter.get('date')
@@ -337,7 +278,6 @@ def build_database(root_dir):
                         'use_pygments': True,
                         'css_class': 'highlight'
                     }
-                    
                 }
             )
             
@@ -395,7 +335,47 @@ def build_database(root_dir):
     conn.commit()
     conn.close()
 
-# Flask routes
+def get_all_til_urls():
+    """Return all URLs for TIL entries - used for static site generation"""
+    # Connect to database
+    conn = get_db()
+    
+    # Get all entries
+    entries = conn.execute(
+        """
+        SELECT 
+            id, 
+            title,
+            slug,
+            created_fs,
+            created_fm
+        FROM entries
+        ORDER BY COALESCE(created_fm, created_fs) DESC
+        """
+    ).fetchall()
+    
+    # Generate URLs for all entries
+    urls = []
+    
+    # Home page
+    urls.append("/")
+    
+    # Individual entry pages
+    for entry in entries:
+        urls.append(f"/note/{entry['slug']}")
+    
+    # Topic pages
+    topics = conn.execute("SELECT DISTINCT name FROM topics").fetchall()
+    for topic in topics:
+        urls.append(f"/topic/{topic['name']}")
+    
+    # Add any other routes you want to include
+    urls.append("/stats")
+    urls.append("/feed.atom")
+    
+    return urls
+
+# ===== FLASK ROUTES =====
 
 @app.route("/")
 def index():
@@ -411,16 +391,55 @@ def index():
     order_clause = "DESC" if order == "desc" else "ASC"
     sort_field = "COALESCE(created_fm, created_fs)"
     
-    # Get entries for this page
+    # Get entries for this page - INCLUDING content, html, topics_raw
     entries = query_db(
-        f"""
-        SELECT id, slug, title, content, {sort_field} as created
-        FROM entries
-        ORDER BY {sort_field} {order_clause}
-        LIMIT ? OFFSET ?
-        """,
-        [PER_PAGE, offset]
-    )
+    f"""
+    SELECT id, slug, title, content, html, topics_raw, 
+           {sort_field} as created, modified_fs, created_fs, created_fm
+    FROM entries
+    ORDER BY {sort_field} {order_clause}
+    LIMIT ? OFFSET ?
+    """,
+    [PER_PAGE, offset]
+)
+    
+    # Process entries to add previews
+    processed_entries = []
+    for entry in entries:
+        entry_dict = dict(entry)  # Convert Row to dict
+        
+        # Generate preview
+        if entry['content'] and entry['content'].strip():
+            # Use markdown content
+            preview_text = entry['content'].strip()
+        elif entry['html']:
+            # Strip HTML tags and use that
+            preview_text = re.sub(r'<[^>]+>', '', entry['html'])
+            preview_text = preview_text.strip()
+        else:
+            preview_text = ""
+        
+    # Clean up and truncate
+    if preview_text:
+        preview_text = ' '.join(preview_text.split())  # Clean whitespace
+        if len(preview_text) > 200:  # CHANGED FROM 100 TO 200
+          # Try to break at word boundary
+          truncated = preview_text[:200]  # CHANGED FROM 100 TO 200
+          last_space = truncated.rfind(' ')
+          if last_space > 140:  # CHANGED FROM 70 TO 140 (70% of 200)
+            preview_text = preview_text[:last_space] + "..."
+        else:
+            preview_text = truncated + "..."    
+        
+        entry_dict['preview'] = preview_text
+
+        # Add logic to determine if entry was modified
+        created_date = entry['created_fm'] or entry['created_fs']
+        modified_date = entry['modified_fs']
+        entry_dict['was_modified'] = (modified_date and 
+                            modified_date[:10] != created_date[:10])
+
+        processed_entries.append(entry_dict) 
     
     # Get all topics with counts
     topic_cloud = get_topic_cloud()
@@ -430,7 +449,7 @@ def index():
     
     return render_template(
         "index.html",
-        entries=entries,
+        entries=processed_entries,
         topic_cloud=topic_cloud,
         page=page,
         has_next=has_next,
@@ -438,6 +457,8 @@ def index():
         count=count,
         current_order=order
     )
+
+
 
 @app.route("/topic/<topic>")
 def topic(topic):
@@ -470,17 +491,54 @@ def topic(topic):
     
     # Get entries for this page
     entries = query_db(
-        f"""
-        SELECT e.id, e.slug, e.title, {sort_field} as created
-        FROM entries e
-        JOIN entry_topics et ON e.id = et.entry_id
-        JOIN topics t ON et.topic_id = t.id
-        WHERE t.name = ?
-        ORDER BY {sort_field} {order_clause}
-        LIMIT ? OFFSET ?
-        """,
-        [topic, PER_PAGE, offset]
-    )
+    f"""
+    SELECT e.id, e.slug, e.title, e.content, e.html, e.topics_raw, 
+           {sort_field} as created, e.modified_fs, e.created_fs, e.created_fm
+    FROM entries e
+    JOIN entry_topics et ON e.id = et.entry_id
+    JOIN topics t ON et.topic_id = t.id
+    WHERE t.name = ?
+    ORDER BY {sort_field} {order_clause}
+    LIMIT ? OFFSET ?
+    """,
+    [topic, PER_PAGE, offset]
+)
+    
+    # Process entries to add previews (same logic as index)
+    processed_entries = []
+    for entry in entries:
+        entry_dict = dict(entry)
+        
+        # Generate preview
+        if entry['content'] and entry['content'].strip():
+            preview_text = entry['content'].strip()
+        elif entry['html']:
+            preview_text = re.sub(r'<[^>]+>', '', entry['html'])
+            preview_text = preview_text.strip()
+        else:
+            preview_text = ""
+        
+        # Clean up and truncate
+        if preview_text:
+          preview_text = ' '.join(preview_text.split())  # Clean whitespace
+          if len(preview_text) > 200:  # CHANGED FROM 100 TO 200
+            # Try to break at word boundary
+            truncated = preview_text[:200]  # CHANGED FROM 100 TO 200
+            last_space = truncated.rfind(' ')
+            if last_space > 140:  # CHANGED FROM 70 TO 140 (70% of 200)
+              preview_text = preview_text[:last_space] + "..."
+            else:
+              preview_text = truncated + "..."
+
+        entry_dict['preview'] = preview_text
+
+        # Add logic to determine if entry was modified
+        created_date = entry['created_fm'] or entry['created_fs']
+        modified_date = entry['modified_fs']
+        entry_dict['was_modified'] = (modified_date and 
+                            modified_date[:10] != created_date[:10])
+
+        processed_entries.append(entry_dict)
     
     # Get all topics for navigation
     topic_cloud = get_topic_cloud()
@@ -490,7 +548,7 @@ def topic(topic):
     
     return render_template(
         "topic.html",
-        entries=entries,
+        entries=processed_entries,
         topic_cloud=topic_cloud,
         current_topic=topic,
         page=page,
@@ -715,6 +773,8 @@ def internal_error(e):
     topic_cloud = get_topic_cloud()
     return render_template('500.html', topic_cloud=topic_cloud), 500
 
+# ===== MAIN EXECUTION =====
+
 if __name__ == "__main__":
     # This code ONLY runs when executed directly (not on Netlify)
     if len(sys.argv) > 1 and sys.argv[1] == 'freeze':
@@ -722,8 +782,10 @@ if __name__ == "__main__":
         freezer = Freezer(app)
         freezer.freeze()
         sys.exit(0)
+    
     # Start file watcher in a separate thread (for local dev only)
-    observer = start_file_watcher()
+    if not is_build_mode:
+        observer = start_file_watcher()
     
     try:
         # If database doesn't exist, build it
@@ -732,14 +794,17 @@ if __name__ == "__main__":
             build_database(root)
         
         # Run the app with file watcher (local dev only)
-        app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
+        if not is_build_mode:
+            app.run(debug=True, use_reloader=False)  # Disable reloader to avoid conflicts with file watcher
+        else:
+            print("Running in build mode - static site generator will handle URLs")
     except KeyboardInterrupt:
-        print("Stopping file watcher...")
-        observer.stop()
-        observer.join()
+        if not is_build_mode:
+            print("Stopping file watcher...")
+            observer.stop()
+            observer.join()
 else:
     # When imported by Netlify, just ensure database exists
     if not os.path.exists(root / DATABASE):
         print("Database not found. Building database...")
         build_database(root)
-    

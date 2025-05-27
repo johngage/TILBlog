@@ -8,7 +8,10 @@ tags:
 excalidraw-plugin: parsed 
 excalidraw-open-md: true
 ---
-# Time to see what it takes for excalidraw
+We must extend the drawing interface....perhaps incorporating the Google LENS capabilities?
+
+What format allows Excalidraw drawings to display on the web site? SVG? 
+What it takes for excalidraw elements to be included in all Obsidian Markdown files.]
 - json format?
 %%
 ## Excalidraw data

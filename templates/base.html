@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}TIL - Today I Learned{% endblock %}</title>
+    <title>{% block title %}John Gage:TIL - Today I Learned{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="{{ url_for('feed') }}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -74,13 +74,7 @@ MathJax = {
                    class="topic-link {% if request.endpoint == 'index' %}active{% endif %}">
                    All
                 </a>
-                {% for topic in topic_cloud %}
-                <a href="{{ url_for('topic', topic=topic.topic) }}" 
-                   class="topic-link {% if current_topic == topic.topic %}active{% endif %}"
-                   data-count="{{ topic.count }}">
-                   {{ topic.topic }} <span class="count">({{ topic.count }})</span>
-                </a>
-                {% endfor %}
+                
                 <a href="{{ url_for('stats') }}" 
                    class="topic-link {% if request.endpoint == 'stats' %}active{% endif %}">
                    Stats

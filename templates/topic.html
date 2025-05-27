@@ -17,16 +17,35 @@
     </div>
     
     {% if entries %}
-        <ul class="entry-list">
-            {% for entry in entries %}
-            <li>
-                <a href="{{ url_for('entry', slug=entry.slug) }}">
-                    <span class="title">{{ entry.title }}</span>
-                    <time datetime="{{ entry.created }}">{{ entry.created[:10] }}</time>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
+     <!-- Update your topic.html entry list section with this: -->
+<ul class="entry-list">
+    {% for entry in entries %}
+    <li class="entry-item">
+        <h3 class="entry-title">
+            <a href="/note/{{ entry.slug }}">{{ entry.title }}</a>
+        </h3>
+        <div class="entry-meta">
+            <span class="entry-date">{{ entry.created[:10] }}</span>
+            {% if entry.topics_raw %}
+            <div class="entry-topics">
+                {% for topic in entry.topics_raw.split(',') %}
+                    {% if topic.strip() %}
+                        <a href="/topic/{{ topic.strip() }}" class="entry-topic">{{ topic.strip() }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Preview - processed in Python -->
+        {% if entry.preview %}
+        <div class="entry-preview">
+            {{ entry.preview }}
+        </div>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
 
         <div class="pagination">
             {% if has_prev %}

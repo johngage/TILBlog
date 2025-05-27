@@ -10,7 +10,6 @@ topics:
 created: 2025-05-22
 ---
 
-# New Test For Site Deploy
 
 Today I learned how to create a "Today I Learned" blog...sort of.
 

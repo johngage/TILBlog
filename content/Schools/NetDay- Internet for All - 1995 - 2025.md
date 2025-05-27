@@ -6,7 +6,7 @@ modified: 2025-05-19 13:12:17
 slug: netday-internet-for-all-1995-2025
 ---
 
-# NetDay- Internet for All - 1995 - 2025
+
 
 ## What I Learned
 - By creating an easily understandable way to see how well a local institution is doing-- in this case, a local school, or a school that someone attended in the past--people will respond to an appeal for support, and invest time, money, and personal effort to improve that institution.
@@ -14,7 +14,7 @@ slug: netday-internet-for-all-1995-2025
 - The second element: a clear definition of an infrastructure improvement that benefits all. Clean water, good food, good air quality, comfortable class and work spaces, adequate tools, equipment, and learning resources.
 - NetDay proposed a simple action: come to the school for one day, work with other parents, or alumni, or teachers, or other skilled volunteers, and finish the day with a clear improvement that the entire school community values.
 - Requisites: a clear work plan with clear, measurable objectives. A test of performance before the work, and a test of performance after the work.
-
+[[Internet joins schools and teachers to a global library]]
 ## Details
 - In late 1995 and early 1996, I created maps of all schools in California--then, a major project; now, easily available in most of the world. On this map, I showed a clickable icon for each school, allowing one-click access to a home web page for each school.
 - I created a home web page for each school, showing the school name, location, and name of the official administrative official, and an appeal to sign up to help the school on one day, March 9, 1996, by going to the school to work.

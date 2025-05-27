@@ -11,11 +11,6 @@ tags:
 excalidraw-open-md: true
 ---
 
-# Building TILBlog
+As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.
 
-## What I Learned
-
-What do I need to add at the end of the template so Excalidraw is enabled?
-## Details
-
-## References
+Most major design issues have 

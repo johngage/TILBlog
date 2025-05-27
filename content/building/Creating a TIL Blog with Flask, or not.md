@@ -5,9 +5,8 @@ created: 2024-01-15
 slug: flask-til-blog-frontmatter
 ---
 
-# Creating a TIL Blog with Flask and Front Matter
 
-Today I learned how to upgrade my TIL blog to use YAML front matter instead of folder structure for organizing topics.
+Today I learned how to upgrade my TIL blog to use YAML front matter instead of a folder structure for organizing topics.  
 
 ## Key Changes
 

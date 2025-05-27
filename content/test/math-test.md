@@ -4,7 +4,7 @@ topics:
   - mathematics
   - testing
 ---
-
+Testing forms of LaTeX for rendering in web site: Jax
 # LaTeX Math Test
 
 ## Inline Math
