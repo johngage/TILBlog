@@ -65,8 +65,8 @@ class EnhancedClaudeIntegration:
         self.content_dir.mkdir(parents=True, exist_ok=True)
         
         # Find export files
-        export_files = list(self.claude_exports_dir.glob("*.json"))
-        
+        export_files = list(self.claude_exports_dir.glob("**/*.json"))    
+
         if not export_files:
             log("📥 No Claude export files found.")
             self._show_setup_instructions()
@@ -156,7 +156,8 @@ class EnhancedClaudeIntegration:
     
     def _is_documentation_worthy(self, conv_data: Dict) -> bool:
         """Enhanced determination of documentation worthiness"""
-        messages = conv_data.get('messages', [])
+        messages = conv_data.get('chat_messages', conv_data.get('messages', []))
+
         
         if len(messages) < 4:  # Too short
             return False
@@ -220,9 +221,21 @@ class EnhancedClaudeIntegration:
         return score
     
     def _get_conversation_content(self, conv_data: Dict) -> str:
-        """Extract all text content from conversation"""
-        messages = conv_data.get('messages', [])
-        return ' '.join([msg.get('content', '') for msg in messages])
+      """Extract all text content from conversation"""
+      # Handle Claude export format
+      messages = conv_data.get('chat_messages', conv_data.get('messages', []))
+      content_parts = []
+    
+      for msg in messages:
+        # Extract text from complex content structure
+        if 'content' in msg and isinstance(msg['content'], list):
+            for content_item in msg['content']:
+                if isinstance(content_item, dict) and 'text' in content_item:
+                    content_parts.append(content_item['text'])
+        elif 'text' in msg:
+            content_parts.append(str(msg['text']))
+    
+      return ' '.join(content_parts)
     
     def _create_conversation_entry(self, conv_data: Dict):
         """Create a TIL entry from conversation with enhanced processing"""
@@ -458,21 +471,31 @@ class EnhancedClaudeIntegration:
         return score
     
     def _format_all_messages(self, messages: List[Dict]) -> List[str]:
-        """Format messages for display"""
-        formatted = []
+      """Format messages for display"""
+      formatted = []
+    
+      for msg in messages:
+        sender = msg.get('sender', 'unknown')
         
-        for msg in messages:
-            role = msg.get('role', 'unknown')
-            content = msg.get('content', '')
-            
-            # Clean and truncate if necessary
-            if len(content) > 800:
-                content = content[:800] + "\n\n*[Message truncated]*"
-            
-            role_label = "**Human:**" if role == 'human' else "**Claude:**"
-            formatted.append(f"{role_label}\n{content}")
+        # Extract content text
+        content = ""
+        if 'content' in msg and isinstance(msg['content'], list):
+            text_parts = []
+            for content_item in msg['content']:
+                if isinstance(content_item, dict) and 'text' in content_item:
+                    text_parts.append(content_item['text'])
+            content = ' '.join(text_parts)
+        elif 'text' in msg:
+            content = str(msg['text'])
         
-        return formatted
+        # Clean and truncate if necessary
+        if len(content) > 800:
+            content = content[:800] + "\n\n*[Message truncated]*"
+        
+        role_label = "**Human:**" if sender == 'human' else "**Claude:**"
+        formatted.append(f"{role_label}\n{content}")
+    
+      return formatted
     
     def _generate_conversation_summary(self, conv_data: Dict) -> str:
         """Generate an intelligent summary of the conversation"""
