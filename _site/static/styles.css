@@ -384,3 +384,41 @@ a:focus,
         gap: 4px;
     }
 }
+/* Topic Cloud Navigation */
+.topic-cloud {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.topic-link {
+    color: #586069;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.topic-link:hover {
+    background: #f1f3f4;
+    color: #24292e;
+}
+
+.topic-link.active {
+    background: #0366d6;
+    color: white;
+}
+
+/* Topic Browse Links */  
+.topic-count {
+    color: #586069;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.topic-separator {
+    color: #d1d5da;
+    margin: 0 8px;
+}
