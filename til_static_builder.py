@@ -143,7 +143,7 @@ class TILStaticSiteBuilder:
             return f"{self.base_url}/search/" #/
             
         elif endpoint == 'feed':
-            return f"{self.base_url}/feed.atom/" #/
+            return f"{self.base_url}/feed.atom" 
             
         elif endpoint == 'stats':
             return f"{self.base_url}/stats/" #/
