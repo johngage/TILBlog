@@ -72,13 +72,17 @@ def get_topic_cloud():
 
 def convert_wikilinks(content):
     """Convert [[Wiki Links]] to HTML links"""
+    import os
+    # Get base URL from environment (empty for local Flask, /TILBlog for static)
+    base_url = os.environ.get('TIL_BASE_URL', '')
+    
     def replace_link(match):
         link_text = match.group(1)
         # Convert to slug (lowercase, hyphens for spaces)
         slug = link_text.lower().replace(' ', '-').replace('_', '-')
         # Remove special characters
         slug = re.sub(r'[^\w\-]', '', slug)
-        return f'<a href="/note/{slug}" class="wiki-link">{link_text}</a>'
+        return f'<a href="{base_url}/note/{slug}/" class="wiki-link">{link_text}</a>'
     
     # Pattern for [[Link Text]]
     pattern = r'\[\[([^\]]+)\]\]'
