@@ -122,7 +122,7 @@ class TILStaticSiteBuilder:
             
         elif endpoint == 'topic':
             topic_name = kwargs.get('topic', '')
-            base_path = f"{self.base_url}/topic/{topic_name}"
+            base_path = f"{self.base_url}/topic/{topic_name}/" #/
             # Handle pagination for topic pages
             params = []
             for key, value in kwargs.items():
@@ -137,19 +137,19 @@ class TILStaticSiteBuilder:
             
         elif endpoint == 'entry':
             slug = kwargs.get('slug', '')
-            return f"{self.base_url}/note/{slug}"
+            return f"{self.base_url}/note/{slug}/" #/
             
         elif endpoint == 'search':
-            return f"{self.base_url}/search"
+            return f"{self.base_url}/search/" #/
             
         elif endpoint == 'feed':
-            return f"{self.base_url}/feed.atom"
+            return f"{self.base_url}/feed.atom/" #/
             
         elif endpoint == 'stats':
-            return f"{self.base_url}/stats"
+            return f"{self.base_url}/stats/" #/
         
         # Fallback
-        return f"{self.base_url}/{endpoint}"
+        return f"{self.base_url}/{endpoint}/" #/
     
     def query_db(self, query, args=(), one=False):
         """Execute a query and return the results - matches Flask app"""

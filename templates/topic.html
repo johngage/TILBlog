@@ -22,7 +22,7 @@
     {% for entry in entries %}
     <li class="entry-item">
         <h3 class="entry-title">
-            <a href="/note/{{ entry.slug }}">{{ entry.title }}</a>
+           <a href="{{ url_for('entry', slug=entry.slug) }}">{{ entry.title }}</a>
         </h3>
         <div class="entry-meta">
             <span class="entry-date">{{ entry.created[:10] }}</span>
@@ -30,7 +30,7 @@
             <div class="entry-topics">
                 {% for topic in entry.topics_raw.split(',') %}
                     {% if topic.strip() %}
-                        <a href="/topic/{{ topic.strip() }}" class="entry-topic">{{ topic.strip() }}</a>
+                        <a href="{{ url_for('topic', topic=topic.strip()) }}" class="entry-topic">{{ topic.strip() }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
