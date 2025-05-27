@@ -12,7 +12,7 @@ topics:
   - math
 created: 2025-05-25 17:00:20
 modified: 2025-05-25 17:00:20
-slug: untitled
+slug: why-machines-learn
 date: 2025-05-25
 author: Anil Ananthaswamy
 isbn: 9780593185742
