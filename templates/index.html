@@ -29,25 +29,41 @@
         </div>
     </div>
     
-    {% if entries %}
-     <div class="entry-meta">
-        <div class="entry-dates">
-           <span class="entry-date">{{ entry.created[:10] }}</span>
-           {% if entry.was_modified %}
-              <span class="modified-date">updated {{ entry.modified_fs[:10] }}</span>
-           {% endif %}
-        </div>
-    
-        {% if entry.topics_raw %}
-        <div class="entry-topics">
-          {% for topic in entry.topics_raw.split(',') %}
-            {% if topic.strip() %}
-                <a href="/topic/{{ topic.strip() }}" class="entry-topic">{{ topic.strip() }}</a>
+   {% if entries %}
+    <ul class="entry-list">
+        {% for entry in entries %}
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/{{ entry.slug }}">{{ entry.title }}</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">{{ entry.created[:10] }}</span>
+                    {% if entry.was_modified %}
+                        <span class="modified-date">updated {{ entry.modified_fs[:10] }}</span>
+                    {% endif %}
+                </div>
+                
+                {% if entry.topics_raw %}
+                <div class="entry-topics">
+                    {% for topic in entry.topics_raw.split(',') %}
+                        {% if topic.strip() %}
+                            <a href="/topic/{{ topic.strip() }}" class="entry-topic">{{ topic.strip() }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            {% if entry.preview %}
+            <div class="entry-preview">
+                {{ entry.preview }}
+            </div>
             {% endif %}
-          {% endfor %}
-        </div>
-        {% endif %}
-    </div>
+        </li>
+        {% endfor %}
+    </ul>
 
         <div class="pagination">
             {% if has_prev %}
