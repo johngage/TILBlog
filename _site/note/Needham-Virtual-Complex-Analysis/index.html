@@ -1,0 +1,181 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Needham-Visual Complex Analysis - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+    
+</head>
+<body>
+    <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>Needham-Visual Complex Analysis</h2>
+            <div class="meta">
+                
+                <div class="topics">
+                    
+                    <a href="/topic/complex" class="topic-tag">complex</a>
+                    
+                    <a href="/topic/math" class="topic-tag">math</a>
+                    
+                </div>
+                
+                <time datetime="2025-05-24 20:06:57">2025-05-24</time>
+            </div>
+        </header>
+        
+        <div class="content">
+            <h1 id="needham-visual-complex-analysis">Needham-Visual Complex Analysis</h1>
+<h1 id="asymp">$\asymp$</h1>
+<ul>
+<li>Needham, in the 25th anniversary edition (2021) of the original Oxford publication of &ldquo;Visual Complex Analysis&rdquo;, clarifies the example he used in the original edition of Newton&rsquo;s third formulation of differentiation, in which Newton abandons his earlier use of symbolic manipulation to emphasize the geometric foundation and analysis.  Newton uses &ldquo;ultimately equal&rdquo;, or, with Needham&rsquo;s modern symbolism, the equivalence relation symbolized by $\asymp$.</li>
+<li>Here is the sequence of steps that show how the desired derivative is equivalent to a sequence of geometrical ratios. The notation for &ldquo;ultimately equal&rdquo; shows the sequence as $\delta\theta$ goes to zero, ending with a multiplication, and the geometric identity with a Pythagorean theorem result.</li>
+</ul>
+<p>$$ \frac {dT}{L d\theta}\asymp \frac {\delta T}{L \delta\theta}\asymp \frac {\delta T}{\delta s}\asymp \frac{L}{1} \implies \frac {dT}{d\theta}= L^2 = 1 + T^2
+$$</p>
+<h2 id="details">Details</h2>
+<ul>
+<li>\ asymp Latex symbol</li>
+</ul>
+<h2 id="linksreferences">Links/References</h2>
+<ul>
+<li><a href="https://www.amazon.com/Visual-Complex-Analysis-25th-Anniversary-ebook/dp/B0BV2TYMHW/ref=tmm_kin_swatch_0">Source</a></li>
+<li>Needham (1993)</li>
+<li>Needham-VCA (1997)</li>
+<li>Needham (2014)</li>
+<li><a href="/note/why-machines-learn" class="wiki-link">Why Machines Learn</a></li>
+<li></li>
+</ul>
+<h2 id="discussion-of-ultimately-equal">Discussion of &ldquo;ultimately equal&rdquo;</h2>
+<ul>
+<li>Needham rebuilds Newton&rsquo;s use of geometric calculus, rather than Leibnizian symbolic calculus, and describes how he rewrote the new edition to emphasize this distinction.</li>
+<li>Needham apologizes for failing to have the courage to use the  geometric &ldquo;ultimately equal&rdquo; notation 25 years ago, and demonstrates it&rsquo;s use by rewriting a key proof using geometric calculus in the Preface. </li>
+<li>In the new edition, he significantly changes the drawing of the geometry of the proof. For the first time, he shows the arc of the circle of radius L, showing how, in the &ldquo;ultimately equal&rdquo; process, the length of the arc from the original vertex of the triangle, to the new vertex after rotating the hypotenuse by the small amount $\delta\theta$, becomes equal to the orthogal distance. He shows this using the derivative of the complex quantity  $re^{i\theta}$, using a triangle with base 1 and vertical side T, so that T = $tan (\theta)$, and the rotation increases the length of the vertical side T by  $\delta T$</li>
+<li></li>
+<li>Needham uses the symbol $\asymp$  for &ldquo;differential equality.&rdquo; This is a beautiful and intuitive notation that perfectly captures the geometric concept he&rsquo;s describing.</li>
+</ul>
+<p>The symbol $\asymp$ (asymptotically equal) is quite fitting for Needham&rsquo;s geometric approach because:</p>
+<ol>
+<li>
+<p><strong>Visual intuition</strong>: The curved lines suggest that the quantities are &ldquo;approximately equal&rdquo; in a limiting sense, rather than exactly equal at any finite scale.</p>
+</li>
+<li>
+<p><strong>Differential relationship</strong>: When he writes something like $dT \asymp L \cdot d\theta$, he&rsquo;s indicating that these quantities become equal in the differential limit - they differ by terms of higher order that vanish as $d\theta \to 0$.</p>
+</li>
+<li>
+<p><strong>Geometric meaning</strong>: This notation emphasizes that we&rsquo;re dealing with infinitesimal geometric relationships where the &ldquo;error&rdquo; in the equality becomes negligible compared to the quantities themselves.</p>
+</li>
+</ol>
+<p>This is exactly what we were discussing with the geometric proof of $\frac{dT}{d\theta} = 1 + T^2$. When Needham says the perpendicular distance is $L \cdot d\theta$, he might write:</p>
+<p>$$\text{perpendicular distance} \asymp L \cdot d\theta$$</p>
+<p>This captures the idea that for infinitesimal $d\theta$, the straight-line perpendicular distance and the arc length $L \cdot d\theta$ are differentially equal - they differ by terms of order $(d\theta)^2$ or higher, which vanish in the limit.</p>
+<p>This notation beautifully embodies Needham&rsquo;s philosophy of making the geometric intuition behind calculus concepts visually and symbolically clear. It&rsquo;s a much more intuitive way to express infinitesimal relationships than the traditional $\epsilon$-$\delta$ formalism, while still being mathematically precise.</p>
+        </div>
+    </article>
+    
+    
+    <aside class="related">
+        <h3>Related entries</h3>
+        <ul>
+            
+            <li><a href="/note/untitled">Why Machines Learn</a></li>
+            
+        </ul>
+    </aside>
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
+</body>
+</html>

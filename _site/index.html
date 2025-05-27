@@ -1,11 +1,15 @@
+<!-- index.html -->
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIL: Today I Learned</title>
-    <link rel="stylesheet" href="/TILBlog/static/styles.css">
-    
+    <title>John Gage: TIL - Today I Learned</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
 <script>
 MathJax = {
   tex: {
@@ -23,161 +27,820 @@ MathJax = {
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
+
+<!-- Optional: Add some styling for math -->
 <style>
 .MathJax {
   font-size: 1.1em !important;
 }
-.MathJax_Display {
-  margin: 1rem 0 !important;
-  text-align: center !important;
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>
-
+    
+    
 </head>
 <body>
     <header>
-        <h1><a href="/TILBlog/">TIL: Today I Learned</a></h1>
-        <nav class="topics-nav">
-            <a href="/TILBlog/topic/Claude/">Claude (2)</a> <a href="/TILBlog/topic/GSPP/">GSPP (1)</a> <a href="/TILBlog/topic/Omar-Yaghi/">Omar-Yaghi (1)</a> <a href="/TILBlog/topic/africa/">africa (1)</a> <a href="/TILBlog/topic/berkeley-open-courseware/">berkeley-open-courseware (1)</a> <a href="/TILBlog/topic/carbon/">carbon (2)</a> <a href="/TILBlog/topic/claude-conversation/">claude-conversation (1)</a> <a href="/TILBlog/topic/cof/">cof (1)</a> <a href="/TILBlog/topic/complex/">complex (1)</a> <a href="/TILBlog/topic/css/">css (1)</a> <a href="/TILBlog/topic/curriculum/">curriculum (1)</a> <a href="/TILBlog/topic/daily/">daily (1)</a> <a href="/TILBlog/topic/documentation/">documentation (2)</a> <a href="/TILBlog/topic/education/">education (3)</a> <a href="/TILBlog/topic/flask/">flask (2)</a> <a href="/TILBlog/topic/gavin-newsom/">gavin-newsom (1)</a> <a href="/TILBlog/topic/internet/">internet (1)</a> <a href="/TILBlog/topic/kenya/">kenya (1)</a> <a href="/TILBlog/topic/kernel-trick/">kernel-trick (1)</a> <a href="/TILBlog/topic/library/">library (1)</a> <a href="/TILBlog/topic/machine-learning/">machine-learning (1)</a> <a href="/TILBlog/topic/markdown/">markdown (1)</a> <a href="/TILBlog/topic/math/">math (2)</a> <a href="/TILBlog/topic/mathematics/">mathematics (1)</a> <a href="/TILBlog/topic/metaphor/">metaphor (1)</a> <a href="/TILBlog/topic/mof/">mof (1)</a> <a href="/TILBlog/topic/netday/">netday (1)</a> <a href="/TILBlog/topic/obsidian/">obsidian (1)</a> <a href="/TILBlog/topic/python/">python (2)</a> <a href="/TILBlog/topic/schools/">schools (2)</a> <a href="/TILBlog/topic/sqlite/">sqlite (1)</a> <a href="/TILBlog/topic/symbol/">symbol (1)</a> <a href="/TILBlog/topic/system-design/">system-design (2)</a> <a href="/TILBlog/topic/testing/">testing (2)</a> <a href="/TILBlog/topic/til-build/">til-build (2)</a> <a href="/TILBlog/topic/tocs-omishakin/">tocs-omishakin (1)</a> <a href="/TILBlog/topic/transformer/">transformer (1)</a> <a href="/TILBlog/topic/vector/">vector (1)</a> <a href="/TILBlog/topic/water/">water (2)</a> <a href="/TILBlog/topic/web-development/">web-development (3)</a> 
-        </nav>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </header>
-    
-    <main>
-        <div class="entries">
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link active">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+     <section class="topic-browse">
+        <h2>Browse by topic:</h2>
+        <div class="topic-links">
             
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/test-hybrid-til-entry/">Test Hybrid TIL Entry</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/system-design/" class="topic-link">system-design</a>, <a href="/TILBlog/topic/testing/" class="topic-link">testing</a></div>
-            </div>
+                <a href="/topic/Claude">Claude</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/GSPP">GSPP</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/Omar-Yaghi">Omar-Yaghi</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/africa">africa</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/berkeley-open-courseware">berkeley-open-courseware</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/carbon">carbon</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/claude-conversation">claude-conversation</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/cof">cof</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/complex">complex</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/css">css</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/curriculum">curriculum</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/daily">daily</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/documentation">documentation</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/education">education</a> <span class="topic-count">3</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/flask">flask</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/gavin-newsom">gavin-newsom</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/internet">internet</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/kenya">kenya</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/kernel-trick">kernel-trick</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/library">library</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/machine-learning">machine-learning</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/markdown">markdown</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/math">math</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/mathematics">mathematics</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/metaphor">metaphor</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/mof">mof</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/netday">netday</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/obsidian">obsidian</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/python">python</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/schools">schools</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/sqlite">sqlite</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/symbol">symbol</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/system-design">system-design</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/testing">testing</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/til-build">til-build</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/tocs-omishakin">tocs-omishakin</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/transformer">transformer</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/vector">vector</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/water">water</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
+            
+                <a href="/topic/web-development">web-development</a> <span class="topic-count">3</span>
+            
         </div>
+    </section>
+    <!-- Optional: Stats summary -->
+    <div class="stats-summary">
+        <strong>16 TILs</strong> so far. <a href="/feed.atom">Atom feed here</a>.
+    </div>
+    <div class="page-header">
+        <h2>Recent entries</h2>
         
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/latex-math-test/">LaTeX Math Test</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/mathematics/" class="topic-link">mathematics</a>, <a href="/TILBlog/topic/testing/" class="topic-link">testing</a></div>
-            </div>
+        <div class="sort-controls">
+            <span>Sort by date:</span>
+            <a href="/" 
+               class="sort-link active">Newest first</a>
+            <a href="/?order=asc" 
+               class="sort-link ">Oldest first</a>
         </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/goldman-school-of-public-policy/">Goldman School of Public Policy</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/schools/" class="topic-link">schools</a>, <a href="/TILBlog/topic/education/" class="topic-link">education</a>, <a href="/TILBlog/topic/curriculum/" class="topic-link">curriculum</a>, <a href="/TILBlog/topic/GSPP/" class="topic-link">GSPP</a>, <a href="/TILBlog/topic/berkeley-open-courseware/" class="topic-link">berkeley-open-courseware</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/creating-a-til-blog/">Creating a TIL Blog</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/til-build/" class="topic-link">til-build</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/building-tilblog/">Building TILBlog</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/documentation/" class="topic-link">documentation</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/Claude/" class="topic-link">Claude</a>, <a href="/TILBlog/topic/web-development/" class="topic-link">web-development</a>, <a href="/TILBlog/topic/css/" class="topic-link">css</a>, <a href="/TILBlog/topic/system-design/" class="topic-link">system-design</a>, <a href="/TILBlog/topic/claude-conversation/" class="topic-link">claude-conversation</a>, <a href="/TILBlog/topic/documentation/" class="topic-link">documentation</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/2025-05-25/">2025-05-25</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-26</span>
-                <div class="topics"><a href="/TILBlog/topic/daily/" class="topic-link">daily</a>, <a href="/TILBlog/topic/Claude/" class="topic-link">Claude</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/untitled/">Why Machines Learn</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-25</span>
-                <div class="topics"><a href="/TILBlog/topic/machine-learning/" class="topic-link">machine-learning</a>, <a href="/TILBlog/topic/vector/" class="topic-link">vector</a>, <a href="/TILBlog/topic/kernel-trick/" class="topic-link">kernel-trick</a>, <a href="/TILBlog/topic/transformer/" class="topic-link">transformer</a>, <a href="/TILBlog/topic/math/" class="topic-link">math</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/Needham-Virtual-Complex-Analysis/">Needham-Visual Complex Analysis</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-24</span>
-                <div class="topics"><a href="/TILBlog/topic/math/" class="topic-link">math</a>, <a href="/TILBlog/topic/complex/" class="topic-link">complex</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/new-test-for-site-deploy/">New Test For Site Deploy</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-22</span>
-                <div class="topics"><a href="/TILBlog/topic/til-build/" class="topic-link">til-build</a>, <a href="/TILBlog/topic/flask/" class="topic-link">flask</a>, <a href="/TILBlog/topic/python/" class="topic-link">python</a>, <a href="/TILBlog/topic/web-development/" class="topic-link">web-development</a>, <a href="/TILBlog/topic/sqlite/" class="topic-link">sqlite</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/framework-for-california-africa-agreements/">Framework for California-Africa Agreements</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-21</span>
-                <div class="topics"><a href="/TILBlog/topic/africa/" class="topic-link">africa</a>, <a href="/TILBlog/topic/tocs-omishakin/" class="topic-link">tocs-omishakin</a>, <a href="/TILBlog/topic/gavin-newsom/" class="topic-link">gavin-newsom</a>, <a href="/TILBlog/topic/kenya/" class="topic-link">kenya</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/NetDay-World-Wide/">The Internet is a global library, with hidden rooms</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-19</span>
-                <div class="topics"><a href="/TILBlog/topic/education/" class="topic-link">education</a>, <a href="/TILBlog/topic/metaphor/" class="topic-link">metaphor</a>, <a href="/TILBlog/topic/internet/" class="topic-link">internet</a>, <a href="/TILBlog/topic/symbol/" class="topic-link">symbol</a>, <a href="/TILBlog/topic/library/" class="topic-link">library</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/omar-yaghi-on-total-carbon-removal/">Omar Yaghi on total carbon removal</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-19</span>
-                <div class="topics"><a href="/TILBlog/topic/carbon/" class="topic-link">carbon</a>, <a href="/TILBlog/topic/water/" class="topic-link">water</a>, <a href="/TILBlog/topic/Omar-Yaghi/" class="topic-link">Omar-Yaghi</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/netday-internet-for-all-1995-2025/">NetDay- Internet for All - 1995 - 2025</a></h3>
-            <div class="meta">
-                <span class="date">2025-05-19</span>
-                <div class="topics"><a href="/TILBlog/topic/netday/" class="topic-link">netday</a>, <a href="/TILBlog/topic/schools/" class="topic-link">schools</a>, <a href="/TILBlog/topic/education/" class="topic-link">education</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/omar-yaghi/">Omar Yaghi</a></h3>
-            <div class="meta">
-                <span class="date">2024-10-28</span>
-                <div class="topics"><a href="/TILBlog/topic/carbon/" class="topic-link">carbon</a>, <a href="/TILBlog/topic/water/" class="topic-link">water</a>, <a href="/TILBlog/topic/mof/" class="topic-link">mof</a>, <a href="/TILBlog/topic/cof/" class="topic-link">cof</a></div>
-            </div>
-        </div>
-        
-        <div class="entry-item">
-            <h3><a href="/TILBlog/til/flask-til-blog-frontmatter/">Creating a TIL Blog with Flask and Front Matter</a></h3>
-            <div class="meta">
-                <span class="date">2024-01-15</span>
-                <div class="topics"><a href="/TILBlog/topic/flask/" class="topic-link">flask</a>, <a href="/TILBlog/topic/python/" class="topic-link">python</a>, <a href="/TILBlog/topic/web-development/" class="topic-link">web-development</a>, <a href="/TILBlog/topic/obsidian/" class="topic-link">obsidian</a>, <a href="/TILBlog/topic/markdown/" class="topic-link">markdown</a></div>
-            </div>
-        </div>
-        
-        </div>
-    </main>
+    </div>
     
+   
+    <ul class="entry-list">
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/test-hybrid-til-entry">Test Hybrid TIL Entry</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/system-design" class="entry-topic">system-design</a>
+                        
+                    
+                        
+                            <a href="/topic/testing" class="entry-topic">testing</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                We must extend the drawing interface....perhaps incorporating the Google LENS capabilities? What format allows Excalidraw drawings to display on the web site? SVG? What it takes for excalidraw...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/latex-math-test">LaTeX Math Test</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/mathematics" class="entry-topic">mathematics</a>
+                        
+                    
+                        
+                            <a href="/topic/testing" class="entry-topic">testing</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Testing forms of LaTeX for rendering in web site: Jax # LaTeX Math Test ## Inline Math The famous equation $E = mc^2$ shows the relationship between energy and mass. ## Display Math The quadratic...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/goldman-school-of-public-policy">Goldman School of Public Policy</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/schools" class="entry-topic">schools</a>
+                        
+                    
+                        
+                            <a href="/topic/education" class="entry-topic">education</a>
+                        
+                    
+                        
+                            <a href="/topic/curriculum" class="entry-topic">curriculum</a>
+                        
+                    
+                        
+                            <a href="/topic/GSPP" class="entry-topic">GSPP</a>
+                        
+                    
+                        
+                            <a href="/topic/berkeley-open-courseware" class="entry-topic">berkeley-open-courseware</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Today, Sunday, May 18, the [Goldman School of Public Policy](https://gspp.berkeley.edu/) graduation was [livestreamed](https://gspp.berkeley.edu/events-upcoming/event/2025-gspp-commencement). There...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/creating-a-til-blog">Creating a TIL Blog</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/til-build" class="entry-topic">til-build</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                A simple, fast TIL (Today I Learned) blog inspired by Simon Willison&#39;s design. This application allows you to publish quick notes and snippets you learn daily, organized by topics. ## Features -...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/building-tilblog">Building TILBlog</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/documentation" class="entry-topic">documentation</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive....
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/redesigning-til-simon-willison-style">Claude builds new TILBlog</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/Claude" class="entry-topic">Claude</a>
+                        
+                    
+                        
+                            <a href="/topic/web-development" class="entry-topic">web-development</a>
+                        
+                    
+                        
+                            <a href="/topic/css" class="entry-topic">css</a>
+                        
+                    
+                        
+                            <a href="/topic/system-design" class="entry-topic">system-design</a>
+                        
+                    
+                        
+                            <a href="/topic/claude-conversation" class="entry-topic">claude-conversation</a>
+                        
+                    
+                        
+                            <a href="/topic/documentation" class="entry-topic">documentation</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Documenting a complete rebuild of the TIL Blog site, to create an open-source system merging Obsidian, SQLite, and a static website generator. Extensions are the use of Excalidraw and SVG, to create...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/2025-05-25">2025-05-25</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/daily" class="entry-topic">daily</a>
+                        
+                    
+                        
+                            <a href="/topic/Claude" class="entry-topic">Claude</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                # 2025-05-25 - Simon Williston has a [great exploration of Claude&#39;s prompting] (https://simonwillison.net/2025/May/25/claude-4-system-prompt/)tools for Sonnet 4. And his [keynote...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/untitled">Why Machines Learn</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-25</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/machine-learning" class="entry-topic">machine-learning</a>
+                        
+                    
+                        
+                            <a href="/topic/vector" class="entry-topic">vector</a>
+                        
+                    
+                        
+                            <a href="/topic/kernel-trick" class="entry-topic">kernel-trick</a>
+                        
+                    
+                        
+                            <a href="/topic/transformer" class="entry-topic">transformer</a>
+                        
+                    
+                        
+                            <a href="/topic/math" class="entry-topic">math</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                I&#39;m building a radiative linked network model of the mathematics and computer innovations treated so carefully by Anil Ananthaswamy: cited papers, theorems, simulated chats between major authors....
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/Needham-Virtual-Complex-Analysis">Needham-Visual Complex Analysis</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-24</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/math" class="entry-topic">math</a>
+                        
+                    
+                        
+                            <a href="/topic/complex" class="entry-topic">complex</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                # Needham-Visual Complex Analysis # $\asymp$ - Needham, in the 25th anniversary edition (2021) of the original Oxford publication of &#34;Visual Complex Analysis&#34;, clarifies the example he used in the...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/new-test-for-site-deploy">New Test For Site Deploy</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-22</span>
+                    
+                        <span class="modified-date">updated 2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/til-build" class="entry-topic">til-build</a>
+                        
+                    
+                        
+                            <a href="/topic/flask" class="entry-topic">flask</a>
+                        
+                    
+                        
+                            <a href="/topic/python" class="entry-topic">python</a>
+                        
+                    
+                        
+                            <a href="/topic/web-development" class="entry-topic">web-development</a>
+                        
+                    
+                        
+                            <a href="/topic/sqlite" class="entry-topic">sqlite</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Today I learned how to create a &#34;Today I Learned&#34; blog...sort of. This is my test to see if site deployment works correctly. Be careful; object: content pairs will be interpreted as if they are in...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/framework-for-california-africa-agreements">Framework for California-Africa Agreements</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-21</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/africa" class="entry-topic">africa</a>
+                        
+                    
+                        
+                            <a href="/topic/tocs-omishakin" class="entry-topic">tocs-omishakin</a>
+                        
+                    
+                        
+                            <a href="/topic/gavin-newsom" class="entry-topic">gavin-newsom</a>
+                        
+                    
+                        
+                            <a href="/topic/kenya" class="entry-topic">kenya</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                # Framework for California-Africa Agreements - San Francisco Climate Week - California-Africa Bay Area Council - Bakar Institute Climate and AI Seminar
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/NetDay-World-Wide">The Internet is a global library, with hidden rooms</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-19</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/education" class="entry-topic">education</a>
+                        
+                    
+                        
+                            <a href="/topic/metaphor" class="entry-topic">metaphor</a>
+                        
+                    
+                        
+                            <a href="/topic/internet" class="entry-topic">internet</a>
+                        
+                    
+                        
+                            <a href="/topic/symbol" class="entry-topic">symbol</a>
+                        
+                    
+                        
+                            <a href="/topic/library" class="entry-topic">library</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                After talking with [[Fenny Desriani]] at the [[GSPP]] graduation on Sunday, May 18, I wanted to extend her prize-winning work in 2025 analyzing California schools and Internet access as it afffects...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/omar-yaghi-on-total-carbon-removal">Omar Yaghi on total carbon removal</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-19</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/carbon" class="entry-topic">carbon</a>
+                        
+                    
+                        
+                            <a href="/topic/water" class="entry-topic">water</a>
+                        
+                    
+                        
+                            <a href="/topic/Omar-Yaghi" class="entry-topic">Omar-Yaghi</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Prof. Omar Yaghi describes the scientific basis for enabling direct atmosperic carbon removal using MOF and COF; removal of 1,100 Gigatonnes of carbon could take as little as 3.1 years, with removal...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/netday-internet-for-all-1995-2025">NetDay- Internet for All - 1995 - 2025</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-19</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/netday" class="entry-topic">netday</a>
+                        
+                    
+                        
+                            <a href="/topic/schools" class="entry-topic">schools</a>
+                        
+                    
+                        
+                            <a href="/topic/education" class="entry-topic">education</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                ## What I Learned - By creating an easily understandable way to see how well a local institution is doing-- in this case, a local school, or a school that someone attended in the past--people will...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/omar-yaghi">Omar Yaghi</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2024-10-28</span>
+                    
+                        <span class="modified-date">updated 2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/carbon" class="entry-topic">carbon</a>
+                        
+                    
+                        
+                            <a href="/topic/water" class="entry-topic">water</a>
+                        
+                    
+                        
+                            <a href="/topic/mof" class="entry-topic">mof</a>
+                        
+                    
+                        
+                            <a href="/topic/cof" class="entry-topic">cof</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Professor Omar Yaghi&#39;s invention of metallic-organic frameworks opened a new world of engineered materials. # Omar Yaghi: Professor, UC Berkeley April 2021 talk to Chemistry seminar...
+            </div>
+            
+        </li>
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/note/flask-til-blog-frontmatter">Creating a TIL Blog with Flask and Front Matter</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2024-01-15</span>
+                    
+                        <span class="modified-date">updated 2025-05-26</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/topic/flask" class="entry-topic">flask</a>
+                        
+                    
+                        
+                            <a href="/topic/python" class="entry-topic">python</a>
+                        
+                    
+                        
+                            <a href="/topic/web-development" class="entry-topic">web-development</a>
+                        
+                    
+                        
+                            <a href="/topic/obsidian" class="entry-topic">obsidian</a>
+                        
+                    
+                        
+                            <a href="/topic/markdown" class="entry-topic">markdown</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                Today I learned how to upgrade my TIL blog to use YAML front matter instead of a folder structure for organizing topics. ## Key Changes The new approach uses **front matter** in each markdown file:...
+            </div>
+            
+        </li>
+        
+    </ul>
+
+        <div class="pagination">
+            
+            
+            <span class="info">Page 1 (16 entries)</span>
+            
+            
+        </div>
+    
+
+    </main>
+
     <footer>
-        <p>Total entries: 16 | Topics: 40</p>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
     </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
 </body>
 </html>

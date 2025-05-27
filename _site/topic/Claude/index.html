@@ -1,11 +1,15 @@
+<!-- topic.html -->
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topic: Claude - TIL</title>
-    <link rel="stylesheet" href="/TILBlog/static/styles.css">
-    
+    <title>Claude - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
 <script>
 MathJax = {
   tex: {
@@ -23,49 +27,179 @@ MathJax = {
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
+
+<!-- Optional: Add some styling for math -->
 <style>
 .MathJax {
   font-size: 1.1em !important;
 }
-.MathJax_Display {
-  margin: 1rem 0 !important;
-  text-align: center !important;
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>
+    
+    
 </head>
 <body>
     <header>
-        <h1><a href="/TILBlog/">TIL: Today I Learned</a></h1>
-        <nav class="topics-nav">
-            <a href="/TILBlog/topic/Claude/">Claude</a> <a href="/TILBlog/topic/GSPP/">GSPP</a> <a href="/TILBlog/topic/Omar-Yaghi/">Omar-Yaghi</a> <a href="/TILBlog/topic/africa/">africa</a> <a href="/TILBlog/topic/berkeley-open-courseware/">berkeley-open-courseware</a> <a href="/TILBlog/topic/carbon/">carbon</a> <a href="/TILBlog/topic/claude-conversation/">claude-conversation</a> <a href="/TILBlog/topic/cof/">cof</a> <a href="/TILBlog/topic/complex/">complex</a> <a href="/TILBlog/topic/css/">css</a> <a href="/TILBlog/topic/curriculum/">curriculum</a> <a href="/TILBlog/topic/daily/">daily</a> <a href="/TILBlog/topic/documentation/">documentation</a> <a href="/TILBlog/topic/education/">education</a> <a href="/TILBlog/topic/flask/">flask</a> <a href="/TILBlog/topic/gavin-newsom/">gavin-newsom</a> <a href="/TILBlog/topic/internet/">internet</a> <a href="/TILBlog/topic/kenya/">kenya</a> <a href="/TILBlog/topic/kernel-trick/">kernel-trick</a> <a href="/TILBlog/topic/library/">library</a> <a href="/TILBlog/topic/machine-learning/">machine-learning</a> <a href="/TILBlog/topic/markdown/">markdown</a> <a href="/TILBlog/topic/math/">math</a> <a href="/TILBlog/topic/mathematics/">mathematics</a> <a href="/TILBlog/topic/metaphor/">metaphor</a> <a href="/TILBlog/topic/mof/">mof</a> <a href="/TILBlog/topic/netday/">netday</a> <a href="/TILBlog/topic/obsidian/">obsidian</a> <a href="/TILBlog/topic/python/">python</a> <a href="/TILBlog/topic/schools/">schools</a> <a href="/TILBlog/topic/sqlite/">sqlite</a> <a href="/TILBlog/topic/symbol/">symbol</a> <a href="/TILBlog/topic/system-design/">system-design</a> <a href="/TILBlog/topic/testing/">testing</a> <a href="/TILBlog/topic/til-build/">til-build</a> <a href="/TILBlog/topic/tocs-omishakin/">tocs-omishakin</a> <a href="/TILBlog/topic/transformer/">transformer</a> <a href="/TILBlog/topic/vector/">vector</a> <a href="/TILBlog/topic/water/">water</a> <a href="/TILBlog/topic/web-development/">web-development</a> 
-        </nav>
-    </header>
-    
-    <main>
-        <h1>Topic: Claude</h1>
-        <p class="topic-count">2 entries in this topic</p>
-        
-        <div class="entries">
-            
-            <div class="entry-item">
-                <h3><a href="/TILBlog/til/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></h3>
-                <div class="meta">
-                    <span class="date">2025-05-26</span>
-                </div>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
             </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <div class="page-header">
+        <h2>Claude</h2>
+        
+        <div class="sort-controls">
+            <span>Sort by date:</span>
+            <a href="/topic/Claude" 
+               class="sort-link active">Newest first</a>
+            <a href="/topic/Claude?order=asc" 
+               class="sort-link ">Oldest first</a>
+        </div>
+    </div>
+    
+    
+     <!-- Update your topic.html entry list section with this: -->
+<ul class="entry-list">
+    
+    <li class="entry-item">
+        <h3 class="entry-title">
+            <a href="/note/redesigning-til-simon-willison-style">Claude builds new TILBlog</a>
+        </h3>
+        <div class="entry-meta">
+            <span class="entry-date">2025-05-26</span>
             
-            <div class="entry-item">
-                <h3><a href="/TILBlog/til/2025-05-25/">2025-05-25</a></h3>
-                <div class="meta">
-                    <span class="date">2025-05-26</span>
-                </div>
+            <div class="entry-topics">
+                
+                    
+                        <a href="/topic/Claude" class="entry-topic">Claude</a>
+                    
+                
+                    
+                        <a href="/topic/web-development" class="entry-topic">web-development</a>
+                    
+                
+                    
+                        <a href="/topic/css" class="entry-topic">css</a>
+                    
+                
+                    
+                        <a href="/topic/system-design" class="entry-topic">system-design</a>
+                    
+                
+                    
+                        <a href="/topic/claude-conversation" class="entry-topic">claude-conversation</a>
+                    
+                
+                    
+                        <a href="/topic/documentation" class="entry-topic">documentation</a>
+                    
+                
             </div>
             
         </div>
-    </main>
+        
+        <!-- Preview - processed in Python -->
+        
+        <div class="entry-preview">
+            Documenting a complete rebuild of the TIL Blog site, to create an open-source system merging Obsidian, SQLite, and a static website generator. Extensions are the use of Excalidraw and SVG, to create...
+        </div>
+        
+    </li>
     
+    <li class="entry-item">
+        <h3 class="entry-title">
+            <a href="/note/2025-05-25">2025-05-25</a>
+        </h3>
+        <div class="entry-meta">
+            <span class="entry-date">2025-05-26</span>
+            
+            <div class="entry-topics">
+                
+                    
+                        <a href="/topic/daily" class="entry-topic">daily</a>
+                    
+                
+                    
+                        <a href="/topic/Claude" class="entry-topic">Claude</a>
+                    
+                
+            </div>
+            
+        </div>
+        
+        <!-- Preview - processed in Python -->
+        
+        <div class="entry-preview">
+            # 2025-05-25 - Simon Williston has a [great exploration of Claude&#39;s prompting] (https://simonwillison.net/2025/May/25/claude-4-system-prompt/)tools for Sonnet 4. And his [keynote...
+        </div>
+        
+    </li>
+    
+</ul>
+
+        <div class="pagination">
+            
+            
+            <span class="info">Page 1 (2 entries)</span>
+            
+            
+        </div>
+    
+
+    </main>
+
     <footer>
-        <p><a href="/TILBlog/">← Back to all entries</a></p>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
     </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
 </body>
 </html>

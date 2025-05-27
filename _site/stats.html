@@ -1,0 +1,324 @@
+<!-- stats.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - TIL</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+    
+</head>
+<body>
+    <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/stats" 
+                   class="topic-link active">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <h2>Blog Statistics</h2>
+    
+    <div class="stats-overview">
+        <h3>Overview</h3>
+        <p><strong>Total entries:</strong> 16</p>
+        
+        <p><strong>First entry:</strong> 2024-01-15</p>
+        <p><strong>Latest entry:</strong> 2025-05-26</p>
+        
+    </div>
+    
+    
+    <div class="topic-stats">
+        <h3>Entries by Topic</h3>
+        <ul class="stats-list">
+            
+            <li>
+                <a href="/topic/web-development">web-development</a>
+                <span class="count">3 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/education">education</a>
+                <span class="count">3 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/water">water</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/til-build">til-build</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/testing">testing</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/system-design">system-design</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/schools">schools</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/python">python</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/math">math</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/flask">flask</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/documentation">documentation</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/carbon">carbon</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/Claude">Claude</a>
+                <span class="count">2 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/vector">vector</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/transformer">transformer</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/tocs-omishakin">tocs-omishakin</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/symbol">symbol</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/sqlite">sqlite</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/obsidian">obsidian</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/netday">netday</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/mof">mof</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/metaphor">metaphor</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/mathematics">mathematics</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/markdown">markdown</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/machine-learning">machine-learning</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/library">library</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/kernel-trick">kernel-trick</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/kenya">kenya</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/internet">internet</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/gavin-newsom">gavin-newsom</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/daily">daily</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/curriculum">curriculum</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/css">css</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/complex">complex</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/cof">cof</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/claude-conversation">claude-conversation</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/berkeley-open-courseware">berkeley-open-courseware</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/africa">africa</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/Omar-Yaghi">Omar-Yaghi</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+            <li>
+                <a href="/topic/GSPP">GSPP</a>
+                <span class="count">1 entries</span>
+            </li>
+            
+        </ul>
+    </div>
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/static/js/dark-mode.js"></script>
+</body>
+</html>
