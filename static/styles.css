@@ -423,11 +423,3 @@ a:focus,
     margin: 0 8px;
 }
 
-/* TEMPORARY - Add to static/styles.css */
-.entry-dates {
-    background: red !important;
-    color: white !important;
-    padding: 10px !important;
-    font-size: 16px !important;
-    border: 2px solid black !important;
-}
