@@ -1,15 +1,18 @@
 ---
-title:  "Goldman School of Public Policy"
+title: Goldman School of Public Policy
 topics:
   - schools
   - education
   - curriculum
   - GSPP
   - berkeley-open-courseware
+modified:
+created:
 ---
+
 Today, Sunday, May 18,  the [Goldman School of Public Policy](https://gspp.berkeley.edu/) graduation was [livestreamed](https://gspp.berkeley.edu/events-upcoming/event/2025-gspp-commencement). 
 
-There is an audio stream and a complete transcript to include in the GSPP NotebookLM, together with links to all documents linked to all participants.  
+The audio stream and a complete transcript can be ingested in the GSPP NotebookLM, together with links to all documents linked to all participants.  
 
 As the total "recording and linking" of this event expands, it will include the unique viewpoints of each participant, building on the common theme expressed by the keynote speaker, now the Executive Director of the Governor of California's Cabinet Secretaries.
 

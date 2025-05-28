@@ -1,13 +1,16 @@
 ---
-title: "Test Hybrid TIL Entry" 
-topics: 
-  - system-design 
-  - testing 
-tags: 
-  - excalidraw 
-excalidraw-plugin: parsed 
+title: Test Hybrid TIL Entry
+topics:
+  - system-design
+  - testing
+tags:
+  - excalidraw
+excalidraw-plugin: parsed
 excalidraw-open-md: true
+modified:
+created:
 ---
+Changed 125pm ,now 146pm May 27
 We must extend the drawing interface....perhaps incorporating the Google LENS capabilities?
 
 What format allows Excalidraw drawings to display on the web site? SVG? 

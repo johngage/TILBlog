@@ -4,6 +4,7 @@ topics:
   - mathematics
   - testing
 ---
+changed 126pm
 Testing forms of LaTeX for rendering in web site: Jax
 # LaTeX Math Test
 

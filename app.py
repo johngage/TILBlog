@@ -243,9 +243,17 @@ def build_database(root_dir):
                 topics = [topics]  # Handle single topic as string
             
             # Get dates - fix the bug where both dates were the same
+            # Get dates - fix the bug where both dates were the same
             file_stat = filepath.stat()
-            created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
-            modified_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
+            # Use creation time for created_fs (on macOS, use st_birthtime if available)
+            try:
+                created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_birthtime))
+            except AttributeError:
+                # Fallback for non-macOS systems
+                created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_ctime))
+
+# Use modification time for modified_fs
+modified_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
             # Check for explicit modified date in front matter
             modified_fm = front_matter.get('modified') or front_matter.get('updated')
             if modified_fm:
