@@ -20,6 +20,7 @@ isbn: 9780593185742
 I'm building a radiative linked network model of the mathematics and computer innovations treated so carefully by Anil Ananthaswamy: cited papers, theorems, simulated chats between major authors.  Pedagogical treasure. Patrick Winston-work of genius.
 # Why Machines Learn
 1. Desperately Seeking Patterns
+	1. Creation of first perceptron by Frank Rosenblatt, with NYT story predicting future where machines learn. July 8, 1958; does not cite name of reporter
 2. We Are All Just Numbers Here...
 3. The Bottom of the Bowl
 4. In All Probability

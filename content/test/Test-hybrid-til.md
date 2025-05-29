@@ -11,6 +11,7 @@ modified:
 created:
 ---
 Changed 125pm ,now 146pm May 27
+- mod 11:08 Thu May 29
 We must extend the drawing interface....perhaps incorporating the Google LENS capabilities?
 
 What format allows Excalidraw drawings to display on the web site? SVG? 

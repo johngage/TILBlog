@@ -1,12 +1,14 @@
 ---
-title: "LaTeX Math Test"
+title: LaTeX Math Test title
 topics:
   - mathematics
   - testing
 ---
-changed 126pm
-Testing forms of LaTeX for rendering in web site: Jax
-# LaTeX Math Test
+- changed 126pm
+- mod 11:08 Thu May 29
+
+Testing forms of LaTeX for rendering in web site: MathJax
+- find name of LateX rendering software
 
 ## Inline Math
 The famous equation $E = mc^2$ shows the relationship between energy and mass.

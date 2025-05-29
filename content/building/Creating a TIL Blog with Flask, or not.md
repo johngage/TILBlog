@@ -4,7 +4,7 @@ topics: ["flask", "python", "web-development", "obsidian", "markdown"]
 created: 2024-01-15
 slug: flask-til-blog-frontmatter
 ---
-
+This is an early discussion
 
 Today I learned how to upgrade my TIL blog to use YAML front matter instead of a folder structure for organizing topics.  
 

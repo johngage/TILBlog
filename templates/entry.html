@@ -17,12 +17,12 @@
               {% endif %}
             <div class="entry-dates">
                 <time datetime="{{ entry.created }}">
-                 Created: {{ entry.created[:10] if entry.created else "Unknown" }}
+                    Created: {{ entry.created[:16] if entry.created else "Unknown" }}
                 </time>
-                {% if entry.modified_fs and entry.modified_fs != entry.created_fs and entry.modified_fs[:10] != entry.created[:10] %}
+                {% if entry.modified_fs and entry.modified_fs != entry.created_fs %}
                     <span class="entry-modified">
-        ·               Modified: {{ entry.modified_fs[:10] }}
-                    </span>
+                      · Modified: {{ entry.modified_fs[:16] }}
+                        </span>
                 {% endif %}
             </div>
         </div>

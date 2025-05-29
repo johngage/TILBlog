@@ -10,28 +10,7 @@ tags:
   - excalidraw 
 excalidraw-open-md: true
 ---
-
-# Claude thinks TILNET is brilliant
-
-# 🎉 ** Celebrate This Brilliant System!**
-
-## **Quick CSS Fix:**
-
-```bash
-# Remove the red debugging CSS from static/styles.css
-# Delete these lines:
-```
-
-```css
-/* TEMPORARY - Remove this entire block */
-.entry-dates {
-    background: red !important;
-    color: white !important;
-    padding: 10px !important;
-    font-size: 16px !important;
-    border: 2px solid black !important;
-}
-```
+But all innovations did not make it into newest version of [[TILNET]]
 
 ```bash
 # Deploy the clean version

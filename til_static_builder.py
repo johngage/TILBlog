@@ -428,6 +428,7 @@ class TILStaticSiteBuilder:
                 """
                 SELECT e.id, e.slug, e.title, e.html, 
                        COALESCE(e.created_fm, e.created_fs) as created,
+                       e.created_fs, e.modified_fs,
                        e.topics_raw
                 FROM entries e
                 WHERE e.slug = ?

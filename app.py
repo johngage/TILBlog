@@ -19,6 +19,8 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import threading
 import frontmatter
+import hashlib
+
 
 # Configuration
 DATABASE = "til.db"
@@ -35,6 +37,42 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 # ===== HELPER FUNCTIONS =====
+
+def tilnet_modification_date(filepath, frontmatter):
+    """Safe TILNET modification detection with proper error handling"""
+    try:
+        # Always get filesystem time as baseline
+        fs_time = filepath.stat().st_mtime
+        
+        # Handle frontmatter modified field safely
+        fm_modified = frontmatter.get('modified')
+        
+        if fm_modified is not None:
+            # Handle different types of frontmatter values
+            if isinstance(fm_modified, datetime):
+                # Already a datetime object
+                if fm_modified.timestamp() > fs_time:
+                    return fm_modified
+            elif isinstance(fm_modified, str) and fm_modified.strip():
+                # String value, try to parse
+                try:
+                    if 'T' in fm_modified:
+                        fm_time = datetime.fromisoformat(fm_modified.replace('Z', '+00:00'))
+                    else:
+                        fm_time = datetime.strptime(fm_modified, '%Y-%m-%d')
+                    
+                    if fm_time.timestamp() > fs_time:
+                        return fm_time
+                except (ValueError, TypeError):
+                    pass  # Invalid format, ignore
+        
+        # Default to filesystem time
+        return datetime.fromtimestamp(fs_time)
+        
+    except Exception as e:
+        # Complete fallback
+        print(f"Warning: Error in tilnet_modification_date for {filepath}: {e}")
+        return datetime.fromtimestamp(filepath.stat().st_mtime)
 
 def get_db():
     """Connect to the database and return a connection object"""
@@ -177,7 +215,7 @@ def build_database(root_dir):
         CREATE VIRTUAL TABLE entry_fts USING fts5(
             title,
             content,
-            topics,
+            topics_raw,
             content=entries,
             content_rowid=id
         )
@@ -242,25 +280,19 @@ def build_database(root_dir):
             if isinstance(topics, str):
                 topics = [topics]  # Handle single topic as string
             
-            # Get dates - fix the bug where both dates were the same
-            # Get dates - fix the bug where both dates were the same
+            # TILNET standard modification date detection
             file_stat = filepath.stat()
-            # Use creation time for created_fs (on macOS, use st_birthtime if available)
+
+            # Use creation time for created_fs (cross-platform)
             try:
                 created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_birthtime))
             except AttributeError:
                 # Fallback for non-macOS systems
                 created_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_ctime))
 
-# Use modification time for modified_fs
-            modified_fs = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(file_stat.st_mtime))
-            # Check for explicit modified date in front matter
-            modified_fm = front_matter.get('modified') or front_matter.get('updated')
-            if modified_fm:
-               if isinstance(modified_fm, datetime):
-                 modified_fs = modified_fm.strftime("%Y-%m-%d %H:%M:%S")
-               else:
-                 modified_fs = str(modified_fm)
+            # Use TILNET smart modification detection
+            modification_date = tilnet_modification_date(filepath, front_matter)
+            modified_fs = modification_date.strftime("%Y-%m-%d %H:%M:%S") 
             
             # Front matter date (if provided)
             created_fm = front_matter.get('created') or front_matter.get('date')
@@ -334,7 +366,7 @@ def build_database(root_dir):
     
     # Populate full-text search
     conn.execute("""
-        INSERT INTO entry_fts (rowid, title, content, topics)
+        INSERT INTO entry_fts (rowid, title, content, topics_raw)
         SELECT id, title, content, topics_raw FROM entries
     """)
     

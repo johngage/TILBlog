@@ -8,8 +8,7 @@ modified: 2025-05-24 20:06:57
 slug: Needham-Virtual-Complex-Analysis
 source: https://www.amazon.com/Visual-Complex-Analysis-25th-Anniversary-ebook/dp/B0BV2TYMHW/ref=tmm_kin_swatch_0
 ---
-
-# Needham-Visual Complex Analysis
+Newton's geometric calculus
 # $\asymp$
 
 - Needham, in the 25th anniversary edition (2021) of the original Oxford publication of "Visual Complex Analysis", clarifies the example he used in the original edition of Newton's third formulation of differentiation, in which Newton abandons his earlier use of symbolic manipulation to emphasize the geometric foundation and analysis.  Newton uses "ultimately equal", or, with Needham's modern symbolism, the equivalence relation symbolized by $\asymp$.

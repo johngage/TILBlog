@@ -7,8 +7,7 @@ slug: netday-internet-for-all-1995-2025
 ---
 changed 126pm
 
-
-## What I Learned
+#### First Internet mass mobilisation: 1996
 - By creating an easily understandable way to see how well a local institution is doing-- in this case, a local school, or a school that someone attended in the past--people will respond to an appeal for support, and invest time, money, and personal effort to improve that institution.
 - The first element: a map of every school in the state of California, then of every school in every state, then of every school in each country.  All schools: public, private, religious, non-sectarian, vocational, apprenticeship, on-site training.
 - The second element: a clear definition of an infrastructure improvement that benefits all. Clean water, good food, good air quality, comfortable class and work spaces, adequate tools, equipment, and learning resources.

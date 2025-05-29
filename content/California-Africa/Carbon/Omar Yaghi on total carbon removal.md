@@ -9,7 +9,13 @@ source: "https://youtube.com/@buildberkeley2050"
 ---
 Prof. Omar Yaghi describes the scientific basis for enabling direct atmosperic carbon removal using MOF and COF; removal of 1,100 Gigatonnes of carbon could take as little as 3.1 years, with removal sites in 706 world cities.
 
+Dimensional analysis calculations:
 
+$\frac {Total excess C gigatonnes}{1}\frac{kilograms}{gigatonnes}\frac{cost per kilo}{kilo}$
+
+Add material costs per gram; construction and operational costs for each Removal Center, which will vary by country and city. 
+
+- Here is a possibility: build a World Carbon Center in the Rift Valley.  Propose this to the new company [[AIMat]]
 
 Talk at Bakar Institute, Berkeley in April, 2025, at the AI-Climate Symposium
 

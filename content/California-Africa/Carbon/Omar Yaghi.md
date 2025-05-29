@@ -1,11 +1,11 @@
 ---
-title:  Omar Yaghi
+title: Omar Yaghi, UC Berkeley professor
 created: 2024-10-28 11:26
 excalidraw-plugin: parsed
 tags:
   - excalidraw
 excalidraw-open-md: true
-topics:  
+topics:
   - carbon
   - water
   - mof
@@ -13,7 +13,7 @@ topics:
 ---
 Professor Omar Yaghi's invention of metallic-organic frameworks opened a new world of engineered materials. 
 
-# Omar Yaghi: Professor, UC Berkeley
+#### Partial list of lectures on MOF
 
 April 2021 talk to Chemistry seminar
 https://www.youtube.com/watch?v=SO18satzFC4

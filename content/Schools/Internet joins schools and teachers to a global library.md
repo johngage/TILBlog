@@ -7,6 +7,8 @@ slug: NetDay-World-Wide
 source: "https://ubiquity.acm.org/article.cfm?id=375349"
 ---
 changed 126pm
+mod: 11:30 Thu May 29
+
 After talking with [[Fenny Desriani]] at the [[GSPP]] graduation on Sunday, May 18,  I wanted to extend her prize-winning work in 2025 analyzing California schools and Internet access as it afffects students.  
 For context, I found some summaries of the 1996 **NetDay** mobilization: tens of thousands of volunteers wired all California schools for access to the internet. Then, over two million Californians had access to the Internet, and for the first time, used the Internet as a tool to self-organize school communities for one day of free work by parents, teachers, staff and unions to install Internet access.
 
