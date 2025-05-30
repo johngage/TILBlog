@@ -58,14 +58,7 @@
             <!-- Preview - processed in Python -->
             {% if entry.preview %}
             <div class="entry-preview">
-              <h3><a href="{{ url_for('entry', slug=entry.slug) }}">{{ entry.title }}</a></h3>
-              <div class="entry-meta">
-                <span class="entry-date">{{ entry.created.split()[0] if entry.created else "Unknown" }}</span>
-                {% if entry.modified_fs and entry.modified_fs != entry.created_fs %}
-                    <span class="modified-indicator">✏️ Modified {{ entry.modified_fs[:16] }}</span>
-                {% endif %}
-              </div>
-              <p class="preview">{{ entry.preview }}</p>
+                <p class="preview">{{ entry.preview }}</p>
             </div>
             {% endif %}
         </li>
