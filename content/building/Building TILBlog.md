@@ -10,6 +10,9 @@ tags:
   - excalidraw 
 excalidraw-open-md: true
 ---
+
+Mod: 5:07pm Thu May 29
+
 Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.  
 - Challenge: provide new conversation with enough context of the state of development to enable useful coding suggestions
 

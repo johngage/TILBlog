@@ -10,6 +10,7 @@ excalidraw-open-md: true
 modified:
 created:
 ---
+Mod: 5:07pm Thu May 29
 Changed 125pm ,now 146pm May 27
 - mod 11:08 Thu May 29
 We must extend the drawing interface....perhaps incorporating the Google LENS capabilities?

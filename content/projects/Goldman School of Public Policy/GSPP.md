@@ -9,7 +9,7 @@ topics:
 modified:
 created:
 ---
-
+Mod: 5:07pm Thu May 29
 Today, Sunday, May 18,  the [Goldman School of Public Policy](https://gspp.berkeley.edu/) graduation was [livestreamed](https://gspp.berkeley.edu/events-upcoming/event/2025-gspp-commencement). 
 
 The audio stream and a complete transcript can be ingested in the GSPP NotebookLM, together with links to all documents linked to all participants.  

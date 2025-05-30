@@ -2,6 +2,7 @@
 title: "Creating a TIL Blog"
 topics:  [til-build]
 ---
+Mod: 5:07pm Thu May 29
 A simple, fast TIL (Today I Learned) blog inspired by Simon Willison's design. This application allows you to publish quick notes and snippets you learn daily, organized by topics.
 
 ## Features

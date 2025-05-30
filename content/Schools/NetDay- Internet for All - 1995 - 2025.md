@@ -5,6 +5,7 @@ created: 2025-05-19 13:12:17
 modified: 2025-05-19 13:12:17
 slug: netday-internet-for-all-1995-2025
 ---
+Mod: 5:07pm Thu May 29
 changed 126pm
 
 #### First Internet mass mobilisation: 1996
