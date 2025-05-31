@@ -215,6 +215,7 @@
   },
   "active": "7d796822c74ea025",
   "lastOpenFiles": [
+    "til_deploy_enhanced.py",
     "tilnet_meta_conversation.json",
     "static_generator.py",
     "debug_database.py",
@@ -225,7 +226,6 @@
     "fresh_conversations.db-journal",
     "fresh_conversations.db",
     "claude_exports/latest/conversations.json",
-    "claude_exports/latest",
     "content/building/Building TILBlog.md",
     "content/building/Claude thinks TILNET is brilliant.md",
     "content/building/Creating a TIL Blog with Flask, or not.md",
