@@ -4,7 +4,7 @@
     "license": "Private",
     "databases": {
         "conversations": {
-            "title": "Claude Conversations",
+            "title": "Claude Conversations", 
             "description": "Complete conversation history including meta-conversations about system building",
             "tables": {
                 "conversations": {
@@ -21,7 +21,7 @@
                 },
                 "implementation_discussions": {
                     "sql": "SELECT name, created_at, length(chat_messages) as size FROM conversations WHERE chat_messages LIKE '%sqlite-utils%' OR chat_messages LIKE '%implementation%' ORDER BY created_at DESC",
-                    "title": "Implementation Discussions",
+                    "title": "Implementation Discussions", 
                     "description": "Technical implementation conversations"
                 },
                 "search_conversations": {
