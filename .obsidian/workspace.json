@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/California-Africa/Water/Atmospheric Water Capture.md",
+                "file": "content/economy/Alan Taylor - Martin Wolf.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Atmospheric Water Capture"
+              "title": "Alan Taylor - Martin Wolf"
             }
           }
         ],
@@ -215,24 +215,25 @@
   },
   "active": "7d796822c74ea025",
   "lastOpenFiles": [
-    "til_deploy_enhanced.py",
-    "tilnet_meta_conversation.json",
-    "static_generator.py",
-    "debug_database.py",
-    "tilnet-datasette-metadata.json",
-    "conversations.db-journal",
-    "claude_tilnet_integration.py",
-    "conversations_backup_20250530_183504.db",
-    "fresh_conversations.db-journal",
-    "fresh_conversations.db",
-    "claude_exports/latest/conversations.json",
+    "_site/note/alan-taylor-martin-wolf/index.html",
+    "_site/note/alan-taylor-martin-wolf",
+    "_site/topic/economy/index.html",
+    "_site/topic/economy",
+    "til.db-journal",
+    "archive/utilities/fix_urls.py",
+    "archive/utilities/feed.py",
+    "archive/utilities",
+    "archive/development/test_claude_processor.py",
+    "archive/development/performance_test.py",
+    "archive/development/database_migration.py",
+    "content/California-Africa/Water/Atmospheric Water Capture.md",
+    "content/economy/Alan Taylor - Martin Wolf.md",
     "content/building/Building TILBlog.md",
     "content/building/Claude thinks TILNET is brilliant.md",
     "content/building/Creating a TIL Blog with Flask, or not.md",
     "content/building/Creating-a-TIl-blog.md",
     "content/building/Redesigning TIL Site to Match Simon Willison's Design.md",
     "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
-    "content/California-Africa/Water/Atmospheric Water Capture.md",
     "content/California-Africa/Framework for California-Africa Agreements.md",
     "content/Daily/2025-05-25.md",
     "content/Daily/2025-05-27-Tuesday.md",
