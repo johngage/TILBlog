@@ -1,0 +1,15 @@
+```json
+{
+  "uuid": "6a44c0db-20f1-49da-9be4-0f945d1cdfcf",
+  "name": "Blog Database Builder",
+  "technical_complexity": 5,
+  "implementation_value": 7,
+  "main_topics_covered": [
+    "Database design",
+    "Blog management systems",
+    "Data modeling",
+    "Back-end development"
+  ],
+  "prioritize_for_technical_knowledge_base": true
+}
+```

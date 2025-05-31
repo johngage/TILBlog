@@ -1,0 +1,3 @@
+[{"name": "Converting Mathematics Exercises from PDF to LaTeX Format for MathJax"},
+ {"name": "Converting PDF Exercises to LaTeX Format"},
+ {"name": "Constructing a basis for polynomials satisfying a condition"}]

@@ -1,0 +1,35 @@
+{
+    "title": "TILNET Conversation Knowledge Base",
+    "description": "Claude conversations about building TILNET - recursive AI knowledge system",
+    "license": "Private",
+    "databases": {
+        "conversations": {
+            "title": "Claude Conversations",
+            "description": "Complete conversation history including meta-conversations about system building",
+            "tables": {
+                "conversations": {
+                    "title": "All Conversations",
+                    "description": "Raw conversation data with full-text search",
+                    "sort_desc": "created_at"
+                }
+            },
+            "queries": {
+                "tilnet_conversations": {
+                    "sql": "SELECT name, created_at, length(chat_messages) as size FROM conversations WHERE name LIKE '%TIL%' OR chat_messages LIKE '%TILNET%' ORDER BY created_at DESC",
+                    "title": "TILNET Development Conversations",
+                    "description": "Conversations about building the TIL system"
+                },
+                "implementation_discussions": {
+                    "sql": "SELECT name, created_at, length(chat_messages) as size FROM conversations WHERE chat_messages LIKE '%sqlite-utils%' OR chat_messages LIKE '%implementation%' ORDER BY created_at DESC",
+                    "title": "Implementation Discussions",
+                    "description": "Technical implementation conversations"
+                },
+                "search_conversations": {
+                    "sql": "SELECT name, snippet(conversations_fts, 1, '<mark>', '</mark>', '...', 50) as snippet FROM conversations_fts JOIN conversations ON conversations.rowid = conversations_fts.rowid WHERE conversations_fts MATCH :search ORDER BY conversations.created_at DESC",
+                    "title": "Search Conversations",
+                    "description": "Full-text search across all conversation content"
+                }
+            }
+        }
+    }
+}

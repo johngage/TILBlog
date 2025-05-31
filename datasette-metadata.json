@@ -1,0 +1,10 @@
+{
+    "title": "TILNET Conversation Database",
+    "description": "Claude conversations about building TILNET - recursive AI knowledge system",
+    "databases": {
+        "fresh_conversations": {
+            "title": "TILNET Development Conversations",
+            "description": "Complete conversation history including meta-conversations about system building"
+        }
+    }
+}
