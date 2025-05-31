@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>library - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/">John Gage: Today I Learned</a></h1>
-                <form action="/search/" method="get" class="search-form">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                <form action="/TILBlog/search/" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/" 
+                <a href="/TILBlog/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/stats/" 
+                <a href="/TILBlog/stats/" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -91,9 +91,9 @@ MathJax = {
         
         <div class="sort-controls">
             <span>Sort by date:</span>
-            <a href="/topic/library/" 
+            <a href="/TILBlog/topic/library/" 
                class="sort-link active">Newest first</a>
-            <a href="/topic/library/?order=asc" 
+            <a href="/TILBlog/topic/library/?order=asc" 
                class="sort-link ">Oldest first</a>
         </div>
     </div>
@@ -104,7 +104,7 @@ MathJax = {
     
     <li class="entry-item">
         <h3 class="entry-title">
-           <a href="/note/NetDay-World-Wide/">The Internet is a global library, with hidden rooms</a>
+           <a href="/TILBlog/note/NetDay-World-Wide/">The Internet is a global library, with hidden rooms</a>
         </h3>
         <div class="entry-meta">
             <span class="entry-date">2025-05-19</span>
@@ -112,23 +112,23 @@ MathJax = {
             <div class="entry-topics">
                 
                     
-                        <a href="/topic/education/" class="entry-topic">education</a>
+                        <a href="/TILBlog/topic/education/" class="entry-topic">education</a>
                     
                 
                     
-                        <a href="/topic/metaphor/" class="entry-topic">metaphor</a>
+                        <a href="/TILBlog/topic/metaphor/" class="entry-topic">metaphor</a>
                     
                 
                     
-                        <a href="/topic/internet/" class="entry-topic">internet</a>
+                        <a href="/TILBlog/topic/internet/" class="entry-topic">internet</a>
                     
                 
                     
-                        <a href="/topic/symbol/" class="entry-topic">symbol</a>
+                        <a href="/TILBlog/topic/symbol/" class="entry-topic">symbol</a>
                     
                 
                     
-                        <a href="/topic/library/" class="entry-topic">library</a>
+                        <a href="/TILBlog/topic/library/" class="entry-topic">library</a>
                     
                 
             </div>
@@ -161,12 +161,12 @@ MathJax = {
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/feed.atom">Atom feed</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/static/js/dark-mode.js"></script>
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
 </body>
 </html>
