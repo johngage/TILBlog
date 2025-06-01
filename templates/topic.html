@@ -20,12 +20,21 @@
      <!-- Update your topic.html entry list section with this: -->
 <ul class="entry-list">
     {% for entry in entries %}
+    <!-- In topic.html, use the same entry-item structure -->
     <li class="entry-item">
+      <div class="entry-header">
         <h3 class="entry-title">
-           <a href="{{ url_for('entry', slug=entry.slug) }}">{{ entry.title }}</a>
+            <a href="{{ url_for('entry', slug=entry.slug) }}">{{ entry.title }}</a>
         </h3>
+        
         <div class="entry-meta">
-            <span class="entry-date">{{ entry.created[:10] }}</span>
+            <div class="entry-dates">
+                <span class="entry-date">{{ entry.created[:10] }}</span>
+                {% if entry.was_modified %}
+                    <span class="modified-indicator">(modified {{ entry.modified_fs[:10] }})</span>
+                {% endif %}
+            </div>
+            
             {% if entry.topics_raw %}
             <div class="entry-topics">
                 {% for topic in entry.topics_raw.split(',') %}
@@ -36,13 +45,13 @@
             </div>
             {% endif %}
         </div>
-        
-        <!-- Preview - processed in Python -->
-        {% if entry.preview %}
-        <div class="entry-preview">
-            {{ entry.preview }}
-        </div>
-        {% endif %}
+      </div>
+    
+      {% if entry.preview %}
+      <div class="entry-preview">
+        {{ entry.preview }}
+      </div>
+      {% endif %}
     </li>
     {% endfor %}
 </ul>

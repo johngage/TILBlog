@@ -423,3 +423,169 @@ a:focus,
     margin: 0 8px;
 }
 
+/* Add these updates to your styles.css file June 1, 2025 */
+
+/* 1. Purple banner at the very top */
+.site-banner {
+    background: #663399;  /* Purple like Simon's */
+    color: white;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.site-banner a {
+    color: white;
+    text-decoration: none;
+}
+
+.site-banner a:hover {
+    text-decoration: underline;
+}
+
+/* Adjust body padding to account for fixed banner */
+body {
+    padding-top: 40px;  /* Add space for the banner */
+}
+
+/* 2. Tighter topic browse section with inline layout */
+.topic-browse {
+    background: #f8f9fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 12px 15px;  /* Reduced from 15px */
+    margin-bottom: 20px;  /* Reduced from 30px */
+    font-size: 13px;
+}
+
+.topic-browse h2 {
+    display: inline;  /* Make heading inline */
+    font-size: 13px;  /* Smaller, matching body text */
+    font-weight: 600;
+    margin: 0;
+    color: #586069;
+}
+
+.topic-links {
+    display: inline;  /* Make links inline with heading */
+    margin-left: 8px;  /* Small gap after heading */
+    line-height: 1.4;  /* Tighter line height */
+}
+
+/* 3. Single-line entry layout */
+.entry-item {
+    border-bottom: 1px solid #eaecef;
+    padding: 12px 0;  /* Reduced from 15px */
+    display: block;  /* Changed from flex column */
+}
+
+/* Entry header - all on one line */
+.entry-header {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.entry-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    display: inline;
+}
+
+.entry-title a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+/* Dates and topics on same line as title */
+.entry-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #586069;
+}
+
+.entry-dates {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.entry-date {
+    color: #586069;
+    white-space: nowrap;
+}
+
+.modified-indicator {
+    color: #6a737d;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* Topics inline with less spacing */
+.entry-topics {
+    display: inline-flex;
+    gap: 6px;  /* Reduced from 8px */
+    flex-wrap: wrap;
+}
+
+.entry-topic {
+    background: #f1f8ff;
+    color: #0366d6;
+    padding: 1px 5px;  /* Reduced padding */
+    border-radius: 10px;  /* Slightly smaller radius */
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid #c8e1ff;
+}
+
+/* 4. Preview text styling */
+.entry-preview {
+    font-size: 13px;
+    color: #586069;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.entry-preview p {
+    margin: 0;
+}
+
+/* 5. Tighter spacing throughout */
+.stats-summary {
+    background: #f6f8fa;
+    border-left: 3px solid #0366d6;
+    padding: 8px 12px;  /* Reduced padding */
+    margin-bottom: 20px;  /* Reduced margin */
+    font-size: 13px;
+    color: #586069;
+}
+
+/* Dark mode updates for banner */
+body.dark-mode .site-banner {
+    background: #4a2d7a;  /* Darker purple */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .entry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .entry-meta {
+        margin-left: 0;
+    }
+}

@@ -4,18 +4,22 @@
 {% block title %}John Gage: TIL - Today I Learned{% endblock %}
 
 {% block content %}
+     <!-- Replace existing topic browse with this tighter version -->
      <section class="topic-browse">
         <h2>Browse by topic:</h2>
         <div class="topic-links">
-            {% for topic in topic_cloud %}
-                <a href="{{ url_for('topic', topic=topic.topic) }}">{{ topic.topic }}</a> <span class="topic-count">{{ topic.count }}</span>
-                {%- if not loop.last %}<span class="topic-separator">·</span>{% endif %}
-            {% endfor %}
+          {% for topic in topic_cloud %}
+            <a href="{{ url_for('topic', topic=topic.topic) }}">{{ topic.topic }}</a> <span class="topic-count">{{ topic.count }}</span>
+            {%- if not loop.last %}<span class="topic-separator">·</span>{% endif %}
+          {% endfor %}
         </div>
     </section>
     <!-- Optional: Stats summary -->
+    <!-- Update stats summary to be more compact -->
     <div class="stats-summary">
-        <strong>{{ count }} TILs</strong> so far. <a href="{{ url_for('feed') }}">Atom feed here</a>.
+        <strong>{{ count }} TILs</strong> so far · 
+        <a href="{{ url_for('feed') }}">Atom feed</a> · 
+        <span class="search-hint">Press <kbd>Ctrl</kbd>+<kbd>K</kbd> for instant search</span>
     </div>
     <div class="page-header">
         <h2>Recent entries{% if request.args.get('page', '1') != '1' %} (page {{ page }}){% endif %}</h2>
