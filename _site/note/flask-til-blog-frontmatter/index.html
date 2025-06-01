@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creating a TIL Blog with Flask and Front Matter - TIL</title>
-    <link rel="stylesheet" href="/TILBlog/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
-                <form action="/TILBlog/search/" method="get" class="search-form">
+                <h1><a href="/">John Gage: Today I Learned</a></h1>
+                <form action="/search/" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/TILBlog/" 
+                <a href="/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/TILBlog/stats/" 
+                <a href="/stats/" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -93,15 +93,15 @@ MathJax = {
               
                <div class="topics">
                  
-                   <a href="/TILBlog/topic/flask/" class="topic-tag">flask</a>
+                   <a href="/topic/flask/" class="topic-tag">flask</a>
                  
-                   <a href="/TILBlog/topic/markdown/" class="topic-tag">markdown</a>
+                   <a href="/topic/markdown/" class="topic-tag">markdown</a>
                  
-                   <a href="/TILBlog/topic/obsidian/" class="topic-tag">obsidian</a>
+                   <a href="/topic/obsidian/" class="topic-tag">obsidian</a>
                  
-                   <a href="/TILBlog/topic/python/" class="topic-tag">python</a>
+                   <a href="/topic/python/" class="topic-tag">python</a>
                  
-                   <a href="/TILBlog/topic/web-development/" class="topic-tag">web-development</a>
+                   <a href="/topic/web-development/" class="topic-tag">web-development</a>
                  
                </div>
               
@@ -139,15 +139,15 @@ This is an early discussion</p>
 - <code>web-development</code>
 - <code>authentication</code> (if it covers login)</p>
 <h3 id="obsidian-integration">Obsidian Integration</h3>
-<p>This structure works perfectly with <a href="/TILBlog/note/obsidian/" class="wiki-link">Obsidian</a> because:
+<p>This structure works perfectly with <a href="/note/obsidian/" class="wiki-link">Obsidian</a> because:
 - Front matter is displayed nicely
 - Topics can be used with the Dataview plugin
-- <a href="/TILBlog/note/wiki-links/" class="wiki-link">Wiki links</a> work automatically
+- <a href="/note/wiki-links/" class="wiki-link">Wiki links</a> work automatically
 - File organization is flexible</p>
 <h3 id="auto-rebuild">Auto-Rebuild</h3>
 <p>The blog now watches for file changes and rebuilds automatically when I save in Obsidian. No more manual rebuilds!</p>
 <h2 id="wiki-links">Wiki Links</h2>
-<p>I can now link between notes using <a href="/TILBlog/note/wiki-links/" class="wiki-link">Wiki Links</a> syntax, and they&rsquo;ll automatically be converted to proper HTML links in the blog.</p>
+<p>I can now link between notes using <a href="/note/wiki-links/" class="wiki-link">Wiki Links</a> syntax, and they&rsquo;ll automatically be converted to proper HTML links in the blog.</p>
 <h2 id="implementation-notes">Implementation Notes</h2>
 <p>The database schema changed to support many-to-many relationships:
 - <code>entries</code> table for posts
@@ -162,9 +162,9 @@ This is an early discussion</p>
         <h3>Related entries</h3>
         <ul>
             
-            <li><a href="/TILBlog/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
+            <li><a href="/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
             
-            <li><a href="/TILBlog/note/new-test-for-site-deploy/">New Test For Site Deploy</a></li>
+            <li><a href="/note/new-test-for-site-deploy/">New Test For Site Deploy</a></li>
             
         </ul>
     </aside>
@@ -177,12 +177,12 @@ This is an early discussion</p>
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/TILBlog/feed.atom">Atom feed</a>.
+                <a href="/feed.atom">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/TILBlog/static/js/dark-mode.js"></script>
+  <script src="/static/js/dark-mode.js"></script>
 </body>
 </html>
