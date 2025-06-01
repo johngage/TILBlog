@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building TILBlog - TIL</title>
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/feed.atom">
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
    <!-- Add to base.html <head> section -->
 <script>
@@ -59,8 +59,8 @@ MathJax = {
     <header>
         <div class="container">
             <div class="header-content">
-                <h1><a href="/">John Gage: Today I Learned</a></h1>
-                <form action="/search/" method="get" class="search-form">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                <form action="/TILBlog/search/" method="get" class="search-form">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
@@ -71,12 +71,12 @@ MathJax = {
     <nav class="topics">
         <div class="container">
             <div class="topic-cloud">
-                <a href="/" 
+                <a href="/TILBlog/" 
                    class="topic-link ">
                    All
                 </a>
                 
-                <a href="/stats/" 
+                <a href="/TILBlog/stats/" 
                    class="topic-link ">
                    Stats
                 </a>
@@ -93,7 +93,7 @@ MathJax = {
               
                <div class="topics">
                  
-                   <a href="/topic/documentation/" class="topic-tag">documentation</a>
+                   <a href="/TILBlog/topic/documentation/" class="topic-tag">documentation</a>
                  
                </div>
               
@@ -114,7 +114,7 @@ MathJax = {
             <p>Mod: 5:07pm Thu May 29</p>
 <p>Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.<br />
 - Challenge: provide new conversation with enough context of the state of development to enable useful coding suggestions</p>
-<p>So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to <a href="/note/tilnet/" class="wiki-link">TILNET</a>, so that they may be analyzed by NotebookLM, and by new versions of Claude.
+<p>So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to <a href="/TILBlog/note/tilnet/" class="wiki-link">TILNET</a>, so that they may be analyzed by NotebookLM, and by new versions of Claude.
 - Goal: improve Claude&rsquo;s ability to develop code
 - Goal: create the human-side documentation</p>
 <p>As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.</p>
@@ -127,7 +127,7 @@ MathJax = {
         <h3>Related entries</h3>
         <ul>
             
-            <li><a href="/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
+            <li><a href="/TILBlog/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
             
         </ul>
     </aside>
@@ -140,12 +140,12 @@ MathJax = {
             <p>
                 Built with Flask and SQLite. 
                 <a href="https://github.com/yourusername/til">Source code</a>.
-                <a href="/feed.atom">Atom feed</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
             </p>
         </div>
     </footer>
 
     <!-- Add dark mode JavaScript -->
-  <script src="/static/js/dark-mode.js"></script>
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
 </body>
 </html>
