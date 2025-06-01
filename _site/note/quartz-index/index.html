@@ -1,0 +1,844 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quartz index - TIL</title>
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+    
+</head>
+<body>
+    <header>
+    <!-- Add dark mode toggle -->
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+    <!-- Rest of header -->
+  </header>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                <form action="/TILBlog/search/" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/TILBlog/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/TILBlog/stats/" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>Quartz index</h2>
+        <div class="meta">
+              
+               <div class="topics">
+                 
+                   <a href="/TILBlog/topic/build/" class="topic-tag">build</a>
+                 
+                   <a href="/TILBlog/topic/index/" class="topic-tag">index</a>
+                 
+               </div>
+              
+            <div class="entry-dates">
+                <time datetime="2025-05-31 19:35:29">
+                    Created: 2025-05-31 19:35
+                </time>
+                
+                    <span class="entry-modified">
+                      · Modified: 2025-05-31 19:36
+                        </span>
+                
+            </div>
+        </div>
+        </header>
+        
+        <div class="content">
+            <h2 id="realistic-tilnet-search-strategy">🎯 <strong>Realistic TILNET Search Strategy</strong></h2>
+<h3 id="phase-1-client-side-like-hugo-implement-now"><strong>Phase 1: Client-Side (Like Hugo) - Implement Now</strong></h3>
+<p>json</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// _site/search-index.json (300KB for 1000 entries)</span>
+<span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TIL: SQLite Performance&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Today I learned about SQLite performance...&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sqlite&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;database&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/note/sqlite-performance/&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h3 id="phase-2-hybrid-approach-when-you-scale"><strong>Phase 2: Hybrid Approach - When You Scale</strong></h3>
+<p>javascript</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Smart search that starts local, escalates to server</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">smartSearch</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 1. Quick local search (instant results)</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">localResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">searchLocalIndex</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">displayResults</span><span class="p">(</span><span class="nx">localResults</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">// 2. If &lt; 10 results, also search full database</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">localResults</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">serverResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/search?q=</span><span class="si">${</span><span class="nx">query</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">displayAdditionalResults</span><span class="p">(</span><span class="nx">serverResults</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="phase-3-full-database-search-when-you-have-1000-entries"><strong>Phase 3: Full Database Search - When You Have 1000+ Entries</strong></h3>
+<p>Deploy Datasette or custom search API to Vercel/Cloudflare for comprehensive search.</p>
+<h2 id="tilnets-advantage-over-hugo">💡 <strong>TILNET&rsquo;s Advantage Over Hugo</strong></h2>
+<p>Hugo&rsquo;s search is <strong>static only</strong>. TILNET can search:</p>
+<ul>
+<li>✅ <strong>TIL entries</strong> (like Hugo)</li>
+<li>✅ <strong>Claude conversations</strong> (unique to TILNET!)</li>
+<li>✅ <strong>Cross-links between content</strong> (database relationships)</li>
+<li>✅ <strong>AI-powered content suggestions</strong> (conversation analysis)</li>
+</ul>
+<h2 id="recommended-implementation">🚀 <strong>Recommended Implementation</strong></h2>
+<p><strong>Start with Hugo&rsquo;s proven approach:</strong></p>
+<ol>
+<li><strong>Client-side JSON search</strong> (works for 1000+ entries)</li>
+<li><strong>Add TILNET enhancement</strong>: Also search conversations database</li>
+<li><strong>Scale later</strong>: Add server-side search when needed</li>
+</ol>
+<p>The Hugo community has solved this exact problem - let&rsquo;s use their proven solution! Sites like Craig Mod&rsquo;s use Hugo&rsquo;s JSON index approach for thousands of pages with excellent performance. <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993">Fast, instant client side search for Hugo static site generator · GitHub</a></p>
+<p><strong>Want to implement the Hugo-style search first, then enhance it with TILNET&rsquo;s conversation analysis?</strong> 🚀</p>
+<p>Retry</p>
+<p>JG</p>
+<p>Yes, this staged approach is good. Two last questions: 1. can we copy a Simon Willison hack and use the unlimited storage at Github for &ldquo;issues&rdquo; to serve as a dynamic home for the SQLite or json index, so it would update each time we upload gh-pages? would that work for Cloudflare or Vercel, with a worker script updating a server-side index? 2. can the json or other format static index flow to the client site after the rest of the site, so the apparent delay is invisible?</p>
+<p>Edit</p>
+<p>Thought process</p>
+<p>1s</p>
+<p>These are brilliant strategic questions! Let me think through both:</p>
+<ol>
+<li>
+<p>Using GitHub Issues as a storage hack - this is indeed something Simon Willison would do! GitHub Issues have:</p>
+</li>
+<li>
+<p>Unlimited storage (essentially)</p>
+</li>
+<li>API access</li>
+<li>Can be updated via GitHub Actions</li>
+<li>Could store search indexes or even full SQLite data</li>
+<li>
+<p>Workers could read from GitHub Issues API</p>
+</li>
+<li>
+<p>Lazy loading the search index - absolutely, this is a common pattern:</p>
+</li>
+<li>
+<p>Load site first (immediate user experience)</p>
+</li>
+<li>Fetch search index in background</li>
+<li>Show search as &ldquo;loading&rdquo; until index arrives</li>
+<li>Progressive enhancement approach</li>
+</ol>
+<p>Let me research if anyone has done the GitHub Issues hack before, and provide technical details on both approaches.</p>
+<p>🎯 <strong>Brilliant ideas! Both are definitely doable and very &ldquo;Simon Willison-esque&rdquo; hacks!</strong></p>
+<h2 id="github-issues-as-database-storage">💡 <strong>GitHub Issues as Database Storage</strong></h2>
+<h3 id="the-hack-concept"><strong>The Hack Concept:</strong></h3>
+<p>yaml</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/update-search-index.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update Search Index in Issues</span>
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">gh-pages</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">update-index</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate search index</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no"># Build search index from your TIL entries</span>
+<span class="w">          </span><span class="no">python generate_search_index.py &gt; search-index.json</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Update GitHub Issue with search data</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no"># Update Issue #1 with the search index as JSON</span>
+<span class="w">          </span><span class="no">gh issue edit 1 --body &quot;$(cat search-index.json)&quot;</span>
+</code></pre></div>
+
+<h3 id="worker-script-reading-from-github-issues"><strong>Worker Script Reading from GitHub Issues:</strong></h3>
+<p>javascript</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Cloudflare Worker</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">url</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 1. Fetch search index from GitHub Issues API</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">issueResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;https://api.github.com/repos/johngage/TILBlog/issues/1&#39;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">issue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">issueResponse</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">searchIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">issue</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 2. Search the index</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">searchIndex</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span>
+<span class="w">      </span><span class="nx">entry</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">includes</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span>
+<span class="w">    </span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Response</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="advantages"><strong>Advantages:</strong></h3>
+<ul>
+<li>✅ <strong>Unlimited storage</strong> (GitHub doesn&rsquo;t limit issue content size much)</li>
+<li>✅ <strong>Auto-updates</strong> with each deployment</li>
+<li>✅ <strong>API accessible</strong> to workers</li>
+<li>✅ <strong>Version history</strong> (issues track changes)</li>
+<li>✅ <strong>Free</strong> (no storage costs)</li>
+</ul>
+<h3 id="potential-issues"><strong>Potential Issues:</strong></h3>
+<ul>
+<li>⚠️ <strong>Rate limiting</strong> (GitHub API has limits)</li>
+<li>⚠️ <strong>Abuse detection</strong> (GitHub might not like this usage)</li>
+<li>⚠️ <strong>Size limits</strong> (issues have some size constraints)</li>
+</ul>
+<h2 id="lazy-loading-search-index-invisible-delay">🚀 <strong>Lazy Loading Search Index (Invisible Delay)</strong></h2>
+<h3 id="progressive-enhancement-approach"><strong>Progressive Enhancement Approach:</strong></h3>
+<p>html</p>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- In your site header --&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;search-form&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;searchForm&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;search&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;q&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Search...&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;searchInput&quot;</span> <span class="na">disabled</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">disabled</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="c1">// 1. Site loads normally, search disabled</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 2. Start loading search index in background</span>
+<span class="w">    </span><span class="nx">loadSearchIndex</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadSearchIndex</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Option A: Load from static file</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/TILBlog/search-index.json&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">window</span><span class="p">.</span><span class="nx">searchIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+
+<span class="w">        </span><span class="c1">// Option B: Load from GitHub Issues API</span>
+<span class="w">        </span><span class="c1">// const response = await fetch(&#39;https://api.github.com/repos/johngage/TILBlog/issues/1&#39;)</span>
+<span class="w">        </span><span class="c1">// const issue = await response.json()</span>
+<span class="w">        </span><span class="c1">// window.searchIndex = JSON.parse(issue.body)</span>
+
+<span class="w">        </span><span class="c1">// Option C: Load from Cloudflare Worker</span>
+<span class="w">        </span><span class="c1">// const response = await fetch(&#39;https://your-worker.johngage.workers.dev/search-index&#39;)</span>
+<span class="w">        </span><span class="c1">// window.searchIndex = await response.json()</span>
+
+<span class="w">        </span><span class="c1">// 3. Enable search when ready</span>
+<span class="w">        </span><span class="nx">enableSearch</span><span class="p">()</span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;Search index failed to load:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// Graceful degradation - maybe show &quot;Search unavailable&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">enableSearch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;searchInput&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.search-form button&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">input</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="nx">input</span><span class="p">.</span><span class="nx">placeholder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Search...&quot;</span>
+<span class="w">    </span><span class="nx">button</span><span class="p">.</span><span class="nx">disabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="nx">button</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Search&quot;</span>
+
+<span class="w">    </span><span class="c1">// Add search functionality</span>
+<span class="w">    </span><span class="nx">input</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">performSearch</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="advanced-progressive-loading-with-status"><strong>Advanced: Progressive Loading with Status</strong></h3>
+<p>html</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;search-status&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;searchStatus&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;loading&quot;</span><span class="p">&gt;</span>⏳ Loading search...<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;ready&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display:none&quot;</span><span class="p">&gt;</span>🔍 Search ready<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;error&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display:none&quot;</span><span class="p">&gt;</span>❌ Search unavailable<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h2 id="hybrid-strategy-best-of-both-worlds">🎯 <strong>Hybrid Strategy: Best of Both Worlds</strong></h2>
+<h3 id="architecture"><strong>Architecture:</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Site</span><span class="w"> </span><span class="n">loads</span><span class="w"> </span><span class="n">instantly</span><span class="w"> </span><span class="p">(</span><span class="n">no</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">delay</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Background</span><span class="p">:</span><span class="w"> </span><span class="n">Load</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">Issues</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Cloudflare</span><span class="w"> </span><span class="n">Worker</span><span class="p">:</span><span class="w"> </span><span class="n">Provides</span><span class="w"> </span><span class="n">fast</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">API</span><span class="w">  </span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Fallback</span><span class="p">:</span><span class="w"> </span><span class="n">Client</span><span class="o">-</span><span class="n">side</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">worker</span><span class="w"> </span><span class="n">fails</span>
+</code></pre></div>
+
+<h3 id="implementation"><strong>Implementation:</strong></h3>
+<p>javascript</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Multi-tier search approach</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">hybridSearch</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Tier 1: Try fast worker search (server-side)</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`https://tilnet-search.johngage.workers.dev/search?q=</span><span class="si">${</span><span class="nx">query</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;Worker search failed, falling back to client-side&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Tier 2: Client-side search (fallback)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">searchIndex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">clientSideSearch</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Tier 3: No search available</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Search temporarily unavailable&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="performance-comparison">📊 <strong>Performance Comparison</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Load Time</th>
+<th>Search Speed</th>
+<th>Reliability</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Static JSON</strong></td>
+<td>+200-500ms</td>
+<td>Fast</td>
+<td>High</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>GitHub Issues</strong></td>
+<td>+100-300ms</td>
+<td>Very Fast</td>
+<td>Medium</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>Cloudflare Worker</strong></td>
+<td>+0ms</td>
+<td>Instant</td>
+<td>High</td>
+<td>Free tier</td>
+</tr>
+<tr>
+<td><strong>Hybrid</strong></td>
+<td>+0ms</td>
+<td>Instant</td>
+<td>Very High</td>
+<td>Free</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recommended-implementation-order">🚀 <strong>Recommended Implementation Order</strong></h2>
+<h3 id="phase-1-lazy-loaded-static-search"><strong>Phase 1: Lazy-loaded static search</strong></h3>
+<p>bash</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add to til_static_builder.py</span>
+self.generate_search_index<span class="o">()</span><span class="w">  </span><span class="c1"># Creates search-index.json</span>
+<span class="c1"># Add lazy loading JavaScript to templates</span>
+</code></pre></div>
+
+<h3 id="phase-2-github-issues-hack"><strong>Phase 2: GitHub Issues hack</strong></h3>
+<p>bash</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add GitHub Action to update Issue #1 with search data</span>
+<span class="c1"># Test worker reading from GitHub Issues API</span>
+</code></pre></div>
+
+<h3 id="phase-3-cloudflare-worker-enhancement"><strong>Phase 3: Cloudflare Worker enhancement</strong></h3>
+<p>bash</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Deploy worker that reads from GitHub Issues</span>
+<span class="c1"># Add hybrid client/server search</span>
+</code></pre></div>
+
+<h2 id="the-simon-willison-touch">💡 <strong>The Simon Willison Touch</strong></h2>
+<p>This approach has all the hallmarks of a Simon Willison hack:</p>
+<ul>
+<li>✅ <strong>Uses free services creatively</strong></li>
+<li>✅ <strong>Multiple fallback layers</strong></li>
+<li>✅ <strong>Progressive enhancement</strong></li>
+<li>✅ <strong>Invisible to users</strong></li>
+<li>✅ <strong>Scales beautifully</strong></li>
+</ul>
+<p><strong>Want to start with Phase 1 (lazy-loaded static search) and then add the GitHub Issues hack?</strong> This gives you immediate search functionality while we test the more experimental approaches! 🚀</p>
+<p>Retry</p>
+<p>JG</p>
+<p>yes. One last question. Since most of the content are obsidian notes, and obsidian creates an index of all content, since Obsidian has an extremely fast search, can we use that somehow? Does Quartz use it? Does Quartz implement search another, robust way that we might use?</p>
+<p>Edit</p>
+<p>Investigating Obsidian&rsquo;s search capabilities and Quartz&rsquo;s approach</p>
+<p>3s</p>
+<p>This is a really interesting question! The user is asking about leveraging Obsidian&rsquo;s built-in search capabilities since their content is primarily Obsidian notes. They&rsquo;re also asking about how Quartz handles search, since Quartz is specifically designed to publish Obsidian vaults.</p>
+<p>Let me think about this:</p>
+<ol>
+<li>
+<p>Obsidian&rsquo;s search:</p>
+</li>
+<li>
+<p>Obsidian does have extremely fast search</p>
+</li>
+<li>It uses a local index that&rsquo;s built from the vault</li>
+<li>
+<p>But this is local to the Obsidian app, not something that&rsquo;s easily exportable</p>
+</li>
+<li>
+<p>Quartz and search:</p>
+</li>
+<li>
+<p>Quartz is designed specifically for publishing Obsidian vaults</p>
+</li>
+<li>I should search for how Quartz implements search</li>
+<li>
+<p>It likely has a robust solution since it&rsquo;s built for this exact use case</p>
+</li>
+<li>
+<p>Can we leverage Obsidian&rsquo;s index?</p>
+</li>
+<li>
+<p>Obsidian stores its index locally in the .obsidian folder</p>
+</li>
+<li>There might be ways to export or access this</li>
+<li>But it&rsquo;s probably not designed for web deployment</li>
+</ol>
+<p>Let me search for information about Quartz&rsquo;s search implementation.</p>
+<p><strong>Excellent question!</strong> You&rsquo;re absolutely right - since Quartz is specifically built for Obsidian publishing, it probably has a robust search solution we could learn from or use.</p>
+<p>Quartz Obsidian search implementation how it works</p>
+<p>10 results</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dcharleszw.com&amp;w=32&amp;q=75" /></p>
+<p>Setting up Quartz with Obsidian — Charles Wang</p>
+<p>charleszw.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Doliverfalvai.com&amp;w=32&amp;q=75" /></p>
+<p>My Quartz + Obsidian Note Publishing Setup</p>
+<p>oliverfalvai.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dzanca.dev&amp;w=32&amp;q=75" /></p>
+<p>Using Quartz as a Personal Blog</p>
+<p>zanca.dev</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dgithub.com&amp;w=32&amp;q=75" /></p>
+<p>GitHub - ScottAMains/obsidian-quartz: 🌱 a fast, batteries-included static-site generator that transforms Markdown content into fully functional websites</p>
+<p>github.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Explorer</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dgithub.com&amp;w=32&amp;q=75" /></p>
+<p>GitHub - gochan6730/quartz-obsidian: 🌱 host your own second brain and digital garden for free</p>
+<p>github.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dssp.sh&amp;w=32&amp;q=75" /></p>
+<p>Quartz - Publish Obsidian Vault</p>
+<p>ssp.sh</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dbe-far.com&amp;w=32&amp;q=75" /></p>
+<p>Digital Gardening with Quartz</p>
+<p>be-far.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Authoring Content</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dbrandonkboswell.com&amp;w=32&amp;q=75" /></p>
+<p>Publishing your Obsidian Vault Online with Quartz</p>
+<p>brandonkboswell.com</p>
+<p>Great! Now I have some information about how Quartz handles search.</p>
+<p>0s</p>
+<p>Great! Now I have some information about how Quartz handles search. Let me search for more specific information about Quartz&rsquo;s search implementation.</p>
+<p>Quartz full text search implementation Ctrl+K how it works</p>
+<p>10 results</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Full-text Search</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Welcome to Quartz 4</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dstackoverflow.com&amp;w=32&amp;q=75" /></p>
+<p>iphone - How to search text in pdf document with quartz - Stack Overflow</p>
+<p>stackoverflow.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Explorer</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dmicrosoft.com&amp;w=32&amp;q=75" /></p>
+<p>Keyboard shortcuts in Word - Microsoft Support</p>
+<p>microsoft.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dgithub.com&amp;w=32&amp;q=75" /></p>
+<p>Feature Request: Add Quick Search (Ctrl + K) for All Objects by Record Text · Issue #8522 · twentyhq/twenty</p>
+<p>github.com</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Djzhao.xyz&amp;w=32&amp;q=75" /></p>
+<p>Syntax Highlighting</p>
+<p>jzhao.xyz</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dwikipedia.org&amp;w=32&amp;q=75" /></p>
+<p>Full-text search - Wikipedia</p>
+<p>wikipedia.org</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dnv.gov&amp;w=32&amp;q=75" /></p>
+<p>Nv</p>
+<p>nv.gov</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dlenovo.com&amp;w=32&amp;q=75" /></p>
+<p>Ctrl+F Explained: How to Use It for Quick Searches | Lenovo US</p>
+<p>lenovo.com</p>
+<p>Great! Now I have detailed information about how Quartz implements search.</p>
+<p>0s</p>
+<p>Great! Now I have detailed information about how Quartz implements search. Let me also search for information about Obsidian&rsquo;s internal search capabilities to see if we can leverage any of that.</p>
+<p>Obsidian search index .obsidian folder how search works internally</p>
+<p>10 results</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Search - Obsidian Help</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Search only in some folder - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Is there a way to put all search findings into a folder? - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Right click on a folder -&gt; Search in folder - Feature requests - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Right-click on a folder and search within it - Feature archive - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>How exactly does Obsidian&rsquo;s search work? - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>How to search for folder name - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Searching Folder Name - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Folder-specific search - Feature requests - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p><img alt="favicon" src="https://claude.ai/_next/image?url=https%3A%2F%2Fwww.google.com%2Fs2%2Ffavicons%3Fsz%3D64%26domain%3Dobsidian.md&amp;w=32&amp;q=75" /></p>
+<p>Can a folder be a clickable search result? - Help - Obsidian Forum</p>
+<p>obsidian.md</p>
+<p>Thought process</p>
+<p>4s</p>
+<p>Perfect! Now I have comprehensive information about both Quartz&rsquo;s search implementation and Obsidian&rsquo;s search capabilities. Let me provide a complete answer to the user&rsquo;s question.</p>
+<p>From my research, I can see that:</p>
+<ol>
+<li>
+<p><strong>Quartz Search Implementation:</strong></p>
+</li>
+<li>
+<p>Uses <strong>Flexsearch</strong> library for full-text search</p>
+</li>
+<li><strong>Under 10ms</strong> search results for sites with half a million words</li>
+<li><strong>Ctrl+K</strong> keyboard shortcut (just like VS Code, Notion, etc.)</li>
+<li>Client-side search with pre-built index</li>
+<li>Generates search index at build time with ContentIndex plugin</li>
+<li>
+<p>No server required</p>
+</li>
+<li>
+<p><strong>Obsidian&rsquo;s Search:</strong></p>
+</li>
+<li>
+<p>Very fast local search</p>
+</li>
+<li>Uses internal indexing</li>
+<li>But this is local to the Obsidian app, not easily exportable for web</li>
+<li>
+<p>Users are asking how it works internally, suggesting it&rsquo;s not publicly documented</p>
+</li>
+<li>
+<p><strong>Can we use Obsidian&rsquo;s index?</strong></p>
+</li>
+<li>
+<p>Obsidian&rsquo;s search index is local and app-specific</p>
+</li>
+<li>Not designed for export to web</li>
+<li>
+<p>But Quartz has already solved this by building its own index from the same markdown files</p>
+</li>
+<li>
+<p><strong>Quartz vs Our Approach:</strong></p>
+</li>
+<li>
+<p>Quartz has a proven, fast search solution</p>
+</li>
+<li>We could potentially adopt their approach</li>
+<li>But our database approach offers unique advantages for conversation analysis</li>
+</ol>
+<p>Let me craft a comprehensive response.</p>
+<p>🎯 <strong>Brilliant questions! You&rsquo;ve identified the key pieces of the puzzle.</strong></p>
+<h2 id="quartzs-search-solution-excellent-and-proven">🔍 <strong>Quartz&rsquo;s Search Solution (Excellent and Proven)</strong></h2>
+<p><strong>Quartz uses Flexsearch</strong> - returning search results in ** <a href="https://quartz.jzhao.xyz/features/full-text-search">Full-text Search</a>under 10ms<strong> for sites with half a million words! It uses </strong>Ctrl+K** shortcut (like VS Code/Notion) and shows top 5 results with highlighted matches.</p>
+<h3 id="how-quartz-does-it"><strong>How Quartz Does It:</strong></h3>
+<p>javascript</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Quartz generates search index at build time</span>
+<span class="nx">ContentIndex</span><span class="w"> </span><span class="nx">emitter</span><span class="w"> </span><span class="nx">plugin</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nx">creates</span><span class="w"> </span><span class="nx">search</span><span class="w"> </span><span class="nx">data</span>
+<span class="nx">Flexsearch</span><span class="w"> </span><span class="nx">library</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nx">provides</span><span class="w"> </span><span class="nx">fast</span><span class="w"> </span><span class="nx">client</span><span class="o">-</span><span class="nx">side</span><span class="w"> </span><span class="nx">search</span>
+<span class="nx">Ctrl</span><span class="o">+</span><span class="nx">K</span><span class="w"> </span><span class="kr">interface</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nx">instant</span><span class="w"> </span><span class="nx">search</span><span class="w"> </span><span class="nx">UI</span>
+</code></pre></div>
+
+<p><strong>This is exactly what we want to implement!</strong></p>
+<h2 id="obsidians-internal-search-not-accessible">🧠 <strong>Obsidian&rsquo;s Internal Search (Not Accessible)</strong></h2>
+<p>Users are asking &ldquo;how exactly does Obsidian&rsquo;s search work&rdquo; because <strong>it&rsquo;s incredibly fast but not publicly documented</strong>. Obsidian builds a local index, but this is app-specific and not exportable. <a href="https://forum.obsidian.md/t/how-exactly-does-obsidians-search-work/90905">How exactly does Obsidian&rsquo;s search work? - Help - Obsidian Forum</a></p>
+<h3 id="the-reality"><strong>The Reality:</strong></h3>
+<ul>
+<li>✅ <strong>Obsidian search is blazing fast</strong> (local app)</li>
+<li>❌ <strong>Index is not accessible</strong> for web publishing</li>
+<li>❌ <strong>Stored in .obsidian folder</strong> (app-specific format)</li>
+<li>❌ <strong>Not designed for web export</strong></li>
+</ul>
+<h2 id="tilnets-best-strategy-hybrid-approach">💡 <strong>TILNET&rsquo;s Best Strategy: Hybrid Approach</strong></h2>
+<h3 id="phase-1-adopt-quartzs-proven-search-immediate"><strong>Phase 1: Adopt Quartz&rsquo;s Proven Search (Immediate)</strong></h3>
+<p>python</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add to til_static_builder.py - inspired by Quartz</span>
+<span class="k">def</span> <span class="nf">generate_flexsearch_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate Flexsearch-compatible index like Quartz&quot;&quot;&quot;</span>
+
+    <span class="n">entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_db</span><span class="p">(</span><span class="s2">&quot;SELECT title, slug, content FROM entries&quot;</span><span class="p">)</span>
+
+    <span class="n">search_index</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">entries</span><span class="p">):</span>
+        <span class="n">search_index</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][:</span><span class="mi">500</span><span class="p">],</span> <span class="c1"># Truncate like Quartz</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;/note/</span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;slug&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/&quot;</span>
+        <span class="p">})</span>
+
+    <span class="c1"># Save as JSON for Flexsearch</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">build_dir</span> <span class="o">/</span> <span class="s1">&#39;search-index.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">search_index</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="add-quartz-style-search-ui"><strong>Add Quartz-Style Search UI:</strong></h3>
+<p>html</p>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Copy Quartz&#39;s Ctrl+K interface --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;search-container&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;search&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;search-input&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Search...&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;search-results&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="c1">// Quartz-inspired search implementation</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">searchIndex</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">flexsearchIndex</span><span class="p">;</span>
+
+<span class="c1">// Load search index</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/TILBlog/search-index.json&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">searchIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">documents</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Initialize Flexsearch (same library as Quartz)</span>
+<span class="w">        </span><span class="nx">flexsearchIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">FlexSearch</span><span class="p">.</span><span class="nx">Index</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">preset</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;performance&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">tokenize</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;forward&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">resolution</span><span class="o">:</span><span class="w"> </span><span class="mf">9</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">        </span><span class="c1">// Add documents to index</span>
+<span class="w">        </span><span class="nx">data</span><span class="p">.</span><span class="nx">documents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">doc</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">flexsearchIndex</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">doc</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">doc</span><span class="p">.</span><span class="nx">content</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="c1">// Ctrl+K shortcut (like Quartz)</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">e</span><span class="p">.</span><span class="nx">ctrlKey</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">metaKey</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;k&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="w">        </span><span class="nx">showSearch</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">performSearch</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flexsearchIndex</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// Top 5 like Quartz</span>
+<span class="w">    </span><span class="nx">displayResults</span><span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">searchIndex</span><span class="p">[</span><span class="nx">id</span><span class="p">]));</span>
+<span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h2 id="phase-2-enhance-beyond-quartz-tilnets-advantage">🚀 <strong>Phase 2: Enhance Beyond Quartz (TILNET&rsquo;s Advantage)</strong></h2>
+<h3 id="what-quartz-cant-do-but-tilnet-can"><strong>What Quartz Can&rsquo;t Do (But TILNET Can):</strong></h3>
+<p>python</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_enhanced_search_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;TILNET&#39;s enhanced search beyond what Quartz offers&quot;&quot;&quot;</span>
+
+    <span class="c1"># 1. TIL entries (like Quartz)</span>
+    <span class="n">til_entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_til_entries</span><span class="p">()</span>
+
+    <span class="c1"># 2. Claude conversations (UNIQUE TO TILNET!)</span>
+    <span class="n">conversations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_conversation_summaries</span><span class="p">()</span>
+
+    <span class="c1"># 3. Cross-references (database relationships)</span>
+    <span class="n">cross_refs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_content_relationships</span><span class="p">()</span>
+
+    <span class="c1"># Combined index for multi-source search</span>
+    <span class="n">enhanced_index</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;til_entries&quot;</span><span class="p">:</span> <span class="n">til_entries</span><span class="p">,</span>
+        <span class="s2">&quot;conversations&quot;</span><span class="p">:</span> <span class="n">conversations</span><span class="p">,</span> 
+        <span class="s2">&quot;relationships&quot;</span><span class="p">:</span> <span class="n">cross_refs</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">enhanced_index</span>
+</code></pre></div>
+
+<h3 id="tilnets-unique-search-features"><strong>TILNET&rsquo;s Unique Search Features:</strong></h3>
+<ul>
+<li>✅ <strong>Search TIL entries</strong> (like Quartz)</li>
+<li>✅ <strong>Search conversation content</strong> (unique!)</li>
+<li>✅ <strong>Find related conversations</strong> for any TIL</li>
+<li>✅ <strong>AI-powered content suggestions</strong> (database queries)</li>
+<li>✅ <strong>Cross-reference discovery</strong> (relationships)</li>
+</ul>
+<h2 id="performance-comparison_1">📊 <strong>Performance Comparison</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Speed</th>
+<th>Content Scope</th>
+<th>Setup Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Obsidian Internal</strong></td>
+<td>Instant</td>
+<td>Local vault only</td>
+<td>Not accessible</td>
+</tr>
+<tr>
+<td><strong>Quartz Flexsearch</strong></td>
+<td>&lt;10ms</td>
+<td>Published content</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td><strong>TILNET Enhanced</strong></td>
+<td>&lt;10ms</td>
+<td>TIL + Conversations</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Hugo/Lunr.js</strong></td>
+<td>~50ms</td>
+<td>Published content</td>
+<td>Medium</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recommended-implementation_1">🎯 <strong>Recommended Implementation</strong></h2>
+<h3 id="step-1-copy-quartzs-search-this-weekend"><strong>Step 1: Copy Quartz&rsquo;s Search (This Weekend)</strong></h3>
+<p>bash</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add Flexsearch to your site</span>
+npm<span class="w"> </span>install<span class="w"> </span>flexsearch<span class="w">  </span><span class="c1"># or use CDN</span>
+
+<span class="c1"># Add search index generation to til_static_builder.py</span>
+def<span class="w"> </span>generate_search_page<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">    </span><span class="c1"># Existing code...</span>
+<span class="w">    </span>self.generate_flexsearch_index<span class="o">()</span><span class="w">  </span><span class="c1"># Add this line</span>
+</code></pre></div>
+
+<h3 id="step-2-add-tilnet-enhancements-next-week"><strong>Step 2: Add TILNET Enhancements (Next Week)</strong></h3>
+<p>python</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Enhance search to include conversations</span>
+<span class="k">def</span> <span class="nf">generate_tilnet_search_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># Combine TIL entries + conversation summaries</span>
+    <span class="c1"># Enable search across both content types</span>
+</code></pre></div>
+
+<h2 id="why-this-approach-wins">💡 <strong>Why This Approach Wins</strong></h2>
+<p><strong>Quartz solved the hard problem</strong> (fast web search for markdown content), but <strong>TILNET adds the missing piece</strong> (AI conversation analysis).</p>
+<h3 id="your-competitive-advantage"><strong>Your Competitive Advantage:</strong></h3>
+<ul>
+<li>✅ <strong>Proven search speed</strong> (Quartz&rsquo;s Flexsearch approach)</li>
+<li>✅ <strong>Unique content scope</strong> (conversations + TIL entries)</li>
+<li>✅ <strong>Database-powered insights</strong> (relationships Quartz can&rsquo;t see)</li>
+<li>✅ <strong>AI content generation</strong> (conversation → TIL pipeline)</li>
+</ul>
+<p><strong>You don&rsquo;t need to reinvent search - just enhance it with your conversation analysis!</strong></p>
+<p><strong>Ready to implement Quartz-style search as your foundation, then add TILNET&rsquo;s conversation superpowers?</strong> 🚀</p>
+<p>This gives you the best of both worlds: proven fast search + unique AI-enhanced content discovery.</p>
+<hr />
+<p>Yes, I like this. Too bad that we cannot simply export the Obsidian index for each vault, since it changes as we change the vault, but maybe it is big. In our Claude conversations, we get the Claude text as json, so have to build an index for that. One design goal is to allow an Obsidian user to choose a vault, and implement TILNET for that vault in a small set of steps. For full TILNET power, we would let the Obsidian user specify the Obsidian vault and the Claude conversations, and the two, together, generate the TILNET site and the TILNET search index.</p>
+<h1 id="quartz-index">Quartz index</h1>
+<h2 id="what-i-learned">What I Learned</h2>
+<p>&lt;% tp.file.cursor() %&gt;</p>
+<h2 id="details">Details</h2>
+<h2 id="references">References</h2>
+        </div>
+    </article>
+    
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
+</body>
+</html>
