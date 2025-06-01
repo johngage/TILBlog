@@ -46,7 +46,9 @@ MathJax = {
 }
 </style>
     
-    
+  <!-- ADD THIS LINE for search modal styling -->
+<link rel="stylesheet" href="/TILBlog/static/search-modal.css">
+
 </head>
 <body>
   <!-- ADD THIS: Purple banner -->
@@ -842,7 +844,7 @@ MathJax = {
                 <div class="entry-dates">
                     <span class="entry-date">2025-05-26</span>
                     
-                         <span class="modified-indicator">✏️ Modified 2025-05-29 17:10</span>
+                         <span class="modified-indicator">✏️ Modified 2025-06-01 14:07</span>
                     
                 </div>
                 
@@ -860,7 +862,7 @@ MathJax = {
             <!-- Preview - processed in Python -->
             
             <div class="entry-preview">
-                <p class="preview">Mod: 5:07pm Thu May 29 Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted. - Challenge: provide new conversation with enough...</p>
+                <p class="preview">TIL for TILNET Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted. - Challenge: provide new conversation with enough context of...</p>
             </div>
             
         </li>
@@ -1030,5 +1032,20 @@ MathJax = {
 
     <!-- Add dark mode JavaScript -->
   <script src="/TILBlog/static/js/dark-mode.js"></script>
+
+
+<!-- ADD THESE LINES for instant search functionality -->
+<!-- Flexsearch library -->
+<script src="https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
+
+<!-- Set base URL for search (important for GitHub Pages) -->
+<script>
+    // This ensures search works correctly on GitHub Pages with /TILBlog base URL
+    window.TILNET_BASE_URL = '/TILBlog';
+</script>
+
+<!-- Load search functionality -->
+<script src="/TILBlog/static/search.js"></script>
+
 </body>
 </html>

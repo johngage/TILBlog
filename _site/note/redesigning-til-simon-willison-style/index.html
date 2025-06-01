@@ -46,7 +46,9 @@ MathJax = {
 }
 </style>
     
-    
+  <!-- ADD THIS LINE for search modal styling -->
+<link rel="stylesheet" href="/TILBlog/static/search-modal.css">
+
 </head>
 <body>
   <!-- ADD THIS: Purple banner -->
@@ -241,5 +243,20 @@ Documenting a complete rebuild of the TIL Blog site,  to create an open-source s
 
     <!-- Add dark mode JavaScript -->
   <script src="/TILBlog/static/js/dark-mode.js"></script>
+
+
+<!-- ADD THESE LINES for instant search functionality -->
+<!-- Flexsearch library -->
+<script src="https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
+
+<!-- Set base URL for search (important for GitHub Pages) -->
+<script>
+    // This ensures search works correctly on GitHub Pages with /TILBlog base URL
+    window.TILNET_BASE_URL = '/TILBlog';
+</script>
+
+<!-- Load search functionality -->
+<script src="/TILBlog/static/search.js"></script>
+
 </body>
 </html>
