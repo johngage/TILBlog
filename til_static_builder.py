@@ -634,6 +634,88 @@ class TILStaticSiteBuilder:
             log(f"Copied static files to {static_target}")
         else:
             log("No static directory found")
+
+    def generate_search_index(self):
+        """Generate Flexsearch-compatible JSON index for client-side search"""
+        log("Generating search index for client-side search")
+        
+        try:
+            # Import json at the top if not already imported
+            import json
+            
+            # Query all entries with the same fields as your Flask app
+            entries = self.query_db("""
+                SELECT 
+                    id, 
+                    slug, 
+                    title, 
+                    content, 
+                    topics_raw,
+                    COALESCE(created_fm, created_fs) as created,
+                    modified_fs
+                FROM entries
+                ORDER BY created DESC
+            """)
+            
+            documents = []
+            for i, entry in enumerate(entries):
+                # Use your existing preview generation logic
+                # Generate preview - EXACT same logic as your process_entries_for_preview
+                if entry['content'] and entry['content'].strip():
+                    preview_text = entry['content'].strip()
+                else:
+                    preview_text = ""
+                
+                # Clean up and truncate to 200 chars like your existing code
+                if preview_text:
+                    preview_text = ' '.join(preview_text.split())
+                    if len(preview_text) > 200:
+                        truncated = preview_text[:200]
+                        last_space = truncated.rfind(' ')
+                        if last_space > 140:
+                            preview_text = preview_text[:last_space] + "..."
+                        else:
+                            preview_text = truncated + "..."
+                
+                # Parse topics
+                topics = []
+                if entry['topics_raw']:
+                    topics = [t.strip() for t in entry['topics_raw'].split(',') if t.strip()]
+                
+                # Build document for search index
+                doc = {
+                    "id": i,
+                    "entry_id": entry['id'],
+                    "title": entry['title'],
+                    "slug": entry['slug'],
+                    "content": entry['content'][:1000] if entry['content'] else "",  # More content for search
+                    "preview": preview_text,
+                    "url": f"{self.base_url}/note/{entry['slug']}/",
+                    "topics": topics,
+                    "created": entry['created'],
+                    "modified": entry['modified_fs']
+                }
+                documents.append(doc)
+            
+            # Create index structure
+            search_index = {
+                "documents": documents,
+                "metadata": {
+                    "version": "1.0",
+                    "generated": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                    "count": len(documents),
+                    "base_url": self.base_url
+                }
+            }
+            
+            # Write search index
+            with open(self.build_dir / 'search-index.json', 'w', encoding='utf-8') as f:
+                json.dump(search_index, f, ensure_ascii=False, separators=(',', ':'))
+            
+            log(f"Generated search index with {len(documents)} entries")
+            
+        except Exception as e:
+            log(f"Error generating search index: {e}")
     
     def build(self):
         """Build the complete static site"""
@@ -660,6 +742,7 @@ class TILStaticSiteBuilder:
         self.generate_search_page()
         self.generate_stats_page()
         self.generate_feed()
+        self.generate_search_index()  # Generate search index for client-side search
         
         # Copy static files
         self.copy_static_files()
