@@ -46,7 +46,9 @@ MathJax = {
 }
 </style>
     
-    
+  <!-- ADD THIS LINE for search modal styling -->
+<link rel="stylesheet" href="/TILBlog/static/search-modal.css">
+
 </head>
 <body>
   <!-- ADD THIS: Purple banner -->
@@ -107,7 +109,7 @@ MathJax = {
                 </time>
                 
                     <span class="entry-modified">
-                      · Modified: 2025-05-29 17:10
+                      · Modified: 2025-06-01 14:07
                         </span>
                 
             </div>
@@ -115,14 +117,67 @@ MathJax = {
         </header>
         
         <div class="content">
-            <p>Mod: 5:07pm Thu May 29</p>
+            <p>TIL for TILNET</p>
 <p>Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.<br />
 - Challenge: provide new conversation with enough context of the state of development to enable useful coding suggestions</p>
 <p>So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to <a href="/TILBlog/note/tilnet/" class="wiki-link">TILNET</a>, so that they may be analyzed by NotebookLM, and by new versions of Claude.
 - Goal: improve Claude&rsquo;s ability to develop code
 - Goal: create the human-side documentation</p>
 <p>As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.</p>
-<p>Most major design issues have</p>
+<p>Most major design issues have been addressed.</p>
+<hr />
+<p>14:01: 2025-06-01
+- Generated complete site survey, using a large shell script. Need to update it as site updates; generates copies of .py files, .html; 
+- snapshot.sh
+    ```sh
+    #!/bin/zsh</p>
+<h1 id="tilnet-project-context-snapshot">TILNET Project Context Snapshot</h1>
+<h1 id="run-this-script-to-generate-a-comprehensive-project-snapshot-for-claude">Run this script to generate a comprehensive project snapshot for Claude</h1>
+<p>echo &ldquo;=== TILNET PROJECT SNAPSHOT ===&rdquo;</p>
+<p>echo &ldquo;Generated: $(date)&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>echo &ldquo;=== PROJECT DIRECTORY TREE ===&rdquo;</p>
+<p>tree -a -I &lsquo;.git|<strong>pycache</strong>|<em>.pyc|node_modules|.DS_Store&rsquo; 2&gt;/dev/null || find . -type f -not -path &lsquo;</em>/.<em>&rsquo; -not -path &lsquo;</em>/<strong>pycache</strong>/*&rsquo; | sort</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>echo &ldquo;=== PYTHON FILES ===&rdquo;</p>
+<p>find . -name &ldquo;*.py&rdquo; -type f | while read file; do</p>
+<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
+<p>cat &ldquo;$file&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>done</p>
+<p>echo &ldquo;=== HTML FILES ===&rdquo;</p>
+<p>find . -name &ldquo;*.html&rdquo; -type f | while read file; do</p>
+<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
+<p>cat &ldquo;$file&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>done</p>
+<p>echo &ldquo;=== CSS FILES ===&rdquo;</p>
+<p>find . -name &ldquo;*.css&rdquo; -type f | while read file; do</p>
+<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
+<p>cat &ldquo;$file&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>done</p>
+<p>echo &ldquo;=== JAVASCRIPT FILES ===&rdquo;</p>
+<p>find . -name &ldquo;*.js&rdquo; -type f | while read file; do</p>
+<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
+<p>cat &ldquo;$file&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>done</p>
+<p>echo &ldquo;=== CONFIGURATION FILES ===&rdquo;</p>
+<p>for config in requirements.txt package.json Dockerfile docker-compose.yml .env.example config.py settings.py; do</p>
+<p>if <a href="/TILBlog/note/--f-config-/" class="wiki-link"> -f &ldquo;$config&rdquo; </a>; then</p>
+<p>echo &ldquo;&mdash; FILE: $config &mdash;&ldquo;</p>
+<p>cat &ldquo;$config&rdquo;</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>fi</p>
+<p>done</p>
+<p>echo &ldquo;=== PROJECT STATUS ===&rdquo;</p>
+<p>echo &ldquo;Last modified files (last 5):&rdquo;</p>
+<p>find . -type f -not -path &lsquo;<em>/.</em>&rsquo; -not -path &lsquo;<em>/<strong>pycache</strong>/</em>&rsquo; -exec ls -lt {} + | head -5</p>
+<p>echo &ldquo;&rdquo;</p>
+<p>echo &ldquo;=== END SNAPSHOT ===&rdquo;
+    ```</p>
+<hr />
         </div>
     </article>
     
@@ -151,5 +206,20 @@ MathJax = {
 
     <!-- Add dark mode JavaScript -->
   <script src="/TILBlog/static/js/dark-mode.js"></script>
+
+
+<!-- ADD THESE LINES for instant search functionality -->
+<!-- Flexsearch library -->
+<script src="https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
+
+<!-- Set base URL for search (important for GitHub Pages) -->
+<script>
+    // This ensures search works correctly on GitHub Pages with /TILBlog base URL
+    window.TILNET_BASE_URL = '/TILBlog';
+</script>
+
+<!-- Load search functionality -->
+<script src="/TILBlog/static/search.js"></script>
+
 </body>
 </html>
