@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/economy/Alan Taylor - Martin Wolf.md",
+                "file": "content/building/Quartz index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Alan Taylor - Martin Wolf"
+              "title": "Quartz index"
             }
           }
         ],
@@ -215,19 +215,20 @@
   },
   "active": "7d796822c74ea025",
   "lastOpenFiles": [
-    "conversations.db-journal",
-    "archive/tested_safe/feed.py",
-    "archive/tested_safe",
-    "til.db-journal",
-    "feed.py.test",
-    "til.db",
-    "archive/definitely_safe/til_static_builder_old.py",
-    "archive/definitely_safe/test_claude_processor.py",
-    "archive/definitely_safe/performance_test.py",
-    "archive/definitely_safe/fix_urls.py",
-    "archive/definitely_safe/database_migration.py",
-    "content/California-Africa/Water/Atmospheric Water Capture.md",
+    "_site/note/quartz-index/index.html",
+    "_site/note/quartz-index",
+    "_site/topic/index/index.html",
+    "_site/topic/index",
+    "_site/topic/build/index.html",
+    "_site/topic/build",
+    "_site/page/2/order/asc/index.html",
+    "_site/page/2/order/asc",
+    "_site/page/2/order",
+    "_site/page/2/index.html",
+    "_site/page/2",
     "content/economy/Alan Taylor - Martin Wolf.md",
+    "content/building/Quartz index.md",
+    "content/California-Africa/Water/Atmospheric Water Capture.md",
     "content/building/Building TILBlog.md",
     "content/building/Claude thinks TILNET is brilliant.md",
     "content/building/Creating a TIL Blog with Flask, or not.md",
