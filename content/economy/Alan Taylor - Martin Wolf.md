@@ -14,9 +14,11 @@ Comments on Brad DeLong's comments on Martin Wolf's comments on Alan Taylor:
 
 Brad in black. JG in Blue.
 
-|                            |     |      |     |      |                                                         |      |     |      |     |      |        |     |     |
-| -------------------------- | --- | ---- | --- | ---- | ------------------------------------------------------- | ---- | --- | ---- | --- | ---- | ------ | --- | --- |
-| Martin Wolf lunch at Davos |     | <br> |     | <br> | [Brad DeLong](https://substack.com/@delongonsubstack)\\ | <br> |     | <br> |     | <br> | May 31 |     |     |
+Martin Wolf and I had lunch in Davos, in 2003 or 2004, to discuss the impact of the internet on productivity.
+
+|                            |             |      |     |      |                                                         |      |     |      |     |      |        |     |     |
+| -------------------------- | ----------- | ---- | --- | ---- | ------------------------------------------------------- | ---- | --- | ---- | --- | ---- | ------ | --- | --- |
+| Martin Wolf lunch at Davos | Martin and  | <br> |     | <br> | [Brad DeLong](https://substack.com/@delongonsubstack)\\ | <br> |     | <br> |     | <br> | May 31 |     |     |
 
 
 ###### Ignore the pond surface ripples: here are the underlying economic tectonic shifts. I take Alan Taylor’s FT interview with Martin Wolf as a demand to sketch a roadmap for navigating the 21st-century macroeconomy. Start from anchored expectations, fragile politics, frequent massive shocks, a continuing savings glut, and the insane chaos monkey in America’s White House. Were do we try to go, and how do we try to get there, in the future as we traverse the rubble left by the fracturing of the Neoliberal Order?
