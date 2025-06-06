@@ -1,6 +1,7 @@
 ---
 title: "Books embedding"
-topics: ["books"]
+topics: 
+  - books
 created: 2025-06-01 20:36:35
 modified: 2025-06-01 20:36:35
 slug: books-embedding
