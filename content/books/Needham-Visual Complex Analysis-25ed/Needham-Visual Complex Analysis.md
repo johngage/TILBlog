@@ -2,7 +2,7 @@
 title: Needham-Visual Complex Analysis
 topics:
   - math
-  - complex
+  - latex
 created: 2025-05-24 20:06:57
 modified: 2025-05-24 20:06:57
 slug: Needham-Virtual-Complex-Analysis

@@ -1,13 +1,14 @@
 ---
-title: "2025-05-27-Tuesday"
-topics: ["daily", "reading"]
+title: Biology updates itself
+topics:
+  - science
 created: 2025-05-27 22:20:32
 modified: 2025-05-27 22:20:32
 slug: 2025-05-27-tuesday
 date: 2025-05-27
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
+excalidraw-plugin: parsed
+tags:
+  - excalidraw
 excalidraw-open-md: true
 ---
 Mod: 5:07pm Thu May 29

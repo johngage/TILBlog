@@ -1,13 +1,14 @@
 ---
-title: "Alan Taylor - Martin Wolf"
-topics: ["economy", ""]
+title: Alan Taylor - Martin Wolf
+topics:
+  - economy
 created: 2025-05-31 09:53:55
 modified: 2025-05-31 09:53:55
 slug: alan-taylor-martin-wolf
 date: 2025-05-31
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
+excalidraw-plugin: parsed
+tags:
+  - excalidraw
 excalidraw-open-md: true
 ---
 Comments on Brad DeLong's comments on Martin Wolf's comments on Alan Taylor: 

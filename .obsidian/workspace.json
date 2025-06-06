@@ -22,49 +22,21 @@
             }
           },
           {
-            "id": "620f44dde487c654",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "templater/til-template.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "til-template"
-            }
-          },
-          {
             "id": "84efba1d4ec1ee45",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
+                "file": "content/building/2025-06-05.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NetDay- Internet for All - 1995 - 2025"
-            }
-          },
-          {
-            "id": "7d796822c74ea025",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "content/building/Building TILBlog.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Building TILBlog"
+              "title": "2025-06-05"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -96,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "latex",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -213,43 +185,43 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "7d796822c74ea025",
+  "active": "84efba1d4ec1ee45",
   "lastOpenFiles": [
+    "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
+    "content/books/Embedding Texts/Books embedding.md",
+    "content/books/Anil Ananthaswamy/Why Machines Learn.md",
+    "templater/til-template.md",
+    "templater/til-with-source.md",
+    "content/test/Test-hybrid-til.md",
+    "content/building/Redesigning TIL Site to Match Simon Willison's Design.md",
+    "content/building/Quartz index.md",
+    "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
+    "content/California-Africa/Carbon/Omar Yaghi.md",
+    "content/building/New Site Deploy.md",
+    "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
+    "content/test/LaTeX Math Test.md",
+    "content/Schools/Internet joins schools and teachers to a global library.md",
+    "content/projects/Goldman School of Public Policy/GSPP.md",
+    "content/California-Africa/Framework for California-Africa Agreements.md",
+    "content/building/Creating-a-TIl-blog.md",
+    "content/building/Creating a TIL Blog with Flask, or not.md",
+    "content/building/Claude thinks TILNET is brilliant.md",
+    "content/building/Building TILBlog.md",
+    "content/science-technology/Biology updates itself.md",
+    "content/California-Africa/Water/Atmospheric Water Capture.md",
+    "content/economy/Alan Taylor - Martin Wolf.md",
+    "content/science-technology/AI and software.md",
+    "content/building/2025-06-05.md",
+    "content/projects/Fiber Optic Sensing Association.md",
+    "content/books/Embedding Texts",
     "til.db-journal",
     "_site/static/search.js",
     "_site/static/search-modal.css",
     "_site/search-index.json",
     "static/search-modal.css",
     "static/search.js",
-    "content/building/Creating-a-TIl-blog.md",
-    "content/building/Quartz index.md",
     "til.db",
     "tilnet_snapshot.txt",
-    "snapshot.sh",
-    "_site/note/quartz-index/index.html",
-    "_site/note/quartz-index",
-    "content/economy/Alan Taylor - Martin Wolf.md",
-    "content/California-Africa/Water/Atmospheric Water Capture.md",
-    "content/building/Building TILBlog.md",
-    "content/building/Claude thinks TILNET is brilliant.md",
-    "content/building/Creating a TIL Blog with Flask, or not.md",
-    "content/building/Redesigning TIL Site to Match Simon Willison's Design.md",
-    "content/California-Africa/Carbon/Omar Yaghi on total carbon removal.md",
-    "content/California-Africa/Framework for California-Africa Agreements.md",
-    "content/Daily/2025-05-25.md",
-    "content/Daily/2025-05-27-Tuesday.md",
-    "content/git/New Test For Site Deploy.md",
-    "content/projects/Goldman School of Public Policy/GSPP.md",
-    "content/Schools/NetDay- Internet for All - 1995 - 2025.md",
-    "content/Schools/Internet joins schools and teachers to a global library.md",
-    "content/test/Test-hybrid-til.md",
-    "content/test/math-test.md",
-    "content/California-Africa/Carbon/Omar Yaghi.md",
-    "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
-    "content/books/Anil Ananthaswamy/Why Machines Learn.md",
-    "templater/til-with-source.md",
-    "templater/til-template.md",
-    "README.md",
-    "content/testing/performance-test.md"
+    "snapshot.sh"
   ]
 }

@@ -1,13 +1,15 @@
 ---
-title: "Claude thinks TILNET is brilliant"
-topics: ["design", "claude"]
+title: Claude thinks TILNET is brilliant
+topics:
+  - claude
+  - til-build
 created: 2025-05-27 22:18:02
 modified: 2025-05-27 22:18:02
 slug: claude-thinks-tilnet-is-brilliant
 date: 2025-05-27
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
+excalidraw-plugin: parsed
+tags:
+  - excalidraw
 excalidraw-open-md: true
 ---
 Mod: 5:07pm Thu May 29

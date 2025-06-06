@@ -1,13 +1,14 @@
 ---
-title: "Building TILBlog"
-topics: ["documentation"]
+title: Building TILBlog
+topics:
+  - til-build
 created: 2025-05-26 13:29:20
 modified: 2025-05-26 13:29:20
 slug: building-tilblog
 date: 2025-05-26
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
+excalidraw-plugin: parsed
+tags:
+  - excalidraw
 excalidraw-open-md: true
 ---
 TIL for TILNET
@@ -84,7 +85,6 @@ echo ""
 
 done
 
-  
 
 echo "=== JAVASCRIPT FILES ==="
 
@@ -133,3 +133,7 @@ echo "=== END SNAPSHOT ==="
 
 
 ---
+---
+After repeated Claude improvements, I'll clean up the repository, then reduce it to the minimum required for deployment as a cloned site. Then, I'll tune it so that it can be deployed on an existing Obsidian vault.   Zsolt's would be ideal. 
+
+Deciding what should be in the template deployable site. It should include the new elements: speech, multi-lingual, drawing, gesture.

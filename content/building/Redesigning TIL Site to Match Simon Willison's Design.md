@@ -2,11 +2,7 @@
 title: Claude builds new TILBlog
 topics:
   - Claude
-  - web-development
-  - css
-  - system-design
-  - claude-conversation
-  - documentation
+  - til-build
 created: 2025-05-26 12:46:26
 modified: 2025-05-26 12:46:26
 slug: redesigning-til-simon-willison-style
@@ -16,7 +12,6 @@ tags:
   - excalidraw
 excalidraw-open-md: true
 ---
-Mod: 5:07pm Thu May 29
 Documenting a complete rebuild of the TIL Blog site,  to create an open-source system merging Obsidian, SQLite, and a static website generator.  Extensions are the use of Excalidraw and SVG, to create an iterative loop of documented innovation.
 
 ---

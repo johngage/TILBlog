@@ -6,9 +6,6 @@ excalidraw-open-md: true
 title: Why Machines Learn
 topics:
   - machine-learning
-  - vector
-  - kernel-trick
-  - transformer
   - math
 created: 2025-05-25 17:00:20
 modified: 2025-05-25 17:00:20

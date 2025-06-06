@@ -1,18 +1,12 @@
 ---
 type: new
-title: "New Test For Site Deploy"
+title: New Test For Site Deploy
 topics:
   - til-build
-  - flask
-  - python
-  - web-development
   - sqlite
 created: 2025-05-22
 ---
-
-Mod: 5:07pm Thu May 29
-modified 128pm
-mod:11:07 am Thu 29 May
+How to design a complementary set of sites.  With an independent, all-inclusive Datasette database of global content.
 
 Today I learned how to create a "Today I Learned" blog...sort of.
 

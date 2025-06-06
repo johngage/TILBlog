@@ -1,8 +1,7 @@
 ---
-title: LaTeX Math Test title
+title: LaTeX Math Test
 topics:
-  - mathematics
-  - testing
+  - math
 ---
 Mod: 5:07pm Thu May 29
 - changed 126pm

@@ -1,13 +1,14 @@
 ---
-title: "Quartz index"
-topics: ["build", "index"]
+title: Quartz index
+topics:
+  - til-build
 created: 2025-05-31 19:35:29
 modified: 2025-05-31 19:35:29
 slug: quartz-index
 date: 2025-05-31
-excalidraw-plugin: parsed 
-tags: 
-  - excalidraw 
+excalidraw-plugin: parsed
+tags:
+  - excalidraw
 excalidraw-open-md: true
 ---
 
