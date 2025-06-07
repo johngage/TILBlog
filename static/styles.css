@@ -1168,3 +1168,22 @@ body.dark-mode .search-form button:hover {
         gap: 6px;
     }
 }
+
+/* Reduce navigation bar height */
+nav.topics {
+    padding: 6px 0;  /* Reduced from default */
+    margin-bottom: 15px;  /* Less space below */
+}
+
+.topic-cloud {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: auto;  /* Remove any minimum height */
+}
+
+.topic-link {
+    padding: 4px 10px;  /* Smaller vertical padding */
+    font-size: 13px;
+    line-height: 1.2;  /* Tighter line height */
+}
