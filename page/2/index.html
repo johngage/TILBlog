@@ -50,26 +50,29 @@ MathJax = {
 <link rel="stylesheet" href="/TILBlog/static/search-modal.css">
 
 </head>
+
 <body>
   <!-- ADD THIS: Purple banner -->
     <div class="site-banner">
         John Gage's TILs - Policy and Technology Interact
     </div>
-    <header>
-    <!-- Add dark mode toggle -->
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-      🌙
-    </button>
-    <!-- Rest of header -->
-  </header>
+    <!-- Single header with dark mode toggle -->
     <header>
         <div class="container">
             <div class="header-content">
                 <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
-                <form action="/TILBlog/search/" method="get" class="search-form">
+                
+                <!-- Search form with onsubmit -->
+                <form action="/TILBlog/search/" method="get" class="search-form" 
+                      onsubmit="return handleSearchSubmit(event)">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
+                
+                <!-- Dark mode toggle - moved to top right corner -->
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
             </div>
         </div>
     </header>
@@ -117,7 +120,7 @@ MathJax = {
           
             <a href="/TILBlog/topic/curriculum/">curriculum</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
           
-            <a href="/TILBlog/topic/dfos/">dfos</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
+            <a href="/TILBlog/topic/dfos/">dfos</a> <span class="topic-count">2</span><span class="topic-separator">·</span>
           
             <a href="/TILBlog/topic/drought/">drought</a> <span class="topic-count">1</span><span class="topic-separator">·</span>
           
@@ -156,7 +159,7 @@ MathJax = {
 
     <!-- Update stats summary to be more compact -->
     <div class="stats-summary">
-        <strong>23 TILs</strong> · 
+        <strong>24 TILs</strong> · 
         <a href="/TILBlog/feed.atom">Atom feed</a> · 
         <span class="search-hint">Press <kbd>Ctrl</kbd>+<kbd>K</kbd> for instant search</span>
     </div>
@@ -174,6 +177,45 @@ MathJax = {
     
    
     <ul class="entry-list">
+        
+        <li class="entry-item">
+            <h3 class="entry-title">
+                <a href="/TILBlog/note/omar-yaghi-on-total-carbon-removal/">Omar Yaghi on total carbon removal</a>
+            </h3>
+            <div class="entry-meta">
+                <div class="entry-dates">
+                    <span class="entry-date">2025-05-19</span>
+                    
+                         <span class="modified-indicator">✏️ Modified 2025-05-29 11:27</span>
+                    
+                </div>
+                
+                
+                <div class="entry-topics">
+                    
+                        
+                            <a href="/TILBlog/topic/carbon/" class="entry-topic">carbon</a>
+                        
+                    
+                        
+                            <a href="/TILBlog/topic/water/" class="entry-topic">water</a>
+                        
+                    
+                        
+                            <a href="/TILBlog/topic/Omar-Yaghi/" class="entry-topic">Omar-Yaghi</a>
+                        
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Preview - processed in Python -->
+            
+            <div class="entry-preview">
+                <p class="preview">Prof. Omar Yaghi describes the scientific basis for enabling direct atmosperic carbon removal using MOF and COF; removal of 1,100 Gigatonnes of carbon could take as little as 3.1 years, with removal...</p>
+            </div>
+            
+        </li>
         
         <li class="entry-item">
             <h3 class="entry-title">
@@ -295,7 +337,7 @@ MathJax = {
             <a href="/TILBlog/" class="prev">Previous</a>
             
             
-            <span class="info">Page 2 (23 entries)</span>
+            <span class="info">Page 2 (24 entries)</span>
             
             
         </div>

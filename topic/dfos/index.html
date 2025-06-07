@@ -50,26 +50,29 @@ MathJax = {
 <link rel="stylesheet" href="/TILBlog/static/search-modal.css">
 
 </head>
+
 <body>
   <!-- ADD THIS: Purple banner -->
     <div class="site-banner">
         John Gage's TILs - Policy and Technology Interact
     </div>
-    <header>
-    <!-- Add dark mode toggle -->
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-      🌙
-    </button>
-    <!-- Rest of header -->
-  </header>
+    <!-- Single header with dark mode toggle -->
     <header>
         <div class="container">
             <div class="header-content">
                 <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
-                <form action="/TILBlog/search/" method="get" class="search-form">
+                
+                <!-- Search form with onsubmit -->
+                <form action="/TILBlog/search/" method="get" class="search-form" 
+                      onsubmit="return handleSearchSubmit(event)">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
+                
+                <!-- Dark mode toggle - moved to top right corner -->
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
             </div>
         </div>
     </header>
@@ -112,6 +115,34 @@ MathJax = {
     <li class="entry-item">
       <div class="entry-header">
         <h3 class="entry-title">
+            <a href="/TILBlog/note/dfos-2d-demo/">DFOS 2D demo</a>
+        </h3>
+        
+        <div class="entry-meta">
+            <div class="entry-dates">
+                <span class="entry-date">2025-06-06</span>
+                
+            </div>
+            
+            
+            <div class="entry-topics">
+                
+                    
+                        <a href="/TILBlog/topic/dfos/" class="entry-topic">dfos</a>
+                    
+                
+            </div>
+            
+        </div>
+      </div>
+    
+      
+    </li>
+    
+    <!-- In topic.html, use the same entry-item structure -->
+    <li class="entry-item">
+      <div class="entry-header">
+        <h3 class="entry-title">
             <a href="/TILBlog/note/2025-06-05/">Fiber Optic Sensing Association</a>
         </h3>
         
@@ -145,7 +176,7 @@ MathJax = {
         <div class="pagination">
             
             
-            <span class="info">Page 1 (1 entries)</span>
+            <span class="info">Page 1 (2 entries)</span>
             
             
         </div>

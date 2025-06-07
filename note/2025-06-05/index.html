@@ -50,26 +50,29 @@ MathJax = {
 <link rel="stylesheet" href="/TILBlog/static/search-modal.css">
 
 </head>
+
 <body>
   <!-- ADD THIS: Purple banner -->
     <div class="site-banner">
         John Gage's TILs - Policy and Technology Interact
     </div>
-    <header>
-    <!-- Add dark mode toggle -->
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-      🌙
-    </button>
-    <!-- Rest of header -->
-  </header>
+    <!-- Single header with dark mode toggle -->
     <header>
         <div class="container">
             <div class="header-content">
                 <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
-                <form action="/TILBlog/search/" method="get" class="search-form">
+                
+                <!-- Search form with onsubmit -->
+                <form action="/TILBlog/search/" method="get" class="search-form" 
+                      onsubmit="return handleSearchSubmit(event)">
                     <input type="search" name="q" placeholder="Search..." value="">
                     <button type="submit">Search</button>
                 </form>
+                
+                <!-- Dark mode toggle - moved to top right corner -->
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
             </div>
         </div>
     </header>
@@ -142,6 +145,15 @@ Graz University of Technology, Host of the 2024 FOSA mid-year member meeting</p>
         </div>
     </article>
     
+    
+    <aside class="related">
+        <h3>Related entries</h3>
+        <ul>
+            
+            <li><a href="/TILBlog/note/dfos-2d-demo/">DFOS 2D demo</a></li>
+            
+        </ul>
+    </aside>
     
 
     </main>

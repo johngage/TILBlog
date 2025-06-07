@@ -1,3 +1,5 @@
+// static/search.js - Complete file with all fixes
+
 /**
  * TILNET Client-Side Search with Flexsearch
  * Provides Ctrl+K instant search functionality
@@ -49,6 +51,14 @@
             
             // Create search modal
             createSearchModal();
+            
+            // Handle regular search form
+            handleRegularSearchForm();
+            
+            // Handle search page if we're on it
+            if (isSearchReady) {
+                handleSearchPage();
+            }
             
         } catch (error) {
             console.error('Failed to initialize search:', error);
@@ -200,6 +210,128 @@
         container.innerHTML = html;
     }
     
+    // Handle regular search form
+    function handleRegularSearchForm() {
+        const searchForm = document.querySelector('.search-form');
+        const searchInput = searchForm ? searchForm.querySelector('input[type="search"]') : null;
+        
+        if (searchForm && searchInput) {
+            // Prevent form submission
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const query = searchInput.value.trim();
+                
+                if (!query) {
+                    return;
+                }
+                
+                // Open the search modal with the query
+                if (isSearchReady) {
+                    showSearch();
+                    document.getElementById('modal-search-input').value = query;
+                    // Trigger search
+                    const event = new Event('input', { bubbles: true });
+                    document.getElementById('modal-search-input').dispatchEvent(event);
+                } else {
+                    alert('Search is still loading. Please try again in a moment.');
+                }
+            });
+        }
+    }
+    
+    // Handle search page if we're on search.html
+    function handleSearchPage() {
+        // Check if we're on the search page
+        if (window.location.pathname.includes('/search.html')) {
+            // Get query from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            
+            if (query && isSearchReady) {
+                // Display search results on the page
+                const resultsContainer = document.getElementById('search-page-results');
+                if (resultsContainer) {
+                    performSearchOnPage(query, resultsContainer);
+                }
+            }
+        }
+    }
+    
+    // Perform search and display on search page
+    function performSearchOnPage(query, container) {
+        // Update the search input if it exists
+        const searchInput = document.querySelector('input[name="q"]');
+        if (searchInput) {
+            searchInput.value = query;
+        }
+        
+        // Update page title
+        const pageTitle = document.querySelector('h2');
+        if (pageTitle) {
+            pageTitle.textContent = `Search results for "${query}"`;
+        }
+        
+        // Perform search
+        const results = flexsearchIndex.search(query, {
+            limit: 50,  // More results for search page
+            suggest: true
+        });
+        
+        if (results.length === 0) {
+            container.innerHTML = `
+                <div class="search-message">
+                    <p>No results found for "<strong>${escapeHtml(query)}</strong>"</p>
+                    <p>Try different keywords or browse by <a href="${BASE_URL}/">topic</a>.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Get full documents and display
+        const resultDocs = results.map(id => searchIndex[id]);
+        
+        // Create HTML similar to your entry list
+        const html = `
+            <p class="search-summary">${results.length} results found</p>
+            <ul class="entry-list">
+                ${resultDocs.map(doc => `
+                    <li class="entry-item">
+                        <div class="entry-header">
+                            <h3 class="entry-title">
+                                <a href="${doc.url}">${escapeHtml(doc.title)}</a>
+                            </h3>
+                            
+                            <div class="entry-meta">
+                                <div class="entry-dates">
+                                    <span class="entry-date">${new Date(doc.created).toLocaleDateString()}</span>
+                                    ${doc.modified && doc.modified !== doc.created ? 
+                                        `<span class="modified-indicator">(modified ${new Date(doc.modified).toLocaleDateString()})</span>` 
+                                        : ''
+                                    }
+                                </div>
+                                
+                                ${doc.topics.length > 0 ? `
+                                    <div class="entry-topics">
+                                        ${doc.topics.map(t => 
+                                            `<a href="${BASE_URL}/topic/${encodeURIComponent(t)}/" class="entry-topic">${escapeHtml(t)}</a>`
+                                        ).join(' ')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="entry-preview">
+                            ${highlightMatch(doc.preview, query)}
+                        </div>
+                    </li>
+                `).join('')}
+            </ul>
+        `;
+        
+        container.innerHTML = html;
+    }
+    
     function highlightMatch(text, query) {
         if (!text || !query) return escapeHtml(text || '');
         
@@ -236,5 +368,17 @@
         show: showSearch,
         close: closeSearch,
         isReady: () => isSearchReady
+    };
+    
+    // Also make handleSearchSubmit available globally for the inline onclick
+    window.handleSearchSubmit = function(event) {
+        event.preventDefault();
+        const query = event.target.q.value.trim();
+        if (query && window.TILNET_SEARCH && window.TILNET_SEARCH.isReady()) {
+            window.TILNET_SEARCH.show();
+            document.getElementById('modal-search-input').value = query;
+            document.getElementById('modal-search-input').dispatchEvent(new Event('input'));
+        }
+        return false;
     };
 })();
