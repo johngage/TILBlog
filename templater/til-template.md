@@ -29,4 +29,3 @@ excalidraw-open-md: true
 
 ## Details
 
-## References
