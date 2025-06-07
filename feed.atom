@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://johngage.github.io/TILBlog</id>
   <title>John Gage: Today I Learned</title>
-  <updated>2025-06-07T18:18:52.055767+00:00</updated>
+  <updated>2025-06-07T22:26:56.526667+00:00</updated>
   <author>
     <name>John Gage</name>
     <email>john@example.com</email>
@@ -1680,7 +1680,16 @@ Joy and &lt;/p&gt;
 &lt;p&gt;Dr. Werner Lienhart, Institute of Engineering Geodesy and Measurement Systems
 Graz University of Technology, Host of the 2024 FOSA mid-year member meeting&lt;/p&gt;
 &lt;p&gt;Brad Lipovsky, The University of Washington&lt;/p&gt;
-&lt;p&gt;Jonathan Ajo-Franklin, Rice University&lt;/p&gt;</content>
+&lt;p&gt;Jonathan Ajo-Franklin, Rice University&lt;/p&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Jaewon Saw, Linqing Luo, Kristy Chu, John Ryan, Kenichi Soga, Yuxin Wu; Distributed Acoustic Sensing for Whale Vocalization Monitoring: A Vertical Deployment Field Test. &lt;strong&gt;Seismological Research Letters&lt;/strong&gt; 2025;; 96 (2A): 801–815. doi: &lt;a href="https://doi.org/10.1785/0220240389"&gt;https://doi.org/10.1785/0220240389&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Saw, J., Zhu, X., Luo, L., Correa, J., Soga, K. and Ajo-Franklin, J., 2025. Distributed Fiber Optic Sensing for in-well hydraulic fracture monitoring. Geoenergy Science and Engineering, 250, p.213792. &lt;a href="https://doi.org/10.1016/j.geoen.2025.213792"&gt;https://doi.org/10.1016/j.geoen.2025.213792&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/2025-06-05/" rel="alternate"/>
     <published>2025-06-05T20:43:23+00:00</published>
   </entry>
@@ -1688,7 +1697,31 @@ Graz University of Technology, Host of the 2024 FOSA mid-year member meeting&lt;
     <id>https://johngage.github.io/TILBlog/note/dfos-2d-demo/</id>
     <title>DFOS 2D demo</title>
     <updated>2025-06-06T14:51:24+00:00</updated>
-    <content type="html"/>
+    <content type="html">&lt;h4 id="location-temperature-strain"&gt;Location, temperature, strain&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Locate sound, motion, heat: &lt;ul&gt;
+&lt;li&gt;Historical survey: sonar, radar, optical, DFOS, seismic, missle defense, autonomous vehicles, robotics&lt;/li&gt;
+&lt;li&gt;Applications: military, seafaring, aviation, defense, astronomy, robotics,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Demonstrating DAS location sensing accuracy.
+    1. https://www.nature.com/articles/s41467-022-31681-x : 
+    2. https://www.nature.com/articles/s41597-025-05119-0?fromPaywallRec=false
+    3. https://www.nature.com/articles/s41598-023-31490-2?fromPaywallRec=false
+    4. https://www.nature.com/articles/s44172-024-00274-5?fromPaywallRec=false
+Basic concepts:
+- The hyperbolic triangulation method corresponds to one of the standard techniques to estimate the position of a source from the TDOAs between different sensors&lt;a href="https://www.nature.com/articles/s41467-022-31681-x#ref-CR36" title="Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. Rev. Sci. Instrum. 87, 041502 (2016)."&gt;36&lt;/a&gt;.
+- Considering the large number of sophisticated array processing techniques existing in the literature[^22],23,24,44,45, we are confident that novel approaches will soon emerge to improve the directivity and performance of near- and far-field beamforming techniques for DAS
+- Note that the approach here demonstrated as a proof of concept is based on one of the simplest array signal processing techniques22,23,24,41 &lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;[^22]: Benesty, J., Chen, J. &amp;amp; Huang, Y. &lt;em&gt;Microphone Array Signal Processing&lt;/em&gt; (Springer, 2008).
+[^23]:  Johnson, D. H. &amp;amp; Dudgeon, D. E. &lt;em&gt;Array Signal Processing: Concepts and Techniques&lt;/em&gt; (Pearson, 1993).
+[^24]:  1. Liu, W. &amp;amp; Weiss, S. &lt;em&gt;Wideband Beamforming: Concepts and Techniques&lt;/em&gt; (Wiley, 2010).
+[^44]:  1. Van Trees, H. L. &lt;em&gt;Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory,&lt;/em&gt; 1st edn. (Wiley-Interscience, 2002).
+[^41]:  Cigada, A., Ripamonti, F. &amp;amp; Vanali, M. The delay &amp;amp; sum algorithm applied to microphone array measurements: Numerical analysis and experimental validation. &lt;em&gt;Mech. Syst. Signal Process.&lt;/em&gt; &lt;strong&gt;21&lt;/strong&gt;, 2645–2664 (2007).
+[^45]: 1. Schweitzer, J., Fyen, J., Mykkeltveit, S. &amp;amp; Kvaerna, T. &lt;em&gt;Seismic arrays&lt;/em&gt; (ed. Bormann, P.), &lt;em&gt;New Manual of Seismological Observatory Practice 2 (NMSOP-2)&lt;/em&gt; 1–80 (Deutsches GeoForschungsZentrum GFZ, Potsdam, 2012).
+[^36]: Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. &lt;em&gt;Rev. Sci. Instrum.&lt;/em&gt; &lt;strong&gt;87&lt;/strong&gt;, 041502 (2016).&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/dfos-2d-demo/" rel="alternate"/>
     <published>2025-06-06T14:51:24+00:00</published>
   </entry>

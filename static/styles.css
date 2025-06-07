@@ -1187,3 +1187,29 @@ nav.topics {
     font-size: 13px;
     line-height: 1.2;  /* Tighter line height */
 }
+/* Add new darkmode statements to apply to all of the page */
+/* Dark mode base styles */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #e5e5e5;
+}
+
+body.dark-mode header {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+body.dark-mode main {
+    background: #1a1a1a;
+    color: #e5e5e5;
+}
+
+/* Make sure ALL elements get dark mode */
+body.dark-mode * {
+    border-color: #333 !important;
+}
+
+body.dark-mode .container {
+    background: #1a1a1a;
+    color: #e5e5e5;
+}
