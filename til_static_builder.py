@@ -326,9 +326,10 @@ class TILStaticSiteBuilder:
             topic_name = topic_row['name']
             log(f"Generating topic page for: {topic_name}")
             
-            # Create directory for this topic
-            topic_page_dir = topic_dir / topic_name
-            ensure_dir(topic_page_dir)
+            # Create directory for this topic using lowercase for URL
+            topic_name_url = topic_name.lower()  # Add this line
+            topic_page_dir = topic_dir / topic_name_url  # Use lowercase version
+            ensure_dir(topic_page_dir)  
             
             # EXACT same query as Flask app topic route
             count = self.query_db(
@@ -517,9 +518,13 @@ class TILStaticSiteBuilder:
             
             html = template.render(**context)
             
-            with open(self.build_dir / 'search.html', 'w', encoding='utf-8') as f:
+            # Create search directory for clean URLs
+            search_dir = self.build_dir / 'search'
+            ensure_dir(search_dir)
+
+            with open(search_dir / 'index.html', 'w', encoding='utf-8') as f:
                 f.write(html)
-            
+
             log("Generated search page")
         except Exception as e:
             log(f"Error generating search page: {e}")
@@ -569,30 +574,26 @@ class TILStaticSiteBuilder:
             
             html = template.render(**context)
             
-            with open(self.build_dir / 'stats.html', 'w', encoding='utf-8') as f:
-                f.write(html)
+            # Create stats directory and write index.html for clean URLs
+            stats_dir = self.build_dir / 'stats'
+            ensure_dir(stats_dir)
+
+            with open(stats_dir / 'index.html', 'w', encoding='utf-8') as f:
+                f.write(html)  
             
             log("Generated stats page")
         except Exception as e:
             log(f"Error generating stats page: {e}")
     
     def generate_feed(self):
-        """Generate Atom feed - matches Flask app feed route patterns"""
+        """Generate Atom feed using feedgen library"""
         log("Generating Atom feed")
         
         try:
-            # Try to find feed template
-            for template_name in ['feed.atom', 'feed.xml', 'atom.xml']:
-                try:
-                    template = self.env.get_template(template_name)
-                    break
-                except:
-                    continue
-            else:
-                log("No feed template found, skipping feed generation")
-                return
+            from feedgen.feed import FeedGenerator
+            from datetime import datetime, timezone
             
-            # EXACT same query as Flask app feed route
+            # Get recent entries
             entries = self.query_db(
                 """
                 SELECT id, slug, title, html, 
@@ -603,25 +604,55 @@ class TILStaticSiteBuilder:
                 """
             )
             
-            # Setup mock request
-            mock_request = MockRequest('feed')
-            mock_request.url_root = "https://example.com"
-            self.env.globals['request'] = mock_request
+            # Create feed generator
+            fg = FeedGenerator()
             
-            # Template context for feed
-            context = {
-                'entries': entries,
-                'request': mock_request
-            }
+            # Base URL for your GitHub Pages site
+            base_url = f"https://johngage.github.io{self.base_url}"
             
-            feed_content = template.render(**context)
+            # Set feed metadata
+            fg.id(base_url)
+            fg.title('John Gage: Today I Learned')
+            fg.author({'name': 'John Gage', 'email': 'john@example.com'})
+            fg.link(href=base_url, rel='alternate')
+            fg.link(href=f"{base_url}/feed.atom", rel='self')
+            fg.subtitle('A collection of things I learn every day')
+            fg.language('en')
             
-            with open(self.build_dir / 'feed.atom', 'w', encoding='utf-8') as f:
-                f.write(feed_content)
+            # Add entries
+            for entry in entries:
+                entry_url = f"{base_url}/note/{entry['slug']}/"
+                
+                # Parse date and add timezone info
+                try:
+                    created = datetime.strptime(entry['created'], "%Y-%m-%d %H:%M:%S")
+                except ValueError:
+                    created = datetime.strptime(entry['created'], "%Y-%m-%d")
+                
+                # Make timezone-aware (assuming UTC)
+                created = created.replace(tzinfo=timezone.utc)
+                
+                # Create feed entry
+                fe = fg.add_entry()
+                fe.id(entry_url)
+                fe.title(entry['title'])
+                fe.link(href=entry_url)
+                fe.published(created)
+                fe.updated(created)
+                fe.content(entry['html'], type='html')
             
-            log("Generated Atom feed")
+            # Generate and save
+            atom_str = fg.atom_str(pretty=True)
+            
+            with open(self.build_dir / 'feed.atom', 'wb') as f:
+                f.write(atom_str)
+            
+            log(f"✅ Generated Atom feed with {len(entries)} entries")
+            
         except Exception as e:
-            log(f"Error generating feed: {e}")
+            log(f"❌ Error generating feed: {e}")
+            import traceback
+            traceback.print_exc()
     
     def copy_static_files(self):
         """Copy static files to the build directory"""
@@ -640,9 +671,6 @@ class TILStaticSiteBuilder:
         log("Generating search index for client-side search")
         
         try:
-            # Import json at the top if not already imported
-            import json
-            
             # Query all entries with the same fields as your Flask app
             entries = self.query_db("""
                 SELECT 

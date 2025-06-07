@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/projects/DFOS demonstration.md",
+                "file": "content/projects/Fiber Optic Sensing Association.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DFOS demonstration"
+              "title": "Fiber Optic Sensing Association"
             }
           }
         ],
@@ -201,19 +201,20 @@
   },
   "active": "18e4e707ff173e03",
   "lastOpenFiles": [
-    "templater/til-template.md",
-    "content/projects/DFOS demonstration.md",
-    "content/projects/Fiber Optic Sensing Association.md",
     "til.db-journal",
     "til.db",
-    "_site/note/latex-math-test/index.html",
-    "_site/note/latex-math-test",
-    "_site/note/books-embedding/index.html",
-    "_site/note/books-embedding",
-    "_site/note/2025-06-05/index.html",
-    "_site/note/2025-06-05",
-    "_site/topic/science/index.html",
-    "_site/topic/science",
+    "content/projects/DFOS demonstrations.md",
+    "_site/feed.atom",
+    "templates/feed.atom",
+    "_site/topic/omar-yaghi/index.html",
+    "_site/topic/omar-yaghi",
+    "_site/topic/gspp/index.html",
+    "_site/topic/gspp",
+    "_site/topic/claude/index.html",
+    "_site/topic/claude",
+    "_site/stats/index.html",
+    "templater/til-template.md",
+    "content/projects/Fiber Optic Sensing Association.md",
     "content/projects/Goldman School of Public Policy/GSPP.md",
     "content/economy/Alan Taylor - Martin Wolf.md",
     "content/California-Africa/Framework for California-Africa Agreements.md",
@@ -235,7 +236,6 @@
     "content/test/Test-hybrid-til.md",
     "content/books/Needham-Visual Complex Analysis-25ed/Needham-Visual Complex Analysis.md",
     "content/test/LaTeX Math Test.md",
-    "content/Schools/Internet joins schools and teachers to a global library.md",
-    "content/science-technology/Biology updates itself.md"
+    "content/Schools/Internet joins schools and teachers to a global library.md"
   ]
 }

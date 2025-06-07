@@ -46,3 +46,8 @@ Graz University of Technology, Host of the 2024 FOSA mid-year member meeting
 Brad Lipovsky, The University of Washington
 
 Jonathan Ajo-Franklin, Rice University
+
+---
+- Jaewon Saw, Linqing Luo, Kristy Chu, John Ryan, Kenichi Soga, Yuxin Wu; Distributed Acoustic Sensing for Whale Vocalization Monitoring: A Vertical Deployment Field Test. __Seismological Research Letters__ 2025;; 96 (2A): 801–815. doi: [https://doi.org/10.1785/0220240389](https://doi.org/10.1785/0220240389)
+
+-  Saw, J., Zhu, X., Luo, L., Correa, J., Soga, K. and Ajo-Franklin, J., 2025. Distributed Fiber Optic Sensing for in-well hydraulic fracture monitoring. Geoenergy Science and Engineering, 250, p.213792. [https://doi.org/10.1016/j.geoen.2025.213792](https://doi.org/10.1016/j.geoen.2025.213792)
