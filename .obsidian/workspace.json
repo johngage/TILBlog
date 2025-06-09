@@ -202,6 +202,7 @@
   "active": "18e4e707ff173e03",
   "lastOpenFiles": [
     "til.db-journal",
+    "tilnet_snapshot2.txt",
     "til.db",
     "content/projects/DFOS demonstrations.md",
     "_site/feed.atom",
@@ -212,7 +213,6 @@
     "_site/topic/gspp",
     "_site/topic/claude/index.html",
     "_site/topic/claude",
-    "_site/stats/index.html",
     "templater/til-template.md",
     "content/projects/Fiber Optic Sensing Association.md",
     "content/projects/Goldman School of Public Policy/GSPP.md",
