@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://johngage.github.io/TILBlog</id>
   <title>John Gage: Today I Learned</title>
-  <updated>2025-06-09T04:35:05.255671+00:00</updated>
+  <updated>2025-06-09T04:41:29.245740+00:00</updated>
   <author>
     <name>John Gage</name>
     <email>john@example.com</email>
@@ -2221,11 +2221,11 @@ topics:
 &lt;p&gt;John Gage &lt;a href="&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#106;&amp;#111;&amp;#104;&amp;#110;&amp;#46;&amp;#103;&amp;#97;&amp;#103;&amp;#101;&amp;#64;&amp;#103;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;"&gt;&amp;#106;&amp;#111;&amp;#104;&amp;#110;&amp;#46;&amp;#103;&amp;#97;&amp;#103;&amp;#101;&amp;#64;&amp;#103;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
 6:17 PM (3 hours ago)
 to dave&lt;/p&gt;
-&lt;p&gt;Willison was great. https://simonw.substack.com/p/the-last-six-months-in-llms-illustrated&lt;/p&gt;
-&lt;p&gt;Here&amp;rsquo;s 15 minutes of Laurie Voss : https://www.youtube.com/watch?v=kqB_xML1SfA&lt;/p&gt;
+&lt;p&gt;Willison was great.&lt;a href="https://simonw.substack.com/p/the-last-six-months-in-llms-illustrated"&gt;The last six months in llms&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s 15 minutes of Laurie Voss : &lt;a href="https://www.youtube.com/watch?v=kqB_xML1SfA"&gt;Laurie Voss on GLM&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It reminded me of Bill Joy and JINI....so here&amp;rsquo;s a Claude chat on the history and future of distributed systems....followed by how photonics might change all distributed systems&amp;hellip;use unique optical signatures in fiber.&lt;/p&gt;
-&lt;p&gt;https://claude.ai/share/6fe5999e-d9e9-438c-972c-622e4c2d558b&lt;/p&gt;
-&lt;p&gt;and photonics: https://claude.ai/share/129707dc-22d0-4342-adfb-82adce76b8b5&lt;/p&gt;</content>
+&lt;p&gt;&lt;a href="https://claude.ai/share/6fe5999e-d9e9-438c-972c-622e4c2d558b"&gt;Claude conversation on JINI and AI Agents&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://claude.ai/share/129707dc-22d0-4342-adfb-82adce76b8b5"&gt;Claude on JINI, code migration, and security through photonics&lt;/a&gt;&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/AI-Engineering/" rel="alternate"/>
     <published>2025-06-08T21:29:29+00:00</published>
   </entry>
