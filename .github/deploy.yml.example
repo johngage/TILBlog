@@ -1,0 +1,82 @@
+name: Build and Deploy TIL Site
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Cache pip packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Build database from content
+      run: |
+        echo "Building database from markdown files..."
+        python rebuild_database.py
+        echo "Database built successfully"
+    
+    - name: Generate static site
+      run: |
+        echo "Generating static site..."
+        python til_static_builder.py --base-url '/TILBlog'
+        echo "Static site generated"
+    
+    - name: Check build output
+      run: |
+        echo "Checking _site directory contents:"
+        ls -la _site/ || echo "_site directory is empty or does not exist"
+        echo "Entry pages:"
+        find _site/note -name "*.html" 2>/dev/null | wc -l || echo "0"
+        echo "Topic pages:"
+        find _site/topic -name "*.html" 2>/dev/null | wc -l || echo "0"
+        
+        # Check if critical files exist
+        if [ ! -f "_site/index.html" ]; then
+          echo "❌ index.html is missing"
+          exit 1
+        fi
+        
+        if [ ! -f "_site/search-index.json" ]; then
+          echo "⚠️  search-index.json is missing"
+        fi
+        
+        if [ ! -f "_site/feed.atom" ]; then
+          echo "⚠️  feed.atom is missing"
+        fi
+        
+        echo "✅ Build successful"
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site
+        publish_branch: gh-pages
+        force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Deploy TIL site - ${{ github.sha }}'

@@ -1,179 +1,269 @@
----
-topics:  [til-build]
----
-# Today I Learned (TIL) Blog that may develop into a full weblog
+# TILNET - Today I Learned Network
 
-A simple, fast TIL (Today I Learned) blog inspired by Simon Willison's design. This application allows you to publish quick notes and snippets you learn daily, organized by topics.
+A self-documenting knowledge management system that transforms your learning journey and Claude AI conversations into a searchable, beautiful static website.
 
-## Features
+## 🌟 What is TILNET?
 
-- Organized by topics- the topics accumulate as notes with named topics in the front matter add new topics; stored somehow in sqlite
-- Full-text search
-- Responsive design
-- Markdown support with syntax highlighting
-- Atom feed
-- SQLite backend for simplicity
+TILNET combines the simplicity of markdown files with the power of SQLite to create a fast, searchable archive of everything you learn. Inspired by Simon Willison's TIL pattern, TILNET adds:
 
-## Requirements
+- **Instant Search**: Ctrl+K to search across all your notes
+- **Claude Integration**: Import and analyze your AI conversations
+- **Smart Organization**: Automatic topic extraction and linking
+- **Simple Deployment**: One command to build and deploy
+- **Beautiful Design**: Clean, responsive, dark mode support
 
-- Python 3.6+
-- Flask
-- Markdown
-- A few other dependencies listed in `requirements.txt`
+## 🚀 Quick Start
 
-## Setup
+### 1. Clone and Setup
 
-1. Clone this repository:
-   ```
-   git clone https://github.com/yourusername/til.git
-   cd til
-   ```
-
-2. Create a virtual environment and install dependencies:
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-3. Initialize the database:
-   ```
-   flask build
-   ```
-
-## Adding Content
-
-Create directories for your topics and add Markdown files:
-
-```
-python/
-  useful-list-comprehensions.md
-  debugging-with-pdb.md
-flask/
-  flask-blueprints.md
-git/
-  reset-vs-revert.md
+```bash
+git clone https://github.com/yourusername/tilnet.git
+cd tilnet
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-Each Markdown file should start with a title (a line beginning with `#`):
+### 2. Add Your First TIL
+
+Create a markdown file in `content/`:
 
 ```markdown
-# Useful List Comprehensions in Python
+---
+title: "Learning Python Decorators"
+topics:
+  - python
+  - programming
+created: 2024-01-15
+---
 
-Here's how to use list comprehensions effectively...
+Today I learned how Python decorators work...
 ```
 
-If no title is provided, the filename (converted to title case) will be used.
+### 3. Build and Deploy with One Command
 
-## Running the App
-
-For development:
-```
-flask run --debug
+```bash
+python til_deploy.py
 ```
 
-For production, use a WSGI server like Gunicorn:
+That's it! This single command:
+- ✅ Rebuilds your database from markdown files
+- ✅ Generates a static site with search
+- ✅ Commits all changes
+- ✅ Deploys to GitHub Pages
+
+Your site will be live at: `https://yourusername.github.io/tilnet/`
+
+## 📁 Project Structure
+
 ```
-gunicorn app:app
+tilnet/
+├── content/              # Your markdown TIL entries
+├── templates/            # HTML templates (customizable)
+├── static/               # CSS and JavaScript
+├── til_deploy.py        # 🌟 One-command deployment
+├── til_static_builder.py # Static site generator
+├── rebuild_database.py   # Database management
+└── app.py               # Local development server
 ```
 
-## Deployment
+## ✨ Features
 
-This app is designed to be simple to deploy. You can deploy it to any platform that supports Python applications, such as:
+### One-Command Deployment
+Unlike complex CI/CD setups, TILNET uses a simple Python script:
 
-- Heroku
-- PythonAnywhere
-- Vercel
-- Fly.io
-- VPS with Nginx and Gunicorn
+```bash
+python til_deploy.py
+```
 
-### Example deployment with Fly.io
+This is:
+- **Transparent**: Read the script to see exactly what happens
+- **Portable**: Works with any git host (GitHub, GitLab, etc.)
+- **Customizable**: Easy to modify for different hosting providers
+- **Educational**: Great for learning deployment concepts
 
-1. Install the Fly CLI
-2. Create a `fly.toml` file
-3. Deploy with `fly deploy`
+### Instant Search (Ctrl+K)
+- Blazing fast client-side search
+- Search across titles, content, and topics
+- Highlighted matches
+- Works offline
 
-## Customization
+### Smart Organization
+- Automatic topic extraction
+- Cross-references between entries
+- Chronological and topic-based browsing
+- Modified date tracking
 
-- Edit `templates/` to change the HTML structure
-- Modify `static/styles.css` to change the appearance
-- Update author information in `feed.py`
+## 🛠️ Deployment Options
 
-## License
+### Primary Method: Simple Python Script (Recommended)
 
-MIT
+The `til_deploy.py` script is the heart of TILNET's simplicity:
 
-## Acknowledgements
+```bash
+python til_deploy.py
+```
 
-Inspired by [Simon Willison's TIL](https://til.simonwillison.net/)
+What it does:
+1. 📄 Updates database from your markdown files
+2. 🏗️  Generates static site with search index
+3. 📦 Commits all changes to git
+4. 🌐 Deploys to GitHub Pages
+
+**Why we recommend this:**
+- **One command** - No complex configuration
+- **Readable** - Open the script and understand every step
+- **Portable** - Easy to adapt for Netlify, Vercel, S3, etc.
+- **Reliable** - You control when deployment happens
+
+### Alternative: GitHub Actions (Advanced)
+
+For automatic deployment on every push, you can enable GitHub Actions:
+
+1. Rename the example workflow:
+```bash
+mv .github/workflows/deploy.yml.example .github/workflows/deploy.yml
+```
+
+2. Update the workflow file to use `_site` instead of `build` directory
+
+3. Push to GitHub - deployments will happen automatically
+
+**Note**: This is more complex and locks you into GitHub's infrastructure. We recommend starting with `til_deploy.py` and only switching to Actions if you need true CI/CD.
+
+## 🎨 Customization
+
+### Adapting for Different Hosts
+
+The beauty of `til_deploy.py` is how easy it is to modify:
+
+```python
+# For Netlify
+run_command("netlify deploy --prod --dir=_site", "Netlify deployment")
+
+# For Vercel
+run_command("vercel --prod _site/", "Vercel deployment")
+
+# For S3
+run_command("aws s3 sync _site/ s3://your-bucket/", "S3 deployment")
+```
+
+### Site Configuration
+
+Edit `til_static_builder.py` to customize:
+
+```python
+# Change base URL for your GitHub Pages
+builder = TILStaticSiteBuilder(
+    base_url='/your-repo-name'  # Update this
+)
+```
+
+### Styling
+
+Modify `static/styles.css` for custom styling. The design follows Simon Willison's aesthetic:
+- Clean typography
+- Subtle colors
+- Focus on readability
+
+## 🔧 Advanced Usage
+
+### Local Development
+
+For local testing with hot reload:
+
+```bash
+python app.py
+# Visit http://localhost:5000
+```
+
+### Manual Build Steps
+
+If you prefer to run steps separately:
+
+```bash
+# Step 1: Update database
+python rebuild_database.py
+
+# Step 2: Generate static site
+python til_static_builder.py --base-url '/your-repo'
+
+# Step 3: Test locally
+cd _site
+python -m http.server 8000
+
+# Step 4: Deploy manually
+git add _site/
+git commit -m "Update site"
+git subtree push --prefix=_site origin gh-pages
+```
+
+### Import Claude Conversations
+
+1. Export your Claude data
+2. Place in `claude_exports/latest/`
+3. Run: `python claude_tilnet_integration.py`
+
+### Database Access
+
+Query your knowledge directly:
+
+```bash
+sqlite3 til.db
+sqlite> SELECT title, created FROM entries WHERE topics_raw LIKE '%python%';
+```
+
+## 🤝 Contributing
+
+TILNET is designed to be forked and customized:
+
+1. Fork the repository
+2. Make your improvements
+3. Share back with the community
+
+Some ideas:
+- Add support for other note formats
+- Create new themes
+- Add analytics integration
+- Build import scripts for other platforms
+
+## 📚 Philosophy
+
+TILNET follows these principles:
+
+1. **Simple > Complex**: One command deployment over CI/CD pipelines
+2. **Readable > Clever**: Clear Python over obscure YAML
+3. **Portable > Convenient**: Works anywhere, not just GitHub
+4. **Educational > Magical**: You should understand how it works
+
+## 🙏 Acknowledgments
+
+- Simon Willison for the TIL concept and design inspiration
+- The Python community for excellent libraries
+- Claude AI for being a great learning companion
+- You, for documenting your learning journey!
+
+## 🚨 Troubleshooting
+
+### "GitHub Pages not updating"
+- Wait 2-3 minutes - GitHub Pages has a delay
+- Check: `https://github.com/yourusername/tilnet/settings/pages`
+- Ensure gh-pages branch exists
+
+### "Search not working"
+- Check browser console for errors
+- Verify `search-index.json` exists in `_site/`
+- Try Ctrl+Shift+R to hard refresh
+
+### "Database not building"
+- Check your markdown files have proper frontmatter
+- Run `python rebuild_database.py` and check for errors
+- Ensure content files are in `content/` directory
+
+## 📄 License
+
+MIT License - Feel free to use TILNET for your own learning journey!
 
 ---
 
-# New version uses static HTML generated by Flask; dynamic vs static needs explanation
-# TIL Blog - Today I Learned
-
-A collection of things I've learned, inspired by [Simon Willison's TIL](https://til.simonwillison.net/).
-
-## How It Works
-
-This TIL blog uses a hybrid approach:
-
-1. **Local Development**:
-   - Write notes in Obsidian
-   - Flask app serves dynamic content
-   - SQLite database stores metadata
-
-2. **Automated Deployment**:
-   - GitHub Actions runs `build.py` to generate static HTML
-   - Deploys to GitHub Pages
-   - Updates automatically when you push changes
-
-## Local Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/tilblog.git
-cd tilblog
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run locally
-python app.py
-```
-
-Visit http://127.0.0.1:5000 to see your TIL blog.
-
-## Adding New TILs
-
-1. Create a new Markdown file in your Obsidian vault
-2. Add front matter with title, date, and topic
-3. Write your content
-4. Commit and push to GitHub
-5. GitHub Actions will automatically build and deploy your site
-
-## File Structure
-
-```
-├── app.py              # Flask application
-├── build.py            # Static site generator
-├── static/             # Static assets (CSS, JS, images)
-├── templates/          # Jinja2 templates
-└── .github/workflows/  # GitHub Actions configuration
-```
-
-## Manual Deployment
-
-If you need to build and deploy manually:
-
-```bash
-# Generate static site
-python build.py
-
-# The static site will be in the build/ directory
-# You can deploy this to any static hosting service
-```
-
-## License
-
-[MIT License](LICENSE)
+**Start documenting what you learn today!** Run `python til_deploy.py` and share your knowledge with the world.
