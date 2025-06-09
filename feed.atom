@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://johngage.github.io/TILBlog</id>
   <title>John Gage: Today I Learned</title>
-  <updated>2025-06-09T02:54:09.511620+00:00</updated>
+  <updated>2025-06-09T04:35:05.255671+00:00</updated>
   <author>
     <name>John Gage</name>
     <email>john@example.com</email>
@@ -11,23 +11,6 @@
   <link href="https://johngage.github.io/TILBlog/feed.atom" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
   <subtitle>A collection of things I learn every day</subtitle>
-  <entry>
-    <id>https://johngage.github.io/TILBlog/note/goldman-school-of-public-policy/</id>
-    <title>Goldman School of Public Policy</title>
-    <updated>2025-05-21T15:58:13+00:00</updated>
-    <content type="html">&lt;p&gt;Mod: 5:07pm Thu May 29
-Today, Sunday, May 18,  the &lt;a href="https://gspp.berkeley.edu/"&gt;Goldman School of Public Policy&lt;/a&gt; graduation was &lt;a href="https://gspp.berkeley.edu/events-upcoming/event/2025-gspp-commencement"&gt;livestreamed&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;The audio stream and a complete transcript can be ingested in the GSPP NotebookLM, together with links to all documents linked to all participants.  &lt;/p&gt;
-&lt;p&gt;As the total &amp;ldquo;recording and linking&amp;rdquo; of this event expands, it will include the unique viewpoints of each participant, building on the common theme expressed by the keynote speaker, now the Executive Director of the Governor of California&amp;rsquo;s Cabinet Secretaries.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Thus, this specific graduation becomes a base document for the Class of 2025, to build   connections over time. &lt;/li&gt;
-&lt;li&gt;As each graduate arrived to receive their diploma, their picture was taken, they then crossed the stage to be congratulated by Dean &lt;a href="/note/david-wilson/" class="wiki-link"&gt;David Wilson&lt;/a&gt; and the president of the GSPPP Alumni Association, . They then had their picture taken again against a GSPP backdrop, and joined family and friends.&lt;/li&gt;
-&lt;li&gt;This event marks the joining of two graphs: the initial creation of their class community over the past two or three years, and the subsequent expansion into the world community, creating new links, new partnerships and initiatives, and new knowledge for the common good.&lt;/li&gt;
-&lt;li&gt;To build this foundation, the next step is linking all papers, all research, all faculty, all Capstone projects, all readings, class work and independent work for a deeper understanding of the fabric of forming the public policy community.&lt;/li&gt;
-&lt;/ul&gt;</content>
-    <link href="https://johngage.github.io/TILBlog/note/goldman-school-of-public-policy/" rel="alternate"/>
-    <published>2025-05-21T15:58:13+00:00</published>
-  </entry>
   <entry>
     <id>https://johngage.github.io/TILBlog/note/creating-a-til-blog/</id>
     <title>Creating a TIL Blog</title>
@@ -137,14 +120,387 @@ Here&amp;#39;s how to use list comprehensions effectively...
     <published>2025-05-21T15:58:13+00:00</published>
   </entry>
   <entry>
-    <id>https://johngage.github.io/TILBlog/note/new-test-for-site-deploy/</id>
-    <title>New Test For Site Deploy</title>
+    <id>https://johngage.github.io/TILBlog/note/new-obsidian-site-deploy/</id>
+    <title>New Obsidian Site Deploy</title>
     <updated>2025-05-22T00:00:00+00:00</updated>
-    <content type="html">&lt;p&gt;How to design a complementary set of sites.  With an independent, all-inclusive Datasette database of global content.&lt;/p&gt;
-&lt;p&gt;Today I learned how to create a &amp;ldquo;Today I Learned&amp;rdquo; blog&amp;hellip;sort of.&lt;/p&gt;
-&lt;p&gt;This is my test to see if site deployment works correctly.&lt;/p&gt;
-&lt;p&gt;Be careful; object: content pairs will be interpreted as if they are in front matter.&lt;/p&gt;</content>
-    <link href="https://johngage.github.io/TILBlog/note/new-test-for-site-deploy/" rel="alternate"/>
+    <content type="html">&lt;h1 id="obsidian-tilnet-integration-guide"&gt;Obsidian + TILNET Integration Guide&lt;/h1&gt;
+&lt;h2 id="overview"&gt;🎯 Overview&lt;/h2&gt;
+&lt;p&gt;TILNET works beautifully with Obsidian! This guide covers every integration scenario, from simple to advanced.&lt;/p&gt;
+&lt;h2 id="quick-setup-choose-one"&gt;🚀 Quick Setup (Choose One)&lt;/h2&gt;
+&lt;h3 id="option-1-tilnet-as-a-new-vault-simplest"&gt;Option 1: TILNET as a New Vault (Simplest)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Clone TILNET&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;https://github.com/YOUR-USERNAME/tilnet.git
+
+&lt;span class="c1"&gt;# Open Obsidian&lt;/span&gt;
+&lt;span class="c1"&gt;# Click &amp;quot;Open folder as vault&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# Navigate to tilnet/content/&lt;/span&gt;
+&lt;span class="c1"&gt;# Click &amp;quot;Open&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: Everything just works, full git integration &lt;strong&gt;Cons&lt;/strong&gt;: Separate from your existing notes&lt;/p&gt;
+&lt;h3 id="option-2-subfolder-in-existing-vault-recommended"&gt;Option 2: Subfolder in Existing Vault (Recommended)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# In your existing Obsidian vault&lt;/span&gt;
+mkdir&lt;span class="w"&gt; &lt;/span&gt;TIL
+
+&lt;span class="c1"&gt;# In your TILNET directory&lt;/span&gt;
+rm&lt;span class="w"&gt; &lt;/span&gt;-rf&lt;span class="w"&gt; &lt;/span&gt;content
+ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;/path/to/ObsidianVault/TIL&lt;span class="w"&gt; &lt;/span&gt;content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: Integrated with your main vault, selective publishing &lt;strong&gt;Cons&lt;/strong&gt;: Need to remember which folder publishes&lt;/p&gt;
+&lt;h3 id="option-3-cherry-pick-publishing-most-control"&gt;Option 3: Cherry-Pick Publishing (Most Control)&lt;/h3&gt;
+&lt;p&gt;Keep vaults separate, copy notes you want to publish:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create a script: publish-til.sh&lt;/span&gt;
+&lt;span class="c1"&gt;#!/bin/bash&lt;/span&gt;
+cp&lt;span class="w"&gt; &lt;/span&gt;~/Obsidian/Blog/ready-to-publish/*.md&lt;span class="w"&gt; &lt;/span&gt;~/tilnet/content/
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/tilnet
+python&lt;span class="w"&gt; &lt;/span&gt;til_deploy.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;: Total control, review before publishing &lt;strong&gt;Cons&lt;/strong&gt;: Extra step in workflow&lt;/p&gt;
+&lt;h2 id="large-vault-strategies"&gt;📁 Large Vault Strategies&lt;/h2&gt;
+&lt;h3 id="the-problem"&gt;The Problem&lt;/h3&gt;
+&lt;p&gt;You have 1,000+ notes but only want to publish TILs. Here&amp;rsquo;s how to handle it:&lt;/p&gt;
+&lt;h3 id="strategy-1-folder-structure"&gt;Strategy 1: Folder Structure&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ObsidianVault/
+├── 📝 TIL/                 # ← Only this publishes
+│   ├── 2024-01-20.md
+│   ├── python-tips.md
+│   └── web-dev/
+├── 🔒 Personal/            # Private
+├── 📚 Reference/           # Private
+├── 💼 Work/               # Private
+└── 📎 Attachments/         # Private
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="strategy-2-tag-based-workflow"&gt;Strategy 2: Tag-Based Workflow&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Tag notes you want to publish with &lt;code&gt;#til-public&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Use this Dataview query to see them:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;LIST
+FROM #til-public
+SORT file.ctime DESC
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Manually copy or script the export:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# export_tagged_tils.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;shutil&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pathlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
+
+&lt;span class="n"&gt;vault&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/path/to/ObsidianVault&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tilnet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/path/to/tilnet/content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;md_file&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;vault&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rglob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*.md&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;md_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#til-public&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;shutil&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;md_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tilnet&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;md_file&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="strategy-3-separate-public-vault"&gt;Strategy 3: Separate Public Vault&lt;/h3&gt;
+&lt;p&gt;Maintain two vaults:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Main Vault&lt;/strong&gt;: Everything (private)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TILNET Vault&lt;/strong&gt;: Just your public TILs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Use Obsidian&amp;rsquo;s &amp;ldquo;Move file to another vault&amp;rdquo; command when ready to publish.&lt;/p&gt;
+&lt;h2 id="obsidian-templates-for-tilnet"&gt;🎨 Obsidian Templates for TILNET&lt;/h2&gt;
+&lt;h3 id="basic-til-template"&gt;Basic TIL Template&lt;/h3&gt;
+&lt;p&gt;Save as &lt;code&gt;Templates/TIL Template.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;---
+title: &amp;quot;{{title}}&amp;quot;
+topics:
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;{{cursor}}
+&lt;span class="gu"&gt;created: {{date:YYYY-MM-DD}}&lt;/span&gt;
+&lt;span class="gu"&gt;---&lt;/span&gt;
+
+&lt;span class="gu"&gt;## What I Learned&lt;/span&gt;
+
+&lt;span class="gu"&gt;## Key Points&lt;/span&gt;
+
+- 
+
+&lt;span class="gu"&gt;## Example&lt;/span&gt;
+
+&lt;span class="gu"&gt;## References&lt;/span&gt;
+
+- 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="daily-til-template"&gt;Daily TIL Template&lt;/h3&gt;
+&lt;p&gt;Save as &lt;code&gt;Templates/Daily TIL.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;---
+title: &amp;quot;Daily Notes - {{date:YYYY-MM-DD}}&amp;quot;
+topics:
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;daily
+&lt;span class="gu"&gt;created: {{date:YYYY-MM-DD}}&lt;/span&gt;
+&lt;span class="gu"&gt;---&lt;/span&gt;
+
+&lt;span class="gu"&gt;## Today I Learned&lt;/span&gt;
+
+&lt;span class="gu"&gt;### Morning&lt;/span&gt;
+- 
+
+&lt;span class="gu"&gt;### Afternoon&lt;/span&gt;
+- 
+
+&lt;span class="gu"&gt;### Evening&lt;/span&gt;
+- 
+
+&lt;span class="gu"&gt;## Interesting Links&lt;/span&gt;
+
+- 
+
+&lt;span class="gu"&gt;## Tomorrow&amp;#39;s Goals&lt;/span&gt;
+
+- 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="technical-topic-template"&gt;Technical Topic Template&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;---
+title: &amp;quot;{{title}}&amp;quot;
+topics:
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;programming
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;{{language}}
+&lt;span class="gu"&gt;created: {{date:YYYY-MM-DD}}&lt;/span&gt;
+&lt;span class="gu"&gt;---&lt;/span&gt;
+
+&lt;span class="gu"&gt;## The Problem&lt;/span&gt;
+
+&lt;span class="gu"&gt;## The Solution&lt;/span&gt;
+
+```{{language}}
+// Code here
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="how-it-works"&gt;How It Works&lt;/h2&gt;
+&lt;h2 id="when-to-use-this"&gt;When to Use This&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://claude.ai/chat/089c3eda-fd7a-43bf-b6b4-1ba38a8462c2"&gt;Official Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;## 🔧 Advanced Configuration
+
+### Custom Frontmatter Processing
+
+Add to your Obsidian notes, TILNET will handle:
+
+```yaml
+---
+title: &amp;quot;Advanced Frontmatter&amp;quot;
+topics:
+  - obsidian
+  - tilnet
+created: 2024-01-20
+modified: 2024-01-21
+author: Your Name
+draft: false
+aliases:
+  - &amp;quot;Alternative Title&amp;quot;
+  - &amp;quot;Another Name&amp;quot;
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="handling-obsidian-specific-features"&gt;Handling Obsidian-Specific Features&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Obsidian Feature&lt;/th&gt;
+&lt;th&gt;TILNET Behavior&lt;/th&gt;
+&lt;th&gt;Solution&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/note/wiki-links/" class="wiki-link"&gt;Wiki Links&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;✅ Converted to HTML&lt;/td&gt;
+&lt;td&gt;Automatic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;!&lt;a href="/note/embedded-images/" class="wiki-link"&gt;Embedded Images&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;⚠️ Needs setup&lt;/td&gt;
+&lt;td&gt;Put images in &lt;code&gt;static/images/&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dataview Queries&lt;/td&gt;
+&lt;td&gt;❌ Not rendered&lt;/td&gt;
+&lt;td&gt;Use for organization only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mermaid Diagrams&lt;/td&gt;
+&lt;td&gt;✅ Works&lt;/td&gt;
+&lt;td&gt;Standard markdown&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LaTeX Math&lt;/td&gt;
+&lt;td&gt;✅ Works&lt;/td&gt;
+&lt;td&gt;MathJax included&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Callouts&lt;/td&gt;
+&lt;td&gt;⚠️ Partial&lt;/td&gt;
+&lt;td&gt;Converts to blockquotes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Canvas Files&lt;/td&gt;
+&lt;td&gt;❌ Not supported&lt;/td&gt;
+&lt;td&gt;Export as image&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="image-handling"&gt;Image Handling&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Option 1: Copy attachments folder&lt;/span&gt;
+cp&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;ObsidianVault/Attachments/*&lt;span class="w"&gt; &lt;/span&gt;tilnet/static/images/
+
+&lt;span class="c1"&gt;# Option 2: Symlink attachments&lt;/span&gt;
+ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;/path/to/ObsidianVault/Attachments&lt;span class="w"&gt; &lt;/span&gt;tilnet/static/images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Update Obsidian settings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Settings → Files &amp;amp; Links → Default location for new attachments&lt;/li&gt;
+&lt;li&gt;Set to: &amp;ldquo;In the folder specified below&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Folder path: &lt;code&gt;Attachments&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="tilignore-file"&gt;.tilignore File&lt;/h3&gt;
+&lt;p&gt;Create &lt;code&gt;content/.tilignore&lt;/code&gt; to exclude files:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="na"&gt;.obsidian&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="nf"&gt;Templates&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="nf"&gt;Archive&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="err"&gt;*&lt;/span&gt;&lt;span class="na"&gt;.canvas&lt;/span&gt;
+&lt;span class="err"&gt;*&lt;/span&gt;&lt;span class="na"&gt;.draft.md&lt;/span&gt;
+&lt;span class="err"&gt;*-&lt;/span&gt;&lt;span class="nf"&gt;private.md&lt;/span&gt;
+&lt;span class="nf"&gt;_&lt;/span&gt;&lt;span class="p"&gt;*.&lt;/span&gt;&lt;span class="no"&gt;md&lt;/span&gt;
+&lt;span class="na"&gt;.DS_Store&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="optimized-workflow"&gt;🚄 Optimized Workflow&lt;/h2&gt;
+&lt;h3 id="1-hotkeys-setup"&gt;1. Hotkeys Setup&lt;/h3&gt;
+&lt;p&gt;Add these Obsidian hotkeys:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Cmd+Shift+T&lt;/code&gt;: Create new TIL from template&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Cmd+Shift+P&lt;/code&gt;: Run publish script&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Cmd+Shift+O&lt;/code&gt;: Open TILNET preview&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-quickadd-plugin-configuration"&gt;2. QuickAdd Plugin Configuration&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Install QuickAdd plugin&lt;/li&gt;
+&lt;li&gt;Create macro: &amp;ldquo;New TIL&amp;rdquo;&lt;ul&gt;
+&lt;li&gt;Create new file from template&lt;/li&gt;
+&lt;li&gt;Add to TIL folder&lt;/li&gt;
+&lt;li&gt;Open in new pane&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="3-shell-commands-plugin"&gt;3. Shell Commands Plugin&lt;/h3&gt;
+&lt;p&gt;Install Shell Commands plugin and add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Name:&lt;span class="w"&gt; &lt;/span&gt;Deploy&lt;span class="w"&gt; &lt;/span&gt;TILNET
+Command:&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/path/to/tilnet&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;python&lt;span class="w"&gt; &lt;/span&gt;til_deploy.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now deploy with one click from Obsidian!&lt;/p&gt;
+&lt;h3 id="4-automated-sync-script"&gt;4. Automated Sync Script&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# watch_and_deploy.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pathlib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;watchdog.observers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Observer&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;watchdog.events&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;FileSystemEventHandler&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TILHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FileSystemEventHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;on_modified&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;src_path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;endswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.md&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Detected change: &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;src_path&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;til_deploy.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="n"&gt;observer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Observer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;observer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TILHandler&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;content/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recursive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;observer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;KeyboardInterrupt&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;observer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;observer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="tracking-your-tils-in-obsidian"&gt;📊 Tracking Your TILs in Obsidian&lt;/h2&gt;
+&lt;h3 id="dataview-dashboard"&gt;Dataview Dashboard&lt;/h3&gt;
+&lt;p&gt;Create &lt;code&gt;TIL Dashboard.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;# TIL Dashboard&lt;/span&gt;
+
+&lt;span class="gu"&gt;## Recent TILs&lt;/span&gt;
+&lt;span class="sb"&gt;```dataview&lt;/span&gt;
+&lt;span class="s"&gt;TABLE topics, created&lt;/span&gt;
+&lt;span class="s"&gt;FROM &amp;quot;TIL&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;SORT created DESC&lt;/span&gt;
+&lt;span class="s"&gt;LIMIT 10&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+
+&lt;span class="gu"&gt;## TILs by Topic&lt;/span&gt;
+&lt;span class="sb"&gt;```dataview&lt;/span&gt;
+&lt;span class="s"&gt;TABLE length(rows) as Count&lt;/span&gt;
+&lt;span class="s"&gt;FROM &amp;quot;TIL&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;GROUP BY topics&lt;/span&gt;
+&lt;span class="s"&gt;SORT length(rows) DESC&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+
+&lt;span class="gu"&gt;## This Week&amp;#39;s Learning&lt;/span&gt;
+&lt;span class="sb"&gt;```dataview&lt;/span&gt;
+&lt;span class="s"&gt;LIST&lt;/span&gt;
+&lt;span class="s"&gt;FROM &amp;quot;TIL&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;WHERE created &amp;gt;= date(today) - dur(7 days)&lt;/span&gt;
+&lt;span class="s"&gt;SORT created DESC&lt;/span&gt;
+&lt;span class="sb"&gt;```&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="best-practices"&gt;🎯 Best Practices&lt;/h2&gt;
+&lt;h3 id="do"&gt;DO:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ Keep TILs focused and concise&lt;/li&gt;
+&lt;li&gt;✅ Use descriptive titles&lt;/li&gt;
+&lt;li&gt;✅ Tag consistently&lt;/li&gt;
+&lt;li&gt;✅ Include code examples&lt;/li&gt;
+&lt;li&gt;✅ Add images to &lt;code&gt;/static/images/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;✅ Test locally before deploying&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="dont"&gt;DON&amp;rsquo;T:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;❌ Put private notes in content/&lt;/li&gt;
+&lt;li&gt;❌ Use complex Obsidian plugins in TILs&lt;/li&gt;
+&lt;li&gt;❌ Forget to add frontmatter&lt;/li&gt;
+&lt;li&gt;❌ Include sensitive information&lt;/li&gt;
+&lt;li&gt;❌ Make TILs too long (aim for &amp;lt; 500 words)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="troubleshooting"&gt;🚨 Troubleshooting&lt;/h2&gt;
+&lt;h3 id="my-notes-arent-showing-up"&gt;&amp;ldquo;My notes aren&amp;rsquo;t showing up&amp;rdquo;&lt;/h3&gt;
+&lt;p&gt;Check:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Notes are in &lt;code&gt;content/&lt;/code&gt; folder&lt;/li&gt;
+&lt;li&gt;Have valid frontmatter (&amp;mdash;)&lt;/li&gt;
+&lt;li&gt;Have a title&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;python rebuild_database.py&lt;/code&gt; manually&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="images-are-broken"&gt;&amp;ldquo;Images are broken&amp;rdquo;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Put images in &lt;code&gt;static/images/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Reference as &lt;code&gt;/static/images/myimage.png&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t use Obsidian&amp;rsquo;s &lt;code&gt;!&amp;lt;a href="/note/image/" class="wiki-link"&amp;gt;image&amp;lt;/a&amp;gt;&lt;/code&gt; syntax&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="wiki-links-not-working"&gt;&amp;ldquo;Wiki links not working&amp;rdquo;&lt;/h3&gt;
+&lt;p&gt;TILNET converts &lt;a href="/note/note-name/" class="wiki-link"&gt;Note Name&lt;/a&gt; to links, but the target note must:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Exist in content/&lt;/li&gt;
+&lt;li&gt;Have matching title in frontmatter&lt;/li&gt;
+&lt;li&gt;Be published (not draft)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Happy learning! Your Obsidian vault + TILNET = 🚀&lt;/em&gt;&lt;/p&gt;</content>
+    <link href="https://johngage.github.io/TILBlog/note/new-obsidian-site-deploy/" rel="alternate"/>
     <published>2025-05-22T00:00:00+00:00</published>
   </entry>
   <entry>
@@ -573,7 +929,7 @@ for Anthropic predicts there will be an enormous increase in the demand for cust
   </entry>
   <entry>
     <id>https://johngage.github.io/TILBlog/note/building-tilblog/</id>
-    <title>Building TILBlog</title>
+    <title>Building TILBlog in Claude</title>
     <updated>2025-05-26T13:29:20+00:00</updated>
     <content type="html">&lt;p&gt;TIL for TILNET&lt;/p&gt;
 &lt;p&gt;Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.&lt;br /&gt;
@@ -1611,39 +1967,44 @@ def&lt;span class="w"&gt; &lt;/span&gt;generate_search_page&lt;span class="o"&gt
   </entry>
   <entry>
     <id>https://johngage.github.io/TILBlog/note/2025-06-05/</id>
-    <title>Fiber Optic Sensing Association</title>
+    <title>2025-06-05</title>
     <updated>2025-06-05T20:43:23+00:00</updated>
-    <content type="html">&lt;p&gt;Annual meeting held in UC Berkeley: Sutardja Dai auditorium;
-PG&amp;E; Stanford; Berkeley; Graz; EBMUD; 
-&lt;a href="https://fiberopticsensing.org/events/EventDetails.aspx?id=1945022"&gt;Program&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Wednesday: Richmond Field Station: use sensitive pavement demo  as example for pedagogical material for high schools, training institutes, community colleges&lt;/p&gt;
-&lt;p&gt;&amp;ndash;
-CSIS &lt;/p&gt;
-&lt;p&gt;How to make a small industry association grow?
-Joy and &lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;2025 Confirmed Speakers&lt;/p&gt;
-&lt;p&gt;Dr. Kenichi Soga, University of California, Berkeley&lt;/p&gt;
-&lt;p&gt;Dr. Yuxin Wu, Lawrence Berkeley National Laboratory (LBNL)
-“Fiber Optic Sensing for Reliable Energy Systems”&lt;/p&gt;
-&lt;p&gt;David Jang, Caltrans&lt;/p&gt;
-&lt;p&gt;David Katzev, East Bay Utility District’s (EBMUD)&lt;/p&gt;
-&lt;p&gt;David Xu, Pacific Gas &amp;amp; Electric (PG&amp;amp;E)&lt;/p&gt;
-&lt;p&gt;Dr. Biondo Biondi, Stanford University
-“Large-scale wavefield imaging under cities with fiber-optic seismology”&lt;/p&gt;
-&lt;p&gt;Dr. Werner Lienhart, Institute of Engineering Geodesy and Measurement Systems
-Graz University of Technology, Host of the 2024 FOSA mid-year member meeting&lt;/p&gt;
-&lt;p&gt;Brad Lipovsky, The University of Washington&lt;/p&gt;
-&lt;p&gt;Jonathan Ajo-Franklin, Rice University&lt;/p&gt;
-&lt;hr /&gt;
+    <content type="html">&lt;p&gt;Extend the framework for &lt;a href="/note/fiber-optic-sensing-association/" class="wiki-link"&gt;Fiber Optic Sensing Association&lt;/a&gt; educational content. Create low-cost demos for schools, science teachers. 
+- 2D DAS implementation; can a sonar location algorithm create a 2D display with accurate x-y coordinates from a 1D DAS application? 
+- DAS microphones: signal to noise; frequency response; &lt;/p&gt;
+&lt;h1 id="2025-06-05"&gt;2025-06-05&lt;/h1&gt;
+&lt;h2 id="what-i-learned"&gt;What I Learned&lt;/h2&gt;
+&lt;p&gt;&amp;lt;% tp.file.cursor() %&amp;gt;&lt;/p&gt;
+&lt;h2 id="details"&gt;Details&lt;/h2&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Jaewon Saw, Linqing Luo, Kristy Chu, John Ryan, Kenichi Soga, Yuxin Wu; Distributed Acoustic Sensing for Whale Vocalization Monitoring: A Vertical Deployment Field Test. &lt;strong&gt;Seismological Research Letters&lt;/strong&gt; 2025;; 96 (2A): 801–815. doi: &lt;a href="https://doi.org/10.1785/0220240389"&gt;https://doi.org/10.1785/0220240389&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;Following the two-day meeting at UCBerkeley, June 3-4, 2025, develop a rich set of subject demonstrations: &lt;/li&gt;
+&lt;li&gt;Smart City fiber web: mapping extant deployment; owners, maintainers, major users; estimation of available dark fiber;&lt;/li&gt;
+&lt;li&gt;City ordinance template: can a city require each fiber deployment&amp;ndash;telco, comms, sensing&amp;ndash;to provide bandwidth and sensing to the city?&lt;/li&gt;
+&lt;li&gt;Use Berkeley, Palo Alto as a testing ground for implementation&lt;ul&gt;
+&lt;li&gt;Campus fiber maps created by DFOS Action Committee&lt;/li&gt;
+&lt;li&gt;City fiber maps created by Berkeley City Library or Public Works department.&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Saw, J., Zhu, X., Luo, L., Correa, J., Soga, K. and Ajo-Franklin, J., 2025. Distributed Fiber Optic Sensing for in-well hydraulic fracture monitoring. Geoenergy Science and Engineering, 250, p.213792. &lt;a href="https://doi.org/10.1016/j.geoen.2025.213792"&gt;https://doi.org/10.1016/j.geoen.2025.213792&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;Work up a demo of the CSI structure: each surface becomes sensitive. &lt;ul&gt;
+&lt;li&gt;Use space where everyone is standing: create orthogonal fibers in floor; fiber in chair; fiber in classroom; DAS; &lt;/li&gt;
+&lt;li&gt;image of exponential drop-off of acoustic energy: f(d^2)&lt;/li&gt;
+&lt;li&gt;show each person&amp;rsquo;s location on floor; have them tap-dance; do a wave, from back to front; dangle bare fiber from ceiling; &lt;/li&gt;
+&lt;li&gt;make microphone: rectangular array? spiral; &lt;/li&gt;
+&lt;li&gt;use fiber embedded in wall; discuss fastening;&lt;/li&gt;
+&lt;li&gt;DAS hearing aids&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;Overview:  TILNET environment
+- initializing development environment:
+    - virtual environment: conda activate tilblog: Claude-suggested 
+Used Claude to create multiple (10) conversations writing TILNET code; all exist at Claude
+- Claude conversations&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/2025-06-05/" rel="alternate"/>
     <published>2025-06-05T20:43:23+00:00</published>
   </entry>
@@ -1683,14 +2044,189 @@ Basic concepts:
     <id>https://johngage.github.io/TILBlog/note/designing-tilnet-to-be-clonable/</id>
     <title>Designing TILNET to be clonable</title>
     <updated>2025-06-08T00:00:00+00:00</updated>
-    <content type="html">&lt;p&gt;Templates are not working in Obsidian&lt;/p&gt;
-&lt;p&gt;Since claude keeps running out of space, the design has been reworked by new converatons that don&amp;rsquo;t know about earlier elements.&lt;/p&gt;
-&lt;p&gt;Datasette, for example. &lt;/p&gt;
-&lt;p&gt;So the three main python programs that make it work:
-one sets thing up
-one builds the static site
-and the third runs the other two.&lt;/p&gt;</content>
+    <content type="html">&lt;h1 id="tilnet-quick-start-5-minutes-to-your-first-deploy"&gt;TILNET Quick Start - 5 Minutes to Your First Deploy! 🚀&lt;/h1&gt;
+&lt;h2 id="the-simplest-path-to-your-own-til-site"&gt;The Simplest Path to Your Own TIL Site&lt;/h2&gt;
+&lt;h3 id="1-fork-and-clone-30-seconds"&gt;1️⃣ Fork and Clone (30 seconds)&lt;/h3&gt;
+&lt;p&gt;Click &amp;ldquo;Fork&amp;rdquo; on GitHub, then:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;clone&lt;span class="w"&gt; &lt;/span&gt;https://github.com/YOUR-USERNAME/tilnet.git
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tilnet
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="2-set-up-python-1-minute"&gt;2️⃣ Set Up Python (1 minute)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;venv/bin/activate&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# Windows: venv\Scripts\activate&lt;/span&gt;
+pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-r&lt;span class="w"&gt; &lt;/span&gt;requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="3-connect-your-obsidian-vault-2-minutes"&gt;3️⃣ Connect Your Obsidian Vault (2 minutes)&lt;/h3&gt;
+&lt;h4 id="option-a-start-fresh-with-tilnet-as-your-vault"&gt;Option A: Start Fresh with TILNET as Your Vault&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Open Obsidian and create a new vault&lt;/span&gt;
+&lt;span class="c1"&gt;# Choose the tilnet/content folder as your vault location&lt;/span&gt;
+&lt;span class="c1"&gt;# Now any note you create in Obsidian goes straight to TILNET!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id="option-b-use-part-of-your-existing-vault"&gt;Option B: Use Part of Your Existing Vault&lt;/h4&gt;
+&lt;p&gt;If you have an existing Obsidian vault with many notes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Create a TIL folder in your existing vault&lt;/span&gt;
+mkdir&lt;span class="w"&gt; &lt;/span&gt;~/ObsidianVault/TIL
+
+&lt;span class="c1"&gt;# Link it to TILNET (Mac/Linux)&lt;/span&gt;
+ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;~/ObsidianVault/TIL&lt;span class="w"&gt; &lt;/span&gt;content
+
+&lt;span class="c1"&gt;# Windows (run as Administrator)&lt;/span&gt;
+mklink&lt;span class="w"&gt; &lt;/span&gt;/D&lt;span class="w"&gt; &lt;/span&gt;content&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C:\Users\YOU\ObsidianVault\TIL&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now only notes in your &lt;code&gt;TIL&lt;/code&gt; folder will be published!&lt;/p&gt;
+&lt;h4 id="option-c-copy-select-notes"&gt;Option C: Copy Select Notes&lt;/h4&gt;
+&lt;p&gt;For maximum control, copy only the notes you want to publish:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Copy specific notes to TILNET&lt;/span&gt;
+cp&lt;span class="w"&gt; &lt;/span&gt;~/ObsidianVault/python-decorators.md&lt;span class="w"&gt; &lt;/span&gt;content/
+cp&lt;span class="w"&gt; &lt;/span&gt;~/ObsidianVault/Projects/learned-today.md&lt;span class="w"&gt; &lt;/span&gt;content/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="large-vault-heres-what-to-do"&gt;🚨 Large Vault? Here&amp;rsquo;s What to Do&lt;/h3&gt;
+&lt;p&gt;If you have 100+ notes in Obsidian:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DON&amp;rsquo;T&lt;/strong&gt; put your entire vault in &lt;code&gt;content/&lt;/code&gt; - you&amp;rsquo;ll publish everything!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DO&lt;/strong&gt; one of these:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Subfolder Method&lt;/strong&gt;: Create a &lt;code&gt;TIL&lt;/code&gt; or &lt;code&gt;Public&lt;/code&gt; folder in Obsidian, symlink only that&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tag Method&lt;/strong&gt;: Tag notes with &lt;code&gt;#til-public&lt;/code&gt;, then copy those to &lt;code&gt;content/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;New Vault&lt;/strong&gt;: Keep TILNET as a separate, focused learning vault&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="4-create-your-first-til-30-seconds"&gt;4️⃣ Create Your First TIL (30 seconds)&lt;/h3&gt;
+&lt;p&gt;In Obsidian, create a new note with this template:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;---
+title: &amp;quot;My First TIL&amp;quot;
+topics:
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;learning
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;obsidian
+&lt;span class="gu"&gt;created: 2024-01-20&lt;/span&gt;
+&lt;span class="gu"&gt;---&lt;/span&gt;
+
+Today I learned how to connect Obsidian with TILNET!
+
+&lt;span class="gu"&gt;## Key Points&lt;/span&gt;
+
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;TILNET reads any .md file in the content folder
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Obsidian&amp;#39;s &amp;lt;a href=&amp;quot;/note/wiki-links/&amp;quot; class=&amp;quot;wiki-link&amp;quot;&amp;gt;wiki links&amp;lt;/a&amp;gt; are automatically converted
+&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;Images should go in static/images/
+
+&lt;span class="gu"&gt;## Code Example&lt;/span&gt;
+
+```python
+&lt;span class="gh"&gt;# This code will have syntax highlighting!&lt;/span&gt;
+print(&amp;quot;Hello from Obsidian + TILNET!&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;💡 **Obsidian Template Tip**: Save this as a template in Obsidian for quick TIL creation!
+
+&lt;span class="gu"&gt;##&lt;/span&gt;# 5️⃣ Deploy to the World (1 minute)
+
+```bash
+python til_deploy.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="6-view-your-site-30-seconds"&gt;6️⃣ View Your Site! (30 seconds)&lt;/h3&gt;
+&lt;p&gt;Visit: &lt;code&gt;https://YOUR-USERNAME.github.io/tilnet/&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id="thats-it-youre-done"&gt;That&amp;rsquo;s It! You&amp;rsquo;re Done! 🎉&lt;/h2&gt;
+&lt;p&gt;Your Obsidian notes are now a beautiful website with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ All your wiki links working&lt;/li&gt;
+&lt;li&gt;✅ Instant search (Ctrl+K)&lt;/li&gt;
+&lt;li&gt;✅ Topic organization&lt;/li&gt;
+&lt;li&gt;✅ Syntax highlighting&lt;/li&gt;
+&lt;li&gt;✅ Mobile friendly&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="obsidian-tilnet-workflow"&gt;Obsidian + TILNET Workflow&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Write in Obsidian&lt;/strong&gt; - Use all your favorite plugins&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Save&lt;/strong&gt; - Just regular Obsidian saving&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Deploy&lt;/strong&gt; - Run &lt;code&gt;python til_deploy.py&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Share&lt;/strong&gt; - Your notes are online!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="obsidian-specific-tips"&gt;Obsidian-Specific Tips&lt;/h2&gt;
+&lt;h3 id="wiki-links"&gt;Wiki Links&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;/note/my-other-note/&amp;quot; class=&amp;quot;wiki-link&amp;quot;&amp;gt;My Other Note&amp;lt;/a&amp;gt; → Automatically converted to HTML links
+!&amp;lt;a href=&amp;quot;/note/imagepng/&amp;quot; class=&amp;quot;wiki-link&amp;quot;&amp;gt;image.png&amp;lt;/a&amp;gt; → Put images in static/images/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="frontmatter-template"&gt;Frontmatter Template&lt;/h3&gt;
+&lt;p&gt;Create an Obsidian template with TILNET frontmatter:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{{title}}&amp;quot;&lt;/span&gt;
+&lt;span class="nt"&gt;topics&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="nt"&gt;created&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;{{&lt;/span&gt;&lt;span class="nv"&gt;date&lt;/span&gt;&lt;span class="p p-Indicator"&gt;}}&lt;/span&gt;
+&lt;span class="nt"&gt;modified&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="daily-notes"&gt;Daily Notes&lt;/h3&gt;
+&lt;p&gt;Perfect for TIL! Set Obsidian&amp;rsquo;s daily note template to:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;---
+title: &amp;quot;Daily Notes - {{date}}&amp;quot;
+topics:
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;daily
+&lt;span class="gu"&gt;created: {{date}}&lt;/span&gt;
+&lt;span class="gu"&gt;---&lt;/span&gt;
+
+&lt;span class="gu"&gt;## Today I Learned&lt;/span&gt;
+
+- 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="large-vault-organization"&gt;Large Vault Organization&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ObsidianVault/
+├── Personal/        # Not published
+├── Projects/        # Not published  
+├── Archive/         # Not published
+└── TIL/            # ← Only this syncs to TILNET
+    ├── python/
+    ├── web-dev/
+    └── daily/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="exclude-patterns"&gt;Exclude Patterns&lt;/h3&gt;
+&lt;p&gt;If you accidentally put your whole vault in &lt;code&gt;content/&lt;/code&gt;, create &lt;code&gt;content/.tilignore&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;Personal&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="nf"&gt;Private&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="na"&gt;.obsidian&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="nf"&gt;Templates&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="nf"&gt;Archive&lt;/span&gt;&lt;span class="err"&gt;/&lt;/span&gt;
+&lt;span class="err"&gt;*&lt;/span&gt;&lt;span class="na"&gt;.draft.md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="next-steps"&gt;Next Steps&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Set up hotkeys&lt;/strong&gt; in Obsidian for quick TIL creation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use Dataview&lt;/strong&gt; to see all your TILs within Obsidian&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Try Excalidraw&lt;/strong&gt; - drawings work great in TILNET!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="faq"&gt;FAQ&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Q: Can I use Obsidian plugins?&lt;/strong&gt; A: Yes! But remember only standard Markdown features will appear on your website.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Q: What about my private notes?&lt;/strong&gt; A: Only notes in the &lt;code&gt;content/&lt;/code&gt; folder are published. Keep private notes elsewhere.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Q: Can I preview before deploying?&lt;/strong&gt; A: Run &lt;code&gt;python app.py&lt;/code&gt; and visit http://localhost:5000&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;Remember: The best TIL is the one you actually write. Open Obsidian and start now!&lt;/em&gt;&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/designing-tilnet-to-be-clonable/" rel="alternate"/>
     <published>2025-06-08T00:00:00+00:00</published>
+  </entry>
+  <entry>
+    <id>https://johngage.github.io/TILBlog/note/AI-Engineering/</id>
+    <title>Simon Willison and Laurie Voss</title>
+    <updated>2025-06-08T21:29:29+00:00</updated>
+    <content type="html">&lt;p&gt;Simon Willison and Laurie Voss&lt;/p&gt;
+&lt;p&gt;John Gage &lt;a href="&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#106;&amp;#111;&amp;#104;&amp;#110;&amp;#46;&amp;#103;&amp;#97;&amp;#103;&amp;#101;&amp;#64;&amp;#103;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;"&gt;&amp;#106;&amp;#111;&amp;#104;&amp;#110;&amp;#46;&amp;#103;&amp;#97;&amp;#103;&amp;#101;&amp;#64;&amp;#103;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
+6:17 PM (3 hours ago)
+to dave&lt;/p&gt;
+&lt;p&gt;Willison was great. https://simonw.substack.com/p/the-last-six-months-in-llms-illustrated&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s 15 minutes of Laurie Voss : https://www.youtube.com/watch?v=kqB_xML1SfA&lt;/p&gt;
+&lt;p&gt;It reminded me of Bill Joy and JINI....so here&amp;rsquo;s a Claude chat on the history and future of distributed systems....followed by how photonics might change all distributed systems&amp;hellip;use unique optical signatures in fiber.&lt;/p&gt;
+&lt;p&gt;https://claude.ai/share/6fe5999e-d9e9-438c-972c-622e4c2d558b&lt;/p&gt;
+&lt;p&gt;and photonics: https://claude.ai/share/129707dc-22d0-4342-adfb-82adce76b8b5&lt;/p&gt;</content>
+    <link href="https://johngage.github.io/TILBlog/note/AI-Engineering/" rel="alternate"/>
+    <published>2025-06-08T21:29:29+00:00</published>
   </entry>
 </feed>
