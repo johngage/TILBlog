@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://johngage.github.io/TILBlog</id>
   <title>John Gage: Today I Learned</title>
-  <updated>2025-06-09T04:41:29.245740+00:00</updated>
+  <updated>2025-06-09T05:14:24.401634+00:00</updated>
   <author>
     <name>John Gage</name>
     <email>john@example.com</email>
@@ -2014,29 +2014,39 @@ Used Claude to create multiple (10) conversations writing TILNET code; all exist
     <updated>2025-06-06T14:51:24+00:00</updated>
     <content type="html">&lt;h4 id="location-temperature-strain"&gt;Location, temperature, strain&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;Locate sound, motion, heat: &lt;ul&gt;
+&lt;li&gt;Locate sound, motion, heat state with 2D or 3D accuracy&lt;ul&gt;
 &lt;li&gt;Historical survey: sonar, radar, optical, DFOS, seismic, missle defense, autonomous vehicles, robotics&lt;/li&gt;
 &lt;li&gt;Applications: military, seafaring, aviation, defense, astronomy, robotics,&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Demonstrating DAS location sensing accuracy.
-    1. https://www.nature.com/articles/s41467-022-31681-x : 
+&lt;p&gt;Demonstrating DAS location sensing accuracy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    1. https://www.nature.com/articles/s41467-022-31681-x : 
     2. https://www.nature.com/articles/s41597-025-05119-0?fromPaywallRec=false
     3. https://www.nature.com/articles/s41598-023-31490-2?fromPaywallRec=false
     4. https://www.nature.com/articles/s44172-024-00274-5?fromPaywallRec=false
-Basic concepts:
-- The hyperbolic triangulation method corresponds to one of the standard techniques to estimate the position of a source from the TDOAs between different sensors&lt;a href="https://www.nature.com/articles/s41467-022-31681-x#ref-CR36" title="Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. Rev. Sci. Instrum. 87, 041502 (2016)."&gt;36&lt;/a&gt;.
-- Considering the large number of sophisticated array processing techniques existing in the literature[^22],23,24,44,45, we are confident that novel approaches will soon emerge to improve the directivity and performance of near- and far-field beamforming techniques for DAS
-- Note that the approach here demonstrated as a proof of concept is based on one of the simplest array signal processing techniques22,23,24,41 &lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;[^22]: Benesty, J., Chen, J. &amp;amp; Huang, Y. &lt;em&gt;Microphone Array Signal Processing&lt;/em&gt; (Springer, 2008).
-[^23]:  Johnson, D. H. &amp;amp; Dudgeon, D. E. &lt;em&gt;Array Signal Processing: Concepts and Techniques&lt;/em&gt; (Pearson, 1993).
-[^24]:  1. Liu, W. &amp;amp; Weiss, S. &lt;em&gt;Wideband Beamforming: Concepts and Techniques&lt;/em&gt; (Wiley, 2010).
-[^44]:  1. Van Trees, H. L. &lt;em&gt;Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory,&lt;/em&gt; 1st edn. (Wiley-Interscience, 2002).
-[^41]:  Cigada, A., Ripamonti, F. &amp;amp; Vanali, M. The delay &amp;amp; sum algorithm applied to microphone array measurements: Numerical analysis and experimental validation. &lt;em&gt;Mech. Syst. Signal Process.&lt;/em&gt; &lt;strong&gt;21&lt;/strong&gt;, 2645–2664 (2007).
-[^45]: 1. Schweitzer, J., Fyen, J., Mykkeltveit, S. &amp;amp; Kvaerna, T. &lt;em&gt;Seismic arrays&lt;/em&gt; (ed. Bormann, P.), &lt;em&gt;New Manual of Seismological Observatory Practice 2 (NMSOP-2)&lt;/em&gt; 1–80 (Deutsches GeoForschungsZentrum GFZ, Potsdam, 2012).
-[^36]: Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. &lt;em&gt;Rev. Sci. Instrum.&lt;/em&gt; &lt;strong&gt;87&lt;/strong&gt;, 041502 (2016).&lt;/p&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="basic-concepts"&gt;Basic concepts:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The hyperbolic triangulation method corresponds to one of the standard techniques to estimate the position of a source from the TDOAs between different sensors&lt;a href="https://www.nature.com/articles/s41467-022-31681-x#ref-CR36" title="Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. Rev. Sci. Instrum. 87, 041502 (2016)."&gt;36&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Considering the large number of sophisticated array processing techniques existing in the literature[^22],[^23],[^24],[^44],[^45], we are confident that novel approaches will soon emerge to improve the directivity and performance of near- and far-field beamforming techniques for DAS&lt;/li&gt;
+&lt;li&gt;Note that the approach here demonstrated as a proof of concept is based on one of the simplest array signal processing techniques22,23,24,41 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;[^22]: Benesty, J., Chen, J. &amp;amp; Huang, Y. &lt;span class="ge"&gt;_Microphone Array Signal Processing_&lt;/span&gt; (Springer, 2008).
+
+[^23]:  Johnson, D. H. &amp;amp; Dudgeon, D. E. &lt;span class="ge"&gt;_Array Signal Processing: Concepts and Techniques_&lt;/span&gt; (Pearson, 1993).
+
+[^24]:  1. Liu, W. &amp;amp; Weiss, S. &lt;span class="ge"&gt;_Wideband Beamforming: Concepts and Techniques_&lt;/span&gt; (Wiley, 2010).
+
+[^44]:  1. Van Trees, H. L. &lt;span class="ge"&gt;_Optimum Array Processing: Part IV of Detection, Estimation, and Modulation Theory,_&lt;/span&gt; 1st edn. (Wiley-Interscience, 2002).
+
+[^41]:  Cigada, A., Ripamonti, F. &amp;amp; Vanali, M. The delay &amp;amp; sum algorithm applied to microphone array measurements: Numerical analysis and experimental validation. &lt;span class="ge"&gt;_Mech. Syst. Signal Process._&lt;/span&gt; **21**, 2645–2664 (2007).
+
+[^45]: 1. Schweitzer, J., Fyen, J., Mykkeltveit, S. &amp;amp; Kvaerna, T. &lt;span class="ge"&gt;_Seismic arrays_&lt;/span&gt; (ed. Bormann, P.), &lt;span class="ge"&gt;_New Manual of Seismological Observatory Practice 2 (NMSOP-2)_&lt;/span&gt; 1–80 (Deutsches GeoForschungsZentrum GFZ, Potsdam, 2012).
+
+[^36]: Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. &lt;span class="ge"&gt;_Rev. Sci. Instrum._&lt;/span&gt; **87**, 041502 (2016).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/dfos-2d-demo/" rel="alternate"/>
     <published>2025-06-06T14:51:24+00:00</published>
   </entry>
@@ -2224,8 +2234,8 @@ to dave&lt;/p&gt;
 &lt;p&gt;Willison was great.&lt;a href="https://simonw.substack.com/p/the-last-six-months-in-llms-illustrated"&gt;The last six months in llms&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here&amp;rsquo;s 15 minutes of Laurie Voss : &lt;a href="https://www.youtube.com/watch?v=kqB_xML1SfA"&gt;Laurie Voss on GLM&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It reminded me of Bill Joy and JINI....so here&amp;rsquo;s a Claude chat on the history and future of distributed systems....followed by how photonics might change all distributed systems&amp;hellip;use unique optical signatures in fiber.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://claude.ai/share/6fe5999e-d9e9-438c-972c-622e4c2d558b"&gt;Claude conversation on JINI and AI Agents&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://claude.ai/share/129707dc-22d0-4342-adfb-82adce76b8b5"&gt;Claude on JINI, code migration, and security through photonics&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;a href="https://claude.ai/share/6fe5999e-d9e9-438c-972c-622e4c2d558b"&gt;Claude conversation on weakness of Internet architecture; photonics future&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://claude.ai/share/129707dc-22d0-4342-adfb-82adce76b8b5"&gt;Claude on JINI, code migration, and AI agent architectures&lt;/a&gt;&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/AI-Engineering/" rel="alternate"/>
     <published>2025-06-08T21:29:29+00:00</published>
   </entry>
