@@ -112,7 +112,7 @@ MathJax = {
                 </time>
                 
                     <span class="entry-modified">
-                      · Modified: 2025-06-08 19:53
+                      · Modified: 2025-06-08 20:10
                         </span>
                 
             </div>
@@ -120,13 +120,172 @@ MathJax = {
         </header>
         
         <div class="content">
-            <p>Templates are not working in Obsidian</p>
-<p>Since claude keeps running out of space, the design has been reworked by new converatons that don&rsquo;t know about earlier elements.</p>
-<p>Datasette, for example. </p>
-<p>So the three main python programs that make it work:
-one sets thing up
-one builds the static site
-and the third runs the other two.</p>
+            <h1 id="tilnet-quick-start-5-minutes-to-your-first-deploy">TILNET Quick Start - 5 Minutes to Your First Deploy! 🚀</h1>
+<h2 id="the-simplest-path-to-your-own-til-site">The Simplest Path to Your Own TIL Site</h2>
+<h3 id="1-fork-and-clone-30-seconds">1️⃣ Fork and Clone (30 seconds)</h3>
+<p>Click &ldquo;Fork&rdquo; on GitHub, then:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR-USERNAME/tilnet.git
+<span class="nb">cd</span><span class="w"> </span>tilnet
+</code></pre></div>
+
+<h3 id="2-set-up-python-1-minute">2️⃣ Set Up Python (1 minute)</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># Windows: venv\Scripts\activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+<h3 id="3-connect-your-obsidian-vault-2-minutes">3️⃣ Connect Your Obsidian Vault (2 minutes)</h3>
+<h4 id="option-a-start-fresh-with-tilnet-as-your-vault">Option A: Start Fresh with TILNET as Your Vault</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Open Obsidian and create a new vault</span>
+<span class="c1"># Choose the tilnet/content folder as your vault location</span>
+<span class="c1"># Now any note you create in Obsidian goes straight to TILNET!</span>
+</code></pre></div>
+
+<h4 id="option-b-use-part-of-your-existing-vault">Option B: Use Part of Your Existing Vault</h4>
+<p>If you have an existing Obsidian vault with many notes:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a TIL folder in your existing vault</span>
+mkdir<span class="w"> </span>~/ObsidianVault/TIL
+
+<span class="c1"># Link it to TILNET (Mac/Linux)</span>
+ln<span class="w"> </span>-s<span class="w"> </span>~/ObsidianVault/TIL<span class="w"> </span>content
+
+<span class="c1"># Windows (run as Administrator)</span>
+mklink<span class="w"> </span>/D<span class="w"> </span>content<span class="w"> </span><span class="s2">&quot;C:\Users\YOU\ObsidianVault\TIL&quot;</span>
+</code></pre></div>
+
+<p>Now only notes in your <code>TIL</code> folder will be published!</p>
+<h4 id="option-c-copy-select-notes">Option C: Copy Select Notes</h4>
+<p>For maximum control, copy only the notes you want to publish:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Copy specific notes to TILNET</span>
+cp<span class="w"> </span>~/ObsidianVault/python-decorators.md<span class="w"> </span>content/
+cp<span class="w"> </span>~/ObsidianVault/Projects/learned-today.md<span class="w"> </span>content/
+</code></pre></div>
+
+<h3 id="large-vault-heres-what-to-do">🚨 Large Vault? Here&rsquo;s What to Do</h3>
+<p>If you have 100+ notes in Obsidian:</p>
+<p><strong>DON&rsquo;T</strong> put your entire vault in <code>content/</code> - you&rsquo;ll publish everything!</p>
+<p><strong>DO</strong> one of these:</p>
+<ol>
+<li><strong>Subfolder Method</strong>: Create a <code>TIL</code> or <code>Public</code> folder in Obsidian, symlink only that</li>
+<li><strong>Tag Method</strong>: Tag notes with <code>#til-public</code>, then copy those to <code>content/</code></li>
+<li><strong>New Vault</strong>: Keep TILNET as a separate, focused learning vault</li>
+</ol>
+<h3 id="4-create-your-first-til-30-seconds">4️⃣ Create Your First TIL (30 seconds)</h3>
+<p>In Obsidian, create a new note with this template:</p>
+<div class="highlight"><pre><span></span><code>---
+title: &quot;My First TIL&quot;
+topics:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>learning
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>obsidian
+<span class="gu">created: 2024-01-20</span>
+<span class="gu">---</span>
+
+Today I learned how to connect Obsidian with TILNET!
+
+<span class="gu">## Key Points</span>
+
+<span class="k">-</span><span class="w"> </span>TILNET reads any .md file in the content folder
+<span class="k">-</span><span class="w"> </span>Obsidian&#39;s &lt;a href=&quot;/note/wiki-links/&quot; class=&quot;wiki-link&quot;&gt;wiki links&lt;/a&gt; are automatically converted
+<span class="k">-</span><span class="w"> </span>Images should go in static/images/
+
+<span class="gu">## Code Example</span>
+
+```python
+<span class="gh"># This code will have syntax highlighting!</span>
+print(&quot;Hello from Obsidian + TILNET!&quot;)
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>💡 **Obsidian Template Tip**: Save this as a template in Obsidian for quick TIL creation!
+
+<span class="gu">##</span># 5️⃣ Deploy to the World (1 minute)
+
+```bash
+python til_deploy.py
+</code></pre></div>
+
+<h3 id="6-view-your-site-30-seconds">6️⃣ View Your Site! (30 seconds)</h3>
+<p>Visit: <code>https://YOUR-USERNAME.github.io/tilnet/</code></p>
+<hr />
+<h2 id="thats-it-youre-done">That&rsquo;s It! You&rsquo;re Done! 🎉</h2>
+<p>Your Obsidian notes are now a beautiful website with:</p>
+<ul>
+<li>✅ All your wiki links working</li>
+<li>✅ Instant search (Ctrl+K)</li>
+<li>✅ Topic organization</li>
+<li>✅ Syntax highlighting</li>
+<li>✅ Mobile friendly</li>
+</ul>
+<h2 id="obsidian-tilnet-workflow">Obsidian + TILNET Workflow</h2>
+<ol>
+<li><strong>Write in Obsidian</strong> - Use all your favorite plugins</li>
+<li><strong>Save</strong> - Just regular Obsidian saving</li>
+<li><strong>Deploy</strong> - Run <code>python til_deploy.py</code></li>
+<li><strong>Share</strong> - Your notes are online!</li>
+</ol>
+<h2 id="obsidian-specific-tips">Obsidian-Specific Tips</h2>
+<h3 id="wiki-links">Wiki Links</h3>
+<div class="highlight"><pre><span></span><code>&lt;a href=&quot;/note/my-other-note/&quot; class=&quot;wiki-link&quot;&gt;My Other Note&lt;/a&gt; → Automatically converted to HTML links
+!&lt;a href=&quot;/note/imagepng/&quot; class=&quot;wiki-link&quot;&gt;image.png&lt;/a&gt; → Put images in static/images/
+</code></pre></div>
+
+<h3 id="frontmatter-template">Frontmatter Template</h3>
+<p>Create an Obsidian template with TILNET frontmatter:</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{title}}&quot;</span>
+<span class="nt">topics</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span>
+<span class="nt">created</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="nv">date</span><span class="p p-Indicator">}}</span>
+<span class="nt">modified</span><span class="p">:</span><span class="w"> </span>
+<span class="nn">---</span>
+</code></pre></div>
+
+<h3 id="daily-notes">Daily Notes</h3>
+<p>Perfect for TIL! Set Obsidian&rsquo;s daily note template to:</p>
+<div class="highlight"><pre><span></span><code>---
+title: &quot;Daily Notes - {{date}}&quot;
+topics:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>daily
+<span class="gu">created: {{date}}</span>
+<span class="gu">---</span>
+
+<span class="gu">## Today I Learned</span>
+
+- 
+</code></pre></div>
+
+<h3 id="large-vault-organization">Large Vault Organization</h3>
+<div class="highlight"><pre><span></span><code>ObsidianVault/
+├── Personal/        # Not published
+├── Projects/        # Not published  
+├── Archive/         # Not published
+└── TIL/            # ← Only this syncs to TILNET
+    ├── python/
+    ├── web-dev/
+    └── daily/
+</code></pre></div>
+
+<h3 id="exclude-patterns">Exclude Patterns</h3>
+<p>If you accidentally put your whole vault in <code>content/</code>, create <code>content/.tilignore</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">Personal</span><span class="err">/</span>
+<span class="nf">Private</span><span class="err">/</span>
+<span class="na">.obsidian</span><span class="err">/</span>
+<span class="nf">Templates</span><span class="err">/</span>
+<span class="nf">Archive</span><span class="err">/</span>
+<span class="err">*</span><span class="na">.draft.md</span>
+</code></pre></div>
+
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><strong>Set up hotkeys</strong> in Obsidian for quick TIL creation</li>
+<li><strong>Use Dataview</strong> to see all your TILs within Obsidian</li>
+<li><strong>Try Excalidraw</strong> - drawings work great in TILNET!</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p><strong>Q: Can I use Obsidian plugins?</strong> A: Yes! But remember only standard Markdown features will appear on your website.</p>
+<p><strong>Q: What about my private notes?</strong> A: Only notes in the <code>content/</code> folder are published. Keep private notes elsewhere.</p>
+<p><strong>Q: Can I preview before deploying?</strong> A: Run <code>python app.py</code> and visit http://localhost:5000</p>
+<hr />
+<p><em>Remember: The best TIL is the one you actually write. Open Obsidian and start now!</em></p>
         </div>
     </article>
     
@@ -135,7 +294,7 @@ and the third runs the other two.</p>
         <h3>Related entries</h3>
         <ul>
             
-            <li><a href="/TILBlog/note/building-tilblog/">Building TILBlog</a></li>
+            <li><a href="/TILBlog/note/building-tilblog/">Building TILBlog in Claude</a></li>
             
             <li><a href="/TILBlog/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
             

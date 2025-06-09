@@ -1,0 +1,554 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Obsidian Site Deploy - TIL</title>
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+  <!-- ADD THIS LINE for search modal styling -->
+<link rel="stylesheet" href="/TILBlog/static/search-modal.css">
+
+</head>
+
+<body>
+  <!-- ADD THIS: Purple banner -->
+    <div class="site-banner">
+        John Gage's TILs - Policy and Technology Interact
+    </div>
+    <!-- Single header with dark mode toggle -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                
+                <!-- Search form with onsubmit -->
+                <form action="/TILBlog/search/" method="get" class="search-form" 
+                      onsubmit="return handleSearchSubmit(event)">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+                
+                <!-- Dark mode toggle - moved to top right corner -->
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/TILBlog/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/TILBlog/stats/" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>New Obsidian Site Deploy</h2>
+        <div class="meta">
+              
+               <div class="topics">
+                 
+                   <a href="/TILBlog/topic/sqlite/" class="topic-tag">sqlite</a>
+                 
+                   <a href="/TILBlog/topic/til-build/" class="topic-tag">til-build</a>
+                 
+               </div>
+              
+            <div class="entry-dates">
+                <time datetime="2025-05-22">
+                    Created: 2025-05-22
+                </time>
+                
+                    <span class="entry-modified">
+                      · Modified: 2025-06-08 20:15
+                        </span>
+                
+            </div>
+        </div>
+        </header>
+        
+        <div class="content">
+            <h1 id="obsidian-tilnet-integration-guide">Obsidian + TILNET Integration Guide</h1>
+<h2 id="overview">🎯 Overview</h2>
+<p>TILNET works beautifully with Obsidian! This guide covers every integration scenario, from simple to advanced.</p>
+<h2 id="quick-setup-choose-one">🚀 Quick Setup (Choose One)</h2>
+<h3 id="option-1-tilnet-as-a-new-vault-simplest">Option 1: TILNET as a New Vault (Simplest)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone TILNET</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR-USERNAME/tilnet.git
+
+<span class="c1"># Open Obsidian</span>
+<span class="c1"># Click &quot;Open folder as vault&quot;</span>
+<span class="c1"># Navigate to tilnet/content/</span>
+<span class="c1"># Click &quot;Open&quot;</span>
+</code></pre></div>
+
+<p><strong>Pros</strong>: Everything just works, full git integration <strong>Cons</strong>: Separate from your existing notes</p>
+<h3 id="option-2-subfolder-in-existing-vault-recommended">Option 2: Subfolder in Existing Vault (Recommended)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># In your existing Obsidian vault</span>
+mkdir<span class="w"> </span>TIL
+
+<span class="c1"># In your TILNET directory</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>content
+ln<span class="w"> </span>-s<span class="w"> </span>/path/to/ObsidianVault/TIL<span class="w"> </span>content
+</code></pre></div>
+
+<p><strong>Pros</strong>: Integrated with your main vault, selective publishing <strong>Cons</strong>: Need to remember which folder publishes</p>
+<h3 id="option-3-cherry-pick-publishing-most-control">Option 3: Cherry-Pick Publishing (Most Control)</h3>
+<p>Keep vaults separate, copy notes you want to publish:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a script: publish-til.sh</span>
+<span class="c1">#!/bin/bash</span>
+cp<span class="w"> </span>~/Obsidian/Blog/ready-to-publish/*.md<span class="w"> </span>~/tilnet/content/
+<span class="nb">cd</span><span class="w"> </span>~/tilnet
+python<span class="w"> </span>til_deploy.py
+</code></pre></div>
+
+<p><strong>Pros</strong>: Total control, review before publishing <strong>Cons</strong>: Extra step in workflow</p>
+<h2 id="large-vault-strategies">📁 Large Vault Strategies</h2>
+<h3 id="the-problem">The Problem</h3>
+<p>You have 1,000+ notes but only want to publish TILs. Here&rsquo;s how to handle it:</p>
+<h3 id="strategy-1-folder-structure">Strategy 1: Folder Structure</h3>
+<div class="highlight"><pre><span></span><code>ObsidianVault/
+├── 📝 TIL/                 # ← Only this publishes
+│   ├── 2024-01-20.md
+│   ├── python-tips.md
+│   └── web-dev/
+├── 🔒 Personal/            # Private
+├── 📚 Reference/           # Private
+├── 💼 Work/               # Private
+└── 📎 Attachments/         # Private
+</code></pre></div>
+
+<h3 id="strategy-2-tag-based-workflow">Strategy 2: Tag-Based Workflow</h3>
+<ol>
+<li>Tag notes you want to publish with <code>#til-public</code></li>
+<li>Use this Dataview query to see them:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>LIST
+FROM #til-public
+SORT file.ctime DESC
+</code></pre></div>
+
+<ol>
+<li>Manually copy or script the export:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># export_tagged_tils.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">vault</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/ObsidianVault&quot;</span><span class="p">)</span>
+<span class="n">tilnet</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/path/to/tilnet/content&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">md_file</span> <span class="ow">in</span> <span class="n">vault</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.md&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">md_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;#til-public&#39;</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">():</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">md_file</span><span class="p">,</span> <span class="n">tilnet</span> <span class="o">/</span> <span class="n">md_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="strategy-3-separate-public-vault">Strategy 3: Separate Public Vault</h3>
+<p>Maintain two vaults:</p>
+<ul>
+<li><strong>Main Vault</strong>: Everything (private)</li>
+<li><strong>TILNET Vault</strong>: Just your public TILs</li>
+</ul>
+<p>Use Obsidian&rsquo;s &ldquo;Move file to another vault&rdquo; command when ready to publish.</p>
+<h2 id="obsidian-templates-for-tilnet">🎨 Obsidian Templates for TILNET</h2>
+<h3 id="basic-til-template">Basic TIL Template</h3>
+<p>Save as <code>Templates/TIL Template.md</code>:</p>
+<div class="highlight"><pre><span></span><code>---
+title: &quot;{{title}}&quot;
+topics:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>{{cursor}}
+<span class="gu">created: {{date:YYYY-MM-DD}}</span>
+<span class="gu">---</span>
+
+<span class="gu">## What I Learned</span>
+
+<span class="gu">## Key Points</span>
+
+- 
+
+<span class="gu">## Example</span>
+
+<span class="gu">## References</span>
+
+- 
+</code></pre></div>
+
+<h3 id="daily-til-template">Daily TIL Template</h3>
+<p>Save as <code>Templates/Daily TIL.md</code>:</p>
+<div class="highlight"><pre><span></span><code>---
+title: &quot;Daily Notes - {{date:YYYY-MM-DD}}&quot;
+topics:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>daily
+<span class="gu">created: {{date:YYYY-MM-DD}}</span>
+<span class="gu">---</span>
+
+<span class="gu">## Today I Learned</span>
+
+<span class="gu">### Morning</span>
+- 
+
+<span class="gu">### Afternoon</span>
+- 
+
+<span class="gu">### Evening</span>
+- 
+
+<span class="gu">## Interesting Links</span>
+
+- 
+
+<span class="gu">## Tomorrow&#39;s Goals</span>
+
+- 
+</code></pre></div>
+
+<h3 id="technical-topic-template">Technical Topic Template</h3>
+<div class="highlight"><pre><span></span><code>---
+title: &quot;{{title}}&quot;
+topics:
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>programming
+<span class="w">  </span><span class="k">-</span><span class="w"> </span>{{language}}
+<span class="gu">created: {{date:YYYY-MM-DD}}</span>
+<span class="gu">---</span>
+
+<span class="gu">## The Problem</span>
+
+<span class="gu">## The Solution</span>
+
+```{{language}}
+// Code here
+</code></pre></div>
+
+<h2 id="how-it-works">How It Works</h2>
+<h2 id="when-to-use-this">When to Use This</h2>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://claude.ai/chat/089c3eda-fd7a-43bf-b6b4-1ba38a8462c2">Official Docs</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code>## 🔧 Advanced Configuration
+
+### Custom Frontmatter Processing
+
+Add to your Obsidian notes, TILNET will handle:
+
+```yaml
+---
+title: &quot;Advanced Frontmatter&quot;
+topics:
+  - obsidian
+  - tilnet
+created: 2024-01-20
+modified: 2024-01-21
+author: Your Name
+draft: false
+aliases:
+  - &quot;Alternative Title&quot;
+  - &quot;Another Name&quot;
+---
+</code></pre></div>
+
+<h3 id="handling-obsidian-specific-features">Handling Obsidian-Specific Features</h3>
+<table>
+<thead>
+<tr>
+<th>Obsidian Feature</th>
+<th>TILNET Behavior</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/note/wiki-links/" class="wiki-link">Wiki Links</a></td>
+<td>✅ Converted to HTML</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>!<a href="/note/embedded-images/" class="wiki-link">Embedded Images</a></td>
+<td>⚠️ Needs setup</td>
+<td>Put images in <code>static/images/</code></td>
+</tr>
+<tr>
+<td>Dataview Queries</td>
+<td>❌ Not rendered</td>
+<td>Use for organization only</td>
+</tr>
+<tr>
+<td>Mermaid Diagrams</td>
+<td>✅ Works</td>
+<td>Standard markdown</td>
+</tr>
+<tr>
+<td>LaTeX Math</td>
+<td>✅ Works</td>
+<td>MathJax included</td>
+</tr>
+<tr>
+<td>Callouts</td>
+<td>⚠️ Partial</td>
+<td>Converts to blockquotes</td>
+</tr>
+<tr>
+<td>Canvas Files</td>
+<td>❌ Not supported</td>
+<td>Export as image</td>
+</tr>
+</tbody>
+</table>
+<h3 id="image-handling">Image Handling</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Option 1: Copy attachments folder</span>
+cp<span class="w"> </span>-r<span class="w"> </span>ObsidianVault/Attachments/*<span class="w"> </span>tilnet/static/images/
+
+<span class="c1"># Option 2: Symlink attachments</span>
+ln<span class="w"> </span>-s<span class="w"> </span>/path/to/ObsidianVault/Attachments<span class="w"> </span>tilnet/static/images
+</code></pre></div>
+
+<p>Update Obsidian settings:</p>
+<ul>
+<li>Settings → Files &amp; Links → Default location for new attachments</li>
+<li>Set to: &ldquo;In the folder specified below&rdquo;</li>
+<li>Folder path: <code>Attachments</code></li>
+</ul>
+<h3 id="tilignore-file">.tilignore File</h3>
+<p>Create <code>content/.tilignore</code> to exclude files:</p>
+<div class="highlight"><pre><span></span><code><span class="na">.obsidian</span><span class="err">/</span>
+<span class="nf">Templates</span><span class="err">/</span>
+<span class="nf">Archive</span><span class="err">/</span>
+<span class="err">*</span><span class="na">.canvas</span>
+<span class="err">*</span><span class="na">.draft.md</span>
+<span class="err">*-</span><span class="nf">private.md</span>
+<span class="nf">_</span><span class="p">*.</span><span class="no">md</span>
+<span class="na">.DS_Store</span>
+</code></pre></div>
+
+<h2 id="optimized-workflow">🚄 Optimized Workflow</h2>
+<h3 id="1-hotkeys-setup">1. Hotkeys Setup</h3>
+<p>Add these Obsidian hotkeys:</p>
+<ul>
+<li><code>Cmd+Shift+T</code>: Create new TIL from template</li>
+<li><code>Cmd+Shift+P</code>: Run publish script</li>
+<li><code>Cmd+Shift+O</code>: Open TILNET preview</li>
+</ul>
+<h3 id="2-quickadd-plugin-configuration">2. QuickAdd Plugin Configuration</h3>
+<ol>
+<li>Install QuickAdd plugin</li>
+<li>Create macro: &ldquo;New TIL&rdquo;<ul>
+<li>Create new file from template</li>
+<li>Add to TIL folder</li>
+<li>Open in new pane</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-shell-commands-plugin">3. Shell Commands Plugin</h3>
+<p>Install Shell Commands plugin and add:</p>
+<div class="highlight"><pre><span></span><code>Name:<span class="w"> </span>Deploy<span class="w"> </span>TILNET
+Command:<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/tilnet<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>python<span class="w"> </span>til_deploy.py
+</code></pre></div>
+
+<p>Now deploy with one click from Obsidian!</p>
+<h3 id="4-automated-sync-script">4. Automated Sync Script</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># watch_and_deploy.py</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">watchdog.observers</span> <span class="kn">import</span> <span class="n">Observer</span>
+<span class="kn">from</span> <span class="nn">watchdog.events</span> <span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
+
+<span class="k">class</span> <span class="nc">TILHandler</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.md&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Detected change: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;til_deploy.py&quot;</span><span class="p">])</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">TILHandler</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;content/&#39;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+
+<h2 id="tracking-your-tils-in-obsidian">📊 Tracking Your TILs in Obsidian</h2>
+<h3 id="dataview-dashboard">Dataview Dashboard</h3>
+<p>Create <code>TIL Dashboard.md</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># TIL Dashboard</span>
+
+<span class="gu">## Recent TILs</span>
+<span class="sb">```dataview</span>
+<span class="s">TABLE topics, created</span>
+<span class="s">FROM &quot;TIL&quot;</span>
+<span class="s">SORT created DESC</span>
+<span class="s">LIMIT 10</span>
+<span class="sb">```</span>
+
+<span class="gu">## TILs by Topic</span>
+<span class="sb">```dataview</span>
+<span class="s">TABLE length(rows) as Count</span>
+<span class="s">FROM &quot;TIL&quot;</span>
+<span class="s">GROUP BY topics</span>
+<span class="s">SORT length(rows) DESC</span>
+<span class="sb">```</span>
+
+<span class="gu">## This Week&#39;s Learning</span>
+<span class="sb">```dataview</span>
+<span class="s">LIST</span>
+<span class="s">FROM &quot;TIL&quot;</span>
+<span class="s">WHERE created &gt;= date(today) - dur(7 days)</span>
+<span class="s">SORT created DESC</span>
+<span class="sb">```</span>
+</code></pre></div>
+
+<h2 id="best-practices">🎯 Best Practices</h2>
+<h3 id="do">DO:</h3>
+<ul>
+<li>✅ Keep TILs focused and concise</li>
+<li>✅ Use descriptive titles</li>
+<li>✅ Tag consistently</li>
+<li>✅ Include code examples</li>
+<li>✅ Add images to <code>/static/images/</code></li>
+<li>✅ Test locally before deploying</li>
+</ul>
+<h3 id="dont">DON&rsquo;T:</h3>
+<ul>
+<li>❌ Put private notes in content/</li>
+<li>❌ Use complex Obsidian plugins in TILs</li>
+<li>❌ Forget to add frontmatter</li>
+<li>❌ Include sensitive information</li>
+<li>❌ Make TILs too long (aim for &lt; 500 words)</li>
+</ul>
+<h2 id="troubleshooting">🚨 Troubleshooting</h2>
+<h3 id="my-notes-arent-showing-up">&ldquo;My notes aren&rsquo;t showing up&rdquo;</h3>
+<p>Check:</p>
+<ol>
+<li>Notes are in <code>content/</code> folder</li>
+<li>Have valid frontmatter (&mdash;)</li>
+<li>Have a title</li>
+<li>Run <code>python rebuild_database.py</code> manually</li>
+</ol>
+<h3 id="images-are-broken">&ldquo;Images are broken&rdquo;</h3>
+<ol>
+<li>Put images in <code>static/images/</code></li>
+<li>Reference as <code>/static/images/myimage.png</code></li>
+<li>Don&rsquo;t use Obsidian&rsquo;s <code>!&lt;a href="/note/image/" class="wiki-link"&gt;image&lt;/a&gt;</code> syntax</li>
+</ol>
+<h3 id="wiki-links-not-working">&ldquo;Wiki links not working&rdquo;</h3>
+<p>TILNET converts <a href="/note/note-name/" class="wiki-link">Note Name</a> to links, but the target note must:</p>
+<ol>
+<li>Exist in content/</li>
+<li>Have matching title in frontmatter</li>
+<li>Be published (not draft)</li>
+</ol>
+<hr />
+<p><em>Happy learning! Your Obsidian vault + TILNET = 🚀</em></p>
+        </div>
+    </article>
+    
+    
+    <aside class="related">
+        <h3>Related entries</h3>
+        <ul>
+            
+            <li><a href="/TILBlog/note/building-tilblog/">Building TILBlog in Claude</a></li>
+            
+            <li><a href="/TILBlog/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
+            
+            <li><a href="/TILBlog/note/claude-thinks-tilnet-is-brilliant/">Claude thinks TILNET is brilliant</a></li>
+            
+            <li><a href="/TILBlog/note/creating-a-til-blog/">Creating a TIL Blog</a></li>
+            
+            <li><a href="/TILBlog/note/flask-til-blog-frontmatter/">Creating a TIL Blog with Flask and Front Matter</a></li>
+            
+        </ul>
+    </aside>
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
+
+
+<!-- ADD THESE LINES for instant search functionality -->
+<!-- Flexsearch library -->
+<script src="https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
+
+<!-- Set base URL for search (important for GitHub Pages) -->
+<script>
+    // This ensures search works correctly on GitHub Pages with /TILBlog base URL
+    window.TILNET_BASE_URL = '/TILBlog';
+</script>
+
+<!-- Load search functionality -->
+<script src="/TILBlog/static/search.js"></script>
+
+</body>
+</html>
