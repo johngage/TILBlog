@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://johngage.github.io/TILBlog</id>
   <title>John Gage: Today I Learned</title>
-  <updated>2025-06-08T00:51:18.063711+00:00</updated>
+  <updated>2025-06-09T02:54:09.511620+00:00</updated>
   <author>
     <name>John Gage</name>
     <email>john@example.com</email>
@@ -11,52 +11,6 @@
   <link href="https://johngage.github.io/TILBlog/feed.atom" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
   <subtitle>A collection of things I learn every day</subtitle>
-  <entry>
-    <id>https://johngage.github.io/TILBlog/note/NetDay-World-Wide/</id>
-    <title>The Internet is a global library, with hidden rooms</title>
-    <updated>2025-05-19T13:52:25+00:00</updated>
-    <content type="html">&lt;p&gt;After talking with &lt;a href="/TILBlog/note/fenny-desriani/" class="wiki-link"&gt;Fenny Desriani&lt;/a&gt; at the &lt;a href="/TILBlog/note/gspp/" class="wiki-link"&gt;GSPP&lt;/a&gt; graduation on Sunday, May 18,  I wanted to extend her prize-winning work in 2025 analyzing California schools and Internet access as it afffects students.&lt;br /&gt;
-For context, I found some summaries of the 1996 &lt;strong&gt;NetDay&lt;/strong&gt; mobilization: tens of thousands of volunteers wired all California schools for access to the internet. Then, over two million Californians had access to the Internet, and for the first time, used the Internet as a tool to self-organize school communities for one day of free work by parents, teachers, staff and unions to install Internet access.&lt;/p&gt;
-&lt;p&gt;&lt;a href="/TILBlog/note/netday--internet-for-all---1995---2025/" class="wiki-link"&gt;NetDay- Internet for All - 1995 - 2025&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I found this interview I did in 2001 for the Association for Computing Machinery: - &lt;a href="https://ubiquity.acm.org/article.cfm?id=375349"&gt;NetDay interview&lt;/a&gt; and thought it should be updated.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Today, I would add major links to the mathematics community of &lt;a href="https://leanprover-community.github.io/"&gt;LEAN proofs&lt;/a&gt;, and the way this methodical development of &lt;a href="https://lean-lang.org/"&gt;conversations about establishing formal truths&lt;/a&gt; can be extended to examinations of how human communities can develop ways of thinking, together.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;First, in 1996, we did California schools, then schools in a dozen other US states, then all schools in Korea, then Great Britain, then Malaysia, then Thailand,  with the hope of doing all countries before 2000. &lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s time to renew the project, with fiber, new sources of power and computing, and generative AI. &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Some quotes, that I had completely forgotten about.&lt;/p&gt;
-&lt;h1 id="how-metaphor-and-language-shape-learning"&gt;How metaphor and language shape learning&lt;/h1&gt;
-&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;GAGE:&lt;/strong&gt; I think several different things are happening at the same time.  They interact with each other. The forms of intellectual technology we use are shifting, but all of them overlap.  &lt;/p&gt;
-&lt;p&gt;Over the last 60,000 or 70,000 years of human life, we&amp;rsquo;ve watched oral technology, written technology, symbolic technology, computed symbol technology, then vector-based pattern-recognition and generative technology  arise. &lt;/p&gt;
-&lt;p&gt;Oral technology: I speak, you listen. The tribal poems of Somalia are an example. The leader composes, in a poetic form, a powerful statement of what the world is at a moment in time and shares that expression of common vision. It&amp;rsquo;s an oral tradition. People in oral cultures have far better memory for things said than you or I have.  People can repeat hours of speech.&lt;/p&gt;
-&lt;p&gt;When writing appeared 6,000 years ago or so, marks became a permanent memory aid.  Writing changed human understanding and human memory&amp;ndash;there were permanent records. This was the foundation for science, for repeated experimentation with a permanent record of observed results. As that technology turned into libraries and books, the sanctity and permanence of a mark made on paper or stone could indicate ownership of objects, so all human economic institutions changed. This brought a new challenge: how could you verify the authenticity of marks? &lt;/p&gt;
-&lt;p&gt;When the ability to mass-produce copies of documents by printing, with Gutenberg, life changed again. &lt;/p&gt;
-&lt;p&gt;Then, with the ability to make voice travel over distance, it changed once again , changing business, changing warfare.  You had a new problem. If I&amp;rsquo;m speaking to you, where&amp;rsquo;s the signature, or mark,  that you would use to authenticate that it&amp;rsquo;s really me?  if I were to make an analog from the old intellectual technology to the new, how could you modify behavior to allow existing societal forms to continue to work when agreement or command could take place at a distance? &lt;/p&gt;
-&lt;p&gt;So, each time we add some new intellectual technology,  it doesn&amp;rsquo;t destroy the old. It just shifts how much each technology is used. It shifts the patterns of thought. It shifts the costs, the ease of use, the habits of thought.&lt;/p&gt;
-&lt;p&gt;Now we&amp;rsquo;re in a domain where symbols have actionable power. Human institutions of law and law enforcement take a new form:  written symbols become executable machines. &lt;/p&gt;
-&lt;p&gt;Take programming languages as an example. This is something new. The old intellectual patterns don&amp;rsquo;t fit this new world in which symbols are machines. Nor do the institutions of law. &lt;/p&gt;
-&lt;p&gt;You could think of the software in my cell phone as a machine. It&amp;rsquo;s making this conversation function. It&amp;rsquo;s doing something to waveforms. All of the old societal patterns then, the legal intellectual property regimes, the authenticity regimes,  based on a certain technology and a certain level of cost to that technology become increasingly meaningless with the new forms of intellectual technology. We&amp;rsquo;re moving into higher-dimensioned spaces, where volumes and distance take on new meanings. One of the telltale signs is the language about these changes is so ugly. The personal digital assistant. AI. Generative. Prompt engineering.&lt;/p&gt;
-&lt;p&gt;Education should tease out the ideas inherent in each human language, in the basic space and relationship metaphors  we use without examination: down, up, inside, outside, near, far. &lt;/p&gt;
-&lt;p&gt;Education can help kids to recognize them, build on and extend them,  to amplify their capability to take apart and build more abstract ideas from sensory ideas,  and build new metaphors from old.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;Much of the democratic debate about public policy&amp;ndash; where does our money go and what should we do with it&amp;ndash; is based on the metaphor of water supply in a desert&amp;ndash;there&amp;rsquo;s a limited supply, it evaporates, it can only be used once. &lt;/p&gt;
-&lt;p&gt;Shift to the image of the complete water cycle: evaporation, transpiration, condensation, rain, all enabling organic growth.&lt;/p&gt;
-&lt;p&gt;The foundation tools or the foundation curriculum is one that enhances thought. I&amp;rsquo;m convinced these days that losing music and art in the schools is a serious detriment to people&amp;rsquo;s capability to think. I don&amp;rsquo;t know many engineers that, when describing what they&amp;rsquo;re doing, don&amp;rsquo;t draw it. &lt;/p&gt;
-&lt;p&gt;That linkage to the physical world is one of the reasons it&amp;rsquo;s so important for Internet connectivity and high bandwidth connectivity for schools.  The capabilities for children to interact with the complexities of the world are rather limited inside a classroom. You can drop chalk on the floor trying to show what Galileo did. But the ability to immerse yourself in molecules, to watch atoms form into molecules, and molecules interact to form life.... all made visible, or audible by the tool of the computer, this symbol manipulator, is now extended through generative language models that extend your thought while building from patterns found by summarizing all forms of human experience.&lt;/p&gt;
-&lt;p&gt;And this technology shift incorporates all the earlier ones.&lt;/p&gt;
-&lt;h2 id="details"&gt;Details&lt;/h2&gt;
-&lt;h2 id="linksreferences"&gt;Links/References&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://ubiquity.acm.org/article.cfm?id=375349"&gt;Source&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-    <link href="https://johngage.github.io/TILBlog/note/NetDay-World-Wide/" rel="alternate"/>
-    <published>2025-05-19T13:52:25+00:00</published>
-  </entry>
   <entry>
     <id>https://johngage.github.io/TILBlog/note/goldman-school-of-public-policy/</id>
     <title>Goldman School of Public Policy</title>
@@ -67,7 +21,7 @@ Today, Sunday, May 18,  the &lt;a href="https://gspp.berkeley.edu/"&gt;Goldman S
 &lt;p&gt;As the total &amp;ldquo;recording and linking&amp;rdquo; of this event expands, it will include the unique viewpoints of each participant, building on the common theme expressed by the keynote speaker, now the Executive Director of the Governor of California&amp;rsquo;s Cabinet Secretaries.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Thus, this specific graduation becomes a base document for the Class of 2025, to build   connections over time. &lt;/li&gt;
-&lt;li&gt;As each graduate arrived to receive their diploma, their picture was taken, they then crossed the stage to be congratulated by Dean &lt;a href="/TILBlog/note/david-wilson/" class="wiki-link"&gt;David Wilson&lt;/a&gt; and the president of the GSPPP Alumni Association, . They then had their picture taken again against a GSPP backdrop, and joined family and friends.&lt;/li&gt;
+&lt;li&gt;As each graduate arrived to receive their diploma, their picture was taken, they then crossed the stage to be congratulated by Dean &lt;a href="/note/david-wilson/" class="wiki-link"&gt;David Wilson&lt;/a&gt; and the president of the GSPPP Alumni Association, . They then had their picture taken again against a GSPP backdrop, and joined family and friends.&lt;/li&gt;
 &lt;li&gt;This event marks the joining of two graphs: the initial creation of their class community over the past two or three years, and the subsequent expansion into the world community, creating new links, new partnerships and initiatives, and new knowledge for the common good.&lt;/li&gt;
 &lt;li&gt;To build this foundation, the next step is linking all papers, all research, all faculty, all Capstone projects, all readings, class work and independent work for a deeper understanding of the fabric of forming the public policy community.&lt;/li&gt;
 &lt;/ul&gt;</content>
@@ -215,7 +169,7 @@ $$&lt;/p&gt;
 &lt;li&gt;Needham (1993)&lt;/li&gt;
 &lt;li&gt;Needham-VCA (1997)&lt;/li&gt;
 &lt;li&gt;Needham (2014)&lt;/li&gt;
-&lt;li&gt;&lt;a href="/TILBlog/note/why-machines-learn/" class="wiki-link"&gt;Why Machines Learn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/note/why-machines-learn/" class="wiki-link"&gt;Why Machines Learn&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="discussion-of-ultimately-equal"&gt;Discussion of &amp;ldquo;ultimately equal&amp;rdquo;&lt;/h2&gt;
@@ -307,7 +261,7 @@ c &amp;amp; d
 &lt;h2 id="references"&gt;References&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Nature 615 (March 9, 2023): 202-5&lt;/li&gt;
-&lt;li&gt;&lt;a href="/TILBlog/note/needham-visual-complex-analysis/" class="wiki-link"&gt;Needham-Visual Complex Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/note/needham-visual-complex-analysis/" class="wiki-link"&gt;Needham-Visual Complex Analysis&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="drawing-section"&gt;Drawing Section&lt;/h2&gt;
@@ -624,7 +578,7 @@ for Anthropic predicts there will be an enormous increase in the demand for cust
     <content type="html">&lt;p&gt;TIL for TILNET&lt;/p&gt;
 &lt;p&gt;Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.&lt;br /&gt;
 - Challenge: provide new conversation with enough context of the state of development to enable useful coding suggestions&lt;/p&gt;
-&lt;p&gt;So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to &lt;a href="/TILBlog/note/tilnet/" class="wiki-link"&gt;TILNET&lt;/a&gt;, so that they may be analyzed by NotebookLM, and by new versions of Claude.
+&lt;p&gt;So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to &lt;a href="/note/tilnet/" class="wiki-link"&gt;TILNET&lt;/a&gt;, so that they may be analyzed by NotebookLM, and by new versions of Claude.
 - Goal: improve Claude&amp;rsquo;s ability to develop code
 - Goal: create the human-side documentation&lt;/p&gt;
 &lt;p&gt;As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.&lt;/p&gt;
@@ -669,7 +623,7 @@ for Anthropic predicts there will be an enormous increase in the demand for cust
 &lt;p&gt;done&lt;/p&gt;
 &lt;p&gt;echo &amp;ldquo;=== CONFIGURATION FILES ===&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;for config in requirements.txt package.json Dockerfile docker-compose.yml .env.example config.py settings.py; do&lt;/p&gt;
-&lt;p&gt;if &lt;a href="/TILBlog/note/--f-config-/" class="wiki-link"&gt; -f &amp;ldquo;$config&amp;rdquo; &lt;/a&gt;; then&lt;/p&gt;
+&lt;p&gt;if &lt;a href="/note/--f-config-/" class="wiki-link"&gt; -f &amp;ldquo;$config&amp;rdquo; &lt;/a&gt;; then&lt;/p&gt;
 &lt;p&gt;echo &amp;ldquo;&amp;mdash; FILE: $config &amp;mdash;&amp;ldquo;&lt;/p&gt;
 &lt;p&gt;cat &amp;ldquo;$config&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;echo &amp;ldquo;&amp;rdquo;&lt;/p&gt;
@@ -692,7 +646,7 @@ for Anthropic predicts there will be an enormous increase in the demand for cust
     <title>Claude thinks TILNET is brilliant</title>
     <updated>2025-05-27T22:18:02+00:00</updated>
     <content type="html">&lt;p&gt;Mod: 5:07pm Thu May 29
-But all innovations did not make it into newest version of &lt;a href="/TILBlog/note/tilnet/" class="wiki-link"&gt;TILNET&lt;/a&gt;&lt;/p&gt;
+But all innovations did not make it into newest version of &lt;a href="/note/tilnet/" class="wiki-link"&gt;TILNET&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Deploy the clean version&lt;/span&gt;
 python&lt;span class="w"&gt; &lt;/span&gt;til_deploy.py
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -769,12 +723,12 @@ python&lt;span class="w"&gt; &lt;/span&gt;til_deploy.py
     <title>Biology updates itself</title>
     <updated>2025-05-27T22:20:32+00:00</updated>
     <content type="html">&lt;p&gt;Mod: 5:07pm Thu May 29
-Wonderful presentation of &lt;a href="/TILBlog/note/gordon-walker/" class="wiki-link"&gt;Gordon Walker&lt;/a&gt; Walker-2025: Dr. Fun Guy&amp;rsquo;s Passport to Kingdom Fungi-A Scientist&amp;rsquo;s Guide to the Wild and Wonderful World of Mushrooms, Molds, and More&lt;/p&gt;
+Wonderful presentation of &lt;a href="/note/gordon-walker/" class="wiki-link"&gt;Gordon Walker&lt;/a&gt; Walker-2025: Dr. Fun Guy&amp;rsquo;s Passport to Kingdom Fungi-A Scientist&amp;rsquo;s Guide to the Wild and Wonderful World of Mushrooms, Molds, and More&lt;/p&gt;
 &lt;p&gt;Making Trump Bioavailable&lt;/p&gt;
 &lt;p&gt;Three books whose ideas interact. 
-- &lt;a href="/TILBlog/note/george-lakoff/" class="wiki-link"&gt;George Lakoff&lt;/a&gt; Lakoff-2009: The Political Mind
-- &lt;a href="/TILBlog/note/john-dewey/" class="wiki-link"&gt;John Dewey&lt;/a&gt; Dewey-1915: Democracy and Education
-- &lt;a href="/TILBlog/note/saul-perlmutter/" class="wiki-link"&gt;Saul Perlmutter&lt;/a&gt; Perlmutter-2024 : Third Millennium Thinking
+- &lt;a href="/note/george-lakoff/" class="wiki-link"&gt;George Lakoff&lt;/a&gt; Lakoff-2009: The Political Mind
+- &lt;a href="/note/john-dewey/" class="wiki-link"&gt;John Dewey&lt;/a&gt; Dewey-1915: Democracy and Education
+- &lt;a href="/note/saul-perlmutter/" class="wiki-link"&gt;Saul Perlmutter&lt;/a&gt; Perlmutter-2024 : Third Millennium Thinking
 Creating interlinks and references.&lt;/p&gt;
 &lt;p&gt;%% &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Draw&lt;/span&gt;
@@ -789,8 +743,8 @@ Creating interlinks and references.&lt;/p&gt;
     <title>Atmospheric Water Capture</title>
     <updated>2025-05-29T01:11:38+00:00</updated>
     <content type="html">&lt;p&gt;Mod: 5:06pm Thu May 29
-For &lt;a href="/TILBlog/note/turkana/" class="wiki-link"&gt;Turkana&lt;/a&gt; ,&lt;a href="/TILBlog/note/west-pokot/" class="wiki-link"&gt;West Pokot&lt;/a&gt;, &lt;a href="/TILBlog/note/kibera/" class="wiki-link"&gt;Kibera&lt;/a&gt; : build HH water capture at near-zero energy cost.
-- can &lt;a href="/TILBlog/note/cof/" class="wiki-link"&gt;COF&lt;/a&gt; and &lt;a href="/TILBlog/note/atmospheric-water-capture/" class="wiki-link"&gt;Atmospheric Water Capture&lt;/a&gt; be a game-changer? At what material and construction costs?&lt;/p&gt;
+For &lt;a href="/note/turkana/" class="wiki-link"&gt;Turkana&lt;/a&gt; ,&lt;a href="/note/west-pokot/" class="wiki-link"&gt;West Pokot&lt;/a&gt;, &lt;a href="/note/kibera/" class="wiki-link"&gt;Kibera&lt;/a&gt; : build HH water capture at near-zero energy cost.
+- can &lt;a href="/note/cof/" class="wiki-link"&gt;COF&lt;/a&gt; and &lt;a href="/note/atmospheric-water-capture/" class="wiki-link"&gt;Atmospheric Water Capture&lt;/a&gt; be a game-changer? At what material and construction costs?&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Energy cost for 20 cycle per day water capture&lt;/li&gt;
 &lt;li&gt;Energy cost for pumping and storage&lt;/li&gt;
@@ -798,7 +752,7 @@ For &lt;a href="/TILBlog/note/turkana/" class="wiki-link"&gt;Turkana&lt;/a&gt; ,
 &lt;/ul&gt;
 &lt;h2 id="what-i-learned"&gt;What I Learned&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;There are existing Kenyan companies operating in &lt;a href="/TILBlog/note/turkana/" class="wiki-link"&gt;Turkana&lt;/a&gt;, primarily on atmospheric carbon capture, using geothermal energy. &lt;/li&gt;
+&lt;li&gt;There are existing Kenyan companies operating in &lt;a href="/note/turkana/" class="wiki-link"&gt;Turkana&lt;/a&gt;, primarily on atmospheric carbon capture, using geothermal energy. &lt;/li&gt;
 &lt;li&gt;Can we twin water capture?&lt;/li&gt;
 &lt;/ul&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/atmospheric-water-capture/" rel="alternate"/>
@@ -1650,7 +1604,7 @@ def&lt;span class="w"&gt; &lt;/span&gt;generate_search_page&lt;span class="o"&gt
     <updated>2025-06-01T20:36:35+00:00</updated>
     <content type="html">&lt;h2 id="latex-original-text"&gt;LaTeX original text&lt;/h2&gt;
 &lt;p&gt;$LaTe\chi$
-- &lt;a href="/TILBlog/note/needham-visual-complex-analysis/" class="wiki-link"&gt;Needham-Visual Complex Analysis&lt;/a&gt;
+- &lt;a href="/note/needham-visual-complex-analysis/" class="wiki-link"&gt;Needham-Visual Complex Analysis&lt;/a&gt;
 -&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/books-embedding/" rel="alternate"/>
     <published>2025-06-01T20:36:35+00:00</published>
@@ -1724,5 +1678,19 @@ Basic concepts:
 [^36]: Li, X., Deng, Z. D., Rauchenstein, L. T. &amp;amp; Carlson, T. J. Contributed review: source-localization algorithms and applications using time of arrival and time difference of arrival measurements. &lt;em&gt;Rev. Sci. Instrum.&lt;/em&gt; &lt;strong&gt;87&lt;/strong&gt;, 041502 (2016).&lt;/p&gt;</content>
     <link href="https://johngage.github.io/TILBlog/note/dfos-2d-demo/" rel="alternate"/>
     <published>2025-06-06T14:51:24+00:00</published>
+  </entry>
+  <entry>
+    <id>https://johngage.github.io/TILBlog/note/designing-tilnet-to-be-clonable/</id>
+    <title>Designing TILNET to be clonable</title>
+    <updated>2025-06-08T00:00:00+00:00</updated>
+    <content type="html">&lt;p&gt;Templates are not working in Obsidian&lt;/p&gt;
+&lt;p&gt;Since claude keeps running out of space, the design has been reworked by new converatons that don&amp;rsquo;t know about earlier elements.&lt;/p&gt;
+&lt;p&gt;Datasette, for example. &lt;/p&gt;
+&lt;p&gt;So the three main python programs that make it work:
+one sets thing up
+one builds the static site
+and the third runs the other two.&lt;/p&gt;</content>
+    <link href="https://johngage.github.io/TILBlog/note/designing-tilnet-to-be-clonable/" rel="alternate"/>
+    <published>2025-06-08T00:00:00+00:00</published>
   </entry>
 </feed>

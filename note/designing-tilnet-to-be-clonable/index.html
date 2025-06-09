@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building TILBlog - TIL</title>
+    <title>Designing TILNET to be clonable - TIL</title>
     <link rel="stylesheet" href="/TILBlog/static/styles.css">
     <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -97,7 +97,7 @@ MathJax = {
         
     <article class="entry">
         <header>
-            <h2>Building TILBlog</h2>
+            <h2>Designing TILNET to be clonable</h2>
         <div class="meta">
               
                <div class="topics">
@@ -107,12 +107,12 @@ MathJax = {
                </div>
               
             <div class="entry-dates">
-                <time datetime="2025-05-26 13:29:20">
-                    Created: 2025-05-26 13:29
+                <time datetime="2025-06-08">
+                    Created: 2025-06-08
                 </time>
                 
                     <span class="entry-modified">
-                      · Modified: 2025-06-01 17:50
+                      · Modified: 2025-06-08 19:53
                         </span>
                 
             </div>
@@ -120,69 +120,13 @@ MathJax = {
         </header>
         
         <div class="content">
-            <p>TIL for TILNET</p>
-<p>Many sequential Claude conversations were required, because Claude conversations reached limits, and had to be restarted.<br />
-- Challenge: provide new conversation with enough context of the state of development to enable useful coding suggestions</p>
-<p>So, all Claude conversations will be harvested, turned into archive Markdown files, and posted to <a href="/note/tilnet/" class="wiki-link">TILNET</a>, so that they may be analyzed by NotebookLM, and by new versions of Claude.
-- Goal: improve Claude&rsquo;s ability to develop code
-- Goal: create the human-side documentation</p>
-<p>As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.</p>
-<p>Most major design issues have been addressed.</p>
-<hr />
-<p>14:01: 2025-06-01
-- Generated complete site survey, using a large shell script. Need to update it as site updates; generates copies of .py files, .html; 
-- snapshot.sh
-    ```sh
-    #!/bin/zsh</p>
-<h1 id="tilnet-project-context-snapshot">TILNET Project Context Snapshot</h1>
-<h1 id="run-this-script-to-generate-a-comprehensive-project-snapshot-for-claude">Run this script to generate a comprehensive project snapshot for Claude</h1>
-<p>echo &ldquo;=== TILNET PROJECT SNAPSHOT ===&rdquo;</p>
-<p>echo &ldquo;Generated: $(date)&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>echo &ldquo;=== PROJECT DIRECTORY TREE ===&rdquo;</p>
-<p>tree -a -I &lsquo;.git|<strong>pycache</strong>|<em>.pyc|node_modules|.DS_Store&rsquo; 2&gt;/dev/null || find . -type f -not -path &lsquo;</em>/.<em>&rsquo; -not -path &lsquo;</em>/<strong>pycache</strong>/*&rsquo; | sort</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>echo &ldquo;=== PYTHON FILES ===&rdquo;</p>
-<p>find . -name &ldquo;*.py&rdquo; -type f | while read file; do</p>
-<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
-<p>cat &ldquo;$file&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>done</p>
-<p>echo &ldquo;=== HTML FILES ===&rdquo;</p>
-<p>find . -name &ldquo;*.html&rdquo; -type f | while read file; do</p>
-<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
-<p>cat &ldquo;$file&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>done</p>
-<p>echo &ldquo;=== CSS FILES ===&rdquo;</p>
-<p>find . -name &ldquo;*.css&rdquo; -type f | while read file; do</p>
-<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
-<p>cat &ldquo;$file&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>done</p>
-<p>echo &ldquo;=== JAVASCRIPT FILES ===&rdquo;</p>
-<p>find . -name &ldquo;*.js&rdquo; -type f | while read file; do</p>
-<p>echo &ldquo;&mdash; FILE: $file &mdash;&ldquo;</p>
-<p>cat &ldquo;$file&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>done</p>
-<p>echo &ldquo;=== CONFIGURATION FILES ===&rdquo;</p>
-<p>for config in requirements.txt package.json Dockerfile docker-compose.yml .env.example config.py settings.py; do</p>
-<p>if <a href="/note/--f-config-/" class="wiki-link"> -f &ldquo;$config&rdquo; </a>; then</p>
-<p>echo &ldquo;&mdash; FILE: $config &mdash;&ldquo;</p>
-<p>cat &ldquo;$config&rdquo;</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>fi</p>
-<p>done</p>
-<p>echo &ldquo;=== PROJECT STATUS ===&rdquo;</p>
-<p>echo &ldquo;Last modified files (last 5):&rdquo;</p>
-<p>find . -type f -not -path &lsquo;<em>/.</em>&rsquo; -not -path &lsquo;<em>/<strong>pycache</strong>/</em>&rsquo; -exec ls -lt {} + | head -5</p>
-<p>echo &ldquo;&rdquo;</p>
-<p>echo &ldquo;=== END SNAPSHOT ===&rdquo;
-    ```</p>
-<h2 id="_1">&mdash;</h2>
-<p>After repeated Claude improvements, I&rsquo;ll clean up the repository, then reduce it to the minimum required for deployment as a cloned site. Then, I&rsquo;ll tune it so that it can be deployed on an existing Obsidian vault.   Zsolt&rsquo;s would be ideal. </p>
-<p>Deciding what should be in the template deployable site. It should include the new elements: speech, multi-lingual, drawing, gesture.</p>
+            <p>Templates are not working in Obsidian</p>
+<p>Since claude keeps running out of space, the design has been reworked by new converatons that don&rsquo;t know about earlier elements.</p>
+<p>Datasette, for example. </p>
+<p>So the three main python programs that make it work:
+one sets thing up
+one builds the static site
+and the third runs the other two.</p>
         </div>
     </article>
     
@@ -191,6 +135,8 @@ MathJax = {
         <h3>Related entries</h3>
         <ul>
             
+            <li><a href="/TILBlog/note/building-tilblog/">Building TILBlog</a></li>
+            
             <li><a href="/TILBlog/note/redesigning-til-simon-willison-style/">Claude builds new TILBlog</a></li>
             
             <li><a href="/TILBlog/note/claude-thinks-tilnet-is-brilliant/">Claude thinks TILNET is brilliant</a></li>
@@ -198,8 +144,6 @@ MathJax = {
             <li><a href="/TILBlog/note/creating-a-til-blog/">Creating a TIL Blog</a></li>
             
             <li><a href="/TILBlog/note/flask-til-blog-frontmatter/">Creating a TIL Blog with Flask and Front Matter</a></li>
-            
-            <li><a href="/TILBlog/note/designing-tilnet-to-be-clonable/">Designing TILNET to be clonable</a></li>
             
         </ul>
     </aside>
