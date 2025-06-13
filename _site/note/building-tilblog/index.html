@@ -112,7 +112,7 @@ MathJax = {
                 </time>
                 
                     <span class="entry-modified">
-                      · Modified: 2025-06-08 20:30
+                      · Modified: 2025-06-11 17:16
                         </span>
                 
             </div>
@@ -129,11 +129,14 @@ MathJax = {
 <p>As a side-note, the process of working with Claude Sonnet 4 for the past week to design a database repository for Obsidian notes that then feeds into a static site generator has been instructive.</p>
 <p>Most major design issues have been addressed.</p>
 <hr />
-<p>14:01: 2025-06-01
-- Generated complete site survey, using a large shell script. Need to update it as site updates; generates copies of .py files, .html; 
-- snapshot.sh
+<p>14:01: 2025-06-01</p>
+<h3 id="do-not-use-this-exhaustive-dump-of-all-code-content-see-short-sequence-to-capture-essence-of-tilblog-code">Do not use this; exhaustive dump of all code, content- see <a href="/note/short-sequence-to-capture-essence-of-tilblog-code/" class="wiki-link">#Short sequence to capture essence of TILBLOG code</a></h3>
+<ul>
+<li>Generated complete site survey, using a large shell script. Need to update it as site updates; generates copies of .py files, .html; </li>
+<li>snapshot.sh
     ```sh
-    #!/bin/zsh</p>
+    #!/bin/zsh</li>
+</ul>
 <h1 id="tilnet-project-context-snapshot">TILNET Project Context Snapshot</h1>
 <h1 id="run-this-script-to-generate-a-comprehensive-project-snapshot-for-claude">Run this script to generate a comprehensive project snapshot for Claude</h1>
 <p>echo &ldquo;=== TILNET PROJECT SNAPSHOT ===&rdquo;</p>
@@ -180,9 +183,20 @@ MathJax = {
 <p>echo &ldquo;&rdquo;</p>
 <p>echo &ldquo;=== END SNAPSHOT ===&rdquo;
     ```</p>
-<h2 id="_1">&mdash;</h2>
+<hr />
+<h3 id="short-sequence-to-capture-essence-of-tilblog-code">Short sequence to capture essence of TILBLOG code</h3>
+<h1 id="just-the-tree-structure">Just the tree structure</h1>
+<p>tree -I &lsquo;.git|<strong>pycache</strong>|*.pyc|node_modules&rsquo;</p>
+<h1 id="list-python-files-with-line-counts-helps-prioritize">List Python files with line counts (helps prioritize)</h1>
+<p>find . -name &ldquo;*.py&rdquo; | xargs wc -l | sort -n</p>
+<h1 id="show-just-til_deploypy-and-the-files-it-importsexecutes">Show just til_deploy.py and the files it imports/executes</h1>
+<p>cat til_deploy.py</p>
+<h1 id="quick-way-to-show-specific-files-claude-requests">Quick way to show specific files Claude requests</h1>
+<p>cat file1.py file2.py file3.py</p>
+<hr />
 <p>After repeated Claude improvements, I&rsquo;ll clean up the repository, then reduce it to the minimum required for deployment as a cloned site. Then, I&rsquo;ll tune it so that it can be deployed on an existing Obsidian vault.   Zsolt&rsquo;s would be ideal. </p>
 <p>Deciding what should be in the template deployable site. It should include the new elements: speech, multi-lingual, drawing, gesture.</p>
+<hr />
         </div>
     </article>
     
