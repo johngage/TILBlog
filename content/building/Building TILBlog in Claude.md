@@ -1,5 +1,5 @@
 ---
-title: Building TILBlog
+title: Building TILBlog in Claude
 topics:
   - til-build
 created: 2025-05-26 13:29:20
@@ -26,6 +26,7 @@ Most major design issues have been addressed.
 
 ---
 14:01: 2025-06-01
+### Do not use this; exhaustive dump of all code, content- see [[#Short sequence to capture essence of TILBLOG code]]
 - Generated complete site survey, using a large shell script. Need to update it as site updates; generates copies of .py files, .html; 
 - snapshot.sh
 	```sh
@@ -133,7 +134,26 @@ echo "=== END SNAPSHOT ==="
 
 
 ---
+
+
+### Short sequence to capture essence of TILBLOG code
+
+# Just the tree structure
+tree -I '.git|__pycache__|*.pyc|node_modules'
+
+# List Python files with line counts (helps prioritize)
+find . -name "*.py" | xargs wc -l | sort -n
+
+# Show just til_deploy.py and the files it imports/executes
+cat til_deploy.py
+
+# Quick way to show specific files Claude requests
+cat file1.py file2.py file3.py
+
 ---
 After repeated Claude improvements, I'll clean up the repository, then reduce it to the minimum required for deployment as a cloned site. Then, I'll tune it so that it can be deployed on an existing Obsidian vault.   Zsolt's would be ideal. 
 
 Deciding what should be in the template deployable site. It should include the new elements: speech, multi-lingual, drawing, gesture.
+
+
+---

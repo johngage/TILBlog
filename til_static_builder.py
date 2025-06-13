@@ -591,9 +591,9 @@ class TILStaticSiteBuilder:
         
         try:
             from feedgen.feed import FeedGenerator
-            from datetime import datetime, timezone
+            from datetime import datetime
             
-            # Get recent entries
+            # Get recent entries - inside the try block
             entries = self.query_db(
                 """
                 SELECT id, slug, title, html, 
@@ -623,14 +623,11 @@ class TILStaticSiteBuilder:
             for entry in entries:
                 entry_url = f"{base_url}/note/{entry['slug']}/"
                 
-                # Parse date and add timezone info
+                # Parse date
                 try:
                     created = datetime.strptime(entry['created'], "%Y-%m-%d %H:%M:%S")
                 except ValueError:
                     created = datetime.strptime(entry['created'], "%Y-%m-%d")
-                
-                # Make timezone-aware (assuming UTC)
-                created = created.replace(tzinfo=timezone.utc)
                 
                 # Create feed entry
                 fe = fg.add_entry()
