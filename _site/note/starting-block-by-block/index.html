@@ -1,0 +1,190 @@
+<!-- entry.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting Block-by-block - TIL</title>
+    <link rel="stylesheet" href="/TILBlog/static/styles.css">
+    <link rel="alternate" type="application/atom+xml" title="TIL Feed" href="/TILBlog/feed.atom">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <!-- Add to base.html <head> section -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<!-- Optional: Add some styling for math -->
+<style>
+.MathJax {
+  font-size: 1.1em !important;
+}
+
+/* Ensure math doesn't break layout */
+.entry .content .MathJax_Display {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.entry .content .MathJax {
+  display: inline-block;
+  vertical-align: middle;
+}
+</style>
+    
+  <!-- ADD THIS LINE for search modal styling -->
+<link rel="stylesheet" href="/TILBlog/static/search-modal.css">
+
+</head>
+
+<body>
+  <!-- ADD THIS: Purple banner -->
+    <div class="site-banner">
+        John Gage's TILs - Policy and Technology Interact
+    </div>
+    <!-- Single header with dark mode toggle -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1><a href="/TILBlog/">John Gage: Today I Learned</a></h1>
+                
+                <!-- Search form with onsubmit -->
+                <form action="/TILBlog/search/" method="get" class="search-form" 
+                      onsubmit="return handleSearchSubmit(event)">
+                    <input type="search" name="q" placeholder="Search..." value="">
+                    <button type="submit">Search</button>
+                </form>
+                
+                <!-- Dark mode toggle - moved to top right corner -->
+                <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="topics">
+        <div class="container">
+            <div class="topic-cloud">
+                <a href="/TILBlog/" 
+                   class="topic-link ">
+                   All
+                </a>
+                
+                <a href="/TILBlog/stats/" 
+                   class="topic-link ">
+                   Stats
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+    <article class="entry">
+        <header>
+            <h2>Starting Block-by-block</h2>
+        <div class="meta">
+              
+               <div class="topics">
+                 
+                   <a href="/TILBlog/topic/block/" class="topic-tag">block</a>
+                 
+               </div>
+              
+            <div class="entry-dates">
+                <time datetime="2025-06-20 09:17:34">
+                    Created: 2025-06-20 09:17
+                </time>
+                
+                    <span class="entry-modified">
+                      · Modified: 2025-06-20 10:20
+                        </span>
+                
+            </div>
+        </div>
+        </header>
+        
+        <div class="content">
+            <h1 id="starting-block-by-block">Starting Block-by-block</h1>
+<h2 id="use-invisible-city-topics-for-each-view-of-the-block">Use Invisible City topics for each view of the block</h2>
+<ul>
+<li>Lidar street profile<ul>
+<li>Accurate measurements by laser</li>
+</ul>
+</li>
+<li>Alameda County original property line analysis</li>
+<li>Original survey documents, if they can  be found in city or county records</li>
+<li>Berkeley historical society</li>
+<li>Original city surveys</li>
+<li>Deeds for all properties</li>
+<li>History of road grading: private or public?</li>
+<li>Photo archives</li>
+</ul>
+<h2 id="walk-and-talk-outline">Walk and talk outline</h2>
+<ul>
+<li>NotebookLM deep dive <ul>
+<li>Ohlone history</li>
+<li>Mexican land grant: relationship to original ranch house</li>
+</ul>
+</li>
+<li>Street block history<ul>
+<li>dirt road</li>
+<li>paving</li>
+<li>water piping </li>
+<li>sewer piping</li>
+<li>gas piping</li>
+<li>storm water piping</li>
+</ul>
+</li>
+</ul>
+        </div>
+    </article>
+    
+    
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Built with Flask and SQLite. 
+                <a href="https://github.com/yourusername/til">Source code</a>.
+                <a href="/TILBlog/feed.atom">Atom feed</a>.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Add dark mode JavaScript -->
+  <script src="/TILBlog/static/js/dark-mode.js"></script>
+
+
+<!-- ADD THESE LINES for instant search functionality -->
+<!-- Flexsearch library -->
+<script src="https://unpkg.com/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
+
+<!-- Set base URL for search (important for GitHub Pages) -->
+<script>
+    // This ensures search works correctly on GitHub Pages with /TILBlog base URL
+    window.TILNET_BASE_URL = '/TILBlog';
+</script>
+
+<!-- Load search functionality -->
+<script src="/TILBlog/static/search.js"></script>
+
+</body>
+</html>
