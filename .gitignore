@@ -1,0 +1,21 @@
+# Database files
+*.db
+*.db-shm
+*.db-wal
+conversations.db
+
+# Mac system files
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+*.egg-info/
+
+# Build outputs
+_site/
