@@ -267,3 +267,28 @@ MIT License - Feel free to use TILNET for your own learning journey!
 ---
 
 **Start documenting what you learn today!** Run `python til_deploy.py` and share your knowledge with the world.
+
+---
+2025-11-29: Starting again. 
+- on Mac, cd to ~/TILBlog
+	- cd /Users/johngage/TILBlog
+- invoke existing conda environment
+	- conda activate tilblog
+- make sure each file has frontmatter:
+
+```---
+title: "Your Title"
+topics:
+  - topic1
+  - topic2
+created: 2024-11-29
+---
+
+Your content...
+```
+# Your daily workflow:
+cd /Users/johngage/TILBlog
+conda activate tilblog
+python til_deploy.py
+
+---
